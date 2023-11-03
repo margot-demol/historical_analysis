@@ -89,7 +89,7 @@ labels = [
     "argos_Jason-2_2008",
 ]
 
-zarr_dir = "/home1/datawork/mdemol/historic_coloc"
+zarr_dir = "/home1/datawork/mdemol/historical_coloc"
 
 lon_180_to_360 = lambda lon: lon % 360
 lon_360_to_180 = lambda lon: (lon + 180) % 360 - 180

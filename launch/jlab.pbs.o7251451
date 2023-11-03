@@ -1,0 +1,605 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Thu Nov  2 15:56:35 GMT 2023
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:29: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  elif dashinfo is not "0":
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:32: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if dashinfo is not "0":
+[I 2023-11-02 15:56:36.957 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-11-02 15:56:36.978 ServerApp] Package jupyter_lsp took 0.0213s to import
+[W 2023-11-02 15:56:36.978 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-02 15:56:36.987 ServerApp] Package jupyter_server_terminals took 0.0084s to import
+[I 2023-11-02 15:56:36.988 ServerApp] Package notebook took 0.0000s to import
+[I 2023-11-02 15:56:36.990 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2023-11-02 15:56:36.990 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-02 15:56:38.506 ServerApp] Package panel.io.jupyter_server_extension took 1.5157s to import
+[I 2023-11-02 15:56:38.507 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2023-11-02 15:56:38.511 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2023-11-02 15:56:38.517 ServerApp] jupyterlab | extension was successfully linked.
+[W 2023-11-02 15:56:38.519 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-11-02 15:56:38.522 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2023-11-02 15:56:38.522 ServerApp] notebook | extension was successfully linked.
+[I 2023-11-02 15:56:38.862 ServerApp] notebook_shim | extension was successfully linked.
+[I 2023-11-02 15:56:38.862 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2023-11-02 15:56:38.899 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2023-11-02 15:56:38.901 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2023-11-02 15:56:38.903 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2023-11-02 15:56:38.906 LabApp] JupyterLab extension loaded from /home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyterlab
+[I 2023-11-02 15:56:38.906 LabApp] JupyterLab application directory is /home1/datahome/mdemol/.miniconda3/envs/histenv2/share/jupyter/lab
+[I 2023-11-02 15:56:38.907 LabApp] Extension Manager is 'pypi'.
+[I 2023-11-02 15:56:38.910 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-11-02 15:56:38.913 ServerApp] notebook | extension was successfully loaded.
+[I 2023-11-02 15:56:38.914 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2023-11-02 15:56:38.915 ServerApp] Serving notebooks from local directory: /home1/datahome/mdemol
+[I 2023-11-02 15:56:38.915 ServerApp] Jupyter Server 2.9.1 is running at:
+[I 2023-11-02 15:56:38.915 ServerApp] http://r2i0n25:8877/lab
+[I 2023-11-02 15:56:38.915 ServerApp]     http://127.0.0.1:8877/lab
+[I 2023-11-02 15:56:38.915 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-11-02 15:56:38.955 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2023-11-02 15:56:41.941 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940601806 (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:56:41.941 ServerApp] wrote error: 'Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18)
+[W 2023-11-02 15:56:41.943 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940601806 (561c211cf284414792903f89972ed90c@10.148.1.145) 3.20ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:42.604 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:56:42.630 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (561c211cf284414792903f89972ed90c@10.148.1.145) 26.76ms referer=None
+[W 2023-11-02 15:56:42.706 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940602620 (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:56:42.706 ServerApp] wrote error: 'Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18)
+[W 2023-11-02 15:56:42.707 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940602620 (561c211cf284414792903f89972ed90c@10.148.1.145) 1.10ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:42.949 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940602862 (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:56:42.949 ServerApp] wrote error: 'Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7)
+[W 2023-11-02 15:56:42.949 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940602862 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:43.554 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:56:43.555 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (561c211cf284414792903f89972ed90c@10.148.1.145) 1.18ms referer=None
+[W 2023-11-02 15:56:43.704 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940603611 (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:56:43.704 ServerApp] wrote error: 'Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7)
+[W 2023-11-02 15:56:43.705 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940603611 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:43.784 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940603694 (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:43.784 ServerApp] wrote error: 'Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9)
+[W 2023-11-02 15:56:43.784 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940603694 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.87ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:44.048 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:56:44.049 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (561c211cf284414792903f89972ed90c@10.148.1.145) 0.94ms referer=None
+[W 2023-11-02 15:56:44.126 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:56:44.126 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=None
+[W 2023-11-02 15:56:44.164 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940604078 (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:56:44.164 ServerApp] wrote error: 'Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7)
+[W 2023-11-02 15:56:44.165 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940604078 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:44.204 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:44.205 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (561c211cf284414792903f89972ed90c@10.148.1.145) 0.92ms referer=None
+[W 2023-11-02 15:56:44.256 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940604170 (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:56:44.256 ServerApp] wrote error: 'Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18)
+[W 2023-11-02 15:56:44.256 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940604170 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:44.342 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940604215 (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:44.342 ServerApp] wrote error: 'Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9)
+[W 2023-11-02 15:56:44.342 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940604215 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:44.958 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940604862 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:56:44.958 ServerApp] wrote error: 'Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a)
+[W 2023-11-02 15:56:44.958 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940604862 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:45.350 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:56:45.351 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.92ms referer=None
+[W 2023-11-02 15:56:45.426 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940605340 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:56:45.426 ServerApp] wrote error: 'Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a)
+[W 2023-11-02 15:56:45.427 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940605340 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:46.408 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:46.409 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (561c211cf284414792903f89972ed90c@10.148.1.145) 1.47ms referer=None
+[W 2023-11-02 15:56:46.482 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940606397 (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:46.482 ServerApp] wrote error: 'Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9)
+[W 2023-11-02 15:56:46.483 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940606397 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.95ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:47.474 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:56:47.475 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.98ms referer=None
+[W 2023-11-02 15:56:47.564 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940607479 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:56:47.564 ServerApp] wrote error: 'Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a)
+[W 2023-11-02 15:56:47.564 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940607479 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:47.976 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:56:47.977 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=None
+[W 2023-11-02 15:56:48.106 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940608020 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:56:48.106 ServerApp] wrote error: 'Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a)
+[W 2023-11-02 15:56:48.107 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940608020 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:48.758 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:48.759 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (561c211cf284414792903f89972ed90c@10.148.1.145) 0.92ms referer=None
+[W 2023-11-02 15:56:48.820 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940608734 (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:48.820 ServerApp] wrote error: 'Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9)
+[W 2023-11-02 15:56:48.821 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940608734 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.87ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:49.598 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:56:49.599 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (561c211cf284414792903f89972ed90c@10.148.1.145) 1.13ms referer=None
+[W 2023-11-02 15:56:49.756 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940609668 (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:56:49.756 ServerApp] wrote error: 'Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7)
+[W 2023-11-02 15:56:49.756 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940609668 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:50.572 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:56:50.573 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=None
+[W 2023-11-02 15:56:50.668 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940610583 (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:56:50.668 ServerApp] wrote error: 'Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18)
+[W 2023-11-02 15:56:50.669 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940610583 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:56:57.243 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:57.244 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (561c211cf284414792903f89972ed90c@10.148.1.145) 1.15ms referer=None
+[W 2023-11-02 15:56:57.350 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940617263 (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:56:57.350 ServerApp] wrote error: 'Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9)
+[W 2023-11-02 15:56:57.351 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940617263 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.92ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:01.062 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940620968 (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:01.062 ServerApp] wrote error: 'Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a)
+[W 2023-11-02 15:57:01.063 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940620968 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:01.200 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:01.201 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (561c211cf284414792903f89972ed90c@10.148.1.145) 0.97ms referer=None
+[W 2023-11-02 15:57:01.446 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940621357 (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:01.446 ServerApp] wrote error: 'Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a)
+[W 2023-11-02 15:57:01.447 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940621357 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:01.656 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:57:01.656 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=None
+[W 2023-11-02 15:57:01.826 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940621740 (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:57:01.826 ServerApp] wrote error: 'Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7)
+[W 2023-11-02 15:57:01.826 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940621740 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:01.914 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:57:01.915 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=None
+[W 2023-11-02 15:57:02.110 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940622024 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:57:02.110 ServerApp] wrote error: 'Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a)
+[W 2023-11-02 15:57:02.110 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940622024 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:03.694 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:57:03.695 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (561c211cf284414792903f89972ed90c@10.148.1.145) 0.94ms referer=None
+[W 2023-11-02 15:57:03.830 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:03.831 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=None
+[W 2023-11-02 15:57:03.936 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940623851 (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:57:03.936 ServerApp] wrote error: 'Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18)
+[W 2023-11-02 15:57:03.937 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940623851 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:04.078 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940623990 (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:04.078 ServerApp] wrote error: 'Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a)
+[W 2023-11-02 15:57:04.079 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940623990 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:04.566 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:57:04.567 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18/channels?session_id=67711529-8195-4fbc-b1b1-9e63fdf6b22c (561c211cf284414792903f89972ed90c@10.148.1.145) 0.94ms referer=None
+[W 2023-11-02 15:57:04.746 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940624657 (10.148.1.145): Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18
+[W 2023-11-02 15:57:04.746 ServerApp] wrote error: 'Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 906c9776-584e-40c6-a03d-2869007c5f18)
+[W 2023-11-02 15:57:04.747 ServerApp] 404 GET /api/kernels/906c9776-584e-40c6-a03d-2869007c5f18?1698940624657 (561c211cf284414792903f89972ed90c@10.148.1.145) 1.00ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:09.338 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:09.339 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (561c211cf284414792903f89972ed90c@10.148.1.145) 1.38ms referer=None
+[W 2023-11-02 15:57:09.476 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940629389 (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:09.476 ServerApp] wrote error: 'Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a)
+[W 2023-11-02 15:57:09.477 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940629389 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:10.664 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:10.665 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (561c211cf284414792903f89972ed90c@10.148.1.145) 1.06ms referer=None
+[W 2023-11-02 15:57:10.828 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940630740 (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:10.828 ServerApp] wrote error: 'Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a)
+[W 2023-11-02 15:57:10.828 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940630740 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:13.048 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:13.049 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (561c211cf284414792903f89972ed90c@10.148.1.145) 1.23ms referer=None
+[W 2023-11-02 15:57:13.230 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940633144 (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:13.230 ServerApp] wrote error: 'Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a)
+[W 2023-11-02 15:57:13.231 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940633144 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.93ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:18.700 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:57:18.701 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (561c211cf284414792903f89972ed90c@10.148.1.145) 0.97ms referer=None
+[W 2023-11-02 15:57:18.952 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940638864 (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:57:18.952 ServerApp] wrote error: 'Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9)
+[W 2023-11-02 15:57:18.952 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940638864 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.85ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:21.436 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:57:21.437 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (561c211cf284414792903f89972ed90c@10.148.1.145) 1.16ms referer=None
+[W 2023-11-02 15:57:21.602 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940641517 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:57:21.602 ServerApp] wrote error: 'Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a)
+[W 2023-11-02 15:57:21.603 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940641517 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.92ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:22.424 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:57:22.425 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7/channels?session_id=5172c004-4ba6-4298-88f1-fef7b4c9c59f (561c211cf284414792903f89972ed90c@10.148.1.145) 1.12ms referer=None
+[W 2023-11-02 15:57:22.616 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940642529 (10.148.1.145): Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7
+[W 2023-11-02 15:57:22.616 ServerApp] wrote error: 'Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: a044e72d-8492-49cf-a70e-cf364712c8b7)
+[W 2023-11-02 15:57:22.617 ServerApp] 404 GET /api/kernels/a044e72d-8492-49cf-a70e-cf364712c8b7?1698940642529 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.84ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 15:57:29.282 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:31.730 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:57:31.731 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a/channels?session_id=32579d64-4d43-4704-8891-9392497cc122 (561c211cf284414792903f89972ed90c@10.148.1.145) 1.17ms referer=None
+[W 2023-11-02 15:57:31.926 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940651838 (10.148.1.145): Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a
+[W 2023-11-02 15:57:31.926 ServerApp] wrote error: 'Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 0350eca4-c5b4-460c-b0d1-e0dff370407a)
+[W 2023-11-02 15:57:31.927 ServerApp] 404 GET /api/kernels/0350eca4-c5b4-460c-b0d1-e0dff370407a?1698940651838 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.92ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:36.774 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:36.775 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a/channels?session_id=a429ca52-9585-4338-961c-d0ddd3b346ee (561c211cf284414792903f89972ed90c@10.148.1.145) 1.70ms referer=None
+[W 2023-11-02 15:57:36.892 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940656807 (10.148.1.145): Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a
+[W 2023-11-02 15:57:36.892 ServerApp] wrote error: 'Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f20f9f64-dc8e-46f9-9297-674084c55c6a)
+[W 2023-11-02 15:57:36.893 ServerApp] 404 GET /api/kernels/f20f9f64-dc8e-46f9-9297-674084c55c6a?1698940656807 (561c211cf284414792903f89972ed90c@10.148.1.145) 1.04ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[W 2023-11-02 15:57:37.826 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:57:37.827 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9/channels?session_id=7d96c064-e970-4e34-be0a-d52ab20e8bbe (561c211cf284414792903f89972ed90c@10.148.1.145) 0.95ms referer=None
+[W 2023-11-02 15:57:37.888 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940657803 (10.148.1.145): Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9
+[W 2023-11-02 15:57:37.888 ServerApp] wrote error: 'Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 43d01b69-bf86-45a8-9fbe-7f4af90a4ca9)
+[W 2023-11-02 15:57:37.888 ServerApp] 404 GET /api/kernels/43d01b69-bf86-45a8-9fbe-7f4af90a4ca9?1698940657803 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab/tree/historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 15:57:43.131 ServerApp] Kernel started: 6d672712-d78d-4fae-af74-34cdbdc3559d
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-02 15:57:43.902 ServerApp] Connecting to kernel 6d672712-d78d-4fae-af74-34cdbdc3559d.
+[I 2023-11-02 15:59:30.582 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:01:31.663 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:03:32.780 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:05:33.898 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:07:35.198 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:08:14.264 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:08:14.415 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:09:06.636 ServerApp] Kernel started: d9b65e8b-3884-4623-853e-5100b6a769ef
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-02 16:09:07.567 ServerApp] Connecting to kernel d9b65e8b-3884-4623-853e-5100b6a769ef.
+[I 2023-11-02 16:09:36.163 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:12:20.736 ServerApp] Kernel restarted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:12:20.798 ServerApp] Starting buffering for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+[I 2023-11-02 16:12:20.870 ServerApp] Connecting to kernel 6d672712-d78d-4fae-af74-34cdbdc3559d.
+[I 2023-11-02 16:12:20.870 ServerApp] Restoring connection for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+readline: /etc/inputrc: line 19: term: unknown variable name
+[W 2023-11-02 16:12:21.501 ServerApp] Got events for closed stream <zmq.eventloop.zmqstream.ZMQStream object at 0x2aaabaf088e0>
+[I 2023-11-02 16:13:15.653 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:15:16.869 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:17:17.988 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:20:58.634 ServerApp] Starting buffering for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+[I 2023-11-02 16:20:58.639 ServerApp] Starting buffering for d9b65e8b-3884-4623-853e-5100b6a769ef:cec72822-a39d-490e-a485-255aab6d0c24
+[I 2023-11-02 16:21:04.714 ServerApp] Connecting to kernel 6d672712-d78d-4fae-af74-34cdbdc3559d.
+[I 2023-11-02 16:21:04.714 ServerApp] Restoring connection for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+[I 2023-11-02 16:21:04.750 ServerApp] Connecting to kernel d9b65e8b-3884-4623-853e-5100b6a769ef.
+[I 2023-11-02 16:21:04.750 ServerApp] Restoring connection for d9b65e8b-3884-4623-853e-5100b6a769ef:cec72822-a39d-490e-a485-255aab6d0c24
+[I 2023-11-02 16:23:50.086 ServerApp] Starting buffering for d9b65e8b-3884-4623-853e-5100b6a769ef:cec72822-a39d-490e-a485-255aab6d0c24
+[I 2023-11-02 16:24:33.807 ServerApp] Kernel started: 5db6385e-ec86-44a2-94ef-2b8f89db5504
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-02 16:24:34.629 ServerApp] Connecting to kernel 5db6385e-ec86-44a2-94ef-2b8f89db5504.
+[I 2023-11-02 16:25:25.137 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:25:34.591 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:27:35.864 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:29:36.745 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:33:37.767 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:37:26.370 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:37:39.288 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:39:40.501 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:41:41.893 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:43:06.107 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:43:30.477 ServerApp] Kernel restarted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:43:30.546 ServerApp] Starting buffering for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+[I 2023-11-02 16:43:30.740 ServerApp] Connecting to kernel 6d672712-d78d-4fae-af74-34cdbdc3559d.
+[I 2023-11-02 16:43:30.740 ServerApp] Restoring connection for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-02 16:45:07.462 ServerApp] Saving file at /m2_2022/sandbox/zarr_coloc.ipynb
+[I 2023-11-02 16:45:27.555 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:46:56.851 ServerApp] Saving file at /historical_analysis/histlib/box.py
+[I 2023-11-02 16:47:24.711 ServerApp] Saving file at /historical_analysis/histlib/box.py
+[I 2023-11-02 16:47:43.539 ServerApp] Kernel restarted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:47:43.581 ServerApp] Starting buffering for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+[I 2023-11-02 16:47:43.660 ServerApp] Connecting to kernel 6d672712-d78d-4fae-af74-34cdbdc3559d.
+[I 2023-11-02 16:47:43.660 ServerApp] Restoring connection for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-02 16:49:28.637 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:50:58.223 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:50:58.407 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:50:58.605 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[IPKernelApp] ERROR | KeyboardInterrupt caught in kernel.
+[I 2023-11-02 16:51:22.453 ServerApp] Kernel restarted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:51:22.492 ServerApp] Starting buffering for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+[I 2023-11-02 16:51:22.563 ServerApp] Connecting to kernel 6d672712-d78d-4fae-af74-34cdbdc3559d.
+[I 2023-11-02 16:51:22.563 ServerApp] Restoring connection for 6d672712-d78d-4fae-af74-34cdbdc3559d:36fae4f3-e522-4f1f-a39c-a838cd173dc5
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-02 16:51:29.947 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-02 16:51:59.125 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:51:59.283 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:51:59.453 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:52:13.759 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:52:13.971 ServerApp] Kernel interrupted: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:53:31.337 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[C 2023-11-02 16:57:16.189 ServerApp] received signal 15, stopping
+Terminated
+[I 2023-11-02 16:57:16.239 ServerApp] Shutting down 6 extensions
+[I 2023-11-02 16:57:16.240 ServerApp] Shutting down 3 kernels
+[I 2023-11-02 16:57:16.241 ServerApp] Kernel shutdown: d9b65e8b-3884-4623-853e-5100b6a769ef
+[I 2023-11-02 16:57:16.241 ServerApp] Kernel shutdown: 6d672712-d78d-4fae-af74-34cdbdc3559d
+[I 2023-11-02 16:57:16.242 ServerApp] Kernel shutdown: 5db6385e-ec86-44a2-94ef-2b8f89db5504
