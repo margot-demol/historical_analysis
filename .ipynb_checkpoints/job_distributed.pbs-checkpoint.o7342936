@@ -1,0 +1,100 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Fri Nov 10 08:10:58 GMT 2023
+/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/config.py:742: FutureWarning: Dask configuration key 'distributed.scheduler.transition-log-length' has been deprecated; please use 'distributed.admin.low-level-log-length' instead
+  warnings.warn(
+/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/config.py:742: FutureWarning: Dask configuration key 'distributed.comm.recent-messages-log-length' has been deprecated; please use 'distributed.admin.low-level-log-length' instead
+  warnings.warn(
+tornado.application - ERROR - Exception in callback <bound method BokehTornado._keep_alive of <bokeh.server.tornado.BokehTornado object at 0x2aaad0a3cb50>>
+Traceback (most recent call last):
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/ioloop.py", line 919, in _run
+    val = self.callback()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/bokeh/server/tornado.py", line 779, in _keep_alive
+    c.send_ping()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/bokeh/server/connection.py", line 91, in send_ping
+    self._socket.ping(str(self._ping_count).encode("utf-8"))
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/websocket.py", line 439, in ping
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+tornado.application - ERROR - Exception in callback <bound method BokehTornado._keep_alive of <bokeh.server.tornado.BokehTornado object at 0x2aaad0a3cb50>>
+Traceback (most recent call last):
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/ioloop.py", line 919, in _run
+    val = self.callback()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/bokeh/server/tornado.py", line 779, in _keep_alive
+    c.send_ping()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/bokeh/server/connection.py", line 91, in send_ping
+    self._socket.ping(str(self._ping_count).encode("utf-8"))
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/websocket.py", line 439, in ping
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 52
+Number of workers up = 78
+Number of workers up = 156
+Cluster is up, proceeding with computations
+Traceback (most recent call last):
+  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 306, in <module>
+    if dataset == 'aviso' : run_aviso(l, cluster, client)
+  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 247, in run_aviso
+    ds_aviso.to_zarr(zarr, mode="w")
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/core/dataset.py", line 2036, in to_zarr
+    return to_zarr(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/api.py", line 1431, in to_zarr
+    dump_to_store(dataset, zstore, writer, encoding=encoding)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/api.py", line 1119, in dump_to_store
+    store.store(variables, attrs, check_encoding, writer, unlimited_dims=unlimited_dims)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 500, in store
+    variables_encoded, attributes = self.encode(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/common.py", line 200, in encode
+    variables = {k: self.encode_variable(v) for k, v in variables.items()}
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/common.py", line 200, in <dictcomp>
+    variables = {k: self.encode_variable(v) for k, v in variables.items()}
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 459, in encode_variable
+    variable = encode_zarr_variable(variable)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 258, in encode_zarr_variable
+    var = conventions.encode_cf_variable(var, name=name)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/conventions.py", line 273, in encode_cf_variable
+    var = coder.encode(var, name=name)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/coding/times.py", line 659, in encode
+    (data, units, calendar) = encode_cf_datetime(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/coding/times.py", line 592, in encode_cf_datetime
+    dates = np.asarray(dates)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/array/core.py", line 1700, in __array__
+    x = self.compute()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/base.py", line 342, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/base.py", line 628, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/distributed/spill.py", line 217, in __getitem__
+    return super().__getitem__(key)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/common.py", line 127, in wrapper
+    return func(*args, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/buffer.py", line 186, in __getitem__
+    return self.slow_to_fast(key)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/buffer.py", line 175, in slow_to_fast
+    self.fast.evict_until_below_target()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/lru.py", line 180, in evict_until_below_target
+    self.evict()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/common.py", line 127, in wrapper
+    return func(*args, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/lru.py", line 227, in evict
+    cb(key, value)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/buffer.py", line 139, in fast_to_slow
+    self.slow[key] = value
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/common.py", line 127, in wrapper
+    return func(*args, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/cache.py", line 89, in __setitem__
+    self.data[key] = value
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/distributed/spill.py", line 347, in __setitem__
+    self.d[key] = pickled
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/common.py", line 127, in wrapper
+    return func(*args, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zict/file.py", line 133, in __setitem__
+    with open(os.path.join(self.directory, fn), "wb") as fh, self.unlock():
+OSError: [Errno 36] File name too long: '/dev/shm/pbs.7342958.datarmor0/dask-scratch-space/worker-ju4r2hg7/storage/%28%27alti_sla_unfiltered_denoised_uncertainty-_concat_aviso-8931b6723b4ed32bd1f5c31bde3342ea-open_dataset-06f9a46a68246f9c40bd52c7ab7481f3alti_sla_unfiltered_denoised_uncertainty-dabb9898fa30edb5ae1980b93232f6cd%27%2C%20632%2C%200%2C%200%2C%200%2C%200%2C%200%29#1399'
+Fri Nov 10 08:23:37 GMT 2023

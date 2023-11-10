@@ -6,12 +6,10 @@ import xarray as xr
 import pandas as pd
 import numpy as np
 
-import m2lib22.cstes as cstes
+import histlib.cstes as cstes
 
 # alti
 aviso_dir = "/home/ref-cmems-public/tac/sea-level/SEALEVEL_GLO_PHY_L4_MY_008_047/cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.25deg_P1D/"
-
-peachi_dir = "/home/datawork-cersat-public/provider/aviso/satellite/l2/sentinel-3_a/sral/peachi/sgdr/"
 
 """
 AVISO  
@@ -21,7 +19,7 @@ AVISO
 
 def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs):
     """Extract AVISO data
-    Ref ...
+    Ref ..
 
     Parameters
     ----------
@@ -45,10 +43,14 @@ def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs
     # LOADftry
     D = []
     for _t in t:
-        files = glob(os.path.join(aviso_dir, f"{_t.year}/{_t.dayofyear:03d}/*.nc"))
+        try : # ds_obsselected with sel, ds_obs is numpy.datetime64
+            files = glob(os.path.join(aviso_dir, f"{_t.year}/{_t.dayofyear:03d}/*.nc"))
+        except : # robust if ds_obs selected with where (ds_obs.time.values  = DatetimeIndex)
+            files = glob(os.path.join(aviso_dir, f"{_t.year.values[0]}/{_t.dayofyear.values[0]:03d}/*.nc"))
+            print('need values[0] for load aviso')
         assert len(files) == 1, f"error: multiple files at {files}"
 
-        if to_360:  # turn erastar to 0-360° if needed
+        if to_360:  # turn aviso to 0-360° if needed
             _ds = (
                 xr.load_dataset(files[0], **rkwargs)
                 # .sel(**kwargs) #in case 180 limit
@@ -56,7 +58,7 @@ def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs
 
             assert all(
                 _ds.longitude <= 180
-            ), "error : era_star in 0-360° lon coordinates"  # verify -180-180° representation for lon coordinates
+            ), "error : aviso in 0-360° lon coordinates"  # verify -180-180° representation for lon coordinates
             _ds = _ds.assign_coords(longitude=cstes.lon_180_to_360(_ds.longitude))
             _ds = _ds.sortby("longitude")
             _ds = _ds.sel(**kwargs)  # select data around the colocalisation
@@ -66,7 +68,7 @@ def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs
 
             assert all(
                 _ds.longitude <= 180
-            ), "error : era_star in 0-360° lon coordinates"  # verify -180-180° representation for lon coordinates
+            ), "error : aviso in 0-360° lon coordinates"  # verify -180-180° representation for lon coordinates
 
         # ds = xr.open_dataset(files[0], **rkwargs).sel(**kwargs)
         # load_dataset loads data and close the file immediately while read_dataset is lazy
@@ -94,25 +96,23 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
     dl = 0.25
     assert (ds_obs["box_lon"] <= 180).all(), "error : ds_obs in 0-360° lon coordinates"
 
-    # -180-180 longitude problem
+    # -180-180 longitude boundary problem
     limite_lon = (
-        (ds_obs.drifter_lon > 179).any()
-        or (ds_obs.drifter_lon < -179).any()
-        or (ds_obs.box_lon > 179).any()
-        or (ds_obs.box_lon < -179).any()
+        (ds_obs.drifter_lon > 178).any()
+        or (ds_obs.drifter_lon < -178).any()
+        or (ds_obs.box_lon > 178).any()
+        or (ds_obs.box_lon < -178).any()
     )
 
     if limite_lon:
         box_lon = cstes.lon_180_to_360(ds_obs.box_lon)
         drifter_lon = cstes.lon_180_to_360(ds_obs.drifter_lon)
-        _alti_lon = cstes.lon_180_to_360(
-            ds_obs.alti_lon.isel(alti_time=10)
-        )  # only matchup
+        _alti_lon = cstes.lon_180_to_360(ds_obs.alti_lon.isel(alti_time=ds_obs.dims['alti_time']//2))  # only matchup
 
     else:
         box_lon = ds_obs["box_lon"]
         drifter_lon = ds_obs["drifter_lon"]
-        _alti_lon = ds_obs["alti_lon"].isel(alti_time=10)  # only matchup
+        _alti_lon = ds_obs["alti_lon"].isel(alti_time=ds_obs.dims['alti_time']//2)  # only matchup
 
     # matchup site
     site_matchup_indice = int(ds_obs.__site_matchup_indice.values)
@@ -155,33 +155,38 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
         )  # aviso sla and err_sla around matchup_time
     except:
         assert False, (ds_obs.__site_id.values, ds_obs.time.values)
-
+    
+    #for all interpolations, need drop_duplicated, because in some case, same aviso point for two differents longitude, latitude points and interpolation works only one uniquely valued coordinated dataset
+    
     # interplate over the trajectoire
-    ds_traj = (
-        ds_aviso.interp(
-            aviso_time=ds_obs.drifter_time,
-            aviso_lon=drifter_lon,
-            aviso_lat=ds_obs.drifter_lat,
+    try :
+        ds_traj = (
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
+                aviso_time=ds_obs.drifter_time,
+                aviso_lon=drifter_lon,
+                aviso_lat=ds_obs.drifter_lat,
+            )
+            .rename({v: "aviso_traj_" + v for v in ds_aviso})
+            .drop(
+                [
+                    "drifter_lon",
+                    "drifter_lat",
+                    "aviso_time",
+                    "aviso_lon",
+                    "aviso_lat",
+                    "lat",
+                    "lon",
+                    "time",
+                ]
+            )
         )
-        .rename({v: "aviso_traj_" + v for v in ds_aviso})
-        .drop(
-            [
-                "drifter_lon",
-                "drifter_lat",
-                "aviso_time",
-                "aviso_lon",
-                "aviso_lat",
-                "lat",
-                "lon",
-                "time",
-            ]
-        )
-    )
-
+    except:
+        assert False, ('pb interpolate over trajectories' ,ds_obs.__site_id.values, ds_obs.time.values)
+        
     # interpolate on the box
     if only_matchup_time:
         ds_box = (
-            ds_aviso.interp(
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
                 aviso_time=_drifter_time, aviso_lon=box_lon, aviso_lat=ds_obs.box_lat
             )
             .rename({v: "aviso_box_" + v for v in ds_aviso})
@@ -189,108 +194,112 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
         )
     else:
         ds_box = (
-            ds_aviso.interp(aviso_lon=box_lon, aviso_lat=ds_obs.box_lat)
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(aviso_lon=box_lon, aviso_lat=ds_obs.box_lat)
             .rename({v: "aviso_box_" + v for v in ds_aviso})
             .drop(["aviso_lon", "aviso_lat", "lat", "lon", "time"])
         )
 
     # interpolate at drifter matchup position, for all drifter times
-    ds_drifter = (
-        ds_aviso.interp(aviso_lon=_drifter_lon, aviso_lat=_drifter_lat)
-        .drop(["aviso_lon", "aviso_lat"])
-        .rename({v: "aviso_drifter_temp_" + v for v in ds_aviso})
-    )
-
-    # at alti matchup
-    ds_alti = ds_aviso.interp(
-        aviso_time=ds_obs.alti_time_.isel(alti_time=10),
-        aviso_lon=_alti_lon,
-        aviso_lat=ds_obs.alti_lat.isel(alti_time=10),
-    )
-    ds_alti = ds_alti.drop(list(ds_alti.coords.keys())).rename(
-        {v: "aviso_alti_matchup_" + v for v in ds_aviso}
-    )
+    try : 
+        ds_drifter = (
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(aviso_lon=_drifter_lon, aviso_lat=_drifter_lat)
+            .drop(["aviso_lon", "aviso_lat"])
+            .rename({v: "aviso_drifter_temp_" + v for v in ds_aviso})
+        )
+    
+        # at alti matchup
+        ds_alti = ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
+            aviso_time=ds_obs.alti_time_.isel(alti_time=ds_obs.dims['alti_time']//2),
+            aviso_lon=_alti_lon,
+            aviso_lat=ds_obs.alti_lat.isel(alti_time=ds_obs.dims['alti_time']//2),
+        )
+        ds_alti = ds_alti.drop(list(ds_alti.coords.keys())).rename(
+            {v: "aviso_alti_matchup_" + v for v in ds_aviso}
+        )
+    except:
+        assert False, ('pb interpolate over drifter matchup' ,ds_obs.__site_id.values, ds_obs.time.values)
 
     # gradient
     g = 9.81
     try:
         # sla
-        ds_box["aviso_box_g_grad_x"] = g * ds_box["aviso_box_sla"].differentiate(
+        ds_box["aviso_box_ggx_sla"] = g * ds_box["aviso_box_sla"].differentiate(
             "box_x"
         )
-        ds_box["aviso_box_g_grad_y"] = g * ds_box["aviso_box_sla"].differentiate(
+        ds_box["aviso_box_ggy_sla"] = g * ds_box["aviso_box_sla"].differentiate(
             "box_y"
         )
-        ds_traj["aviso_traj_g_grad_x"] = ds_box["aviso_box_g_grad_x"].interp(
+        ds_traj["aviso_traj_ggx_sla"] = ds_box["aviso_box_ggx_sla"].interp(
             box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y
         )
-        ds_traj["aviso_traj_g_grad_y"] = ds_box["aviso_box_g_grad_y"].interp(
+        ds_traj["aviso_traj_ggy_sla"] = ds_box["aviso_box_ggy_sla"].interp(
             box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y
         )
         # adt
-        ds_box["aviso_box_adt_g_grad_x"] = g * ds_box["aviso_box_adt"].differentiate(
+        ds_box["aviso_box_ggx_adr"] = g * ds_box["aviso_box_adt"].differentiate(
             "box_x"
         )
-        ds_box["aviso_box_adt_g_grad_y"] = g * ds_box["aviso_box_adt"].differentiate(
+        ds_box["aviso_box_ggy_adt"] = g * ds_box["aviso_box_adt"].differentiate(
             "box_y"
         )
-        ds_traj["aviso_traj_adt_g_grad_x"] = ds_box["aviso_box_adt_g_grad_x"].interp(
+        ds_traj["aviso_traj_ggx_adt"] = ds_box["aviso_box_ggx_adt"].interp(
             box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y
         )
-        ds_traj["aviso_traj_adt_g_grad_y"] = ds_box["aviso_box_adt_g_grad_y"].interp(
+        ds_traj["aviso_traj_ggy_adt"] = ds_box["aviso_box_ggy_adt"].interp(
             box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y
         )
-        # ds_traj['aviso_traj_g_grad_x']= g * ds_traj['aviso_traj_sla'].differentiate('drifter_x')
-        # ds_traj['aviso_traj_g_grad_y']= g * ds_traj['aviso_traj_sla'].differentiate('drifter_y')
+        # ds_traj['aviso_traj_ggx']= g * ds_traj['aviso_traj_sla'].differentiate('drifter_x')
+        # ds_traj['aviso_traj_ggy']= g * ds_traj['aviso_traj_sla'].differentiate('drifter_y')
 
     except:
         try:
-            # ds_traj['aviso_traj_g_grad_x']= g * ds_traj['aviso_traj_sla'].compute().differentiate('drifter_x')
-            # ds_traj['aviso_traj_g_grad_y']= g * ds_traj['aviso_traj_sla'].compute().differentiate('drifter_y')
-            ds_box["aviso_box_g_grad_x"] = g * ds_box[
+            # ds_traj['aviso_traj_ggx']= g * ds_traj['aviso_traj_sla'].compute().differentiate('drifter_x')
+            # ds_traj['aviso_traj_ggy']= g * ds_traj['aviso_traj_sla'].compute().differentiate('drifter_y')
+            ds_box["aviso_box_ggx_sla"] = g * ds_box[
                 "aviso_box_sla"
             ].compute().differentiate("box_x")
-            ds_box["aviso_box_g_grad_y"] = g * ds_box[
+            ds_box["aviso_box_ggy_sla"] = g * ds_box[
                 "aviso_box_sla"
             ].compute().differentiate("box_y")
-            ds_traj["aviso_traj_g_grad_x"] = ds_box["aviso_box_g_grad_x"].interp(
+            ds_traj["aviso_traj_ggx_sla"] = ds_box["aviso_box_ggx_sla"].interp(
                 box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y
             )
-            ds_traj["aviso_traj_g_grad_y"] = ds_box["aviso_box_g_grad_y"].interp(
+            ds_traj["aviso_traj_ggy_sla"] = ds_box["aviso_box_ggy_sla"].interp(
                 box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y
             )
             # adt
-            ds_box["aviso_box_adt_g_grad_x"] = g * ds_box[
+            ds_box["aviso_box_ggx_adt"] = g * ds_box[
                 "aviso_box_adt"
             ].compute().differentiate("box_x")
-            ds_box["aviso_box_adt_g_grad_y"] = g * ds_box[
+            ds_box["aviso_box_ggy_adt"] = g * ds_box[
                 "aviso_box_adt"
             ].compute().differentiate("box_y")
-            ds_traj["aviso_traj_adt_g_grad_x"] = ds_box[
-                "aviso_box_adt_g_grad_x"
+            ds_traj["aviso_traj_ggx_adt"] = ds_box[
+                "aviso_box_ggx_adt"
             ].interp(box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y)
-            ds_traj["aviso_traj_adt_g_grad_y"] = ds_box[
-                "aviso_box_adt_g_grad_y"
+            ds_traj["aviso_traj_ggy_adt"] = ds_box[
+                "aviso_box_ggy_adt"
             ].interp(box_x=ds_traj.drifter_x, box_y=ds_traj.drifter_y)
         except:
             assert False, "pb differentiate grad"
     # sla
-    ds_alti["aviso_alti_matchup_g_grad_x"] = ds_box["aviso_box_g_grad_x"].sel(
+    ds_alti
+    ds_alti["aviso_alti_matchup_ggx_sla"] = ds_box["aviso_box_ggx_sla"].sel(
         box_x=0, box_y=0
     )
-    ds_alti["aviso_alti_matchup_g_grad_y"] = ds_box["aviso_box_g_grad_y"].sel(
+    ds_alti["aviso_alti_matchup_ggy_sla"] = ds_box["aviso_box_ggy_sla"].sel(
         box_x=0, box_y=0
     )
     # adt
-    ds_alti["aviso_alti_matchup_adt_g_grad_x"] = ds_box["aviso_box_adt_g_grad_x"].sel(
+    ds_alti["aviso_alti_matchup_ggx_adt"] = ds_box["aviso_box_ggx_adt"].sel(
         box_x=0, box_y=0
     )
-    ds_alti["aviso_alti_matchup_adt_g_grad_y"] = ds_box["aviso_box_adt_g_grad_y"].sel(
+    ds_alti["aviso_alti_matchup_ggy_adt"] = ds_box["aviso_box_ggy_adt"].sel(
         box_x=0, box_y=0
     )
 
     # at drifter matchup
-    ds_drifter_matchup = ds_traj[[v for v in ds_traj if "grad" in v]].isel(
+    ds_drifter_matchup = ds_traj[[v for v in ds_traj if "gg" in v]].isel(
         site_obs=site_matchup_indice
     )
     ds_drifter_matchup = ds_drifter_matchup.rename(
@@ -313,9 +322,15 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
 
 def _concat_aviso(ds, dt=(-1, 2), only_matchup_time=True):
     """Load aviso data for multiple collocations and concatenate"""
-    return xr.concat(
-        [get_aviso_one_obs(ds.sel(obs=o), dt, only_matchup_time) for o in ds.obs], "obs"
-    )
+    L=[]
+    for o in ds.obs :
+        try : 
+            L.append(get_aviso_one_obs(ds.sel(obs=o), dt, only_matchup_time))
+        except :
+            assert False, o
+    #ds0 = xr.concat([get_aviso_one_obs(ds.sel(obs=o), dt, only_matchup_time) for o in ds.obs], "obs")
+    
+    return xr.concat(L, "obs")
 
 
 def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
@@ -331,7 +346,7 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
         the interval (t-5 days, t+5 days)
         Default is (-1,2)
     only_matchup_time : bool
-                        if True return aviso_sla, aviso_g_grad_x/y on the box only for the drifter matchup time
+                        if True return aviso_sla, aviso_ggx/y on the box only for the drifter matchup time
                         if False return it for all aviso time over the dt period
 
     Return
@@ -398,10 +413,10 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
 
     """
     #add drifter_matchup
-    aviso_drifter_matchup_g_grad_x = ds_aviso.aviso_traj_g_grad_x.isel(site_obs = ds.__site_matchup_indice.compute())
-    aviso_drifter_matchup_g_grad_y = ds_aviso.aviso_traj_g_grad_y.isel(site_obs = ds.__site_matchup_indice.compute())
-    ds_aviso['aviso_drifter_matchup_g_grad_x'] = aviso_drifter_matchup_g_grad_x
-    ds_aviso['aviso_drifter_matchup_g_grad_y'] = aviso_drifter_matchup_g_grad_y
+    aviso_drifter_matchup_ggx = ds_aviso.aviso_traj_ggx.isel(site_obs = ds.__site_matchup_indice.compute())
+    aviso_drifter_matchup_ggy = ds_aviso.aviso_traj_ggy.isel(site_obs = ds.__site_matchup_indice.compute())
+    ds_aviso['aviso_drifter_matchup_ggx'] = aviso_drifter_matchup_ggx
+    ds_aviso['aviso_drifter_matchup_ggy'] = aviso_drifter_matchup_ggy
     """
     # attrs
     ds_aviso.aviso_alti_matchup_err_sla.attrs = {
@@ -419,22 +434,22 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
         "long_name": r"$adt_{altimatchup}$",
         "units": "m",
     }
-    ds_aviso.aviso_alti_matchup_g_grad_x.attrs = {
+    ds_aviso.aviso_alti_matchup_ggx_sla.attrs = {
         "description": "along track sla gradient term interpolated on the altimeter's matchup",
         "long_name": r"$g\partial_x\eta_{altimatchup}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_alti_matchup_g_grad_y.attrs = {
+    ds_aviso.aviso_alti_matchup_ggy_sla.attrs = {
         "description": "cross track sla gradient term interpolated on the altimeter's matchup",
         "long_name": r"$g\partial_y\eta_{altimatchup}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_alti_matchup_adt_g_grad_x.attrs = {
+    ds_aviso.aviso_alti_matchup_ggx_adt.attrs = {
         "description": "along track adt gradient term interpolated on the altimeter's matchup",
         "long_name": r"$g\partial_xadt_{altimatchup}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_alti_matchup_adt_g_grad_y.attrs = {
+    ds_aviso.aviso_alti_matchup_ggy_adt.attrs = {
         "description": "cross track adt gradient term interpolated on the altimeter's matchup",
         "long_name": r"$g\partial_yadt_{altimatchup}$",
         "units": r"$m.s^{-2}$",
@@ -450,12 +465,12 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
         "long_name": r"$\eta_{box}$",
         "units": "m",
     }
-    ds_aviso.aviso_box_g_grad_x.attrs = {
+    ds_aviso.aviso_box_ggx_sla.attrs = {
         "description": "along track sla gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
         "long_name": r"$g\partial_x\eta_{box}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_box_g_grad_y.attrs = {
+    ds_aviso.aviso_box_ggy_sla.attrs = {
         "description": "cross track sla gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
         "long_name": r"$g\partial_y\eta_{box}$",
         "units": r"$m.s^{-2}$",
@@ -465,12 +480,12 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
         "long_name": r"$adt_{box}$",
         "units": "m",
     }
-    ds_aviso.aviso_box_adt_g_grad_x.attrs = {
+    ds_aviso.aviso_box_ggx_adt.attrs = {
         "description": "along track adt gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
         "long_name": r"$g\partial_xadt_{box}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_box_adt_g_grad_y.attrs = {
+    ds_aviso.aviso_box_ggy_adt.attrs = {
         "description": "cross track adt gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
         "long_name": r"$g\partial_yadt_{box}$",
         "units": r"$m.s^{-2}$",
@@ -486,12 +501,12 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
         "long_name": r"$\eta_{traj}$",
         "units": "m",
     }
-    ds_aviso.aviso_traj_g_grad_x.attrs = {
+    ds_aviso.aviso_traj_ggx_sla.attrs = {
         "description": "along track sla gradient term interpolated on the drifter's trajectory",
         "long_name": r"$g\partial_x\eta_{traj}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_traj_g_grad_y.attrs = {
+    ds_aviso.aviso_traj_ggy_sla.attrs = {
         "description": "cross track sla gradient term interpolated on the drifter's trajectory",
         "long_name": r"$g\partial_y\eta_{traj}$",
         "units": r"$m.s^{-2}$",
@@ -501,33 +516,33 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
         "long_name": r"$adt_{traj}$",
         "units": "m",
     }
-    ds_aviso.aviso_traj_adt_g_grad_x.attrs = {
+    ds_aviso.aviso_traj_ggx_adt.attrs = {
         "description": "along track adt gradient term interpolated on the drifter's trajectory",
         "long_name": r"$g\partial_xadt_{traj}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_traj_adt_g_grad_y.attrs = {
+    ds_aviso.aviso_traj_ggy_adt.attrs = {
         "description": "cross track adt gradient term interpolated on the drifter's trajectory",
         "long_name": r"$g\partial_yadt_{traj}$",
         "units": r"$m.s^{-2}$",
     }
 
-    ds_aviso.aviso_drifter_matchup_g_grad_x.attrs = {
+    ds_aviso.aviso_drifter_matchup_ggx_sla.attrs = {
         "description": "along track sla gradient term interpolated on the drifter's matchup",
         "long_name": r"$g\partial_x\eta_{driftermatchup}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_drifter_matchup_g_grad_y.attrs = {
+    ds_aviso.aviso_drifter_matchup_ggy_sla.attrs = {
         "description": "cross track sla gradient term interpolated on the drifter's matchup",
         "long_name": r"$g\partial_y\eta_{altimetermatchup}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_drifter_matchup_adt_g_grad_x.attrs = {
+    ds_aviso.aviso_drifter_matchup_ggx_adt.attrs = {
         "description": "along track adt gradient term interpolated on the drifter's matchup",
         "long_name": r"$g\partial_xadt_{driftermatchup}$",
         "units": r"$m.s^{-2}$",
     }
-    ds_aviso.aviso_drifter_matchup_adt_g_grad_y.attrs = {
+    ds_aviso.aviso_drifter_matchup_ggy_adt.attrs = {
         "description": "cross track adt gradient term interpolated on the drifter's matchup",
         "long_name": r"$g\partial_yadt_{altimetermatchup}$",
         "units": r"$m.s^{-2}$",

@@ -523,80 +523,6 @@ def compute_local_drifters_velocities(ds, tdim):
     )
     return vx, vy
     
-"""
-ERRORS
----------------------------------------------------------------------------------------------------------
-"""
-def dlonlat_dlonlatkm(dlon, dlat, lat):
-    """ return the error distance in m from the error in degree"""
-    R=6371e3
-    return R*np.arccos(np.sin(lat)**2 + (np.cos(lat)**2)*np.cos(dlon)), R*dlat
-                       
-def rotation(dlonkm, dlatkm, box_phi):#APPROXIMATIF
-    """ apply rotation lon, lat -> xy """ 
-    return dlonkm*np.cos(box_phi)+dlatkm*np.sin(box_phi), -dlonkm*np.sin(box_phi)+dlatkm*np.cos(box_phi) 
-def err_xy_obs(dobs):
-    #_drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
-    #dobs= dobs.drop(_drop)
-    dlon=dobs.drifter_err_lon.compute()*np.pi/180 
-    dlat=dobs.drifter_err_lat.compute()*np.pi/180
-    lat=dobs.lat.compute()*np.pi/180
-    box_phi = dobs.box_phi.compute()*np.pi/180
-    dlonkm, dlatkm=dlonlat_dlonlatkm(dlon, dlat,lat) #need computed values !!!
-    
-    ds=xr.Dataset()
-    ds['drifter_err_lonm']=dlonkm.assign_attrs({"long_name":r'$err_{lon}$', "units":'m'})
-    ds['drifter_err_latm']=dlatkm.assign_attrs({"long_name":r'$err_{lat}$', "units":'m'})
-    errx, erry = rotation(dlonkm, dlatkm, box_phi)
-    ds['drifter_err_x']=errx.assign_attrs({"long_name":r'$err_x$', "units":'m'})
-    ds['drifter_err_y']=erry.assign_attrs({"long_name":r'$err_y$', "units":'m'})
-    
-    errvx, errvy = vevn2vxvy(dobs.drifter_theta_lon, dobs.drifter_theta_lat, dobs.drifter_ve, dobs.drifter_vn)
-    ds['drifter_err_vx']=errvx.assign_attrs({"long_name":r'$err_{vx}$', "units":'m/s'})
-    ds['drifter_err_vy']=errvy.assign_attrs({"long_name":r'$err_{vy}$', "units":'m/s'})
-    return ds
-    
-def _concat_err_xy(ds):
-    """ concatenate """
-    return xr.concat([err_xy_obs(ds.sel(obs=o)) for o in ds.obs], 'obs')
-
-def compute_err_xy(ds):
-    """
-    https://xarray.pydata.org/en/stable/user-guide/dask.html
-    Parameters
-    ----------
-    ds: xr.Dataset
-        Input collocation dataset
-    
-    Return
-    ------
-    ds: xr.Dataset
-        Dataset with errors
-
-    """
-    #_drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
-    #ds=ds.drop(_drop)
-
-    # build template
-    template = _concat_err_xy(ds.isel(obs=slice(0,2)))
-    
-    # broad cast along obs dimension
-    template, _ = xr.broadcast(template.isel(obs=0).chunk(), 
-                               ds.time,
-                               exclude=[ "box_x", "box_y",],
-                              )
-    
-    # massage further and unify chunks
-    template = (xr.merge([ds[['lon','lat', 'time']], template.drop(list(template.coords))])
-             .unify_chunks()[list(template.keys())])
-    
-    # actually perform the calculation
-    try : 
-        ds_err = xr.map_blocks(_concat_err_xy, ds, template=template).compute()
-    except : 
-        assert False, 'pb map_blocks'
-   
-    return ds_err
     
 """
 BUILDING DATASET AND ADD THE BOX velocities, sla gradients
@@ -605,8 +531,8 @@ BUILDING DATASET AND ADD THE BOX velocities, sla gradients
 # def build_dataset(nc,
 def build_dataset(
     nc,
-    x=np.arange(-200e3, 200e3, 5e3),
-    y=np.arange(-100e3, 100e3, 5e3),
+    x=np.arange(-300e3, 300e3, 5e3),
+    y=np.arange(-200e3, 200e3, 5e3),
     chunks=None,
     persist=False,
 ):
@@ -617,7 +543,7 @@ def build_dataset(
     nc : str
         path to netcdf file to open
     x,y : np.array, np.array
-        local coordinates of the box, default is x = np.arange(-200e3,200e3,5e3) and y = np.arange(-100e3,100e3,5e3)
+        local coordinates of the box, default is x = np.arange(-300e3,300e3,5e3) and y = np.arange(-200e3,200e3,5e3)
     persist : bool
             True to return ds.persist
 
@@ -639,10 +565,24 @@ def build_dataset(
     # change prefixes
     ds = change_prefix(ds)
 
+    #put longitude in the -180-180° system for all
+    from histlib.cstes import lon_360_to_180
+    if (ds["lon"] > 180).any() or (ds["lon"] < -180).any():
+        ds['lon'] = lon_360_to_180(ds.lon)
+        print('lon from 0-360° to -180-180°')
+    if (ds["alti_lon"] > 180).any() or (ds["alti_lon"] < -180).any():
+        ds['alti_lon'] = lon_360_to_180(ds.alti_lon)
+        print('alti_lon from 0-360° to -180-180°')
+    if (ds["drifter_lon"] > 180).any() or (ds["drifter_lon"] < -180).any():
+        ds['drifter_lon'] = lon_360_to_180(ds.drifter_lon)
+        print('drifter_lon from 0-360° to -180-180°')
+    
     # add several variables in coords
     ds = ds.set_coords(["drifter_" + d for d in ["time", "lon", "lat"]]).set_coords(
         ["alti_" + d for d in ["time_", "lon", "lat"]]
     )
+    #put longitude in the -180-180° system
+    
     # ds = ds.persist()
 
     # add box
@@ -831,3 +771,79 @@ def build_dataset(
         ds = ds.persist()
 
     return ds
+
+
+"""
+ERRORS
+---------------------------------------------------------------------------------------------------------
+"""
+def dlonlat_dlonlatkm(dlon, dlat, lat):
+    """ return the error distance in m from the error in degree"""
+    R=6371e3
+    return R*np.arccos(np.sin(lat)**2 + (np.cos(lat)**2)*np.cos(dlon)), R*dlat
+                       
+def rotation(dlonkm, dlatkm, box_phi):#APPROXIMATIF
+    """ apply rotation lon, lat -> xy """ 
+    return dlonkm*np.cos(box_phi)+dlatkm*np.sin(box_phi), -dlonkm*np.sin(box_phi)+dlatkm*np.cos(box_phi) 
+def err_xy_obs(dobs):
+    #_drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
+    #dobs= dobs.drop(_drop)
+    dlon=dobs.drifter_err_lon.compute()*np.pi/180 
+    dlat=dobs.drifter_err_lat.compute()*np.pi/180
+    lat=dobs.lat.compute()*np.pi/180
+    box_phi = dobs.box_phi.compute()*np.pi/180
+    dlonkm, dlatkm=dlonlat_dlonlatkm(dlon, dlat,lat) #need computed values !!!
+    
+    ds=xr.Dataset()
+    ds['drifter_err_lonm']=dlonkm.assign_attrs({"long_name":r'$err_{lon}$', "units":'m'})
+    ds['drifter_err_latm']=dlatkm.assign_attrs({"long_name":r'$err_{lat}$', "units":'m'})
+    errx, erry = rotation(dlonkm, dlatkm, box_phi)
+    ds['drifter_err_x']=errx.assign_attrs({"long_name":r'$err_x$', "units":'m'})
+    ds['drifter_err_y']=erry.assign_attrs({"long_name":r'$err_y$', "units":'m'})
+    
+    errvx, errvy = vevn2vxvy(dobs.drifter_theta_lon, dobs.drifter_theta_lat, dobs.drifter_ve, dobs.drifter_vn)
+    ds['drifter_err_vx']=errvx.assign_attrs({"long_name":r'$err_{vx}$', "units":'m/s'})
+    ds['drifter_err_vy']=errvy.assign_attrs({"long_name":r'$err_{vy}$', "units":'m/s'})
+    return ds
+    
+def _concat_err_xy(ds):
+    """ concatenate """
+    return xr.concat([err_xy_obs(ds.sel(obs=o)) for o in ds.obs], 'obs')
+
+def compute_err_xy(ds):
+    """
+    https://xarray.pydata.org/en/stable/user-guide/dask.html
+    Parameters
+    ----------
+    ds: xr.Dataset
+        Input collocation dataset
+    
+    Return
+    ------
+    ds: xr.Dataset
+        Dataset with errors
+
+    """
+    #_drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
+    #ds=ds.drop(_drop)
+
+    # build template
+    template = _concat_err_xy(ds.isel(obs=slice(0,2)))
+    
+    # broad cast along obs dimension
+    template, _ = xr.broadcast(template.isel(obs=0).chunk(), 
+                               ds.time,
+                               exclude=[ "box_x", "box_y",],
+                              )
+    
+    # massage further and unify chunks
+    template = (xr.merge([ds[['lon','lat', 'time']], template.drop(list(template.coords))])
+             .unify_chunks()[list(template.keys())])
+    
+    # actually perform the calculation
+    try : 
+        ds_err = xr.map_blocks(_concat_err_xy, ds, template=template).compute()
+    except : 
+        assert False, 'pb map_blocks'
+   
+    return ds_err

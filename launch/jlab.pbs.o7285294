@@ -1,0 +1,199 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Mon Nov  6 09:06:23 GMT 2023
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:29: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  elif dashinfo is not "0":
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:32: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if dashinfo is not "0":
+[I 2023-11-06 09:06:46.836 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-11-06 09:06:47.422 ServerApp] Package jupyter_lsp took 0.5852s to import
+[W 2023-11-06 09:06:47.422 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-06 09:06:47.749 ServerApp] Package jupyter_server_terminals took 0.3269s to import
+[I 2023-11-06 09:06:47.749 ServerApp] Package notebook took 0.0000s to import
+[I 2023-11-06 09:06:47.752 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2023-11-06 09:06:47.752 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-06 09:07:14.584 ServerApp] Package panel.io.jupyter_server_extension took 26.8106s to import
+[I 2023-11-06 09:07:14.585 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2023-11-06 09:07:14.591 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2023-11-06 09:07:14.596 ServerApp] jupyterlab | extension was successfully linked.
+[W 2023-11-06 09:07:14.612 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-11-06 09:07:14.615 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2023-11-06 09:07:14.615 ServerApp] notebook | extension was successfully linked.
+[I 2023-11-06 09:07:22.560 ServerApp] notebook_shim | extension was successfully linked.
+[I 2023-11-06 09:07:22.560 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2023-11-06 09:07:22.932 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2023-11-06 09:07:22.935 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2023-11-06 09:07:22.936 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2023-11-06 09:07:23.085 LabApp] JupyterLab extension loaded from /home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyterlab
+[I 2023-11-06 09:07:23.085 LabApp] JupyterLab application directory is /home1/datahome/mdemol/.miniconda3/envs/histenv2/share/jupyter/lab
+[I 2023-11-06 09:07:23.106 LabApp] Extension Manager is 'pypi'.
+[I 2023-11-06 09:07:23.109 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-11-06 09:07:23.113 ServerApp] notebook | extension was successfully loaded.
+[I 2023-11-06 09:07:23.114 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2023-11-06 09:07:23.114 ServerApp] Serving notebooks from local directory: /home1/datahome/mdemol
+[I 2023-11-06 09:07:23.114 ServerApp] Jupyter Server 2.9.1 is running at:
+[I 2023-11-06 09:07:23.114 ServerApp] http://r2i0n20:8877/lab
+[I 2023-11-06 09:07:23.114 ServerApp]     http://127.0.0.1:8877/lab
+[I 2023-11-06 09:07:23.114 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-11-06 09:07:23.270 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2023-11-06 09:07:28.414 ServerApp] 302 GET / (@10.148.1.145) 0.47ms
+[W 2023-11-06 09:07:33.006 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2023-11-06 09:07:42.446 ServerApp] Notebook historical_analysis/test_coloc.ipynb is not trusted
+[I 2023-11-06 09:07:46.522 ServerApp] Kernel started: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:07:46.525 ServerApp] Kernel started: 0652040f-61c8-47ab-ab45-1de194183e6e
+[I 2023-11-06 09:07:46.525 ServerApp] Kernel started: 18e228ed-711b-49cc-9595-58fe8fa6a701
+[I 2023-11-06 09:07:46.528 ServerApp] Kernel started: 48386cd4-e8a5-43b0-9a50-c8b4b468cbae
+[I 2023-11-06 09:07:46.528 ServerApp] Kernel started: da29c288-3ab2-4c7f-b605-22b3f6df98ab
+readline: /etc/inputrc: line 19: term: unknown variable name
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 09:07:52.970 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 09:07:52.972 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 09:07:52.974 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 09:07:52.981 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 09:07:53.031 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 09:07:53.132 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 09:07:53.237 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 09:11:43.103 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:13:43.485 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:14:24.680 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:59659134-6ec4-43d6-ac88-e6e8f3b7d654
+[I 2023-11-06 09:14:24.681 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:07e33f18-76d2-4295-9b14-c59f74e384ee
+[I 2023-11-06 09:14:24.682 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:4dc0910c-c518-47b7-b9fa-4ae4f9de51cb
+[I 2023-11-06 09:14:24.682 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:ff39d3ad-e931-4f2f-9cec-5e314a76b5a2
+[I 2023-11-06 09:14:24.683 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:a1d72e1c-3109-4ccd-85ce-fd1bea1f97db
+[W 2023-11-06 09:14:25.996 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 09:14:26.050 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 09:14:26.057 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 09:14:26.059 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 09:14:26.061 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 09:14:26.064 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 09:14:26.154 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:b5280766-2606-4a58-931e-12734e38a106
+[I 2023-11-06 09:14:26.157 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:7cf15ac3-4f1d-4df3-ae56-1863e30ca312
+[I 2023-11-06 09:14:26.157 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:b629426d-50d9-467e-95d7-d3ebc16fa6b9
+[I 2023-11-06 09:14:26.158 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:b769273f-dd50-4acd-af03-c81a52f914b0
+[W 2023-11-06 09:14:26.477 ServerApp] Notebook historical_analysis/test_coloc.ipynb is not trusted
+[I 2023-11-06 09:14:27.874 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 09:14:27.876 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 09:14:27.878 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 09:14:27.880 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 09:14:27.881 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 09:14:51.329 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:91757be5-5ad5-4347-ab78-7c162ab8b609
+[I 2023-11-06 09:14:51.330 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:bd0e6cb2-a8f5-4a4a-8b25-a46d3f282350
+[I 2023-11-06 09:14:51.331 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:2c35ab62-0d66-4b45-9426-af5f131faca3
+[I 2023-11-06 09:14:51.332 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:724c999b-250b-48db-8258-a00de6bfdd8d
+[I 2023-11-06 09:14:51.332 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:0670a763-5204-4241-bed0-b4ac78a31be7
+[W 2023-11-06 09:15:01.287 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 09:15:01.335 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 09:15:01.340 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 09:15:01.344 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 09:15:01.347 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 09:15:01.349 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 09:15:01.443 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:7b148b16-c192-4f7c-bd54-f50fa67b3797
+[I 2023-11-06 09:15:01.443 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:2e6c1c77-0dfe-4bae-9bb5-cafe299b35d8
+[I 2023-11-06 09:15:01.443 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:c91c8cba-082f-4d95-ba96-1909f6ba32dd
+[I 2023-11-06 09:15:01.446 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:e4917b91-312c-4151-98ec-bb48218c34b3
+[W 2023-11-06 09:15:01.864 ServerApp] Notebook historical_analysis/test_coloc.ipynb is not trusted
+[I 2023-11-06 09:15:02.813 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 09:15:02.815 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 09:15:02.817 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 09:15:02.819 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 09:15:03.071 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 09:15:07.488 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:07.658 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:07.843 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[IPKernelApp] ERROR | KeyboardInterrupt caught in kernel.
+[I 2023-11-06 09:15:08.041 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:08.220 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:08.425 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:08.621 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:08.872 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:09.040 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:15:09.216 ServerApp] Kernel interrupted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:16:49.604 ServerApp] Kernel restarted: 7407731e-172f-4835-9d72-8137ba85aed0
+[I 2023-11-06 09:16:49.611 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:beb7076b-5a70-4017-8439-121fb824ccb7
+[I 2023-11-06 09:16:49.619 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 09:16:49.619 ServerApp] Restoring connection for 7407731e-172f-4835-9d72-8137ba85aed0:beb7076b-5a70-4017-8439-121fb824ccb7
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 09:17:02.396 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:19:02.541 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:19:16.479 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:85593914-d18c-4bf1-af3e-5a914faa5a52
+[I 2023-11-06 09:19:17.105 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:fdb91ad3-f345-4154-9113-7a66111e4246
+[I 2023-11-06 09:19:17.720 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:3e2e2a5f-c428-4c1f-9a03-ce28670d7779
+[I 2023-11-06 09:19:18.284 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:3fa33ae0-235a-45e8-ade2-3e8765c818d8
+[I 2023-11-06 09:25:02.741 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:27:02.949 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:29:03.148 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:33:03.327 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:39:03.519 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 09:56:09.007 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 11:00:05.026 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 11:01:24.969 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:beb7076b-5a70-4017-8439-121fb824ccb7
+[W 2023-11-06 11:01:26.652 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 11:01:26.722 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 11:01:26.731 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 11:01:26.733 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 11:01:26.736 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 11:01:26.738 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 11:01:26.843 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:dc861411-429d-47de-8206-0000ad4f74ec
+[I 2023-11-06 11:01:26.845 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:70c50146-175c-4a57-95d0-1847ab8dda7c
+[I 2023-11-06 11:01:26.845 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:c6884f78-ef50-4836-b66e-e154d49982a2
+[I 2023-11-06 11:01:26.849 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:bb1fef16-1803-4fb2-bc32-61bb50dd7d35
+[I 2023-11-06 11:01:26.849 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:29407dd4-cc2e-4836-b910-d4e9e0203b41
+[I 2023-11-06 11:01:27.355 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 11:01:59.842 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:14dc8f04-97e1-4a15-81ce-e8eaf6ab8d0c
+[W 2023-11-06 11:02:06.950 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 11:02:06.999 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 11:02:07.008 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 11:02:07.010 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 11:02:07.012 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 11:02:07.015 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 11:02:07.099 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:534a5a7e-f6a6-48d1-adcd-c56e7e01471b
+[I 2023-11-06 11:02:07.102 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:a6a38f33-1646-4b5a-9582-cae9523b2fde
+[I 2023-11-06 11:02:07.103 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:6295a0d4-f794-4715-bd96-9401992a5352
+[I 2023-11-06 11:02:07.105 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:9f2d74fe-f825-431a-bcfb-47d3de4b6e76
+[I 2023-11-06 11:02:07.105 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:d7c5d3ad-322d-473a-b706-bff8b9263baf
+[I 2023-11-06 11:02:08.134 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 11:04:07.746 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 11:14:07.895 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 12:26:26.398 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:a08d516d-60bb-4096-878c-d13230f31539
+[I 2023-11-06 12:26:29.460 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 12:26:29.462 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 12:26:29.464 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 12:26:29.466 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 12:26:29.475 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[W 2023-11-06 12:26:29.485 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 12:26:29.541 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:0ad8ce63-fbf4-4daf-8d7e-8bbaf0bbdc4d
+[I 2023-11-06 12:26:29.541 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:58f37331-9563-4c9a-abd5-635aafe5e9d4
+[I 2023-11-06 12:26:29.544 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:72180507-652b-4756-bff7-6d0a7da53339
+[I 2023-11-06 12:26:29.545 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:2f279431-249e-4b72-932d-c6f1ee4ea027
+[I 2023-11-06 12:26:29.562 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:273233a5-6994-44f9-9f8c-2c82a6c9b034
+[I 2023-11-06 12:26:30.309 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 12:26:46.751 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:bcacb9b2-4abc-4adc-a587-4220cf53cf04
+[W 2023-11-06 12:26:47.945 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 12:26:47.996 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 12:26:48.001 ServerApp] Connecting to kernel 0652040f-61c8-47ab-ab45-1de194183e6e.
+[I 2023-11-06 12:26:48.011 ServerApp] Connecting to kernel 48386cd4-e8a5-43b0-9a50-c8b4b468cbae.
+[I 2023-11-06 12:26:48.013 ServerApp] Connecting to kernel da29c288-3ab2-4c7f-b605-22b3f6df98ab.
+[I 2023-11-06 12:26:48.016 ServerApp] Connecting to kernel 18e228ed-711b-49cc-9595-58fe8fa6a701.
+[I 2023-11-06 12:26:48.107 ServerApp] Starting buffering for 0652040f-61c8-47ab-ab45-1de194183e6e:c5fb7a55-6297-4a59-a53f-006b23720d23
+[I 2023-11-06 12:26:48.111 ServerApp] Starting buffering for 48386cd4-e8a5-43b0-9a50-c8b4b468cbae:996d6f5d-53ad-4363-b8c7-a72fc8949675
+[I 2023-11-06 12:26:48.115 ServerApp] Starting buffering for 7407731e-172f-4835-9d72-8137ba85aed0:e87e24c5-5b68-4e90-b9bf-f2420f20b527
+[I 2023-11-06 12:26:48.119 ServerApp] Starting buffering for 18e228ed-711b-49cc-9595-58fe8fa6a701:8bd42c4e-8e86-4a79-8956-006cc8f9821b
+[I 2023-11-06 12:26:48.120 ServerApp] Starting buffering for da29c288-3ab2-4c7f-b605-22b3f6df98ab:4adfd69f-6c33-446d-ba30-dca6f2af17b2
+[I 2023-11-06 12:26:48.905 ServerApp] Connecting to kernel 7407731e-172f-4835-9d72-8137ba85aed0.
+[I 2023-11-06 12:28:48.561 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 12:30:48.786 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 12:36:48.972 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 12:38:49.159 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 12:40:49.337 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[C 2023-11-06 12:41:13.360 ServerApp] received signal 15, stopping
+Terminated
+[I 2023-11-06 12:41:13.441 ServerApp] Shutting down 6 extensions
+[I 2023-11-06 12:41:13.441 ServerApp] Shutting down 5 kernels
+[I 2023-11-06 12:41:13.442 ServerApp] Kernel shutdown: 18e228ed-711b-49cc-9595-58fe8fa6a701
+[I 2023-11-06 12:41:13.442 ServerApp] Kernel shutdown: da29c288-3ab2-4c7f-b605-22b3f6df98ab
+[I 2023-11-06 12:41:13.443 ServerApp] Kernel shutdown: 48386cd4-e8a5-43b0-9a50-c8b4b468cbae
+[I 2023-11-06 12:41:13.443 ServerApp] Kernel shutdown: 0652040f-61c8-47ab-ab45-1de194183e6e
+[I 2023-11-06 12:41:13.443 ServerApp] Kernel shutdown: 7407731e-172f-4835-9d72-8137ba85aed0

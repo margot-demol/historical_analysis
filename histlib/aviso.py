@@ -19,7 +19,7 @@ AVISO
 
 def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs):
     """Extract AVISO data
-    Ref ...
+    Ref ..
 
     Parameters
     ----------
@@ -43,7 +43,11 @@ def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs
     # LOADftry
     D = []
     for _t in t:
-        files = glob(os.path.join(aviso_dir, f"{_t.year}/{_t.dayofyear:03d}/*.nc"))
+        try : # ds_obsselected with sel, ds_obs is numpy.datetime64
+            files = glob(os.path.join(aviso_dir, f"{_t.year}/{_t.dayofyear:03d}/*.nc"))
+        except : # robust if ds_obs selected with where (ds_obs.time.values  = DatetimeIndex)
+            files = glob(os.path.join(aviso_dir, f"{_t.year.values[0]}/{_t.dayofyear.values[0]:03d}/*.nc"))
+            print('need values[0] for load aviso')
         assert len(files) == 1, f"error: multiple files at {files}"
 
         if to_360:  # turn aviso to 0-360° if needed
@@ -92,25 +96,23 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
     dl = 0.25
     assert (ds_obs["box_lon"] <= 180).all(), "error : ds_obs in 0-360° lon coordinates"
 
-    # -180-180 longitude problem
+    # -180-180 longitude boundary problem
     limite_lon = (
-        (ds_obs.drifter_lon > 179).any()
-        or (ds_obs.drifter_lon < -179).any()
-        or (ds_obs.box_lon > 179).any()
-        or (ds_obs.box_lon < -179).any()
+        (ds_obs.drifter_lon > 178).any()
+        or (ds_obs.drifter_lon < -178).any()
+        or (ds_obs.box_lon > 178).any()
+        or (ds_obs.box_lon < -178).any()
     )
 
     if limite_lon:
         box_lon = cstes.lon_180_to_360(ds_obs.box_lon)
         drifter_lon = cstes.lon_180_to_360(ds_obs.drifter_lon)
-        _alti_lon = cstes.lon_180_to_360(
-            ds_obs.alti_lon.isel(alti_time=10)
-        )  # only matchup
+        _alti_lon = cstes.lon_180_to_360(ds_obs.alti_lon.isel(alti_time=ds_obs.dims['alti_time']//2))  # only matchup
 
     else:
         box_lon = ds_obs["box_lon"]
         drifter_lon = ds_obs["drifter_lon"]
-        _alti_lon = ds_obs["alti_lon"].isel(alti_time=10)  # only matchup
+        _alti_lon = ds_obs["alti_lon"].isel(alti_time=ds_obs.dims['alti_time']//2)  # only matchup
 
     # matchup site
     site_matchup_indice = int(ds_obs.__site_matchup_indice.values)
@@ -153,33 +155,38 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
         )  # aviso sla and err_sla around matchup_time
     except:
         assert False, (ds_obs.__site_id.values, ds_obs.time.values)
-
+    
+    #for all interpolations, need drop_duplicated, because in some case, same aviso point for two differents longitude, latitude points and interpolation works only one uniquely valued coordinated dataset
+    
     # interplate over the trajectoire
-    ds_traj = (
-        ds_aviso.interp(
-            aviso_time=ds_obs.drifter_time,
-            aviso_lon=drifter_lon,
-            aviso_lat=ds_obs.drifter_lat,
+    try :
+        ds_traj = (
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
+                aviso_time=ds_obs.drifter_time,
+                aviso_lon=drifter_lon,
+                aviso_lat=ds_obs.drifter_lat,
+            )
+            .rename({v: "aviso_traj_" + v for v in ds_aviso})
+            .drop(
+                [
+                    "drifter_lon",
+                    "drifter_lat",
+                    "aviso_time",
+                    "aviso_lon",
+                    "aviso_lat",
+                    "lat",
+                    "lon",
+                    "time",
+                ]
+            )
         )
-        .rename({v: "aviso_traj_" + v for v in ds_aviso})
-        .drop(
-            [
-                "drifter_lon",
-                "drifter_lat",
-                "aviso_time",
-                "aviso_lon",
-                "aviso_lat",
-                "lat",
-                "lon",
-                "time",
-            ]
-        )
-    )
-
+    except:
+        assert False, ('pb interpolate over trajectories' ,ds_obs.__site_id.values, ds_obs.time.values)
+        
     # interpolate on the box
     if only_matchup_time:
         ds_box = (
-            ds_aviso.interp(
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
                 aviso_time=_drifter_time, aviso_lon=box_lon, aviso_lat=ds_obs.box_lat
             )
             .rename({v: "aviso_box_" + v for v in ds_aviso})
@@ -187,27 +194,30 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
         )
     else:
         ds_box = (
-            ds_aviso.interp(aviso_lon=box_lon, aviso_lat=ds_obs.box_lat)
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(aviso_lon=box_lon, aviso_lat=ds_obs.box_lat)
             .rename({v: "aviso_box_" + v for v in ds_aviso})
             .drop(["aviso_lon", "aviso_lat", "lat", "lon", "time"])
         )
 
     # interpolate at drifter matchup position, for all drifter times
-    ds_drifter = (
-        ds_aviso.interp(aviso_lon=_drifter_lon, aviso_lat=_drifter_lat)
-        .drop(["aviso_lon", "aviso_lat"])
-        .rename({v: "aviso_drifter_temp_" + v for v in ds_aviso})
-    )
-
-    # at alti matchup
-    ds_alti = ds_aviso.interp(
-        aviso_time=ds_obs.alti_time_.isel(alti_time=10),
-        aviso_lon=_alti_lon,
-        aviso_lat=ds_obs.alti_lat.isel(alti_time=10),
-    )
-    ds_alti = ds_alti.drop(list(ds_alti.coords.keys())).rename(
-        {v: "aviso_alti_matchup_" + v for v in ds_aviso}
-    )
+    try : 
+        ds_drifter = (
+            ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(aviso_lon=_drifter_lon, aviso_lat=_drifter_lat)
+            .drop(["aviso_lon", "aviso_lat"])
+            .rename({v: "aviso_drifter_temp_" + v for v in ds_aviso})
+        )
+    
+        # at alti matchup
+        ds_alti = ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
+            aviso_time=ds_obs.alti_time_.isel(alti_time=ds_obs.dims['alti_time']//2),
+            aviso_lon=_alti_lon,
+            aviso_lat=ds_obs.alti_lat.isel(alti_time=ds_obs.dims['alti_time']//2),
+        )
+        ds_alti = ds_alti.drop(list(ds_alti.coords.keys())).rename(
+            {v: "aviso_alti_matchup_" + v for v in ds_aviso}
+        )
+    except:
+        assert False, ('pb interpolate over drifter matchup' ,ds_obs.__site_id.values, ds_obs.time.values)
 
     # gradient
     g = 9.81
@@ -273,6 +283,7 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
         except:
             assert False, "pb differentiate grad"
     # sla
+    ds_alti
     ds_alti["aviso_alti_matchup_ggx_sla"] = ds_box["aviso_box_ggx_sla"].sel(
         box_x=0, box_y=0
     )
@@ -311,9 +322,15 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
 
 def _concat_aviso(ds, dt=(-1, 2), only_matchup_time=True):
     """Load aviso data for multiple collocations and concatenate"""
-    return xr.concat(
-        [get_aviso_one_obs(ds.sel(obs=o), dt, only_matchup_time) for o in ds.obs], "obs"
-    )
+    L=[]
+    for o in ds.obs :
+        try : 
+            L.append(get_aviso_one_obs(ds.sel(obs=o), dt, only_matchup_time))
+        except :
+            assert False, o
+    #ds0 = xr.concat([get_aviso_one_obs(ds.sel(obs=o), dt, only_matchup_time) for o in ds.obs], "obs")
+    
+    return xr.concat(L, "obs")
 
 
 def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):

@@ -1,0 +1,228 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Mon Nov  6 14:04:16 GMT 2023
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:29: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  elif dashinfo is not "0":
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:32: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if dashinfo is not "0":
+[I 2023-11-06 14:04:19.617 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-11-06 14:04:19.681 ServerApp] Package jupyter_lsp took 0.0626s to import
+[W 2023-11-06 14:04:19.681 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-06 14:04:19.739 ServerApp] Package jupyter_server_terminals took 0.0586s to import
+[I 2023-11-06 14:04:19.740 ServerApp] Package notebook took 0.0000s to import
+[I 2023-11-06 14:04:19.743 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2023-11-06 14:04:19.743 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-06 14:04:21.704 ServerApp] Package panel.io.jupyter_server_extension took 1.9609s to import
+[I 2023-11-06 14:04:21.705 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2023-11-06 14:04:21.709 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2023-11-06 14:04:21.715 ServerApp] jupyterlab | extension was successfully linked.
+[W 2023-11-06 14:04:21.717 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-11-06 14:04:21.720 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2023-11-06 14:04:21.720 ServerApp] notebook | extension was successfully linked.
+[I 2023-11-06 14:04:22.932 ServerApp] notebook_shim | extension was successfully linked.
+[I 2023-11-06 14:04:22.933 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2023-11-06 14:04:22.983 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2023-11-06 14:04:22.986 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2023-11-06 14:04:22.987 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2023-11-06 14:04:22.990 LabApp] JupyterLab extension loaded from /home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyterlab
+[I 2023-11-06 14:04:22.990 LabApp] JupyterLab application directory is /home1/datahome/mdemol/.miniconda3/envs/histenv2/share/jupyter/lab
+[I 2023-11-06 14:04:22.991 LabApp] Extension Manager is 'pypi'.
+[I 2023-11-06 14:04:22.994 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-11-06 14:04:22.997 ServerApp] notebook | extension was successfully loaded.
+[I 2023-11-06 14:04:22.998 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2023-11-06 14:04:22.998 ServerApp] Serving notebooks from local directory: /home1/datahome/mdemol
+[I 2023-11-06 14:04:22.998 ServerApp] Jupyter Server 2.9.1 is running at:
+[I 2023-11-06 14:04:22.998 ServerApp] http://r2i0n20:8877/lab
+[I 2023-11-06 14:04:22.998 ServerApp]     http://127.0.0.1:8877/lab
+[I 2023-11-06 14:04:22.998 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-11-06 14:04:23.054 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2023-11-06 14:04:36.221 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279476194 (10.148.1.145): Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c
+[W 2023-11-06 14:04:36.221 ServerApp] wrote error: 'Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c)
+[W 2023-11-06 14:04:36.223 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279476194 (561c211cf284414792903f89972ed90c@10.148.1.145) 3.13ms referer=http://localhost:8877/lab
+[W 2023-11-06 14:04:37.216 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c/channels?session_id=5b52e63a-a2ef-4a4d-b30c-03f234598d25 (10.148.1.145): Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c
+[W 2023-11-06 14:04:37.274 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c/channels?session_id=5b52e63a-a2ef-4a4d-b30c-03f234598d25 (561c211cf284414792903f89972ed90c@10.148.1.145) 58.52ms referer=None
+[W 2023-11-06 14:04:37.373 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279477352 (10.148.1.145): Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c
+[W 2023-11-06 14:04:37.374 ServerApp] wrote error: 'Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c)
+[W 2023-11-06 14:04:37.374 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279477352 (561c211cf284414792903f89972ed90c@10.148.1.145) 1.11ms referer=http://localhost:8877/lab
+[W 2023-11-06 14:04:40.123 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c/channels?session_id=5b52e63a-a2ef-4a4d-b30c-03f234598d25 (10.148.1.145): Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c
+[W 2023-11-06 14:04:40.124 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c/channels?session_id=5b52e63a-a2ef-4a4d-b30c-03f234598d25 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.99ms referer=None
+[W 2023-11-06 14:04:40.168 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279480147 (10.148.1.145): Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c
+[W 2023-11-06 14:04:40.168 ServerApp] wrote error: 'Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c)
+[W 2023-11-06 14:04:40.169 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279480147 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.86ms referer=http://localhost:8877/lab
+[W 2023-11-06 14:04:43.505 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c/channels?session_id=5b52e63a-a2ef-4a4d-b30c-03f234598d25 (10.148.1.145): Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c
+[W 2023-11-06 14:04:43.506 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c/channels?session_id=5b52e63a-a2ef-4a4d-b30c-03f234598d25 (561c211cf284414792903f89972ed90c@10.148.1.145) 1.45ms referer=None
+[W 2023-11-06 14:04:43.594 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279483574 (10.148.1.145): Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c
+[W 2023-11-06 14:04:43.594 ServerApp] wrote error: 'Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c'
+    Traceback (most recent call last):
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/tornado/web.py", line 1786, in _execute
+        result = await result
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 500, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 531, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 4dc8e9b0-0bc0-4696-a961-620278fa266c)
+[W 2023-11-06 14:04:43.595 ServerApp] 404 GET /api/kernels/4dc8e9b0-0bc0-4696-a961-620278fa266c?1699279483574 (561c211cf284414792903f89972ed90c@10.148.1.145) 0.88ms referer=http://localhost:8877/lab
+[W 2023-11-06 14:04:45.488 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 14:04:51.402 ServerApp] Kernel started: 46f02e27-a0d0-49f7-bc56-2965800937f5
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 14:04:54.508 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:04:56.354 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:28b4a2f4-f6b4-414f-a194-8df8fc034073
+[W 2023-11-06 14:05:45.773 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 14:05:45.822 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:05:45.887 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:3938aad4-bf52-49f0-9d62-aa5ec261b26c
+[I 2023-11-06 14:05:46.790 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:07:46.371 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:13:11.230 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:ea387e84-a5f0-4c63-9c15-273305cf7a09
+[W 2023-11-06 14:13:12.613 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 14:13:12.695 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:13:12.805 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:82ea6dfa-3b0f-48d8-adc1-67ac999cf603
+[I 2023-11-06 14:13:13.798 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:15:13.472 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:16:24.646 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:8eed22cb-d7e2-4b54-9a5c-6b05041fdbbd
+[W 2023-11-06 14:16:25.976 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 14:16:26.033 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:16:26.095 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:26955843-a98e-479e-9d26-5dce5ec34c09
+[I 2023-11-06 14:16:27.104 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:16:37.841 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:362c9631-7297-4878-9bc5-39cbb56582e5
+[W 2023-11-06 14:16:39.114 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 14:16:39.170 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:16:39.238 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:780d1999-c53b-41b1-85c6-e2b0e65a92e1
+[I 2023-11-06 14:16:40.143 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:16:48.960 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:c46f28e4-4566-42d9-9c63-b1e32c2c9051
+[W 2023-11-06 14:16:53.635 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 14:16:53.683 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:16:53.782 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:5a53f549-08ed-4a3e-9e41-8f0cf9f55df6
+[I 2023-11-06 14:16:54.568 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:18:08.648 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:18:08.818 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:18:08.984 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:18:54.124 ServerApp] Saving file at /historical_analysis/histlib/cstes.py
+[I 2023-11-06 14:18:54.210 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:19:37.230 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:19:37.251 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:19:37.566 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:20:54.483 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:22:54.742 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:24:33.365 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:24:33.570 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:24:55.058 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:24:57.530 ServerApp] Kernel restarted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:24:57.534 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:a869e438-dfef-4523-a646-49137fc2a6fa
+[I 2023-11-06 14:24:57.542 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:24:57.542 ServerApp] Restoring connection for 46f02e27-a0d0-49f7-bc56-2965800937f5:a869e438-dfef-4523-a646-49137fc2a6fa
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 14:26:55.282 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:28:55.567 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:30:55.798 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:30:59.478 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:30:59.736 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:32:56.082 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:34:56.361 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:38:56.598 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:40:57.372 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:41:57.574 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:41:57.586 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:41:57.998 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:41:58.193 ServerApp] Kernel interrupted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:42:04.010 ServerApp] Kernel restarted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:42:04.016 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:a869e438-dfef-4523-a646-49137fc2a6fa
+[I 2023-11-06 14:42:04.024 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:42:04.025 ServerApp] Restoring connection for 46f02e27-a0d0-49f7-bc56-2965800937f5:a869e438-dfef-4523-a646-49137fc2a6fa
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 14:42:57.644 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:44:57.994 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:46:58.239 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:48:58.495 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:54:58.741 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 14:56:59.117 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:a869e438-dfef-4523-a646-49137fc2a6fa
+[W 2023-11-06 14:57:17.086 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 14:57:17.152 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:57:17.318 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:1df28ebe-7911-4bd4-ac4c-7315d650b968
+[I 2023-11-06 14:57:18.930 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:57:32.341 ServerApp] Kernel restarted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 14:57:32.347 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:78af4118-0716-4126-88dc-a4c2c2a98164
+[I 2023-11-06 14:57:32.355 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 14:57:32.355 ServerApp] Restoring connection for 46f02e27-a0d0-49f7-bc56-2965800937f5:78af4118-0716-4126-88dc-a4c2c2a98164
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 14:59:18.401 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:00:38.279 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:78af4118-0716-4126-88dc-a4c2c2a98164
+[W 2023-11-06 15:00:43.405 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 15:00:43.470 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 15:00:43.553 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:ceab6552-f6f7-4863-a8ff-5bf243c7f6bf
+[I 2023-11-06 15:00:44.464 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 15:02:44.119 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:04:44.319 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:06:44.561 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:08:44.850 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:10:45.115 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:14:45.354 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:16:45.587 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:18:34.501 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:88ea80f6-8f0b-45e1-836f-593766e67dd3
+[W 2023-11-06 15:18:38.518 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 15:18:38.585 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 15:18:38.685 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:30660974-5423-449c-8f8b-004f9f3f87bc
+[I 2023-11-06 15:18:39.484 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 15:18:45.949 ServerApp] Kernel restarted: 46f02e27-a0d0-49f7-bc56-2965800937f5
+[I 2023-11-06 15:18:45.953 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:aa7c4eec-26cd-4c07-bde9-b2a7817763c3
+[I 2023-11-06 15:18:45.957 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 15:18:45.957 ServerApp] Restoring connection for 46f02e27-a0d0-49f7-bc56-2965800937f5:aa7c4eec-26cd-4c07-bde9-b2a7817763c3
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-06 15:20:39.121 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:23:44.946 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:aa7c4eec-26cd-4c07-bde9-b2a7817763c3
+[W 2023-11-06 15:24:00.987 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-06 15:24:01.047 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 15:24:01.047 ServerApp] Discarding 3 buffered messages for 46f02e27-a0d0-49f7-bc56-2965800937f5:aa7c4eec-26cd-4c07-bde9-b2a7817763c3
+[I 2023-11-06 15:24:01.110 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:bb310a0b-4ac6-497c-b94c-4c35f559f374
+[I 2023-11-06 15:24:01.970 ServerApp] Connecting to kernel 46f02e27-a0d0-49f7-bc56-2965800937f5.
+[I 2023-11-06 15:26:01.596 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:26:17.382 ServerApp] Creating new file in /historical_analysis
+[I 2023-11-06 15:28:03.739 ServerApp] Creating new file in /historical_analysis
+[I 2023-11-06 15:28:22.940 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-06 15:28:38.942 ServerApp] Saving file at /historical_analysis/job_distributed.pbs
+[I 2023-11-06 15:30:01.831 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:36:02.136 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:38:02.406 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:42:02.668 ServerApp] Saving file at /historical_analysis/1_zarr_coloc.ipynb
+[I 2023-11-06 15:42:23.075 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-06 15:44:23.087 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-06 15:44:37.170 ServerApp] Saving file at /historical_analysis/histlib/cstes.py
+[I 2023-11-06 15:46:23.101 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-06 15:48:23.117 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-06 16:12:01.918 ServerApp] Starting buffering for 46f02e27-a0d0-49f7-bc56-2965800937f5:2ca5a541-37e7-4f16-846b-728af9aeb9d5
+[C 2023-11-06 16:12:49.069 ServerApp] received signal 15, stopping
+Terminated
+[I 2023-11-06 16:12:49.170 ServerApp] Shutting down 6 extensions
+[I 2023-11-06 16:12:49.171 ServerApp] Shutting down 1 kernel
+[I 2023-11-06 16:12:49.171 ServerApp] Kernel shutdown: 46f02e27-a0d0-49f7-bc56-2965800937f5

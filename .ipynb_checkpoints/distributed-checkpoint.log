@@ -1,0 +1,17 @@
+INFO:root:start spinning up dask cluster, jobs=8
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n18:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:aviso argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/aviso_argos_Sentinel-3_A_2019.zarr
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:start spinning up dask cluster, jobs=14
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n31:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:aviso argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/aviso_argos_Sentinel-3_B_2019.zarr
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:aviso argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/aviso_argos_Jason-3_2018.zarr
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018

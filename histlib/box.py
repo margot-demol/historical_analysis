@@ -531,8 +531,8 @@ BUILDING DATASET AND ADD THE BOX velocities, sla gradients
 # def build_dataset(nc,
 def build_dataset(
     nc,
-    x=np.arange(-200e3, 200e3, 5e3),
-    y=np.arange(-100e3, 100e3, 5e3),
+    x=np.arange(-300e3, 300e3, 5e3),
+    y=np.arange(-200e3, 200e3, 5e3),
     chunks=None,
     persist=False,
 ):
@@ -543,7 +543,7 @@ def build_dataset(
     nc : str
         path to netcdf file to open
     x,y : np.array, np.array
-        local coordinates of the box, default is x = np.arange(-200e3,200e3,5e3) and y = np.arange(-100e3,100e3,5e3)
+        local coordinates of the box, default is x = np.arange(-300e3,300e3,5e3) and y = np.arange(-200e3,200e3,5e3)
     persist : bool
             True to return ds.persist
 
@@ -565,10 +565,24 @@ def build_dataset(
     # change prefixes
     ds = change_prefix(ds)
 
+    #put longitude in the -180-180° system for all
+    from histlib.cstes import lon_360_to_180
+    if (ds["lon"] > 180).any() or (ds["lon"] < -180).any():
+        ds['lon'] = lon_360_to_180(ds.lon)
+        print('lon from 0-360° to -180-180°')
+    if (ds["alti_lon"] > 180).any() or (ds["alti_lon"] < -180).any():
+        ds['alti_lon'] = lon_360_to_180(ds.alti_lon)
+        print('alti_lon from 0-360° to -180-180°')
+    if (ds["drifter_lon"] > 180).any() or (ds["drifter_lon"] < -180).any():
+        ds['drifter_lon'] = lon_360_to_180(ds.drifter_lon)
+        print('drifter_lon from 0-360° to -180-180°')
+    
     # add several variables in coords
     ds = ds.set_coords(["drifter_" + d for d in ["time", "lon", "lat"]]).set_coords(
         ["alti_" + d for d in ["time_", "lon", "lat"]]
     )
+    #put longitude in the -180-180° system
+    
     # ds = ds.persist()
 
     # add box

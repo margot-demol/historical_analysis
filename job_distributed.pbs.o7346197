@@ -1,0 +1,62 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Fri Nov 10 09:41:24 GMT 2023
+/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/config.py:742: FutureWarning: Dask configuration key 'distributed.scheduler.transition-log-length' has been deprecated; please use 'distributed.admin.low-level-log-length' instead
+  warnings.warn(
+/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/config.py:742: FutureWarning: Dask configuration key 'distributed.comm.recent-messages-log-length' has been deprecated; please use 'distributed.admin.low-level-log-length' instead
+  warnings.warn(
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 1
+Number of workers up = 45
+Number of workers up = 75
+Number of workers up = 120
+Number of workers up = 210
+Cluster is up, proceeding with computations
+Traceback (most recent call last):
+  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 306, in <module>
+    if dataset == 'aviso' : run_aviso(l, cluster, client)
+  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 247, in run_aviso
+    ds_aviso.to_zarr(zarr, mode="w")
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/core/dataset.py", line 2036, in to_zarr
+    return to_zarr(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/api.py", line 1431, in to_zarr
+    dump_to_store(dataset, zstore, writer, encoding=encoding)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/api.py", line 1119, in dump_to_store
+    store.store(variables, attrs, check_encoding, writer, unlimited_dims=unlimited_dims)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 500, in store
+    variables_encoded, attributes = self.encode(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/common.py", line 200, in encode
+    variables = {k: self.encode_variable(v) for k, v in variables.items()}
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/common.py", line 200, in <dictcomp>
+    variables = {k: self.encode_variable(v) for k, v in variables.items()}
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 459, in encode_variable
+    variable = encode_zarr_variable(variable)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 258, in encode_zarr_variable
+    var = conventions.encode_cf_variable(var, name=name)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/conventions.py", line 273, in encode_cf_variable
+    var = coder.encode(var, name=name)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/coding/times.py", line 659, in encode
+    (data, units, calendar) = encode_cf_datetime(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/coding/times.py", line 592, in encode_cf_datetime
+    dates = np.asarray(dates)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/array/core.py", line 1700, in __array__
+    x = self.compute()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/base.py", line 342, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/base.py", line 628, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/core/parallel.py", line 285, in _wrapper
+    result = func(*converted_args, **kwargs)
+  File "/home1/datahome/mdemol/historical_analysis/histlib/aviso.py", line 324, in _concat_aviso
+    assert False, o
+AssertionError: <xarray.DataArray 'obs' ()>
+array(496)
+Coordinates:
+    lat      float64 71.56
+    lon      float64 -11.11
+    time     datetime64[ns] 2018-08-02T21:00:00
+Fri Nov 10 10:11:14 GMT 2023

@@ -1,0 +1,170 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Thu Nov  9 18:28:10 GMT 2023
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:29: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  elif dashinfo is not "0":
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:32: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if dashinfo is not "0":
+[I 2023-11-09 18:28:14.351 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-11-09 18:28:14.685 ServerApp] Package jupyter_lsp took 0.3332s to import
+[W 2023-11-09 18:28:14.685 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-09 18:28:14.860 ServerApp] Package jupyter_server_terminals took 0.1752s to import
+[I 2023-11-09 18:28:14.861 ServerApp] Package notebook took 0.0000s to import
+[I 2023-11-09 18:28:14.886 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2023-11-09 18:28:14.886 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-09 18:28:16.603 ServerApp] Package panel.io.jupyter_server_extension took 1.7046s to import
+[I 2023-11-09 18:28:16.604 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2023-11-09 18:28:16.609 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2023-11-09 18:28:16.614 ServerApp] jupyterlab | extension was successfully linked.
+[W 2023-11-09 18:28:16.621 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-11-09 18:28:16.624 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2023-11-09 18:28:16.624 ServerApp] notebook | extension was successfully linked.
+[I 2023-11-09 18:28:18.764 ServerApp] notebook_shim | extension was successfully linked.
+[I 2023-11-09 18:28:18.764 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2023-11-09 18:28:18.798 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2023-11-09 18:28:18.801 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2023-11-09 18:28:18.802 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2023-11-09 18:28:18.807 LabApp] JupyterLab extension loaded from /home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyterlab
+[I 2023-11-09 18:28:18.807 LabApp] JupyterLab application directory is /home1/datahome/mdemol/.miniconda3/envs/histenv2/share/jupyter/lab
+[I 2023-11-09 18:28:18.807 LabApp] Extension Manager is 'pypi'.
+[I 2023-11-09 18:28:18.811 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-11-09 18:28:18.814 ServerApp] notebook | extension was successfully loaded.
+[I 2023-11-09 18:28:18.815 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2023-11-09 18:28:18.815 ServerApp] Serving notebooks from local directory: /home1/datahome/mdemol
+[I 2023-11-09 18:28:18.816 ServerApp] Jupyter Server 2.9.1 is running at:
+[I 2023-11-09 18:28:18.816 ServerApp] http://r2i0n32:8877/lab
+[I 2023-11-09 18:28:18.816 ServerApp]     http://127.0.0.1:8877/lab
+[I 2023-11-09 18:28:18.816 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-11-09 18:28:19.084 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2023-11-09 18:29:28.413 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-09 18:29:37.576 ServerApp] Kernel started: d81be892-4a71-42d4-bfd2-bb18647e1792
+[I 2023-11-09 18:29:37.584 ServerApp] Kernel started: 77a49140-0f98-4475-9586-5527244e5175
+[I 2023-11-09 18:29:38.240 ServerApp] Kernel started: a0032654-be02-4fa0-a70a-81ee55f339bf
+readline: readline: /etc/inputrc: line 19: term: unknown variable name
+/etc/inputrc: line 19: term: unknown variable name
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-09 18:29:57.776 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 18:29:57.778 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 18:29:57.818 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 18:29:57.819 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 18:29:57.821 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 18:29:57.823 ServerApp] Connecting to kernel d81be892-4a71-42d4-bfd2-bb18647e1792.
+[W 2023-11-09 18:30:07.709 ServerApp] delete /historical_analysis/job_distributed.pbs.o7296203
+[W 2023-11-09 18:30:07.952 ServerApp] delete /historical_analysis/job_distributed.pbs.o7298270
+[W 2023-11-09 18:30:08.013 ServerApp] delete /historical_analysis/job_distributed.pbs.o7298332
+[W 2023-11-09 18:30:08.016 ServerApp] delete /historical_analysis/job_distributed.pbs.o7298420
+[W 2023-11-09 18:30:08.020 ServerApp] delete /historical_analysis/job_distributed.pbs.o7306596
+[W 2023-11-09 18:30:08.024 ServerApp] delete /historical_analysis/job_distributed.pbs.o7307906
+[W 2023-11-09 18:30:08.030 ServerApp] delete /historical_analysis/job_distributed.pbs.o7308147
+[W 2023-11-09 18:30:08.068 ServerApp] delete /historical_analysis/job_distributed.pbs.o7313091
+[W 2023-11-09 18:30:08.097 ServerApp] delete /historical_analysis/job_distributed.pbs.o7313196
+[W 2023-11-09 18:30:08.102 ServerApp] delete /historical_analysis/job_distributed.pbs.o7320246
+[I 2023-11-09 18:30:12.731 ServerApp] Creating new notebook in /historical_analysis
+[W 2023-11-09 18:30:22.893 ServerApp] delete /historical_analysis/Untitled.ipynb
+[I 2023-11-09 18:30:33.468 ServerApp] Copying historical_analysis/21_zarr_aviso.ipynb to /historical_analysis
+[I 2023-11-09 18:30:40.150 ServerApp] Copying historical_analysis/21_zarr_aviso.ipynb to /historical_analysis
+[W 2023-11-09 18:30:46.848 ServerApp] delete /historical_analysis/21_zarr_aviso-Copy2.ipynb
+[I 2023-11-09 18:31:02.637 ServerApp] Kernel started: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-09 18:31:03.333 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:31:06.796 ServerApp] Starting buffering for d81be892-4a71-42d4-bfd2-bb18647e1792:f411b237-5ada-4197-b32a-ada9e397376a
+[I 2023-11-09 18:33:02.555 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:33:57.957 ServerApp] Starting buffering for a0032654-be02-4fa0-a70a-81ee55f339bf:da3caae9-51bc-4f0d-a4fa-492805153b4d
+[I 2023-11-09 18:33:57.958 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:6d5c7441-4cb5-46bd-b80a-f03e85fb2194
+[I 2023-11-09 18:33:57.958 ServerApp] Starting buffering for 77a49140-0f98-4475-9586-5527244e5175:f31106f6-f1a8-4fa8-94d5-8f2505ceac63
+[W 2023-11-09 18:34:04.732 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-09 18:34:04.835 ServerApp] Connecting to kernel d81be892-4a71-42d4-bfd2-bb18647e1792.
+[I 2023-11-09 18:34:04.843 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 18:34:04.848 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 18:34:04.855 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:34:04.855 ServerApp] Discarding 2 buffered messages for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:6d5c7441-4cb5-46bd-b80a-f03e85fb2194
+[I 2023-11-09 18:34:04.959 ServerApp] Starting buffering for 77a49140-0f98-4475-9586-5527244e5175:99670abe-6329-4b13-bce0-ad7844f7b438
+[I 2023-11-09 18:34:04.960 ServerApp] Starting buffering for a0032654-be02-4fa0-a70a-81ee55f339bf:d379eca3-0fbe-4c9c-875c-6348307de551
+[I 2023-11-09 18:34:05.001 ServerApp] Starting buffering for d81be892-4a71-42d4-bfd2-bb18647e1792:17fd4869-aac8-4164-88a8-009169c97a74
+[I 2023-11-09 18:34:05.001 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:eb584000-5561-40f9-bdb0-bc2861d77229
+[I 2023-11-09 18:34:08.118 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 18:34:08.429 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:34:08.830 ServerApp] Kernel interrupted: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+[I 2023-11-09 18:34:08.992 ServerApp] Kernel interrupted: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+[I 2023-11-09 18:34:09.162 ServerApp] Kernel interrupted: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+[I 2023-11-09 18:34:09.433 ServerApp] Kernel interrupted: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+[I 2023-11-09 18:34:09.779 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 18:34:26.128 ServerApp] Kernel restarted: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+[I 2023-11-09 18:34:26.183 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:0218bab2-f268-4393-be1d-9e05c243c796
+[I 2023-11-09 18:34:26.255 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:34:26.256 ServerApp] Restoring connection for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:0218bab2-f268-4393-be1d-9e05c243c796
+readline: /etc/inputrc: line 19: term: unknown variable name
+[W 2023-11-09 18:35:53.246 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-09 18:35:53.390 ServerApp] Connecting to kernel d81be892-4a71-42d4-bfd2-bb18647e1792.
+[I 2023-11-09 18:35:53.394 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 18:35:53.410 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 18:35:53.413 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:35:53.538 ServerApp] Starting buffering for d81be892-4a71-42d4-bfd2-bb18647e1792:a665eaa7-1bed-4931-afb8-98546f110d68
+[I 2023-11-09 18:35:54.528 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:0218bab2-f268-4393-be1d-9e05c243c796
+[I 2023-11-09 18:35:54.528 ServerApp] Starting buffering for a0032654-be02-4fa0-a70a-81ee55f339bf:8d1876d4-b6f8-4c34-adf2-2ac6c56cabc3
+[I 2023-11-09 18:35:54.529 ServerApp] Starting buffering for 77a49140-0f98-4475-9586-5527244e5175:96a07925-4323-4a69-bd8b-635ad23ce202
+[I 2023-11-09 18:36:00.853 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:38:00.662 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:40:01.217 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:40:58.811 ServerApp] Kernel restarted: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+[I 2023-11-09 18:40:58.848 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:d1aa7f22-4a3d-4bc2-83f1-af25c64f26ac
+[I 2023-11-09 18:40:58.921 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:40:58.921 ServerApp] Restoring connection for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:d1aa7f22-4a3d-4bc2-83f1-af25c64f26ac
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-09 18:42:01.869 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:44:36.463 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:d1aa7f22-4a3d-4bc2-83f1-af25c64f26ac
+[W 2023-11-09 18:44:39.422 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-09 18:44:39.563 ServerApp] Connecting to kernel d81be892-4a71-42d4-bfd2-bb18647e1792.
+[I 2023-11-09 18:44:39.570 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 18:44:39.573 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 18:44:39.579 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:44:39.705 ServerApp] Starting buffering for d81be892-4a71-42d4-bfd2-bb18647e1792:9514ba12-a48c-43af-9dbc-99c2af4c5859
+[I 2023-11-09 18:44:39.721 ServerApp] Starting buffering for 77a49140-0f98-4475-9586-5527244e5175:ad0a81b8-72e4-4b0d-8d44-50b54f92aebe
+[I 2023-11-09 18:44:39.721 ServerApp] Starting buffering for a0032654-be02-4fa0-a70a-81ee55f339bf:d96b8573-e6c1-4f4d-8f54-9783958d814e
+[I 2023-11-09 18:44:39.805 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:4e69ae85-85cb-46b3-a9fc-930c4a43d2f0
+[I 2023-11-09 18:45:02.065 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:47:01.841 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:49:00.128 ServerApp] Saving file at /historical_analysis/histlib/aviso.py
+[I 2023-11-09 18:49:02.412 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:50:41.623 ServerApp] Kernel restarted: 5b168115-9e7e-4d1a-95a3-3ac10999f32c
+[I 2023-11-09 18:50:41.660 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:cec32cd7-93f0-4c7b-93a7-0a1961873450
+[I 2023-11-09 18:50:41.733 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 18:50:41.733 ServerApp] Restoring connection for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:cec32cd7-93f0-4c7b-93a7-0a1961873450
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-09 18:51:03.010 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:53:03.709 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 18:55:04.487 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 19:26:05.290 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 19:50:29.197 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 19:51:01.568 ServerApp] Saving file at /historical_analysis/histlib/aviso.py
+[I 2023-11-09 19:51:10.621 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:cec32cd7-93f0-4c7b-93a7-0a1961873450
+[I 2023-11-09 19:51:26.249 ServerApp] Connecting to kernel d81be892-4a71-42d4-bfd2-bb18647e1792.
+[I 2023-11-09 19:51:40.579 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 19:51:53.649 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-09 19:51:54.949 ServerApp] Starting buffering for d81be892-4a71-42d4-bfd2-bb18647e1792:97946cfa-18b0-4cf3-adea-b10c6b65543a
+[I 2023-11-09 19:51:58.934 ServerApp] Saving file at /historical_analysis/test_aviso.ipynb
+[I 2023-11-09 19:51:59.412 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:38d9d31d-2c3b-4d19-bb02-5b54c7827d77
+[I 2023-11-09 19:52:45.842 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[W 2023-11-09 20:09:33.468 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-09 20:09:33.563 ServerApp] Connecting to kernel d81be892-4a71-42d4-bfd2-bb18647e1792.
+[I 2023-11-09 20:09:33.568 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 20:09:33.570 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 20:09:33.587 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 20:09:33.683 ServerApp] Starting buffering for d81be892-4a71-42d4-bfd2-bb18647e1792:807a4347-17a6-4879-bad9-4056a56bc25d
+[I 2023-11-09 20:09:33.683 ServerApp] Starting buffering for 77a49140-0f98-4475-9586-5527244e5175:f25868b2-bff5-492e-ac97-81931291e58e
+[I 2023-11-09 20:09:33.703 ServerApp] Starting buffering for a0032654-be02-4fa0-a70a-81ee55f339bf:f405aff4-a098-44fd-86eb-d3b2d7ec9837
+[I 2023-11-09 20:09:33.704 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:9db80071-dce6-40d9-ac38-a3de78ab60c3
+[I 2023-11-09 20:09:35.542 ServerApp] Connecting to kernel 77a49140-0f98-4475-9586-5527244e5175.
+[I 2023-11-09 20:09:35.923 ServerApp] Connecting to kernel 5b168115-9e7e-4d1a-95a3-3ac10999f32c.
+[I 2023-11-09 20:09:37.101 ServerApp] Connecting to kernel a0032654-be02-4fa0-a70a-81ee55f339bf.
+[I 2023-11-09 20:10:40.263 ServerApp] Starting buffering for 77a49140-0f98-4475-9586-5527244e5175:82d1725b-702a-40f7-a03e-a0474df8436e
+[I 2023-11-09 20:10:40.264 ServerApp] Starting buffering for 5b168115-9e7e-4d1a-95a3-3ac10999f32c:a127b031-b1df-488d-a1fb-beac503879cb
+[I 2023-11-09 20:10:40.265 ServerApp] Starting buffering for a0032654-be02-4fa0-a70a-81ee55f339bf:b29a611d-7449-46aa-80f7-3dd0fb12c5a8
+Terminated
+[C 2023-11-09 20:11:47.082 ServerApp] received signal 15, stopping
+[I 2023-11-09 20:11:47.137 ServerApp] Shutting down 6 extensions
+[I 2023-11-09 20:11:47.138 ServerApp] Shutting down 4 kernels
+[I 2023-11-09 20:11:47.138 ServerApp] Kernel shutdown: d81be892-4a71-42d4-bfd2-bb18647e1792
+[I 2023-11-09 20:11:47.138 ServerApp] Kernel shutdown: a0032654-be02-4fa0-a70a-81ee55f339bf
+[I 2023-11-09 20:11:47.139 ServerApp] Kernel shutdown: 77a49140-0f98-4475-9586-5527244e5175
+[I 2023-11-09 20:11:47.139 ServerApp] Kernel shutdown: 5b168115-9e7e-4d1a-95a3-3ac10999f32c

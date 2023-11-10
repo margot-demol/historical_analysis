@@ -1,0 +1,70 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Fri Nov 10 08:26:29 GMT 2023
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:29: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  elif dashinfo is not "0":
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:32: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if dashinfo is not "0":
+[I 2023-11-10 08:26:32.759 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-11-10 08:26:32.782 ServerApp] Package jupyter_lsp took 0.0222s to import
+[W 2023-11-10 08:26:32.782 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-10 08:26:32.792 ServerApp] Package jupyter_server_terminals took 0.0090s to import
+[I 2023-11-10 08:26:32.792 ServerApp] Package notebook took 0.0000s to import
+[I 2023-11-10 08:26:32.794 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2023-11-10 08:26:32.794 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-10 08:26:38.044 ServerApp] Package panel.io.jupyter_server_extension took 5.2488s to import
+[I 2023-11-10 08:26:38.044 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2023-11-10 08:26:38.050 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2023-11-10 08:26:38.056 ServerApp] jupyterlab | extension was successfully linked.
+[W 2023-11-10 08:26:38.058 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-11-10 08:26:38.061 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2023-11-10 08:26:38.061 ServerApp] notebook | extension was successfully linked.
+[I 2023-11-10 08:26:39.845 ServerApp] notebook_shim | extension was successfully linked.
+[I 2023-11-10 08:26:39.845 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2023-11-10 08:26:39.880 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2023-11-10 08:26:39.882 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2023-11-10 08:26:39.884 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2023-11-10 08:26:39.888 LabApp] JupyterLab extension loaded from /home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyterlab
+[I 2023-11-10 08:26:39.889 LabApp] JupyterLab application directory is /home1/datahome/mdemol/.miniconda3/envs/histenv2/share/jupyter/lab
+[I 2023-11-10 08:26:39.889 LabApp] Extension Manager is 'pypi'.
+[I 2023-11-10 08:26:39.892 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-11-10 08:26:39.896 ServerApp] notebook | extension was successfully loaded.
+[I 2023-11-10 08:26:39.897 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2023-11-10 08:26:39.897 ServerApp] Serving notebooks from local directory: /home1/datahome/mdemol
+[I 2023-11-10 08:26:39.897 ServerApp] Jupyter Server 2.9.1 is running at:
+[I 2023-11-10 08:26:39.897 ServerApp] http://r1i2n2:8877/lab
+[I 2023-11-10 08:26:39.897 ServerApp]     http://127.0.0.1:8877/lab
+[I 2023-11-10 08:26:39.897 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-11-10 08:26:39.948 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2023-11-10 08:27:43.904 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-10 08:28:49.119 ServerApp] Kernel started: cce1331e-c87d-4d94-b111-ff93fc95c960
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-10 08:28:49.999 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 08:28:57.059 ServerApp] Starting buffering for cce1331e-c87d-4d94-b111-ff93fc95c960:697637ae-1bde-4fc7-890b-6f46775e2143
+[W 2023-11-10 08:28:59.597 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-10 08:28:59.683 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 08:28:59.857 ServerApp] Starting buffering for cce1331e-c87d-4d94-b111-ff93fc95c960:b19c812f-7c02-406a-b238-e2e2a2e845f4
+[I 2023-11-10 08:29:13.161 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 08:31:53.202 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-10 08:33:07.990 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[W 2023-11-10 08:41:06.895 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-10 08:41:07.046 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 08:45:49.930 ServerApp] Starting buffering for cce1331e-c87d-4d94-b111-ff93fc95c960:1a2f782b-1647-4243-b816-6941aae89f49
+[W 2023-11-10 08:45:51.822 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-10 08:45:51.928 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 08:45:52.059 ServerApp] Starting buffering for cce1331e-c87d-4d94-b111-ff93fc95c960:37348d86-6a89-40b9-abd2-2ed6345d619e
+[I 2023-11-10 08:45:54.504 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 08:45:56.544 ServerApp] Starting buffering for cce1331e-c87d-4d94-b111-ff93fc95c960:59f55b9d-04c2-4c81-8f38-8642be261326
+[W 2023-11-10 08:59:46.171 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-10 08:59:46.257 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 08:59:46.361 ServerApp] Starting buffering for cce1331e-c87d-4d94-b111-ff93fc95c960:0c97a659-210d-49bf-8845-1faa4d7eafb6
+[I 2023-11-10 08:59:49.540 ServerApp] Connecting to kernel cce1331e-c87d-4d94-b111-ff93fc95c960.
+[I 2023-11-10 09:00:20.149 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-10 09:00:44.014 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[W 2023-11-10 09:00:55.943 ServerApp] delete /historical_analysis/distributed.log
+[I 2023-11-10 09:02:31.517 ServerApp] Starting buffering for cce1331e-c87d-4d94-b111-ff93fc95c960:d071f971-f16e-49c3-ba66-d773ad06c32b
+[C 2023-11-10 09:28:54.972 ServerApp] received signal 15, stopping
+Terminated
+[I 2023-11-10 09:28:55.023 ServerApp] Shutting down 6 extensions
+[I 2023-11-10 09:28:55.023 ServerApp] Shutting down 1 kernel
+[I 2023-11-10 09:28:55.024 ServerApp] Kernel shutdown: cce1331e-c87d-4d94-b111-ff93fc95c960
