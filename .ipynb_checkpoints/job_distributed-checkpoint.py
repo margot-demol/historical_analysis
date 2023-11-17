@@ -23,7 +23,7 @@ import histlib.aviso as aviso
 import histlib.erastar as eras
 from histlib.cstes import labels, zarr_dir, nc_files
 
-dataset = 'aviso'
+dataset = 'eras'
 # ---- Run parameters
 
 #root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
@@ -40,11 +40,11 @@ if dataset == 'coloc' :
     jobqueuekw = dict(processes=3, cores=3)  # uplet debug
 
 if dataset == 'aviso' :
-    dask_jobs = 14  # number of dask pbd jobs for gps_sentinel_3A_2019
+    dask_jobs = 20  # number of dask pbd jobs for gps_sentinel_3A_2019
     jobqueuekw = dict(processes=15, cores=15)  # uplet debug
     
 if dataset == 'eras' :
-    dask_jobs = 8  # number of dask pbd jobs
+    dask_jobs = 10  # number of dask pbd jobs
     jobqueuekw = dict(processes=20, cores=20)  # uplet debug
 
 # ---------------------------- dask utils - do not touch -------------------------------
@@ -240,7 +240,7 @@ def run_aviso(l, cluster, client):
     # synthetic example here to compute pi:
     import dask.array as da
     ds_data = xr.open_zarr(zarr_dir+'/'+l+'.zarr')
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':500, 'alti_time':-1, 'site_obs':-1})
+    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':250, 'alti_time':-1, 'site_obs':-1})
     ds_aviso = aviso.compute_aviso_sla(ds_data).persist()
     #store
     zarr = os.path.join(zarr_dir, "aviso_"+l+".zarr")
@@ -255,11 +255,11 @@ def run_eras(l, cluster, client):
     # synthetic example here to compute pi:
     import dask.array as da
     ds_data = xr.open_zarr(zarr_dir+'/'+l+'.zarr')
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':500, 'alti_time':-1, 'site_obs':-1})
-    ds_es = eras.compute_eras(ds_data, dt=(-12,13), only_matchup_time = True).persist()
+    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':200, 'alti_time':-1, 'site_obs':-1})
+    ds_es = eras.compute_eras(ds_data, dt=(-12,13), only_matchup_time = True).chunk({'obs':500, 'site_obs':-1}).persist()
     #store
     zarr = os.path.join(zarr_dir, "erastar_"+l+".zarr")
-    ds_es.chunk({'obs':500}).to_zarr(zarr, mode="w")  
+    ds_es.to_zarr(zarr, mode="w")  
     logging.info(f"erastar {l} storred in {zarr}")
     
 if __name__ == "__main__":
@@ -287,7 +287,7 @@ if __name__ == "__main__":
         "distributed",
         jobs=dask_jobs,
         fraction=0.9,
-        walltime="12:00:00",
+        walltime="4:00:00",
         **jobqueuekw,
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)

@@ -94,13 +94,13 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
         box_lon = cstes.lon_180_to_360(ds_obs.box_lon)
         drifter_lon = cstes.lon_180_to_360(ds_obs.drifter_lon)
         _alti_lon = cstes.lon_180_to_360(
-            ds_obs.alti_lon.isel(alti_time=10)
+            ds_obs.alti_lon.isel(alti_time=ds_obs.dims['alti_time']//2)
         )  # only matchup
 
     else:
         box_lon = ds_obs["box_lon"]
         drifter_lon = ds_obs["drifter_lon"]
-        _alti_lon = ds_obs["alti_lon"].isel(alti_time=10)  # only matchup
+        _alti_lon = ds_obs["alti_lon"].isel(alti_time=ds_obs.dims['alti_time']//2)  # only matchup
 
     # matchup site
     site_matchup_indice = int(ds_obs.__site_matchup_indice.values)
@@ -186,9 +186,9 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
 
     # at alti matchup
     ds_alti = ds_eras.interp(
-        es_time=ds_obs.alti_time_.isel(alti_time=10),
+        es_time=ds_obs.alti_time_.isel(alti_time=ds_obs.dims['alti_time']//2),
         es_lon=_alti_lon,
-        es_lat=ds_obs.alti_lat.isel(alti_time=10),
+        es_lat=ds_obs.alti_lat.isel(alti_time=ds_obs.dims['alti_time']//2),
     )
     ds_alti = ds_alti.drop(list(ds_alti.coords.keys())).rename(
         {v: "alti_matchup_" + v for v in ds_eras}

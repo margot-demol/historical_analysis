@@ -1,0 +1,50 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Fri Nov 17 12:58:53 GMT 2023
+/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/config.py:742: FutureWarning: Dask configuration key 'distributed.scheduler.transition-log-length' has been deprecated; please use 'distributed.admin.low-level-log-length' instead
+  warnings.warn(
+/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/dask/config.py:742: FutureWarning: Dask configuration key 'distributed.comm.recent-messages-log-length' has been deprecated; please use 'distributed.admin.low-level-log-length' instead
+  warnings.warn(
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 0
+Number of workers up = 20
+Number of workers up = 140
+Number of workers up = 180
+Cluster is up, proceeding with computations
+Traceback (most recent call last):
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 348, in open_group
+    zarr_group = zarr.open_consolidated(store, **open_kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zarr/convenience.py", line 1351, in open_consolidated
+    meta_store = ConsolidatedStoreClass(store, metadata_key=metadata_key)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zarr/storage.py", line 2947, in __init__
+    meta = json_loads(self.store[metadata_key])
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zarr/storage.py", line 1113, in __getitem__
+    raise KeyError(key)
+KeyError: '.zmetadata'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 307, in <module>
+    if dataset == 'eras' : run_eras(l, cluster, client)
+  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 257, in run_eras
+    ds_data = xr.open_zarr(zarr_dir+'/'+l+'.zarr')
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 752, in open_zarr
+    ds = open_dataset(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/api.py", line 495, in open_dataset
+    backend_ds = backend.open_dataset(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 800, in open_dataset
+    store = ZarrStore.open_group(
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/xarray/backends/zarr.py", line 365, in open_group
+    zarr_group = zarr.open_group(store, **open_kwargs)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/zarr/hierarchy.py", line 1532, in open_group
+    raise GroupNotFoundError(path)
+zarr.errors.GroupNotFoundError: group not found at path ''
+Fri Nov 17 13:53:15 GMT 2023

@@ -1,0 +1,8 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Tue Nov 14 22:04:53 GMT 2023
+  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 323
+    run_aviso_slice(l, (0, 75000),to_zarr_mode='w', cluster, client)
+                                                                   ^
+SyntaxError: positional argument follows keyword argument
+Tue Nov 14 22:04:53 GMT 2023

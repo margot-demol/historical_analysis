@@ -1,0 +1,118 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Mon Nov 13 09:00:30 GMT 2023
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:29: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  elif dashinfo is not "0":
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:32: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if dashinfo is not "0":
+[I 2023-11-13 09:00:59.257 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-11-13 09:00:59.866 ServerApp] Package jupyter_lsp took 0.6088s to import
+[W 2023-11-13 09:00:59.866 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-13 09:01:00.121 ServerApp] Package jupyter_server_terminals took 0.2545s to import
+[I 2023-11-13 09:01:00.122 ServerApp] Package notebook took 0.0000s to import
+[I 2023-11-13 09:01:00.124 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2023-11-13 09:01:00.124 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-13 09:01:31.579 ServerApp] Package panel.io.jupyter_server_extension took 31.4257s to import
+[I 2023-11-13 09:01:31.580 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2023-11-13 09:01:31.586 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2023-11-13 09:01:31.592 ServerApp] jupyterlab | extension was successfully linked.
+[W 2023-11-13 09:01:31.603 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-11-13 09:01:31.606 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2023-11-13 09:01:31.606 ServerApp] notebook | extension was successfully linked.
+[I 2023-11-13 09:01:39.348 ServerApp] notebook_shim | extension was successfully linked.
+[I 2023-11-13 09:01:39.348 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2023-11-13 09:01:39.709 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2023-11-13 09:01:39.711 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2023-11-13 09:01:39.713 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2023-11-13 09:01:39.870 LabApp] JupyterLab extension loaded from /home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyterlab
+[I 2023-11-13 09:01:39.870 LabApp] JupyterLab application directory is /home1/datahome/mdemol/.miniconda3/envs/histenv2/share/jupyter/lab
+[I 2023-11-13 09:01:39.888 LabApp] Extension Manager is 'pypi'.
+[I 2023-11-13 09:01:39.892 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-11-13 09:01:39.895 ServerApp] notebook | extension was successfully loaded.
+[I 2023-11-13 09:01:39.896 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2023-11-13 09:01:39.896 ServerApp] Serving notebooks from local directory: /home1/datahome/mdemol
+[I 2023-11-13 09:01:39.896 ServerApp] Jupyter Server 2.9.1 is running at:
+[I 2023-11-13 09:01:39.897 ServerApp] http://r1i6n35:8877/lab
+[I 2023-11-13 09:01:39.897 ServerApp]     http://127.0.0.1:8877/lab
+[I 2023-11-13 09:01:39.897 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-11-13 09:01:40.030 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2023-11-13 09:02:35.242 ServerApp] 404 GET /apple-touch-icon-precomposed.png (@10.148.1.145) 1922.57ms referer=None
+[W 2023-11-13 09:02:35.248 ServerApp] 404 GET /apple-touch-icon.png (@10.148.1.145) 1.56ms referer=None
+[W 2023-11-13 09:02:36.276 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-13 09:02:47.350 ServerApp] Kernel started: f5e44068-f2bc-4a75-a298-8a36b30a4b0e
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-13 09:02:56.912 ServerApp] Connecting to kernel f5e44068-f2bc-4a75-a298-8a36b30a4b0e.
+[I 2023-11-13 09:02:56.914 ServerApp] Connecting to kernel f5e44068-f2bc-4a75-a298-8a36b30a4b0e.
+[I 2023-11-13 09:02:56.916 ServerApp] Connecting to kernel f5e44068-f2bc-4a75-a298-8a36b30a4b0e.
+[I 2023-11-13 09:04:04.456 ServerApp] Copying historical_analysis/test_aviso.ipynb to /historical_analysis
+[I 2023-11-13 09:04:22.702 ServerApp] Kernel started: a837e245-6671-4e65-ba5e-f0b5d3527dda
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-13 09:04:23.483 ServerApp] Connecting to kernel a837e245-6671-4e65-ba5e-f0b5d3527dda.
+[I 2023-11-13 09:04:31.963 ServerApp] Kernel shutdown: a837e245-6671-4e65-ba5e-f0b5d3527dda
+[W 2023-11-13 09:04:32.228 ServerApp] delete /historical_analysis/test_erastar.ipynb
+[I 2023-11-13 09:04:58.217 ServerApp] Copying m2_2022/sandbox/test_erastar_lib.ipynb to /historical_analysis
+[I 2023-11-13 09:05:19.421 ServerApp] Kernel started: 31c5b8de-899a-417d-8c89-0672240a804d
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-13 09:05:20.138 ServerApp] Connecting to kernel 31c5b8de-899a-417d-8c89-0672240a804d.
+[I 2023-11-13 09:05:55.496 ServerApp] Kernel restarted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 09:05:55.503 ServerApp] Starting buffering for 31c5b8de-899a-417d-8c89-0672240a804d:832a05a1-3842-4f04-82f4-7744b36cd5e1
+[I 2023-11-13 09:05:55.511 ServerApp] Connecting to kernel 31c5b8de-899a-417d-8c89-0672240a804d.
+[I 2023-11-13 09:05:55.511 ServerApp] Restoring connection for 31c5b8de-899a-417d-8c89-0672240a804d:832a05a1-3842-4f04-82f4-7744b36cd5e1
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-13 09:07:19.208 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:19:23.406 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:19:44.505 ServerApp] Kernel restarted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 09:19:44.508 ServerApp] Starting buffering for 31c5b8de-899a-417d-8c89-0672240a804d:832a05a1-3842-4f04-82f4-7744b36cd5e1
+[I 2023-11-13 09:19:44.512 ServerApp] Connecting to kernel 31c5b8de-899a-417d-8c89-0672240a804d.
+[I 2023-11-13 09:19:44.512 ServerApp] Restoring connection for 31c5b8de-899a-417d-8c89-0672240a804d:832a05a1-3842-4f04-82f4-7744b36cd5e1
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-13 09:21:23.772 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:23:24.272 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:25:24.592 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:39:24.834 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:45:25.122 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:47:25.391 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:49:24.310 ServerApp] Saving file at /historical_analysis/histlib/erastar.py
+[I 2023-11-13 09:50:26.939 ServerApp] Kernel restarted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 09:50:26.944 ServerApp] Starting buffering for 31c5b8de-899a-417d-8c89-0672240a804d:832a05a1-3842-4f04-82f4-7744b36cd5e1
+[I 2023-11-13 09:50:26.952 ServerApp] Connecting to kernel 31c5b8de-899a-417d-8c89-0672240a804d.
+[I 2023-11-13 09:50:26.952 ServerApp] Restoring connection for 31c5b8de-899a-417d-8c89-0672240a804d:832a05a1-3842-4f04-82f4-7744b36cd5e1
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-13 09:51:25.591 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 09:53:25.756 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[W 2023-11-13 09:55:11.294 ServerApp] delete /historical_analysis/histlib/sat.py
+[W 2023-11-13 09:55:19.059 ServerApp] delete /historical_analysis/histlib/diagnosis_modif_en_dours.py
+[I 2023-11-13 09:55:25.928 ServerApp] Saving file at /historical_analysis/test_erastar_lib.ipynb
+[I 2023-11-13 15:33:54.880 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:55.042 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:55.231 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:57.144 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:57.341 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:57.591 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:57.766 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:57.937 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:33:58.090 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:34:14.279 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:34:14.560 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[I 2023-11-13 15:34:14.720 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[IPKernelApp] ERROR | KeyboardInterrupt caught in kernel.
+[I 2023-11-13 15:34:14.906 ServerApp] Kernel interrupted: 31c5b8de-899a-417d-8c89-0672240a804d
+[IPKernelApp] ERROR | Error in message handler
+Traceback (most recent call last):
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/ipykernel/kernelbase.py", line 524, in dispatch_queue
+    await self.process_one()
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/ipykernel/kernelbase.py", line 513, in process_one
+    await dispatch(*args)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/ipykernel/kernelbase.py", line 374, in dispatch_shell
+    idents, msg = self.session.feed_identities(msg, copy=False)
+  File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyter_client/session.py", line 992, in feed_identities
+    raise ValueError(msg)
+ValueError: DELIM not in msg_list
+[I 2023-11-13 15:34:19.102 ServerApp] Starting buffering for f5e44068-f2bc-4a75-a298-8a36b30a4b0e:be2dc644-5a66-4bbf-bada-24dcb8d9c499
+[I 2023-11-13 15:34:19.103 ServerApp] Starting buffering for 31c5b8de-899a-417d-8c89-0672240a804d:832a05a1-3842-4f04-82f4-7744b36cd5e1
+Terminated
+[C 2023-11-13 15:34:32.017 ServerApp] received signal 15, stopping
+[I 2023-11-13 15:34:32.163 ServerApp] Shutting down 6 extensions
+[I 2023-11-13 15:34:32.164 ServerApp] Shutting down 2 kernels
+[I 2023-11-13 15:34:32.164 ServerApp] Kernel shutdown: f5e44068-f2bc-4a75-a298-8a36b30a4b0e
+[I 2023-11-13 15:34:32.164 ServerApp] Kernel shutdown: 31c5b8de-899a-417d-8c89-0672240a804d

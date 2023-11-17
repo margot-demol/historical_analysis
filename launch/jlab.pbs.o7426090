@@ -1,0 +1,112 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+Tue Nov 14 15:25:58 GMT 2023
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:29: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  elif dashinfo is not "0":
+/home1/datahome/mdemol/historical_analysis/launch/jlab.py:32: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if dashinfo is not "0":
+[I 2023-11-14 15:26:06.021 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-11-14 15:26:06.581 ServerApp] Package jupyter_lsp took 0.5589s to import
+[W 2023-11-14 15:26:06.581 ServerApp] A `_jupyter_server_extension_points` function was not found in jupyter_lsp. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-14 15:26:06.734 ServerApp] Package jupyter_server_terminals took 0.1524s to import
+[I 2023-11-14 15:26:06.734 ServerApp] Package notebook took 0.0000s to import
+[I 2023-11-14 15:26:06.749 ServerApp] Package notebook_shim took 0.0000s to import
+[W 2023-11-14 15:26:06.749 ServerApp] A `_jupyter_server_extension_points` function was not found in notebook_shim. Instead, a `_jupyter_server_extension_paths` function was found and will be used for now. This function name will be deprecated in future releases of Jupyter Server.
+[I 2023-11-14 15:26:14.568 ServerApp] Package panel.io.jupyter_server_extension took 7.7923s to import
+[I 2023-11-14 15:26:14.568 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2023-11-14 15:26:14.574 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2023-11-14 15:26:14.579 ServerApp] jupyterlab | extension was successfully linked.
+[W 2023-11-14 15:26:14.593 JupyterNotebookApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-11-14 15:26:14.596 ServerApp] ServerApp.password config is deprecated in 2.0. Use PasswordIdentityProvider.hashed_password.
+[I 2023-11-14 15:26:14.596 ServerApp] notebook | extension was successfully linked.
+[I 2023-11-14 15:26:18.840 ServerApp] notebook_shim | extension was successfully linked.
+[I 2023-11-14 15:26:18.840 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2023-11-14 15:26:19.073 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2023-11-14 15:26:19.075 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2023-11-14 15:26:19.077 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2023-11-14 15:26:19.099 LabApp] JupyterLab extension loaded from /home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/jupyterlab
+[I 2023-11-14 15:26:19.099 LabApp] JupyterLab application directory is /home1/datahome/mdemol/.miniconda3/envs/histenv2/share/jupyter/lab
+[I 2023-11-14 15:26:19.100 LabApp] Extension Manager is 'pypi'.
+[I 2023-11-14 15:26:19.104 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-11-14 15:26:19.107 ServerApp] notebook | extension was successfully loaded.
+[I 2023-11-14 15:26:19.108 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2023-11-14 15:26:19.108 ServerApp] Serving notebooks from local directory: /home1/datahome/mdemol
+[I 2023-11-14 15:26:19.108 ServerApp] Jupyter Server 2.9.1 is running at:
+[I 2023-11-14 15:26:19.108 ServerApp] http://r1i3n7:8877/lab
+[I 2023-11-14 15:26:19.109 ServerApp]     http://127.0.0.1:8877/lab
+[I 2023-11-14 15:26:19.109 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-11-14 15:26:19.203 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2023-11-14 15:27:06.696 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-14 15:27:16.974 ServerApp] Kernel started: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 15:27:16.976 ServerApp] Kernel started: d9b9921d-c0c2-47b2-8b1c-d4259916a743
+readline: readline: /etc/inputrc: line 19: term: unknown variable name
+/etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-14 15:27:34.917 ServerApp] Connecting to kernel d9b9921d-c0c2-47b2-8b1c-d4259916a743.
+[I 2023-11-14 15:27:34.918 ServerApp] Connecting to kernel d9b9921d-c0c2-47b2-8b1c-d4259916a743.
+[I 2023-11-14 15:27:34.920 ServerApp] Connecting to kernel d9b9921d-c0c2-47b2-8b1c-d4259916a743.
+[I 2023-11-14 15:27:34.922 ServerApp] Connecting to kernel af9bb133-b4b2-4445-ab01-a2801e790ea9.
+[I 2023-11-14 15:31:16.145 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 15:41:16.479 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 15:43:16.800 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 16:19:00.640 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 16:21:36.153 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:21:36.338 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:21:36.518 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[IPKernelApp] ERROR | KeyboardInterrupt caught in kernel.
+[I 2023-11-14 16:21:37.059 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:21:37.067 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:21:59.703 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:22:00.161 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:22:00.168 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:22:04.988 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:22:05.444 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:22:05.452 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:23:00.908 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 16:25:00.620 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-14 16:27:00.641 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-14 16:29:00.660 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-14 16:29:01.193 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 16:30:46.791 ServerApp] Kernel restarted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 16:30:46.796 ServerApp] Starting buffering for af9bb133-b4b2-4445-ab01-a2801e790ea9:9052e307-4b69-4eae-97b2-6813f0f86dec
+[I 2023-11-14 16:30:46.802 ServerApp] Connecting to kernel af9bb133-b4b2-4445-ab01-a2801e790ea9.
+[I 2023-11-14 16:30:46.802 ServerApp] Restoring connection for af9bb133-b4b2-4445-ab01-a2801e790ea9:9052e307-4b69-4eae-97b2-6813f0f86dec
+readline: /etc/inputrc: line 19: term: unknown variable name
+[I 2023-11-14 16:31:00.678 ServerApp] Saving file at /historical_analysis/job_distributed.py
+[I 2023-11-14 16:31:01.484 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 16:33:01.804 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 16:35:02.041 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 16:39:02.286 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 17:07:00.663 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 17:09:00.964 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 17:11:01.287 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 17:13:01.557 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[W 2023-11-14 17:16:16.803 ServerApp] WebSocket ping timeout after 119997 ms.
+[I 2023-11-14 17:16:21.806 ServerApp] Starting buffering for af9bb133-b4b2-4445-ab01-a2801e790ea9:9052e307-4b69-4eae-97b2-6813f0f86dec
+[W 2023-11-14 17:16:34.919 ServerApp] WebSocket ping timeout after 119997 ms.
+[I 2023-11-14 17:16:39.922 ServerApp] Starting buffering for d9b9921d-c0c2-47b2-8b1c-d4259916a743:5aad9934-18c6-4881-84cf-14664a955e7b
+[I 2023-11-14 18:01:53.974 ServerApp] Connecting to kernel af9bb133-b4b2-4445-ab01-a2801e790ea9.
+[I 2023-11-14 18:01:53.974 ServerApp] Restoring connection for af9bb133-b4b2-4445-ab01-a2801e790ea9:9052e307-4b69-4eae-97b2-6813f0f86dec
+[I 2023-11-14 18:02:14.409 ServerApp] Connecting to kernel d9b9921d-c0c2-47b2-8b1c-d4259916a743.
+[I 2023-11-14 18:02:14.410 ServerApp] Restoring connection for d9b9921d-c0c2-47b2-8b1c-d4259916a743:5aad9934-18c6-4881-84cf-14664a955e7b
+[I 2023-11-14 18:26:59.746 ServerApp] Starting buffering for af9bb133-b4b2-4445-ab01-a2801e790ea9:9052e307-4b69-4eae-97b2-6813f0f86dec
+[I 2023-11-14 18:26:59.747 ServerApp] Starting buffering for d9b9921d-c0c2-47b2-8b1c-d4259916a743:5aad9934-18c6-4881-84cf-14664a955e7b
+[W 2023-11-14 18:27:01.535 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2023-11-14 18:27:01.664 ServerApp] Connecting to kernel af9bb133-b4b2-4445-ab01-a2801e790ea9.
+[I 2023-11-14 18:27:01.665 ServerApp] Connecting to kernel d9b9921d-c0c2-47b2-8b1c-d4259916a743.
+[I 2023-11-14 18:27:01.812 ServerApp] Starting buffering for d9b9921d-c0c2-47b2-8b1c-d4259916a743:7fb7f288-dd60-4ff5-b21d-61b6232155ab
+[I 2023-11-14 18:27:05.210 ServerApp] Connecting to kernel d9b9921d-c0c2-47b2-8b1c-d4259916a743.
+[I 2023-11-14 18:27:05.215 ServerApp] Connecting to kernel af9bb133-b4b2-4445-ab01-a2801e790ea9.
+[I 2023-11-14 18:29:06.037 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+[I 2023-11-14 18:29:07.227 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 18:29:07.451 ServerApp] Kernel interrupted: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 18:35:06.615 ServerApp] Saving file at /historical_analysis/21_zarr_aviso.ipynb
+Terminated
+[C 2023-11-14 18:38:05.046 ServerApp] received signal 15, stopping
+[I 2023-11-14 18:38:05.048 ServerApp] Shutting down 6 extensions
+[I 2023-11-14 18:38:05.049 ServerApp] Shutting down 2 kernels
+[I 2023-11-14 18:38:05.049 ServerApp] Kernel shutdown: af9bb133-b4b2-4445-ab01-a2801e790ea9
+[I 2023-11-14 18:38:05.049 ServerApp] Kernel shutdown: d9b9921d-c0c2-47b2-8b1c-d4259916a743
+[C 2023-11-14 18:38:07.418 ServerApp] received signal 15, stopping
+[I 2023-11-14 18:38:07.419 ServerApp] Shutting down 6 extensions
+[I 2023-11-14 18:38:07.419 ServerApp] Shutting down 1 kernel
+[I 2023-11-14 18:38:07.419 ServerApp] Kernel shutdown: af9bb133-b4b2-4445-ab01-a2801e790ea9
