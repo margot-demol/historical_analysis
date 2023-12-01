@@ -5,7 +5,7 @@ from glob import glob
 import xarray as xr
 import pandas as pd
 import numpy as np
-import m2lib22.cstes as cstes
+import histlib.cstes as cstes
 
 # directories
 
@@ -201,7 +201,9 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
         .reset_coords(["drifter_time", "drifter_x", "drifter_y", "es_time_"])
     )  # NEW
 
-    ds["time"] = ds_obs.time.drop(["lon", "lat"])
+    #ds["time"] = ds_obs.time.drop(["lon", "lat"])
+    ds['obs'] = ds_obs.obs
+    ds = ds.drop(['time', 'lon', 'lat'])
     ds = ds.rename({v: "es_" + v.replace("_es", "") for v in ds if "_es" in v})
     ds = ds.rename({v: "e5_" + v.replace("_e5", "") for v in ds if "_e5" in v})
 
@@ -211,12 +213,12 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
 def _concat_eras(ds, dt, only_matchup_time=True):
     """Load erastar data for multiple collocations and concatenate"""
     try:
-        _ds = xr.concat(
-            [get_eras_one_obs(ds.sel(obs=o), dt, only_matchup_time) for o in ds.obs],
-            "obs",
-        )
+        D = []
+        for o in ds.obs:
+            D.append(get_eras_one_obs(ds.sel(obs=o), dt, only_matchup_time))
+        _ds = xr.concat(D,"obs")
     except:
-        assert False, (ds.__site_id.values, ds.time.values)
+        assert False, (ds.__site_id.values, ds.obs.values)
     return _ds
 
 
@@ -294,7 +296,7 @@ def compute_eras(ds, dt, only_matchup_time=True):
         kwargs=dict(dt=dt, only_matchup_time=only_matchup_time),
         template=template,
     )
-    ds_eras = ds_eras.set_coords(["time", "es_time_"])  # coordinate for obs dimension
+    ds_eras = ds_eras.set_coords(["obs", "es_time_"])  # coordinate for obs dimension
 
     """ NOT HERE (COMPUTE SITE OBS MATCHUP INDICE AGAIN)
     #add drifter matchup

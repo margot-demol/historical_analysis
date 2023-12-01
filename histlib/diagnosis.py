@@ -24,12 +24,12 @@ warnings.filterwarnings("ignore")
 import os
 from glob import glob
 
-import m2lib22.box as box
-import m2lib22.sat as sat
-import m2lib22.cstes as cstes
-import m2lib22.stress_to_windterm as stw
+import histlib.box as box
+import histlib.sat as sat
+import histlib.cstes as cstes
+import histlib.stress_to_windterm as stw
 
-from m2lib22.stress_to_windterm import list_wd_srce_suffix, list_func, list_func_suffix
+from histlib.stress_to_windterm import list_wd_srce_suffix, list_func, list_func_suffix
 
 """ 
 Datasets
@@ -44,17 +44,17 @@ def combinations(_ds):
     _ds: dataset
         contains - drifter_acc_x/y,
                  - drifter_coriolisx/y,
-                 - sla gradients from the different sources all fiishing with '_g_grad_x/y',
+                 - sla gradients from the different sources all fiishing with '_ggx/y',
                  - wind terms from the different sources and way to compute it from stress all finishing with '_wd_x/y'
     Returns
     ----------
-    [{'acc': 'drifter_acc_x','coriolis': 'drifter_coriolis_x','ggrad': 'alti_g_grad_x','wind': 'es_cstrio_z0_alti_wd_x','id': 'co_es_cstrio_z0_alti_x'},....]
+    [{'acc': 'drifter_acc_x','coriolis': 'drifter_coriolis_x','ggrad': 'alti_ggx','wind': 'es_cstrio_z0_alti_wd_x','id': 'co_es_cstrio_z0_alti_x'},....]
     list of dictionnaries containing the varaibles taken for each term and an identification: gradsrc_wdsrc_wdmethod_wddepth_matchupposition_x/y
     """
     wd_x = [l for l in _ds if "wd_x" in l]
     wd_y = [l for l in _ds if "wd_y" in l]
-    grad_x = [l for l in _ds if "g_grad_x" in l]
-    grad_y = [l for l in _ds if "g_grad_y" in l]
+    grad_x = [l for l in _ds if "ggx" in l]
+    grad_y = [l for l in _ds if "ggy" in l]
     acc_cor_x = ["drifter_acc_x", "drifter_coriolis_x"]
     acc_cor_y = ["drifter_acc_y", "drifter_coriolis_y"]
 
@@ -75,7 +75,7 @@ def combinations(_ds):
                     lx["ggrad"] = grad
                     lx["wind"] = wd
                     lx["id"] = (
-                        grad.replace("alti_", "").replace("g_grad_x", "")
+                        grad.replace("alti_", "").replace("ggx", "")
                         + "_".join(wd.split("_")[:3])
                         + "_alti_x"
                     )
@@ -84,7 +84,7 @@ def combinations(_ds):
                     lx["ggrad"] = grad
                     lx["wind"] = wd
                     lx["id"] = (
-                        grad.replace("drifter_", "").replace("g_grad_x", "")
+                        grad.replace("drifter_", "").replace("ggx", "")
                         + "_".join(wd.split("_")[:3])
                         + "_drifter_x"
                     )
@@ -96,7 +96,7 @@ def combinations(_ds):
                     lx["wind"] = wd
                     lx["id"] = (
                         "co_"
-                        + grad.replace("alti_", "").replace("g_grad_x", "")
+                        + grad.replace("alti_", "").replace("ggx", "")
                         + "_".join(wd.split("_")[:3])
                         + "_alti_x"
                     )
@@ -106,7 +106,7 @@ def combinations(_ds):
                     lx["wind"] = wd
                     lx["id"] = (
                         "co_"
-                        + grad.replace("alti_", "").replace("g_grad_x", "")
+                        + grad.replace("alti_", "").replace("ggx", "")
                         + "_".join(wd.split("_")[:3])
                         + "_drifter_x"
                     )
@@ -155,22 +155,23 @@ _data_var = [
     "drifter_theta_lat",
     "alti___distance",
     "alti___time_difference",
-    "alti_g_grad_x",
-    "alti_denoised_g_grad_x",
+    "alti_ggx",
+    "alti_denoised_ggx",
     "drifter_acc_x",
     "drifter_acc_y",
     "drifter_coriolis_x",
     "drifter_coriolis_y",
+    
 ]
 _aviso_var = [
-    "aviso_alti_matchup_g_grad_x",
-    "aviso_alti_matchup_g_grad_y",
-    "aviso_drifter_matchup_g_grad_x",
-    "aviso_drifter_matchup_g_grad_y",
-    "aviso_alti_matchup_adt_g_grad_x",
-    "aviso_alti_matchup_adt_g_grad_y",
-    "aviso_drifter_matchup_adt_g_grad_x",
-    "aviso_drifter_matchup_adt_g_grad_y",
+    "aviso_alti_matchup_ggx",
+    "aviso_alti_matchup_ggy",
+    "aviso_drifter_matchup_ggx",
+    "aviso_drifter_matchup_ggy",
+    "aviso_alti_matchup_adt_ggx",
+    "aviso_alti_matchup_adt_ggy",
+    "aviso_drifter_matchup_adt_ggx",
+    "aviso_drifter_matchup_adt_ggy",
 ]
 _stress_var = [
     "e5_alti_matchup_taue",
@@ -181,11 +182,6 @@ _stress_var = [
     "e5_drifter_matchup_taun",
     "es_drifter_matchup_taue",
     "es_drifter_matchup_taun",
-]
-_corr_var = [
-    "alti_adt_g_grad_x",
-    "alti_adt_oceantide_g_grad_x",
-    "alti_adt_oceantide_dac_g_grad_x",
 ]
 
 
@@ -568,12 +564,12 @@ def ds_mean_var_std_2bins(ds, bin_dim, bin_dim_ggrad, **kwargs):
     return xr.merge(
         [
             ds_mean_var_std(
-                ds[[var for var in ds if var != "pdf_alti_g_grad_x"]],
+                ds[[var for var in ds if var != "pdf_alti_ggx"]],
                 bin_dim="acc_bin",
                 **kwargs
             ),
             ds_mean_var_std(
-                ds[["pdf_alti_g_grad_x"]], bin_dim="acc_bin_grad", **kwargs
+                ds[["pdf_alti_ggx"]], bin_dim="acc_bin_grad", **kwargs
             ),
         ]
     )
@@ -711,6 +707,11 @@ def plot_ms_lonlat(ds, id_, title=1):
     cmap_label = [r"$\langle x^2\rangle/\langle S^2\rangle$"] * len(Sx)
     plot_stat_lonlat(x, title=title, cmap_label=cmap_label, fig_title=id_)
 
+
+"""
+LOW PASS FILTER
+-------------------------------
+"""
 
 """
 Default list
