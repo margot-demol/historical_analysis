@@ -23,7 +23,7 @@ import histlib.aviso as aviso
 import histlib.erastar as eras
 from histlib.cstes import labels, zarr_dir
 
-dataset = 'aviso'
+dataset = 'eras'
 # ---- Run parameters
 
 #root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
@@ -44,7 +44,7 @@ if dataset == 'aviso' :
     jobqueuekw = dict(processes=20, cores=20)  # uplet debug
     
 if dataset == 'eras' :
-    dask_jobs = 8  # number of dask pbd jobs
+    dask_jobs = 10  # number of dask pbd jobs
     jobqueuekw = dict(processes=20, cores=20)  # uplet debug
 
 # ---------------------------- dask utils - do not touch -------------------------------
@@ -256,7 +256,7 @@ def run_aviso_divided_one(ds_data, i):
     ds_aviso.to_zarr(zarr, mode="w")  
     logging.info(f"aviso {l} group {i} storred in {zarr}")
 
-def run_eras_divided(l, Ng=40000) :
+def run_eras_divided(l, Ng=100000) :
     "run erastar on subfiles of constant obs dim (allow to always get same number of chunk/task, solve memory pb"
     ds_data = xr.open_zarr(zarr_dir+'/'+l+'.zarr')
     ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True)
@@ -265,7 +265,7 @@ def run_eras_divided(l, Ng=40000) :
     i=0
     while N < Nt :
         if not os.path.isdir(os.path.join(zarr_dir, "erastar_"+l+f"_{i}.zarr")):
-            ds_data_ = ds_data.isel(obs=slice(N,min(N+Ng, Nt))).chunk({'obs':250, 'alti_time':-1, 'site_obs':-1})
+            ds_data_ = ds_data.isel(obs=slice(N,min(N+Ng, Nt))).chunk({'obs':500, 'alti_time':-1, 'site_obs':-1})
             run_eras_divided_one(ds_data_, i)
         i+=1
         N+=Ng

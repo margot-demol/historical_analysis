@@ -1,30 +1,30 @@
 import string
 
 labels = [
-    #"gps_Jason-3_2020",#
-    #"argos_Jason-3_2020",#
-    #"gps_SARAL_2020",
-    #"argos_SARAL_2020",
-    #"gps_Cryosat-2_2020",
-    #"argos_Cryosat-2_2020",
-    #"gps_Sentinel-3_A_2020",
-    #"argos_Sentinel-3_A_2020",
-    #"gps_Sentinel-3_B_2020",
-    #"argos_Sentinel-3_B_2020",
-    #"gps_Jason-3_2019",#
-    #"argos_Jason-3_2019",
-    #"gps_SARAL_2019",
-    #"argos_SARAL_2019",
-    #"gps_Cryosat-2_2019",
-    #"argos_Cryosat-2_2019",
-    #"gps_Sentinel-3_A_2019",#,too big, to do with append dims
-    #"argos_Sentinel-3_A_2019",
-    #"gps_Sentinel-3_B_2019",
-    #"argos_Sentinel-3_B_2019",
-    #"gps_Jason-3_2018",#
-    #"argos_Jason-3_2018",
-    #"gps_SARAL_2018",
-    #"argos_SARAL_2018",
+    "gps_Jason-3_2020",#
+    "argos_Jason-3_2020",#
+    "gps_SARAL_2020",
+    "argos_SARAL_2020",
+    "gps_Cryosat-2_2020",
+    "argos_Cryosat-2_2020",
+    "gps_Sentinel-3_A_2020",
+    "argos_Sentinel-3_A_2020",
+    "gps_Sentinel-3_B_2020",
+    "argos_Sentinel-3_B_2020",
+    "gps_Jason-3_2019",#
+    "argos_Jason-3_2019",
+    "gps_SARAL_2019",
+    "argos_SARAL_2019",
+    "gps_Cryosat-2_2019",
+    "argos_Cryosat-2_2019",
+    "gps_Sentinel-3_A_2019",#,too big, to do with append dims
+    "argos_Sentinel-3_A_2019",
+    "gps_Sentinel-3_B_2019",
+    "argos_Sentinel-3_B_2019",
+    "gps_Jason-3_2018",#
+    "argos_Jason-3_2018",
+    "gps_SARAL_2018",
+    "argos_SARAL_2018",
     "gps_Cryosat-2_2018",
     "argos_Cryosat-2_2018",
     "gps_Sentinel-3_A_2018",
