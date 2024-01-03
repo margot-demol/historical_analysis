@@ -22,7 +22,7 @@ INFO:root:aviso argos_Sentinel-3_B_2019 group 0 storred in /home/datawork-lops-o
 INFO:root:end processing argos_Sentinel-3_B_2019
 INFO:root:start processing gps_Jason-3_2018
 INFO:root:start spinning up dask cluster, jobs=10
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 24:02
 INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n9:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2018
@@ -41,7 +41,7 @@ INFO:root:aviso argos_SARAL_2018 group 0 storred in /home/datawork-lops-osi/apon
 INFO:root:end processing argos_SARAL_2018
 INFO:root:start processing gps_Cryosat-2_2018
 INFO:root:aviso gps_Cryosat-2_2018 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/aviso_gps_Cryosat-2_2018_0.zarr
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 23:46
 INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n29:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Cryosat-2_2018
@@ -173,7 +173,7 @@ INFO:root:aviso gps_SARAL_2013 group 0 storred in /home/datawork-lops-osi/aponte
 INFO:root:end processing gps_SARAL_2013
 INFO:root:start processing argos_SARAL_2013
 INFO:root:start spinning up dask cluster, jobs=10
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 06:05
 INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n22:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Cryosat-2_2018
@@ -291,7 +291,7 @@ INFO:root:aviso gps_Cryosat-2_2011 group 0 storred in /home/datawork-lops-osi/ap
 INFO:root:end processing gps_Cryosat-2_2011
 INFO:root:start processing argos_Cryosat-2_2011
 INFO:root:aviso argos_Cryosat-2_2011 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/aviso_argos_Cryosat-2_2011_0.zarr
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 4:24
 INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n35:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Cryosat-2_2018
@@ -441,7 +441,7 @@ INFO:root:manually killed jobs ...
 INFO:root:... done
 INFO:root:- all done
 INFO:root:start spinning up dask cluster, jobs=8
-INFO:root:start spinning up dask cluster, jobs=8
+INFO:root:start spinning up dask cluster, jobs=8 24:01
 INFO:root:dashboard via ssh: ssh -N -L 8787:r1i5n35:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2020
@@ -490,7 +490,7 @@ INFO:root:end processing argos_Jason-3_2019
 INFO:root:start processing gps_SARAL_2019
 INFO:root:erastar gps_SARAL_2019 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_SARAL_2019_0.zarr
 INFO:root:erastar gps_SARAL_2019 group 1 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_SARAL_2019_1.zarr
-INFO:root:start spinning up dask cluster, jobs=8
+INFO:root:start spinning up dask cluster, jobs=8 23:32
 INFO:root:dashboard via ssh: ssh -N -L 8787:r1i2n29:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2020
@@ -544,7 +544,7 @@ INFO:root:erastar gps_Sentinel-3_A_2019 group 6 storred in /home/datawork-lops-o
 INFO:root:erastar gps_Sentinel-3_A_2019 group 7 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Sentinel-3_A_2019_7.zarr
 INFO:root:end processing gps_Sentinel-3_A_2019
 INFO:root:start processing argos_Sentinel-3_A_2019
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 24:01
 INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n6:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2020
@@ -612,7 +612,7 @@ INFO:root:start processing argos_Cryosat-2_2018
 INFO:root:erastar argos_Cryosat-2_2018 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2018_0.zarr
 INFO:root:end processing argos_Cryosat-2_2018
 INFO:root:start processing gps_Sentinel-3_A_2018
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 24:09
 INFO:root:dashboard via ssh: ssh -N -L 8787:r2i1n9:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2020
@@ -714,7 +714,7 @@ Traceback (most recent call last):
   File "/home1/datahome/mdemol/.miniconda3/envs/histenv2/lib/python3.9/site-packages/distributed/scheduler.py", line 5306, in validate_processing
     assert ts in dts.waiters
 AssertionError
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 22:35h
 INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n32:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2020
@@ -789,3 +789,443 @@ INFO:root:start processing gps_SARAL_2017
 INFO:root:erastar gps_SARAL_2017 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_SARAL_2017_0.zarr
 INFO:root:end processing gps_SARAL_2017
 INFO:root:start processing argos_SARAL_2017
+INFO:root:erastar argos_SARAL_2017 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_SARAL_2017_0.zarr
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:erastar gps_Cryosat-2_2017 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2017_0.zarr
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:erastar argos_Cryosat-2_2017 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2017_0.zarr
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:erastar gps_Sentinel-3_A_2017 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Sentinel-3_A_2017_0.zarr
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:erastar argos_Sentinel-3_A_2017 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Sentinel-3_A_2017_0.zarr
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:erastar gps_Jason-3_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-3_2016_0.zarr
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:erastar argos_Jason-3_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-3_2016_0.zarr
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10 48h
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n14:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:erastar gps_Jason-2_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-2_2016_0.zarr
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:erastar argos_Jason-2_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2016_0.zarr
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:erastar gps_SARAL_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_SARAL_2016_0.zarr
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:erastar argos_SARAL_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_SARAL_2016_0.zarr
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:erastar gps_Cryosat-2_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2016_0.zarr
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:erastar argos_Cryosat-2_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2016_0.zarr
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:erastar gps_Sentinel-3_A_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Sentinel-3_A_2016_0.zarr
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:erastar argos_Sentinel-3_A_2016 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Sentinel-3_A_2016_0.zarr
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:erastar gps_Jason-2_2015 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-2_2015_0.zarr
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:erastar argos_Jason-2_2015 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2015_0.zarr
+INFO:root:erastar argos_Jason-2_2015 group 1 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2015_1.zarr
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:erastar gps_SARAL_2015 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_SARAL_2015_0.zarr
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:erastar argos_SARAL_2015 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_SARAL_2015_0.zarr
+INFO:root:erastar argos_SARAL_2015 group 1 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_SARAL_2015_1.zarr
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:erastar gps_Cryosat-2_2015 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2015_0.zarr
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:erastar argos_Cryosat-2_2015 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2015_0.zarr
+INFO:root:erastar argos_Cryosat-2_2015 group 1 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2015_1.zarr
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:erastar gps_Jason-2_2014 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-2_2014_0.zarr
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:start spinning up dask cluster, jobs=10 30h
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n35:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:erastar argos_Jason-2_2014 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2014_0.zarr
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:erastar gps_SARAL_2014 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_SARAL_2014_0.zarr
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:erastar argos_SARAL_2014 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_SARAL_2014_0.zarr
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:erastar gps_Cryosat-2_2014 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2014_0.zarr
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:erastar argos_Cryosat-2_2014 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2014_0.zarr
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:erastar gps_Jason-2_2013 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-2_2013_0.zarr
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:erastar argos_Jason-2_2013 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2013_0.zarr
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:erastar gps_SARAL_2013 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_SARAL_2013_0.zarr
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:erastar argos_SARAL_2013 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_SARAL_2013_0.zarr
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:erastar gps_Cryosat-2_2013 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2013_0.zarr
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:erastar argos_Cryosat-2_2013 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2013_0.zarr
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:erastar gps_Jason-2_2012 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-2_2012_0.zarr
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:start spinning up dask cluster, jobs=10 36h
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n35:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:erastar argos_Jason-2_2012 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2012_0.zarr
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:erastar gps_Cryosat-2_2012 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2012_0.zarr
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:erastar argos_Cryosat-2_2012 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2012_0.zarr
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:erastar gps_Jason-2_2011 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-2_2011_0.zarr
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:erastar argos_Jason-2_2011 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2011_0.zarr
+INFO:root:erastar argos_Jason-2_2011 group 1 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2011_1.zarr
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:erastar gps_Cryosat-2_2011 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2011_0.zarr
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:erastar argos_Cryosat-2_2011 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2011_0.zarr
+INFO:root:erastar argos_Cryosat-2_2011 group 1 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2011_1.zarr
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:erastar gps_Jason-2_2010 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Jason-2_2010_0.zarr
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:erastar argos_Jason-2_2010 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2010_0.zarr
+INFO:root:erastar argos_Jason-2_2010 group 1 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Jason-2_2010_1.zarr
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:erastar gps_Cryosat-2_2010 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_gps_Cryosat-2_2010_0.zarr
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:erastar argos_Cryosat-2_2010 group 0 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc/erastar_argos_Cryosat-2_2010_0.zarr
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:start processing gps_Jason-2_2009
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n8:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-2_2009
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i2n33:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-2_2009
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i2n33:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing argos_Jason-2_2009
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n33:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n27:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n24:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n28:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n28:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:matchup gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2020.zarr
+INFO:root:end processing gps_Jason-3_2020
+INFO:root:start processing argos_Jason-3_2020
+INFO:root:matchup argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2020.zarr
+INFO:root:end processing argos_Jason-3_2020
+INFO:root:start processing gps_SARAL_2020
+INFO:root:matchup gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2020.zarr
+INFO:root:end processing gps_SARAL_2020
+INFO:root:start processing argos_SARAL_2020
+INFO:root:matchup argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2020.zarr
+INFO:root:end processing argos_SARAL_2020
+INFO:root:start processing gps_Cryosat-2_2020
+INFO:root:matchup gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2020.zarr
+INFO:root:end processing gps_Cryosat-2_2020
+INFO:root:start processing argos_Cryosat-2_2020
+INFO:root:matchup argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2020.zarr
+INFO:root:end processing argos_Cryosat-2_2020
+INFO:root:start processing gps_Sentinel-3_A_2020
+INFO:root:matchup gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2020.zarr
+INFO:root:end processing gps_Sentinel-3_A_2020
+INFO:root:start processing argos_Sentinel-3_A_2020
+INFO:root:matchup argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2020.zarr
+INFO:root:end processing argos_Sentinel-3_A_2020
+INFO:root:start processing gps_Sentinel-3_B_2020
+INFO:root:matchup gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_B_2020.zarr
+INFO:root:end processing gps_Sentinel-3_B_2020
+INFO:root:start processing argos_Sentinel-3_B_2020
+INFO:root:matchup argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_B_2020.zarr
+INFO:root:end processing argos_Sentinel-3_B_2020
+INFO:root:start processing gps_Jason-3_2019
+INFO:root:matchup gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2019.zarr
+INFO:root:end processing gps_Jason-3_2019
+INFO:root:start processing argos_Jason-3_2019
+INFO:root:matchup argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2019.zarr
+INFO:root:end processing argos_Jason-3_2019
+INFO:root:start processing gps_SARAL_2019
+INFO:root:matchup gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2019.zarr
+INFO:root:end processing gps_SARAL_2019
+INFO:root:start processing argos_SARAL_2019
+INFO:root:matchup argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2019.zarr
+INFO:root:end processing argos_SARAL_2019
+INFO:root:start processing gps_Cryosat-2_2019
+INFO:root:matchup gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2019.zarr
+INFO:root:end processing gps_Cryosat-2_2019
+INFO:root:start processing argos_Cryosat-2_2019
+INFO:root:matchup argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2019.zarr
+INFO:root:end processing argos_Cryosat-2_2019
+INFO:root:start processing gps_Sentinel-3_A_2019
+INFO:root:matchup gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2019.zarr
+INFO:root:end processing gps_Sentinel-3_A_2019
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:matchup argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2019.zarr
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:matchup gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_B_2019.zarr
+INFO:root:end processing gps_Sentinel-3_B_2019
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:matchup argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_B_2019.zarr
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing gps_Jason-3_2018
+INFO:root:matchup gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2018.zarr
+INFO:root:end processing gps_Jason-3_2018
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:matchup argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2018.zarr
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018
+INFO:root:matchup gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2018.zarr
+INFO:root:end processing gps_SARAL_2018
+INFO:root:start processing argos_SARAL_2018
+INFO:root:matchup argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2018.zarr
+INFO:root:end processing argos_SARAL_2018
+INFO:root:start processing gps_Cryosat-2_2018
+INFO:root:matchup gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2018.zarr
+INFO:root:end processing gps_Cryosat-2_2018
+INFO:root:start processing argos_Cryosat-2_2018
+INFO:root:matchup argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2018.zarr
+INFO:root:end processing argos_Cryosat-2_2018
+INFO:root:start processing gps_Sentinel-3_A_2018
+INFO:root:matchup gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2018.zarr
+INFO:root:end processing gps_Sentinel-3_A_2018
+INFO:root:start processing argos_Sentinel-3_A_2018
+INFO:root:matchup argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2018.zarr
+INFO:root:end processing argos_Sentinel-3_A_2018
+INFO:root:start processing gps_Sentinel-3_B_2018
+INFO:root:matchup gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_B_2018.zarr
+INFO:root:end processing gps_Sentinel-3_B_2018
+INFO:root:start processing argos_Sentinel-3_B_2018
+INFO:root:matchup argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_B_2018.zarr
+INFO:root:end processing argos_Sentinel-3_B_2018
+INFO:root:start processing gps_Jason-3_2017
+INFO:root:matchup gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2017.zarr
+INFO:root:end processing gps_Jason-3_2017
+INFO:root:start processing argos_Jason-3_2017
+INFO:root:matchup argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2017.zarr
+INFO:root:end processing argos_Jason-3_2017
+INFO:root:start processing gps_Jason-2_2017
+INFO:root:matchup gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2017.zarr
+INFO:root:end processing gps_Jason-2_2017
+INFO:root:start processing argos_Jason-2_2017
+INFO:root:matchup argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2017.zarr
+INFO:root:end processing argos_Jason-2_2017
+INFO:root:start processing gps_SARAL_2017
+INFO:root:matchup gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2017.zarr
+INFO:root:end processing gps_SARAL_2017
+INFO:root:start processing argos_SARAL_2017
+INFO:root:matchup argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2017.zarr
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:matchup gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2017.zarr
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:matchup argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2017.zarr
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:matchup gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2017.zarr
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:matchup argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2017.zarr
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:matchup gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2016.zarr
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:matchup argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2016.zarr
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:matchup gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2016.zarr
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:matchup argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2016.zarr
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:matchup gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2016.zarr
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:matchup argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2016.zarr
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:matchup gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2016.zarr
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:matchup argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2016.zarr
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:matchup gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2016.zarr
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:matchup argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2016.zarr
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:matchup gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2015.zarr
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:matchup argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2015.zarr
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:matchup gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2015.zarr
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:matchup argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2015.zarr
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:matchup gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2015.zarr
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:matchup argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2015.zarr
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:matchup gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2014.zarr
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:matchup argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2014.zarr
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:matchup gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2014.zarr
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:matchup argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2014.zarr
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:matchup gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2014.zarr
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:matchup argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2014.zarr
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:matchup gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2013.zarr
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:matchup argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2013.zarr
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:matchup gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2013.zarr
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:matchup argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2013.zarr
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:matchup gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2013.zarr
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:matchup argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2013.zarr
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:matchup gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2012.zarr
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:matchup argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2012.zarr
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:matchup gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2012.zarr
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:matchup argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2012.zarr
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:matchup gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2011.zarr
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:matchup argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2011.zarr
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:matchup gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2011.zarr
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:matchup argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2011.zarr
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:matchup gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2010.zarr
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:matchup argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2010.zarr
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:matchup gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2010.zarr
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:matchup argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2010.zarr
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 7744033
+INFO:root: qdel 7744034
+INFO:root: qdel 7744035
+INFO:root: qdel 7744036
+INFO:root: qdel 7744037
+INFO:root: qdel 7744038
+INFO:root: qdel 7744039
+INFO:root: qdel 7744040
+INFO:root: qdel 7744041
+INFO:root: qdel 7744042
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done

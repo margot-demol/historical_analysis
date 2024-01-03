@@ -92,7 +92,7 @@ Build dataset
 
 
 def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
-    """load aviso for one collocation"""
+    """load aviso for one colocalization"""
     dl = 0.25
     assert (ds_obs["box_lon"] <= 180).all(), "error : ds_obs in 0-360° lon coordinates"
 
@@ -322,7 +322,7 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
 
 
 def _concat_aviso(ds, dt=(-1, 2), only_matchup_time=True):
-    """Load aviso data for multiple collocations and concatenate"""
+    """Load aviso data for multiple colocalizations and concatenate"""
     L=[]
     for o in ds.obs :
         try : 
@@ -340,9 +340,9 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
     Parameters
     ----------
     ds: xr.Dataset
-        Input collocation dataset
+        Input colocalization dataset
     dt: tuple
-        Time offsets compared to the collocation, e.g. if collocation
+        Time offsets compared to the colocalization, e.g. if colocalization
         is at time t and dt=(-5,5), aviso data will be interpolated on
         the interval (t-5 days, t+5 days)
         Default is (-1,2)

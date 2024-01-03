@@ -23,7 +23,7 @@ import histlib.aviso as aviso
 import histlib.erastar as eras
 from histlib.cstes import labels, zarr_dir
 
-dataset = 'eras'
+dataset = 'matchup'
 # ---- Run parameters
 
 #root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
@@ -44,6 +44,10 @@ if dataset == 'aviso' :
     jobqueuekw = dict(processes=20, cores=20)  # uplet debug
     
 if dataset == 'eras' :
+    dask_jobs = 10  # number of dask pbd jobs
+    jobqueuekw = dict(processes=20, cores=20)  # uplet debug
+
+if dataset == 'matchup' :
     dask_jobs = 10  # number of dask pbd jobs
     jobqueuekw = dict(processes=20, cores=20)  # uplet debug
 
@@ -265,7 +269,7 @@ def run_eras_divided(l, Ng=100000) :
     i=0
     while N < Nt :
         if not os.path.isdir(os.path.join(zarr_dir, "erastar_"+l+f"_{i}.zarr")):
-            ds_data_ = ds_data.isel(obs=slice(N,min(N+Ng, Nt))).chunk({'obs':500, 'alti_time':-1, 'site_obs':-1})
+            ds_data_ = ds_data.isel(obs=slice(N,min(N+Ng, Nt))).chunk({'obs':200, 'alti_time':-1, 'site_obs':-1})
             run_eras_divided_one(ds_data_, i)
         i+=1
         N+=Ng
@@ -278,6 +282,14 @@ def run_eras_divided_one(ds_data, i):
     zarr = os.path.join(zarr_dir, "erastar_"+l+f"_{i}.zarr")
     ds_es.to_zarr(zarr, mode="w")  
     logging.info(f"erastar {l} group {i} storred in {zarr}")
+
+def run_matchup(l):
+    from histlib.matchup import matchup_dataset_one
+    ds_matchup = matchup_dataset_one(l)
+    #store
+    zarr = os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr")
+    ds_matchup.to_zarr(zarr, mode="w")
+    logging.info(f"matchup {l} storred in {zarr}")
     
 if __name__ == "__main__":
 
@@ -304,7 +316,7 @@ if __name__ == "__main__":
         "distributed",
         jobs=dask_jobs,
         fraction=0.9,
-        walltime="24:00:00",
+        walltime="36:00:00",
         **jobqueuekw,
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
@@ -316,12 +328,15 @@ if __name__ == "__main__":
         if dataset == 'coloc' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, l+".zarr"))]
         if dataset == 'aviso' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, "aviso_"+l+".zarr"))]
         if dataset == 'eras' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, "erastar_"+l+".zarr"))]
+        if dataset == 'matchup' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr"))]
     ## boucle for on labels
     for l in labels: 
         logging.info(f"start processing {l}")
         if dataset == 'coloc' : run_coloc(l)
         if dataset == 'aviso' : run_aviso_divided(l)
         if dataset == 'eras' : run_eras_divided(l)
+        if dataset == 'matchup' : run_matchup(l)
+            
             
         logging.info(f"end processing {l}")
     

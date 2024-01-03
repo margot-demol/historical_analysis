@@ -30,7 +30,7 @@ def load_eras(t, dt=None, suffix="es_", to_360=False, rkwargs=None, **kwargs):
     """
     # TIME
     t = pd.to_datetime(t)
-    if dt is not None:
+    if dt is not None:#select several hours around matchup
         t = [t + pd.Timedelta(np.timedelta64(_dt, "h")) for _dt in range(*dt)]
     else:
         t = [t]
@@ -41,6 +41,7 @@ def load_eras(t, dt=None, suffix="es_", to_360=False, rkwargs=None, **kwargs):
     for _t in t:
         _rpath = f"{_t.year}/{_t.dayofyear:03d}/{_t.year}{_t.month:02d}{_t.day:02d}{_t.hour:02d}*.nc"
         files = glob(os.path.join(era_star_dir, _rpath))
+        print(files, _rpath)
 
         if to_360:  # turn erastar to 0-360° if needed
             _ds = (
@@ -75,7 +76,7 @@ Build dataset
 
 
 def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
-    """load erastar for one collocation"""
+    """load erastar for one colocalization"""
     dl = 0.125
     assert (ds_obs["box_lon"] <= 180).all(), "error : ds_obs in 0-360° lon coordinates"
 
@@ -211,7 +212,7 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
 
 
 def _concat_eras(ds, dt, only_matchup_time=True):
-    """Load erastar data for multiple collocations and concatenate"""
+    """Load erastar data for multiple colocalizations and concatenate"""
     try:
         D = []
         for o in ds.obs:

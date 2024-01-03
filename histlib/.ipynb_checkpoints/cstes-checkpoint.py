@@ -81,13 +81,14 @@ labels = [
     "argos_Jason-2_2010",
     "gps_Cryosat-2_2010",
     "argos_Cryosat-2_2010",
-    "gps_Jason-2_2009",#
-    "argos_Jason-2_2009",
-    "gps_Jason-2_2008",#
-    "argos_Jason-2_2008",
+    #"gps_Jason-2_2009",# no erastar
+    #"argos_Jason-2_2009",
+    #"gps_Jason-2_2008",#
+    #"argos_Jason-2_2008",
 ]
 
 zarr_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc"
+matchup_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup"
 images_dir = "/home1/datawork/mdemol/historical_analysis/images"
 result_dir = "/home1/datawork/mdemol/historical_analysis/results"
 
@@ -100,3 +101,41 @@ lon_180_to_360 = lambda lon: lon % 360
 lon_360_to_180 = lambda lon: (lon + 180) % 360 - 180
 
 lettres = ["(" + l + ")" for l in list(string.ascii_lowercase)]
+
+
+var = [
+    'drifter_acc_x_0',
+    'drifter_acc_y_0',
+    'drifter_coriolis_x_0',
+    'drifter_coriolis_y_0',
+    'e5_cstrio_z0_alti_wd_x',
+    'e5_cstrio_z0_drifter_wd_x',
+    'e5_cstrio_z15_alti_wd_x',
+    'e5_cstrio_z15_drifter_wd_x',
+    'es_cstrio_z0_alti_wd_x',
+    'es_cstrio_z0_drifter_wd_x',
+    'es_cstrio_z15_alti_wd_x',
+    'es_cstrio_z15_drifter_wd_x',
+    'e5_cstrio_z0_alti_wd_y',
+    'e5_cstrio_z0_drifter_wd_y',
+    'e5_cstrio_z15_alti_wd_y',
+    'e5_cstrio_z15_drifter_wd_y',
+    'es_cstrio_z0_alti_wd_y',
+    'es_cstrio_z0_drifter_wd_y',
+    'es_cstrio_z15_alti_wd_y',
+    'es_cstrio_z15_drifter_wd_y',
+    'alti_ggx_adt_filtered',
+    'alti_ggx_adt_unfiltered',
+    'alti_ggx_adt_unfiltered_denoised',
+    'alti_ggx_sla_filtered',
+    'alti_ggx_sla_unfiltered',
+    'alti_ggx_sla_unfiltered_denoised',
+    'aviso_alti_ggx_adt',
+    'aviso_alti_ggx_sla',
+    'aviso_drifter_ggx_adt',
+    'aviso_drifter_ggx_sla',
+    'aviso_alti_ggy_adt',
+    'aviso_alti_ggy_sla',
+    'aviso_drifter_ggy_adt',
+    'aviso_drifter_ggy_sla',
+]
