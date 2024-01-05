@@ -73,7 +73,8 @@ def load_collocalisations(source, satellite=None, product_type=None, drifter=Non
         files = [f for f in files if product_type in f]
     if drifter is not None:
         files = [f for f in files if drifter in f]
-
+    files = [f for f in files if xr.open_dataset(f).dims['obs']>1] # 1 obs files can't be processed by build_dataset (TO CORRECT ONE DAY...)
+    
     return files
 
 
@@ -559,8 +560,12 @@ def build_dataset(
     ds = xr.open_dataset(nc).chunk(chunks)
 
     # prevent to use apply_ufuncs(vectorize=True) on 1 chunk dataset
-    if ds.dims['obs']<=1000:
+    if ds.dims['obs']==1 :
+        print('obs dim =1')
+        return 1
+    elif ds.dims['obs']<=1000:
         ds = ds.chunk({'obs':ds.dims['obs']//2})
+        
         
     # change prefixes
     ds = change_prefix(ds)
@@ -631,8 +636,8 @@ def build_dataset(
 
     # add momentum conservation equation term
     dt = 3600
-    ds["drifter_acc_x"] = ds.drifter_vx.differentiate("site_obs") / dt
-    ds["drifter_acc_y"] = ds.drifter_vy.differentiate("site_obs") / dt
+    ds["drifter_acc_x"] = ds.drifter_vx.differentiate("site_obs")/dt
+    ds["drifter_acc_y"] = ds.drifter_vy.differentiate("site_obs")/dt
     ds["drifter_coriolis_x"] = -ds["drifter_vy"] * ds.f
     ds["drifter_coriolis_y"] = ds["drifter_vx"] * ds.f
 

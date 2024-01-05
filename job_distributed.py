@@ -21,9 +21,9 @@ import gc, ctypes
 import histlib.box as box
 import histlib.aviso as aviso
 import histlib.erastar as eras
-from histlib.cstes import labels, zarr_dir, nc_files
+from histlib.cstes import labels, zarr_dir
 
-dataset = 'eras'
+dataset = 'matchup'
 # ---- Run parameters
 
 #root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
@@ -40,10 +40,14 @@ if dataset == 'coloc' :
     jobqueuekw = dict(processes=3, cores=3)  # uplet debug
 
 if dataset == 'aviso' :
-    dask_jobs = 20  # number of dask pbd jobs for gps_sentinel_3A_2019
-    jobqueuekw = dict(processes=15, cores=15)  # uplet debug
+    dask_jobs = 10  # number of dask pbd jobs for gps_sentinel_3A_2019
+    jobqueuekw = dict(processes=20, cores=20)  # uplet debug
     
 if dataset == 'eras' :
+    dask_jobs = 10  # number of dask pbd jobs
+    jobqueuekw = dict(processes=20, cores=20)  # uplet debug
+
+if dataset == 'matchup' :
     dask_jobs = 10  # number of dask pbd jobs
     jobqueuekw = dict(processes=20, cores=20)  # uplet debug
 
@@ -213,54 +217,79 @@ def trim_memory() -> int:
 # ---------------------------------- core of the job to be done ----------------------------------
 
 
-def run_coloc(l, cluster, client):
+def run_coloc(l):
     """main execution code"""
 
     # load or create dataset and do work
     # ds = ...
     # synthetic example here to compute pi:
     import dask.array as da
-
-    L = [box.build_dataset(nc_files[l][i], persist=True) for i in range(len(nc_files[l]))]
+    nc_files = box.load_collocalisations(int(l.split('_')[-1]), drifter=l.split('_')[0], product_type=l.split('_')[1], satellite=l.split('_')[2], )
+    L = [box.build_dataset(nc_files[i], persist=True) for i in range(len(nc_files))]
     ds = (xr.concat(L, "obs")
-      .assign_attrs(__time_coverage_end=xr.open_dataset(nc_files[l][-1]).attrs['__time_coverage_end'])
+      .assign_attrs(__time_coverage_end=xr.open_dataset(nc_files[-1]).attrs['__time_coverage_end'])
       .drop_vars('site_obs')
       .chunk(dict(obs=500))
      )
+    ds['obs'] = np.arange(ds.dims['obs'])
     #store
     zarr = os.path.join(zarr_dir, l+".zarr")
     ds.to_zarr(zarr, mode="w")
     logging.info(f"{l} storred in {zarr}")
 
-def run_aviso(l, cluster, client):
-    """main execution code"""
-
-    # load or create dataset and do work
-    # ds = ...
-    # synthetic example here to compute pi:
-    import dask.array as da
+def run_aviso_divided(l, Ng=100000) :
+    "run aviso on subfiles of constant obs dim (allow to always get same number of chunk/task, solve memory pb"
     ds_data = xr.open_zarr(zarr_dir+'/'+l+'.zarr')
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':250, 'alti_time':-1, 'site_obs':-1})
-    ds_aviso = aviso.compute_aviso_sla(ds_data).persist()
+    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True)#delete colocalization with alti_distance >200km (outside the box)
+    Nt = ds_data.dims['obs']
+    N=0
+    i=0
+    while N < Nt :
+        if not os.path.isdir(os.path.join(zarr_dir, "aviso_"+l+f"_{i}.zarr")):
+            ds_data_ = ds_data.isel(obs=slice(N,min(N+Ng, Nt))).chunk({'obs':500, 'alti_time':-1, 'site_obs':-1})
+            run_aviso_divided_one(ds_data_, i)
+        i+=1
+        N+=Ng
+            
+def run_aviso_divided_one(ds_data, i):
+    """run aviso on one subfile"""
+    import dask.array as da
+    ds_aviso = aviso.compute_aviso_sla(ds_data, dt=(-2,3), only_matchup_time = True).chunk({'obs':500, 'site_obs':-1})
     #store
-    zarr = os.path.join(zarr_dir, "aviso_"+l+".zarr")
-    ds_aviso.to_zarr(zarr, mode="w")
-    logging.info(f"aviso {l} storred in {zarr}")
+    zarr = os.path.join(zarr_dir, "aviso_"+l+f"_{i}.zarr")
+    ds_aviso.to_zarr(zarr, mode="w")  
+    logging.info(f"aviso {l} group {i} storred in {zarr}")
 
-def run_eras(l, cluster, client):
-    """main execution code"""
-
-    # load or create dataset and do work
-    # ds = ...
-    # synthetic example here to compute pi:
-    import dask.array as da
+def run_eras_divided(l, Ng=100000) :
+    "run erastar on subfiles of constant obs dim (allow to always get same number of chunk/task, solve memory pb"
     ds_data = xr.open_zarr(zarr_dir+'/'+l+'.zarr')
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':200, 'alti_time':-1, 'site_obs':-1})
+    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True)
+    Nt = ds_data.dims['obs']
+    N=0
+    i=0
+    while N < Nt :
+        if not os.path.isdir(os.path.join(zarr_dir, "erastar_"+l+f"_{i}.zarr")):
+            ds_data_ = ds_data.isel(obs=slice(N,min(N+Ng, Nt))).chunk({'obs':200, 'alti_time':-1, 'site_obs':-1})
+            run_eras_divided_one(ds_data_, i)
+        i+=1
+        N+=Ng
+            
+def run_eras_divided_one(ds_data, i):
+    """run erastar on one subfile"""
+    import dask.array as da
     ds_es = eras.compute_eras(ds_data, dt=(-12,13), only_matchup_time = True).chunk({'obs':500, 'site_obs':-1}).persist()
     #store
-    zarr = os.path.join(zarr_dir, "erastar_"+l+".zarr")
+    zarr = os.path.join(zarr_dir, "erastar_"+l+f"_{i}.zarr")
     ds_es.to_zarr(zarr, mode="w")  
-    logging.info(f"erastar {l} storred in {zarr}")
+    logging.info(f"erastar {l} group {i} storred in {zarr}")
+
+def run_matchup(l):
+    from histlib.matchup import matchup_dataset_one
+    ds_matchup = matchup_dataset_one(l)
+    #store
+    zarr = os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr")
+    ds_matchup.to_zarr(zarr, mode="w")
+    logging.info(f"matchup {l} storred in {zarr}")
     
 if __name__ == "__main__":
 
@@ -287,7 +316,7 @@ if __name__ == "__main__":
         "distributed",
         jobs=dask_jobs,
         fraction=0.9,
-        walltime="4:00:00",
+        walltime="36:00:00",
         **jobqueuekw,
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
@@ -299,12 +328,16 @@ if __name__ == "__main__":
         if dataset == 'coloc' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, l+".zarr"))]
         if dataset == 'aviso' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, "aviso_"+l+".zarr"))]
         if dataset == 'eras' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, "erastar_"+l+".zarr"))]
+        if dataset == 'matchup' : labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr"))]
     ## boucle for on labels
-    for l in labels : 
+    for l in labels: 
         logging.info(f"start processing {l}")
-        if dataset == 'coloc' : run_coloc(l, cluster, client)
-        if dataset == 'aviso' : run_aviso(l, cluster, client)
-        if dataset == 'eras' : run_eras(l, cluster, client)
+        if dataset == 'coloc' : run_coloc(l)
+        if dataset == 'aviso' : run_aviso_divided(l)
+        if dataset == 'eras' : run_eras_divided(l)
+        if dataset == 'matchup' : run_matchup(l)
+            
+            
         logging.info(f"end processing {l}")
     
     # close dask

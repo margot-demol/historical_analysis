@@ -1,8 +1,0 @@
-Warning: no access to tty (Bad file descriptor).
-Thus no job control in this shell.
-Tue Nov 14 11:51:45 GMT 2023
-  File "/home1/datahome/mdemol/historical_analysis/job_distributed.py", line 303
-    for l in ["gps_Sentinel-3_A_2019"]#labels : 
-                                      ^
-SyntaxError: invalid syntax
-Tue Nov 14 11:51:48 GMT 2023

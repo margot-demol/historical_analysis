@@ -61,7 +61,7 @@ def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs
             ), "error : aviso in 0-360° lon coordinates"  # verify -180-180° representation for lon coordinates
             _ds = _ds.assign_coords(longitude=cstes.lon_180_to_360(_ds.longitude))
             _ds = _ds.sortby("longitude")
-            _ds = _ds.sel(**kwargs)  # select data around the colocalisation
+            _ds = _ds.sel(**kwargs)  # select data around the colocation
 
         else:
             _ds = xr.load_dataset(files[0], **rkwargs).sel(**kwargs)
@@ -92,7 +92,7 @@ Build dataset
 
 
 def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
-    """load aviso for one collocation"""
+    """load aviso for one colocation"""
     dl = 0.25
     assert (ds_obs["box_lon"] <= 180).all(), "error : ds_obs in 0-360° lon coordinates"
 
@@ -126,7 +126,7 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
     lat_min = min(ds_obs.box_lat.min(), ds_obs.drifter_lat.min())
     lat_max = max(ds_obs.box_lat.max(), ds_obs.drifter_lat.max())
 
-    # load data
+    # LOAD DATA
     _drop = [
         "crs",
         "lat_bnds",
@@ -152,13 +152,13 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
             latitude=np.arange(lat_min - dl, lat_max + dl, dl),
             method="nearest",
             tolerance=dl,
-        )  # aviso sla and err_sla around matchup_time
+        )  # aviso sla, adt around matchup_time
     except:
-        assert False, (ds_obs.__site_id.values, ds_obs.time.values)
-    
-    #for all interpolations, need drop_duplicated, because in some case, same aviso point for two differents longitude, latitude points and interpolation works only one uniquely valued coordinated dataset
-    
-    # interplate over the trajectoire
+        assert False, (ds_obs.obs.values, ds_obs.__site_id.values, ds_obs.time.values)
+    # INTERPOLATIONS
+    #for all interpolations, need drop_duplicated, because in some case, same aviso point for two differents longitude, latitude points and interpolation works only one uniquely valued coordinated dataset    
+    # interpolate on the drifter trajectory
+
     try :
         ds_traj = (
             ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
@@ -181,7 +181,7 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
             )
         )
     except:
-        assert False, ('pb interpolate over trajectories' ,ds_obs.__site_id.values, ds_obs.time.values)
+        assert False, ('pb interpolate over trajectories' , ds_obs.obs.values, ds_obs.__site_id.values, ds_obs.time.values)
         
     # interpolate on the box
     if only_matchup_time:
@@ -217,9 +217,9 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
             {v: "aviso_alti_matchup_" + v for v in ds_aviso}
         )
     except:
-        assert False, ('pb interpolate over drifter matchup' ,ds_obs.__site_id.values, ds_obs.time.values)
+        assert False, ('pb interpolate over drifter matchup', ds_obs.obs, ds_obs.__site_id.values, ds_obs.time.values)
 
-    # gradient
+    # COMPUTE GRADIENT
     g = 9.81
     try:
         # sla
@@ -315,13 +315,14 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
         .reset_coords(["drifter_time", "drifter_x", "drifter_y", "aviso_time_"])
     )
 
-    ds["time"] = ds_obs.time.drop(["lon", "lat"])
-
+    #ds["time"] = ds_obs.time.drop(["lon", "lat"])
+    ds['obs'] = ds_obs.obs.drop(["lon", "lat"])
+    ds = ds.drop('time')
     return ds
 
 
 def _concat_aviso(ds, dt=(-1, 2), only_matchup_time=True):
-    """Load aviso data for multiple collocations and concatenate"""
+    """Load aviso data for multiple colocalizations and concatenate"""
     L=[]
     for o in ds.obs :
         try : 
@@ -339,9 +340,9 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
     Parameters
     ----------
     ds: xr.Dataset
-        Input collocation dataset
+        Input colocalization dataset
     dt: tuple
-        Time offsets compared to the collocation, e.g. if collocation
+        Time offsets compared to the colocalization, e.g. if colocalization
         is at time t and dt=(-5,5), aviso data will be interpolated on
         the interval (t-5 days, t+5 days)
         Default is (-1,2)
@@ -356,9 +357,9 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
 
     """
     # build template
-    template = _concat_aviso(
-        ds.isel(obs=slice(0, 2)), dt=dt, only_matchup_time=only_matchup_time
-    )
+    try : 
+        template = _concat_aviso(ds.isel(obs=slice(0, 2)), dt=dt, only_matchup_time=only_matchup_time)
+    except : assert False, (ds.isel(obs=slice(0, 2)), ds.dims['obs'])
 
     # broad cast along obs dimension
     template, _ = xr.broadcast(
@@ -408,7 +409,7 @@ def compute_aviso_sla(ds, dt=(-1, 2), only_matchup_time=True):
         template=template,
     )
     ds_aviso = ds_aviso.set_coords(
-        ["time", "aviso_time_"]
+        ["obs", "aviso_time_"]
     )  # coordinate for obs dimension
 
     """
