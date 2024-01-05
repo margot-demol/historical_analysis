@@ -30,7 +30,7 @@ def load_eras(t, dt=None, suffix="es_", to_360=False, rkwargs=None, **kwargs):
     """
     # TIME
     t = pd.to_datetime(t)
-    if dt is not None:
+    if dt is not None:#select several hours around matchup
         t = [t + pd.Timedelta(np.timedelta64(_dt, "h")) for _dt in range(*dt)]
     else:
         t = [t]
@@ -53,7 +53,7 @@ def load_eras(t, dt=None, suffix="es_", to_360=False, rkwargs=None, **kwargs):
             ), "error : era_star in 0-360° lon coordinates"  # verify -180-180° representation for lon coordinates
             _ds = _ds.assign_coords(lon=cstes.lon_180_to_360(_ds.lon))
             _ds = _ds.sortby("lon")
-            _ds = _ds.sel(**kwargs)  # select data around the colocalisation
+            _ds = _ds.sel(**kwargs)  # select data around the colocation
 
         else:
             _ds = xr.load_dataset(files[0], **rkwargs).sel(**kwargs)
@@ -76,7 +76,7 @@ Build dataset
 
 
 def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
-    """load erastar for one collocation"""
+    """load erastar for one colocalization"""
     dl = 0.125
     assert (ds_obs["box_lon"] <= 180).all(), "error : ds_obs in 0-360° lon coordinates"
 
@@ -212,7 +212,7 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
 
 
 def _concat_eras(ds, dt, only_matchup_time=True):
-    """Load erastar data for multiple collocations and concatenate"""
+    """Load erastar data for multiple colocalizations and concatenate"""
     try:
         D = []
         for o in ds.obs:
@@ -229,9 +229,9 @@ def compute_eras(ds, dt, only_matchup_time=True):
     Parameters
     ----------
     ds: xr.Dataset
-        Input collocation dataset
+        Input colocation dataset
     dt: tuple
-        Time offsets compared to the collocation, e.g. if collocation
+        Time offsets compared to the colocation, e.g. if colocation
         is at time t and dt=(-12,13), erastar data will be interpolated on
         the interval (t-12, t+12 hours) with an hour step
         Default is (-12,13)

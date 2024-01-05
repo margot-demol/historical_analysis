@@ -61,7 +61,7 @@ def load_aviso(t, dt=None, suffix="aviso_", to_360=False, rkwargs=None, **kwargs
             ), "error : aviso in 0-360° lon coordinates"  # verify -180-180° representation for lon coordinates
             _ds = _ds.assign_coords(longitude=cstes.lon_180_to_360(_ds.longitude))
             _ds = _ds.sortby("longitude")
-            _ds = _ds.sel(**kwargs)  # select data around the colocalisation
+            _ds = _ds.sel(**kwargs)  # select data around the colocation
 
         else:
             _ds = xr.load_dataset(files[0], **rkwargs).sel(**kwargs)
@@ -92,7 +92,7 @@ Build dataset
 
 
 def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
-    """load aviso for one colocalization"""
+    """load aviso for one colocation"""
     dl = 0.25
     assert (ds_obs["box_lon"] <= 180).all(), "error : ds_obs in 0-360° lon coordinates"
 
@@ -126,7 +126,7 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
     lat_min = min(ds_obs.box_lat.min(), ds_obs.drifter_lat.min())
     lat_max = max(ds_obs.box_lat.max(), ds_obs.drifter_lat.max())
 
-    # load data
+    # LOAD DATA
     _drop = [
         "crs",
         "lat_bnds",
@@ -152,13 +152,13 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
             latitude=np.arange(lat_min - dl, lat_max + dl, dl),
             method="nearest",
             tolerance=dl,
-        )  # aviso sla and err_sla around matchup_time
+        )  # aviso sla, adt around matchup_time
     except:
         assert False, (ds_obs.obs.values, ds_obs.__site_id.values, ds_obs.time.values)
-    
-    #for all interpolations, need drop_duplicated, because in some case, same aviso point for two differents longitude, latitude points and interpolation works only one uniquely valued coordinated dataset
-    
-    # interplate over the trajectoire
+    # INTERPOLATIONS
+    #for all interpolations, need drop_duplicated, because in some case, same aviso point for two differents longitude, latitude points and interpolation works only one uniquely valued coordinated dataset    
+    # interpolate on the drifter trajectory
+
     try :
         ds_traj = (
             ds_aviso.drop_duplicates(['aviso_lon', 'aviso_lat']).interp(
@@ -219,7 +219,7 @@ def get_aviso_one_obs(ds_obs, dt=(-1, 2), only_matchup_time=True):
     except:
         assert False, ('pb interpolate over drifter matchup', ds_obs.obs, ds_obs.__site_id.values, ds_obs.time.values)
 
-    # gradient
+    # COMPUTE GRADIENT
     g = 9.81
     try:
         # sla

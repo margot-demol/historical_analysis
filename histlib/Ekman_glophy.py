@@ -9,15 +9,10 @@ import histlib.cstes as cstes
 
 # directories
 
-era_star_dir = "/home/datawork-cersat-public/provider/woc/products/theme1/ocean_winds/woc-l4-se-erastar-h/v2.0/"
-
-"""
-ERA STAR  
----------------------------------------------------------------------------------------------------------
-"""
+ekman_dir = "/home/ref-cmems-public/tac/multiobs/MULTIOBS_GLO_PHY_REP_015-004/dataset-uv-rep-hourly/"
 
 
-def load_eras(t, dt=None, suffix="es_", to_360=False, rkwargs=None, **kwargs):
+def load_ekman(t, dt=None, suffix="ek_", to_360=False, rkwargs=None, **kwargs):
     """Extract ERA star data
     Ref ...
 

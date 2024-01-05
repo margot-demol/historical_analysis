@@ -9,7 +9,7 @@ import histlib.cstes as cstes
 
 # directories
 
-era_star_dir = "/home/datawork-cersat-public/provider/woc/products/theme1/ocean_winds/woc-l4-se-erastar-h/v2.0/"
+glophy_dir = "/home/ref-cmems-public/tac/multiobs/MULTIOBS_GLO_PHY_REP_015-004/dataset-uv-rep-hourly/"
 
 """
 ERA STAR  
