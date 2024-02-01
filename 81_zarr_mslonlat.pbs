@@ -18,7 +18,7 @@ setenv OPENBLAS_NUM_THREADS 1
 
 # core computation
 date
-python mslonlat.py
+python 81_zarr_mslonlat.py
 date
 
 # cleanup dask workers

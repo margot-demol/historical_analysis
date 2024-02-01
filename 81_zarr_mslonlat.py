@@ -200,8 +200,8 @@ def trim_memory() -> int:
 
 
 # ---------------------------------- core of the job to be done ----------------------------------
-DL = 100*1e3 #meters
-DT = 3*3600 #seconds
+DL =25e3 #meters
+DT = 0.5*3600 #seconds
 dl = 5
 
 def bin_lonlat_ms(ds,l, dl):

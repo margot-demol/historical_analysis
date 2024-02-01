@@ -283,8 +283,8 @@ def find_term_list(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=N
     """
     if not wd_x : wd_x = [l for l in _ds if "wd_x" in l]
     if not wd_y : wd_y = [l for l in _ds if "wd_y" in l]
-    if not grad_x : grad_x = [l for l in _ds if "ggx_adt" in l or "ggx_sla" in l]
-    if not grad_y : grad_y = [l for l in _ds if "ggy_adt" in l or "ggy_sla" in l]
+    if not grad_x : grad_x = [l for l in _ds if "ggx_adt"]# in l or "ggx_sla" in l]
+    if not grad_y : grad_y = [l for l in _ds if "ggy_adt"]# in l or "ggy_sla" in l]
     if not cutoff : cutoff = [l.split('acc_x_')[-1] for l in _ds if "acc_x" in l]
     return wd_x, wd_y, grad_x, grad_y, cutoff
     

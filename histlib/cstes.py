@@ -139,3 +139,35 @@ var = [
     'aviso_drifter_ggy_adt',
     'aviso_drifter_ggy_sla',
 ]
+
+
+var2 =['nb_coloc_bin',
+ 'exc_acc_co__0__adt_filtered__es_cstrio_z15__drifter_x',
+ 'exc_coriolis_co__0__adt_filtered__es_cstrio_z15__drifter_x',
+ 'exc_ggrad_co__0__adt_filtered__es_cstrio_z15__drifter_x',
+ 'exc_wind_co__0__adt_filtered__es_cstrio_z15__drifter_x',
+ 'sum_co__0__adt_filtered__es_cstrio_z15__drifter_x',
+ 'exc_acc_aviso__0__adt__es_cstrio_z15__alti_x',
+ 'exc_coriolis_aviso__0__adt__es_cstrio_z15__alti_x',
+ 'exc_ggrad_aviso__0__adt__es_cstrio_z15__alti_x',
+ 'exc_wind_aviso__0__adt__es_cstrio_z15__alti_x',
+ 'sum_aviso__0__adt__es_cstrio_z15__alti_x',
+ 'exc_acc_aviso__0__adt__es_cstrio_z15__drifter_x',
+ 'exc_coriolis_aviso__0__adt__es_cstrio_z15__drifter_x',
+ 'exc_ggrad_aviso__0__adt__es_cstrio_z15__drifter_x',
+ 'exc_wind_aviso__0__adt__es_cstrio_z15__drifter_x',
+ 'sum_aviso__0__adt__es_cstrio_z15__drifter_x',
+ 'drifter_acc_x_0',
+ 'drifter_coriolis_x_0',
+ 'alti_ggx_adt_filtered',
+ 'es_cstrio_z15_drifter_wd_x',
+ 'drifter_acc_x_0',
+ 'drifter_coriolis_x_0',
+ 'aviso_alti_ggx_adt',
+'aviso_drifter_ggx_adt',
+ 'es_cstrio_z15_alti_wd_x']
+
+id_co_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'alti_ggx_adt_filtered','wind':'es_cstrio_z15_drifter_wd_x'}
+id_aviso_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'aviso_alti_ggx_adt','wind':'es_cstrio_z15_alti_wd_x'}
+
+term_color ={'acc':'r', 'coriolis':'g','ggrad':'c', 'wind':'mediumvioletred'}
