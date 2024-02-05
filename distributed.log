@@ -1,11 +1,1374 @@
-INFO:root:start spinning up dask cluster, jobs=2
-INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n4:8787 mdemol@datarmor1-10g
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i0n24:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 8317996
+INFO:root: qdel 8317997
+INFO:root: qdel 8317998
+INFO:root: qdel 8317999
+INFO:root: qdel 8318000
+INFO:root: qdel 8318001
+INFO:root: qdel 8318002
+INFO:root: qdel 8318003
+INFO:root: qdel 8318004
+INFO:root: qdel 8318005
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i0n24:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2020
-INFO:root:start spinning up dask cluster, jobs=2
-INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n4:8787 mdemol@datarmor1-10g
+INFO:root:matchup gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2020.zarr
+INFO:root:end processing gps_Jason-3_2020
+INFO:root:start processing argos_Jason-3_2020
+INFO:root:matchup argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2020.zarr
+INFO:root:end processing argos_Jason-3_2020
+INFO:root:start processing gps_SARAL_2020
+INFO:root:matchup gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2020.zarr
+INFO:root:end processing gps_SARAL_2020
+INFO:root:start processing argos_SARAL_2020
+INFO:root:matchup argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2020.zarr
+INFO:root:end processing argos_SARAL_2020
+INFO:root:start processing gps_Cryosat-2_2020
+INFO:root:matchup gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2020.zarr
+INFO:root:end processing gps_Cryosat-2_2020
+INFO:root:start processing argos_Cryosat-2_2020
+INFO:root:matchup argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2020.zarr
+INFO:root:end processing argos_Cryosat-2_2020
+INFO:root:start processing gps_Sentinel-3_A_2020
+INFO:root:matchup gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2020.zarr
+INFO:root:end processing gps_Sentinel-3_A_2020
+INFO:root:start processing argos_Sentinel-3_A_2020
+INFO:root:matchup argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2020.zarr
+INFO:root:end processing argos_Sentinel-3_A_2020
+INFO:root:start processing gps_Sentinel-3_B_2020
+INFO:root:matchup gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_B_2020.zarr
+INFO:root:end processing gps_Sentinel-3_B_2020
+INFO:root:start processing argos_Sentinel-3_B_2020
+INFO:root:matchup argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_B_2020.zarr
+INFO:root:end processing argos_Sentinel-3_B_2020
+INFO:root:start processing gps_Jason-3_2019
+INFO:root:matchup gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2019.zarr
+INFO:root:end processing gps_Jason-3_2019
+INFO:root:start processing argos_Jason-3_2019
+INFO:root:matchup argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2019.zarr
+INFO:root:end processing argos_Jason-3_2019
+INFO:root:start processing gps_SARAL_2019
+INFO:root:matchup gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2019.zarr
+INFO:root:end processing gps_SARAL_2019
+INFO:root:start processing argos_SARAL_2019
+INFO:root:matchup argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2019.zarr
+INFO:root:end processing argos_SARAL_2019
+INFO:root:start processing gps_Cryosat-2_2019
+INFO:root:matchup gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2019.zarr
+INFO:root:end processing gps_Cryosat-2_2019
+INFO:root:start processing argos_Cryosat-2_2019
+INFO:root:matchup argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2019.zarr
+INFO:root:end processing argos_Cryosat-2_2019
+INFO:root:start processing gps_Sentinel-3_A_2019
+INFO:root:matchup gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2019.zarr
+INFO:root:end processing gps_Sentinel-3_A_2019
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:matchup argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2019.zarr
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:matchup gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_B_2019.zarr
+INFO:root:end processing gps_Sentinel-3_B_2019
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:matchup argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_B_2019.zarr
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing gps_Jason-3_2018
+INFO:root:matchup gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2018.zarr
+INFO:root:end processing gps_Jason-3_2018
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:matchup argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2018.zarr
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018
+INFO:root:matchup gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2018.zarr
+INFO:root:end processing gps_SARAL_2018
+INFO:root:start processing argos_SARAL_2018
+INFO:root:matchup argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2018.zarr
+INFO:root:end processing argos_SARAL_2018
+INFO:root:start processing gps_Cryosat-2_2018
+INFO:root:matchup gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2018.zarr
+INFO:root:end processing gps_Cryosat-2_2018
+INFO:root:start processing argos_Cryosat-2_2018
+INFO:root:matchup argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2018.zarr
+INFO:root:end processing argos_Cryosat-2_2018
+INFO:root:start processing gps_Sentinel-3_A_2018
+INFO:root:matchup gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2018.zarr
+INFO:root:end processing gps_Sentinel-3_A_2018
+INFO:root:start processing argos_Sentinel-3_A_2018
+INFO:root:matchup argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2018.zarr
+INFO:root:end processing argos_Sentinel-3_A_2018
+INFO:root:start processing gps_Sentinel-3_B_2018
+INFO:root:matchup gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_B_2018.zarr
+INFO:root:end processing gps_Sentinel-3_B_2018
+INFO:root:start processing argos_Sentinel-3_B_2018
+INFO:root:matchup argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_B_2018.zarr
+INFO:root:end processing argos_Sentinel-3_B_2018
+INFO:root:start processing gps_Jason-3_2017
+INFO:root:matchup gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2017.zarr
+INFO:root:end processing gps_Jason-3_2017
+INFO:root:start processing argos_Jason-3_2017
+INFO:root:matchup argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2017.zarr
+INFO:root:end processing argos_Jason-3_2017
+INFO:root:start processing gps_Jason-2_2017
+INFO:root:matchup gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2017.zarr
+INFO:root:end processing gps_Jason-2_2017
+INFO:root:start processing argos_Jason-2_2017
+INFO:root:matchup argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2017.zarr
+INFO:root:end processing argos_Jason-2_2017
+INFO:root:start processing gps_SARAL_2017
+INFO:root:matchup gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2017.zarr
+INFO:root:end processing gps_SARAL_2017
+INFO:root:start processing argos_SARAL_2017
+INFO:root:matchup argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2017.zarr
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:matchup gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2017.zarr
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:matchup argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2017.zarr
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:matchup gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2017.zarr
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:matchup argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2017.zarr
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:matchup gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-3_2016.zarr
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:matchup argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-3_2016.zarr
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:matchup gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2016.zarr
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:matchup argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2016.zarr
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:matchup gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2016.zarr
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:matchup argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2016.zarr
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:matchup gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2016.zarr
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:matchup argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2016.zarr
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:matchup gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Sentinel-3_A_2016.zarr
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:matchup argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Sentinel-3_A_2016.zarr
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:matchup gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2015.zarr
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:matchup argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2015.zarr
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:matchup gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2015.zarr
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:matchup argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2015.zarr
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:matchup gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2015.zarr
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:matchup argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2015.zarr
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:matchup gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2014.zarr
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:matchup argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2014.zarr
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:matchup gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2014.zarr
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:matchup argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2014.zarr
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:matchup gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2014.zarr
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:matchup argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2014.zarr
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:matchup gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2013.zarr
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:matchup argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2013.zarr
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:matchup gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_SARAL_2013.zarr
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:matchup argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_SARAL_2013.zarr
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:matchup gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2013.zarr
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:matchup argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2013.zarr
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:matchup gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2012.zarr
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:matchup argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2012.zarr
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:matchup gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2012.zarr
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:matchup argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2012.zarr
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:matchup gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2011.zarr
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:matchup argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2011.zarr
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:matchup gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2011.zarr
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:matchup argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2011.zarr
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:matchup gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Jason-2_2010.zarr
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:matchup argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Jason-2_2010.zarr
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:matchup gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_gps_Cryosat-2_2010.zarr
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:matchup argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_argos_Cryosat-2_2010.zarr
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 8318028
+INFO:root: qdel 8318029
+INFO:root: qdel 8318030
+INFO:root: qdel 8318031
+INFO:root: qdel 8318032
+INFO:root: qdel 8318033
+INFO:root: qdel 8318034
+INFO:root: qdel 8318035
+INFO:root: qdel 8318036
+INFO:root: qdel 8318037
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=3
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n17:8787 mdemol@datarmor1-10g
 INFO:root:open browser at address of the type: http://localhost:8787
 INFO:root:start processing gps_Jason-3_2020
+INFO:root:start spinning up dask cluster, jobs=3
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i3n14:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:end processing gps_Jason-3_2020
+INFO:root:start processing argos_Jason-3_2020
+INFO:root:end processing argos_Jason-3_2020
+INFO:root:start processing gps_SARAL_2020
+INFO:root:end processing gps_SARAL_2020
+INFO:root:start processing argos_SARAL_2020
+INFO:root:end processing argos_SARAL_2020
+INFO:root:start processing gps_Cryosat-2_2020
+INFO:root:end processing gps_Cryosat-2_2020
+INFO:root:start processing argos_Cryosat-2_2020
+INFO:root:end processing argos_Cryosat-2_2020
+INFO:root:start processing gps_Sentinel-3_A_2020
+INFO:root:end processing gps_Sentinel-3_A_2020
+INFO:root:start processing argos_Sentinel-3_A_2020
+INFO:root:end processing argos_Sentinel-3_A_2020
+INFO:root:start processing gps_Sentinel-3_B_2020
+INFO:root:end processing gps_Sentinel-3_B_2020
+INFO:root:start processing argos_Sentinel-3_B_2020
+INFO:root:end processing argos_Sentinel-3_B_2020
+INFO:root:start processing gps_Jason-3_2019
+INFO:root:end processing gps_Jason-3_2019
+INFO:root:start processing argos_Jason-3_2019
+INFO:root:end processing argos_Jason-3_2019
+INFO:root:start processing gps_SARAL_2019
+INFO:root:end processing gps_SARAL_2019
+INFO:root:start processing argos_SARAL_2019
+INFO:root:end processing argos_SARAL_2019
+INFO:root:start processing gps_Cryosat-2_2019
+INFO:root:end processing gps_Cryosat-2_2019
+INFO:root:start processing argos_Cryosat-2_2019
+INFO:root:end processing argos_Cryosat-2_2019
+INFO:root:start processing gps_Sentinel-3_A_2019
+INFO:root:end processing gps_Sentinel-3_A_2019
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:end processing gps_Sentinel-3_B_2019
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing gps_Jason-3_2018
+INFO:root:end processing gps_Jason-3_2018
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018
+INFO:root:end processing gps_SARAL_2018
+INFO:root:start processing argos_SARAL_2018
+INFO:root:end processing argos_SARAL_2018
+INFO:root:start processing gps_Cryosat-2_2018
+INFO:root:end processing gps_Cryosat-2_2018
+INFO:root:start processing argos_Cryosat-2_2018
+INFO:root:end processing argos_Cryosat-2_2018
+INFO:root:start processing gps_Sentinel-3_A_2018
+INFO:root:end processing gps_Sentinel-3_A_2018
+INFO:root:start processing argos_Sentinel-3_A_2018
+INFO:root:end processing argos_Sentinel-3_A_2018
+INFO:root:start processing gps_Sentinel-3_B_2018
+INFO:root:end processing gps_Sentinel-3_B_2018
+INFO:root:start processing argos_Sentinel-3_B_2018
+INFO:root:end processing argos_Sentinel-3_B_2018
+INFO:root:start processing gps_Jason-3_2017
+INFO:root:end processing gps_Jason-3_2017
+INFO:root:start processing argos_Jason-3_2017
+INFO:root:end processing argos_Jason-3_2017
+INFO:root:start processing gps_Jason-2_2017
+INFO:root:end processing gps_Jason-2_2017
+INFO:root:start processing argos_Jason-2_2017
+INFO:root:end processing argos_Jason-2_2017
+INFO:root:start processing gps_SARAL_2017
+INFO:root:end processing gps_SARAL_2017
+INFO:root:start processing argos_SARAL_2017
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 8327538
+INFO:root: qdel 8327539
+INFO:root: qdel 8327540
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=2
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n12:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:end processing gps_Jason-3_2020
+INFO:root:start processing argos_Jason-3_2020
+INFO:root:end processing argos_Jason-3_2020
+INFO:root:start processing gps_SARAL_2020
+INFO:root:end processing gps_SARAL_2020
+INFO:root:start processing argos_SARAL_2020
+INFO:root:end processing argos_SARAL_2020
+INFO:root:start processing gps_Cryosat-2_2020
+INFO:root:end processing gps_Cryosat-2_2020
+INFO:root:start processing argos_Cryosat-2_2020
+INFO:root:end processing argos_Cryosat-2_2020
+INFO:root:start processing gps_Sentinel-3_A_2020
+INFO:root:end processing gps_Sentinel-3_A_2020
+INFO:root:start processing argos_Sentinel-3_A_2020
+INFO:root:end processing argos_Sentinel-3_A_2020
+INFO:root:start processing gps_Sentinel-3_B_2020
+INFO:root:end processing gps_Sentinel-3_B_2020
+INFO:root:start processing argos_Sentinel-3_B_2020
+INFO:root:end processing argos_Sentinel-3_B_2020
+INFO:root:start processing gps_Jason-3_2019
+INFO:root:end processing gps_Jason-3_2019
+INFO:root:start processing argos_Jason-3_2019
+INFO:root:end processing argos_Jason-3_2019
+INFO:root:start processing gps_SARAL_2019
+INFO:root:end processing gps_SARAL_2019
+INFO:root:start processing argos_SARAL_2019
+INFO:root:end processing argos_SARAL_2019
+INFO:root:start processing gps_Cryosat-2_2019
+INFO:root:end processing gps_Cryosat-2_2019
+INFO:root:start processing argos_Cryosat-2_2019
+INFO:root:end processing argos_Cryosat-2_2019
+INFO:root:start processing gps_Sentinel-3_A_2019
+INFO:root:end processing gps_Sentinel-3_A_2019
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:end processing gps_Sentinel-3_B_2019
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing gps_Jason-3_2018
+INFO:root:end processing gps_Jason-3_2018
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018
+INFO:root:end processing gps_SARAL_2018
+INFO:root:start processing argos_SARAL_2018
+INFO:root:end processing argos_SARAL_2018
+INFO:root:start processing gps_Cryosat-2_2018
+INFO:root:end processing gps_Cryosat-2_2018
+INFO:root:start processing argos_Cryosat-2_2018
+INFO:root:end processing argos_Cryosat-2_2018
+INFO:root:start processing gps_Sentinel-3_A_2018
+INFO:root:end processing gps_Sentinel-3_A_2018
+INFO:root:start processing argos_Sentinel-3_A_2018
+INFO:root:end processing argos_Sentinel-3_A_2018
+INFO:root:start processing gps_Sentinel-3_B_2018
+INFO:root:end processing gps_Sentinel-3_B_2018
+INFO:root:start processing argos_Sentinel-3_B_2018
+INFO:root:end processing argos_Sentinel-3_B_2018
+INFO:root:start processing gps_Jason-3_2017
+INFO:root:end processing gps_Jason-3_2017
+INFO:root:start processing argos_Jason-3_2017
+INFO:root:end processing argos_Jason-3_2017
+INFO:root:start processing gps_Jason-2_2017
+INFO:root:end processing gps_Jason-2_2017
+INFO:root:start processing argos_Jason-2_2017
+INFO:root:end processing argos_Jason-2_2017
+INFO:root:start processing gps_SARAL_2017
+INFO:root:end processing gps_SARAL_2017
+INFO:root:start processing argos_SARAL_2017
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 8329080
+INFO:root: qdel 8331894
+INFO:root: qdel 8331895
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=2
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n30:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:end processing gps_Jason-3_2020
+INFO:root:start processing argos_Jason-3_2020
+INFO:root:end processing argos_Jason-3_2020
+INFO:root:start processing gps_SARAL_2020
+INFO:root:end processing gps_SARAL_2020
+INFO:root:start processing argos_SARAL_2020
+INFO:root:end processing argos_SARAL_2020
+INFO:root:start processing gps_Cryosat-2_2020
+INFO:root:end processing gps_Cryosat-2_2020
+INFO:root:start processing argos_Cryosat-2_2020
+INFO:root:end processing argos_Cryosat-2_2020
+INFO:root:start processing gps_Sentinel-3_A_2020
+INFO:root:end processing gps_Sentinel-3_A_2020
+INFO:root:start processing argos_Sentinel-3_A_2020
+INFO:root:end processing argos_Sentinel-3_A_2020
+INFO:root:start processing gps_Sentinel-3_B_2020
+INFO:root:end processing gps_Sentinel-3_B_2020
+INFO:root:start processing argos_Sentinel-3_B_2020
+INFO:root:end processing argos_Sentinel-3_B_2020
+INFO:root:start processing gps_Jason-3_2019
+INFO:root:end processing gps_Jason-3_2019
+INFO:root:start processing argos_Jason-3_2019
+INFO:root:end processing argos_Jason-3_2019
+INFO:root:start processing gps_SARAL_2019
+INFO:root:end processing gps_SARAL_2019
+INFO:root:start processing argos_SARAL_2019
+INFO:root:end processing argos_SARAL_2019
+INFO:root:start processing gps_Cryosat-2_2019
+INFO:root:end processing gps_Cryosat-2_2019
+INFO:root:start processing argos_Cryosat-2_2019
+INFO:root:end processing argos_Cryosat-2_2019
+INFO:root:start processing gps_Sentinel-3_A_2019
+INFO:root:end processing gps_Sentinel-3_A_2019
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:end processing gps_Sentinel-3_B_2019
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing gps_Jason-3_2018
+INFO:root:end processing gps_Jason-3_2018
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018
+INFO:root:end processing gps_SARAL_2018
+INFO:root:start processing argos_SARAL_2018
+INFO:root:end processing argos_SARAL_2018
+INFO:root:start processing gps_Cryosat-2_2018
+INFO:root:end processing gps_Cryosat-2_2018
+INFO:root:start processing argos_Cryosat-2_2018
+INFO:root:end processing argos_Cryosat-2_2018
+INFO:root:start processing gps_Sentinel-3_A_2018
+INFO:root:end processing gps_Sentinel-3_A_2018
+INFO:root:start processing argos_Sentinel-3_A_2018
+INFO:root:end processing argos_Sentinel-3_A_2018
+INFO:root:start processing gps_Sentinel-3_B_2018
+INFO:root:end processing gps_Sentinel-3_B_2018
+INFO:root:start processing argos_Sentinel-3_B_2018
+INFO:root:end processing argos_Sentinel-3_B_2018
+INFO:root:start processing gps_Jason-3_2017
+INFO:root:end processing gps_Jason-3_2017
+INFO:root:start processing argos_Jason-3_2017
+INFO:root:end processing argos_Jason-3_2017
+INFO:root:start processing gps_Jason-2_2017
+INFO:root:end processing gps_Jason-2_2017
+INFO:root:start processing argos_Jason-2_2017
+INFO:root:end processing argos_Jason-2_2017
+INFO:root:start processing gps_SARAL_2017
+INFO:root:end processing gps_SARAL_2017
+INFO:root:start processing argos_SARAL_2017
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 8332089
+INFO:root: qdel 8332090
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=2
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i5n28:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-3_2020.zarr
+INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-3_2020.zarr
+INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-3_2020.zarr
+INFO:root:end processing gps_Jason-3_2020
+INFO:root:start processing argos_Jason-3_2020
+INFO:root:argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-3_2020.zarr
+INFO:root:argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-3_2020.zarr
+INFO:root:end processing argos_Jason-3_2020
+INFO:root:start processing gps_SARAL_2020
+INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2020.zarr
+INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2020.zarr
+INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2020.zarr
+INFO:root:end processing gps_SARAL_2020
+INFO:root:start processing argos_SARAL_2020
+INFO:root:argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2020.zarr
+INFO:root:argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2020.zarr
+INFO:root:end processing argos_SARAL_2020
+INFO:root:start processing gps_Cryosat-2_2020
+INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2020.zarr
+INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2020.zarr
+INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2020.zarr
+INFO:root:end processing gps_Cryosat-2_2020
+INFO:root:start processing argos_Cryosat-2_2020
+INFO:root:argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2020.zarr
+INFO:root:argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2020.zarr
+INFO:root:end processing argos_Cryosat-2_2020
+INFO:root:start processing gps_Sentinel-3_A_2020
+INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_A_2020.zarr
+INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_A_2020.zarr
+INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_A_2020.zarr
+INFO:root:end processing gps_Sentinel-3_A_2020
+INFO:root:start processing argos_Sentinel-3_A_2020
+INFO:root:argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_A_2020.zarr
+INFO:root:argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_A_2020.zarr
+INFO:root:end processing argos_Sentinel-3_A_2020
+INFO:root:start processing gps_Sentinel-3_B_2020
+INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_B_2020.zarr
+INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_B_2020.zarr
+INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_B_2020.zarr
+INFO:root:end processing gps_Sentinel-3_B_2020
+INFO:root:start processing argos_Sentinel-3_B_2020
+INFO:root:argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_B_2020.zarr
+INFO:root:argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_B_2020.zarr
+INFO:root:end processing argos_Sentinel-3_B_2020
+INFO:root:start processing gps_Jason-3_2019
+INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-3_2019.zarr
+INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-3_2019.zarr
+INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-3_2019.zarr
+INFO:root:end processing gps_Jason-3_2019
+INFO:root:start processing argos_Jason-3_2019
+INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-3_2019.zarr
+INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-3_2019.zarr
+INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-3_2019.zarr
+INFO:root:end processing argos_Jason-3_2019
+INFO:root:start processing gps_SARAL_2019
+INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2019.zarr
+INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2019.zarr
+INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2019.zarr
+INFO:root:end processing gps_SARAL_2019
+INFO:root:start processing argos_SARAL_2019
+INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2019.zarr
+INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_SARAL_2019.zarr
+INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2019.zarr
+INFO:root:end processing argos_SARAL_2019
+INFO:root:start processing gps_Cryosat-2_2019
+INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2019.zarr
+INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2019.zarr
+INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2019.zarr
+INFO:root:end processing gps_Cryosat-2_2019
+INFO:root:start processing argos_Cryosat-2_2019
+INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2019.zarr
+INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2019.zarr
+INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2019.zarr
+INFO:root:end processing argos_Cryosat-2_2019
+INFO:root:start processing gps_Sentinel-3_A_2019
+INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_A_2019.zarr
+INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_A_2019.zarr
+INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_A_2019.zarr
+INFO:root:end processing gps_Sentinel-3_A_2019
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_A_2019.zarr
+INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Sentinel-3_A_2019.zarr
+INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_A_2019.zarr
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_B_2019.zarr
+INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_B_2019.zarr
+INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_B_2019.zarr
+INFO:root:end processing gps_Sentinel-3_B_2019
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_B_2019.zarr
+INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Sentinel-3_B_2019.zarr
+INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_B_2019.zarr
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing gps_Jason-3_2018
+INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-3_2018.zarr
+INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-3_2018.zarr
+INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-3_2018.zarr
+INFO:root:end processing gps_Jason-3_2018
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-3_2018.zarr
+INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-3_2018.zarr
+INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-3_2018.zarr
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018
+INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2018.zarr
+INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2018.zarr
+INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2018.zarr
+INFO:root:end processing gps_SARAL_2018
+INFO:root:start processing argos_SARAL_2018
+INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2018.zarr
+INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_SARAL_2018.zarr
+INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2018.zarr
+INFO:root:end processing argos_SARAL_2018
+INFO:root:start processing gps_Cryosat-2_2018
+INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2018.zarr
+INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2018.zarr
+INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2018.zarr
+INFO:root:end processing gps_Cryosat-2_2018
+INFO:root:start processing argos_Cryosat-2_2018
+INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2018.zarr
+INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2018.zarr
+INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2018.zarr
+INFO:root:end processing argos_Cryosat-2_2018
+INFO:root:start processing gps_Sentinel-3_A_2018
+INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_A_2018.zarr
+INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_A_2018.zarr
+INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_A_2018.zarr
+INFO:root:end processing gps_Sentinel-3_A_2018
+INFO:root:start processing argos_Sentinel-3_A_2018
+INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_A_2018.zarr
+INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Sentinel-3_A_2018.zarr
+INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_A_2018.zarr
+INFO:root:end processing argos_Sentinel-3_A_2018
+INFO:root:start processing gps_Sentinel-3_B_2018
+INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_B_2018.zarr
+INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_B_2018.zarr
+INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_B_2018.zarr
+INFO:root:end processing gps_Sentinel-3_B_2018
+INFO:root:start processing argos_Sentinel-3_B_2018
+INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_B_2018.zarr
+INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Sentinel-3_B_2018.zarr
+INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_B_2018.zarr
+INFO:root:end processing argos_Sentinel-3_B_2018
+INFO:root:start processing gps_Jason-3_2017
+INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-3_2017.zarr
+INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-3_2017.zarr
+INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-3_2017.zarr
+INFO:root:end processing gps_Jason-3_2017
+INFO:root:start processing argos_Jason-3_2017
+INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-3_2017.zarr
+INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-3_2017.zarr
+INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-3_2017.zarr
+INFO:root:end processing argos_Jason-3_2017
+INFO:root:start processing gps_Jason-2_2017
+INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2017.zarr
+INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2017.zarr
+INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2017.zarr
+INFO:root:end processing gps_Jason-2_2017
+INFO:root:start processing argos_Jason-2_2017
+INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2017.zarr
+INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2017.zarr
+INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2017.zarr
+INFO:root:end processing argos_Jason-2_2017
+INFO:root:start processing gps_SARAL_2017
+INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2017.zarr
+INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2017.zarr
+INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2017.zarr
+INFO:root:end processing gps_SARAL_2017
+INFO:root:start processing argos_SARAL_2017
+INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2017.zarr
+INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_SARAL_2017.zarr
+INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2017.zarr
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2017.zarr
+INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2017.zarr
+INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2017.zarr
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2017.zarr
+INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2017.zarr
+INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2017.zarr
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_A_2017.zarr
+INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_A_2017.zarr
+INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_A_2017.zarr
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_A_2017.zarr
+INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Sentinel-3_A_2017.zarr
+INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_A_2017.zarr
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-3_2016.zarr
+INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-3_2016.zarr
+INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-3_2016.zarr
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-3_2016.zarr
+INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-3_2016.zarr
+INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-3_2016.zarr
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2016.zarr
+INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2016.zarr
+INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2016.zarr
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2016.zarr
+INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2016.zarr
+INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2016.zarr
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2016.zarr
+INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2016.zarr
+INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2016.zarr
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2016.zarr
+INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_SARAL_2016.zarr
+INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2016.zarr
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2016.zarr
+INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2016.zarr
+INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2016.zarr
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2016.zarr
+INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2016.zarr
+INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2016.zarr
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Sentinel-3_A_2016.zarr
+INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Sentinel-3_A_2016.zarr
+INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Sentinel-3_A_2016.zarr
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Sentinel-3_A_2016.zarr
+INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Sentinel-3_A_2016.zarr
+INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Sentinel-3_A_2016.zarr
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2015.zarr
+INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2015.zarr
+INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2015.zarr
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2015.zarr
+INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2015.zarr
+INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2015.zarr
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2015.zarr
+INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2015.zarr
+INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2015.zarr
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2015.zarr
+INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_SARAL_2015.zarr
+INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2015.zarr
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2015.zarr
+INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2015.zarr
+INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2015.zarr
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2015.zarr
+INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2015.zarr
+INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2015.zarr
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2014.zarr
+INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2014.zarr
+INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2014.zarr
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2014.zarr
+INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2014.zarr
+INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2014.zarr
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2014.zarr
+INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2014.zarr
+INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2014.zarr
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2014.zarr
+INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_SARAL_2014.zarr
+INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2014.zarr
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2014.zarr
+INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2014.zarr
+INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2014.zarr
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2014.zarr
+INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2014.zarr
+INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2014.zarr
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2013.zarr
+INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2013.zarr
+INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2013.zarr
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2013.zarr
+INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2013.zarr
+INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2013.zarr
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_SARAL_2013.zarr
+INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_SARAL_2013.zarr
+INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_SARAL_2013.zarr
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_SARAL_2013.zarr
+INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_SARAL_2013.zarr
+INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_SARAL_2013.zarr
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2013.zarr
+INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2013.zarr
+INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2013.zarr
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2013.zarr
+INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2013.zarr
+INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2013.zarr
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2012.zarr
+INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2012.zarr
+INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2012.zarr
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2012.zarr
+INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2012.zarr
+INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2012.zarr
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2012.zarr
+INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2012.zarr
+INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2012.zarr
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2012.zarr
+INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2012.zarr
+INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2012.zarr
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2011.zarr
+INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2011.zarr
+INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2011.zarr
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2011.zarr
+INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2011.zarr
+INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2011.zarr
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2011.zarr
+INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2011.zarr
+INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Cryosat-2_2011.zarr
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2011.zarr
+INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2011.zarr
+INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2011.zarr
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Jason-2_2010.zarr
+INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Jason-2_2010.zarr
+INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_gps_Jason-2_2010.zarr
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Jason-2_2010.zarr
+INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Jason-2_2010.zarr
+INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Jason-2_2010.zarr
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_gps_Cryosat-2_2010.zarr
+INFO:root:gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_gps_Cryosat-2_2010.zarr
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_argos_Cryosat-2_2010.zarr
+INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_drogued_argos_Cryosat-2_2010.zarr
+INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800_5_undrogued_argos_Cryosat-2_2010.zarr
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 8335218
+INFO:root: qdel 8335219
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=2
+INFO:root:dashboard via ssh: ssh -N -L 8787:r2i0n26:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:end processing gps_Jason-3_2020
+INFO:root:start processing argos_Jason-3_2020
+INFO:root:end processing argos_Jason-3_2020
+INFO:root:start processing gps_SARAL_2020
+INFO:root:end processing gps_SARAL_2020
+INFO:root:start processing argos_SARAL_2020
+INFO:root:end processing argos_SARAL_2020
+INFO:root:start processing gps_Cryosat-2_2020
+INFO:root:end processing gps_Cryosat-2_2020
+INFO:root:start processing argos_Cryosat-2_2020
+INFO:root:end processing argos_Cryosat-2_2020
+INFO:root:start processing gps_Sentinel-3_A_2020
+INFO:root:end processing gps_Sentinel-3_A_2020
+INFO:root:start processing argos_Sentinel-3_A_2020
+INFO:root:end processing argos_Sentinel-3_A_2020
+INFO:root:start processing gps_Sentinel-3_B_2020
+INFO:root:end processing gps_Sentinel-3_B_2020
+INFO:root:start processing argos_Sentinel-3_B_2020
+INFO:root:end processing argos_Sentinel-3_B_2020
+INFO:root:start processing gps_Jason-3_2019
+INFO:root:end processing gps_Jason-3_2019
+INFO:root:start processing argos_Jason-3_2019
+INFO:root:end processing argos_Jason-3_2019
+INFO:root:start processing gps_SARAL_2019
+INFO:root:end processing gps_SARAL_2019
+INFO:root:start processing argos_SARAL_2019
+INFO:root:end processing argos_SARAL_2019
+INFO:root:start processing gps_Cryosat-2_2019
+INFO:root:end processing gps_Cryosat-2_2019
+INFO:root:start processing argos_Cryosat-2_2019
+INFO:root:end processing argos_Cryosat-2_2019
+INFO:root:start processing gps_Sentinel-3_A_2019
+INFO:root:end processing gps_Sentinel-3_A_2019
+INFO:root:start processing argos_Sentinel-3_A_2019
+INFO:root:end processing argos_Sentinel-3_A_2019
+INFO:root:start processing gps_Sentinel-3_B_2019
+INFO:root:end processing gps_Sentinel-3_B_2019
+INFO:root:start processing argos_Sentinel-3_B_2019
+INFO:root:end processing argos_Sentinel-3_B_2019
+INFO:root:start processing gps_Jason-3_2018
+INFO:root:end processing gps_Jason-3_2018
+INFO:root:start processing argos_Jason-3_2018
+INFO:root:end processing argos_Jason-3_2018
+INFO:root:start processing gps_SARAL_2018
+INFO:root:end processing gps_SARAL_2018
+INFO:root:start processing argos_SARAL_2018
+INFO:root:end processing argos_SARAL_2018
+INFO:root:start processing gps_Cryosat-2_2018
+INFO:root:end processing gps_Cryosat-2_2018
+INFO:root:start processing argos_Cryosat-2_2018
+INFO:root:end processing argos_Cryosat-2_2018
+INFO:root:start processing gps_Sentinel-3_A_2018
+INFO:root:end processing gps_Sentinel-3_A_2018
+INFO:root:start processing argos_Sentinel-3_A_2018
+INFO:root:end processing argos_Sentinel-3_A_2018
+INFO:root:start processing gps_Sentinel-3_B_2018
+INFO:root:end processing gps_Sentinel-3_B_2018
+INFO:root:start processing argos_Sentinel-3_B_2018
+INFO:root:end processing argos_Sentinel-3_B_2018
+INFO:root:start processing gps_Jason-3_2017
+INFO:root:end processing gps_Jason-3_2017
+INFO:root:start processing argos_Jason-3_2017
+INFO:root:end processing argos_Jason-3_2017
+INFO:root:start processing gps_Jason-2_2017
+INFO:root:end processing gps_Jason-2_2017
+INFO:root:start processing argos_Jason-2_2017
+INFO:root:end processing argos_Jason-2_2017
+INFO:root:start processing gps_SARAL_2017
+INFO:root:end processing gps_SARAL_2017
+INFO:root:start processing argos_SARAL_2017
+INFO:root:end processing argos_SARAL_2017
+INFO:root:start processing gps_Cryosat-2_2017
+INFO:root:end processing gps_Cryosat-2_2017
+INFO:root:start processing argos_Cryosat-2_2017
+INFO:root:end processing argos_Cryosat-2_2017
+INFO:root:start processing gps_Sentinel-3_A_2017
+INFO:root:end processing gps_Sentinel-3_A_2017
+INFO:root:start processing argos_Sentinel-3_A_2017
+INFO:root:end processing argos_Sentinel-3_A_2017
+INFO:root:start processing gps_Jason-3_2016
+INFO:root:end processing gps_Jason-3_2016
+INFO:root:start processing argos_Jason-3_2016
+INFO:root:end processing argos_Jason-3_2016
+INFO:root:start processing gps_Jason-2_2016
+INFO:root:end processing gps_Jason-2_2016
+INFO:root:start processing argos_Jason-2_2016
+INFO:root:end processing argos_Jason-2_2016
+INFO:root:start processing gps_SARAL_2016
+INFO:root:end processing gps_SARAL_2016
+INFO:root:start processing argos_SARAL_2016
+INFO:root:end processing argos_SARAL_2016
+INFO:root:start processing gps_Cryosat-2_2016
+INFO:root:end processing gps_Cryosat-2_2016
+INFO:root:start processing argos_Cryosat-2_2016
+INFO:root:end processing argos_Cryosat-2_2016
+INFO:root:start processing gps_Sentinel-3_A_2016
+INFO:root:end processing gps_Sentinel-3_A_2016
+INFO:root:start processing argos_Sentinel-3_A_2016
+INFO:root:end processing argos_Sentinel-3_A_2016
+INFO:root:start processing gps_Jason-2_2015
+INFO:root:end processing gps_Jason-2_2015
+INFO:root:start processing argos_Jason-2_2015
+INFO:root:end processing argos_Jason-2_2015
+INFO:root:start processing gps_SARAL_2015
+INFO:root:end processing gps_SARAL_2015
+INFO:root:start processing argos_SARAL_2015
+INFO:root:end processing argos_SARAL_2015
+INFO:root:start processing gps_Cryosat-2_2015
+INFO:root:end processing gps_Cryosat-2_2015
+INFO:root:start processing argos_Cryosat-2_2015
+INFO:root:end processing argos_Cryosat-2_2015
+INFO:root:start processing gps_Jason-2_2014
+INFO:root:end processing gps_Jason-2_2014
+INFO:root:start processing argos_Jason-2_2014
+INFO:root:end processing argos_Jason-2_2014
+INFO:root:start processing gps_SARAL_2014
+INFO:root:end processing gps_SARAL_2014
+INFO:root:start processing argos_SARAL_2014
+INFO:root:end processing argos_SARAL_2014
+INFO:root:start processing gps_Cryosat-2_2014
+INFO:root:end processing gps_Cryosat-2_2014
+INFO:root:start processing argos_Cryosat-2_2014
+INFO:root:end processing argos_Cryosat-2_2014
+INFO:root:start processing gps_Jason-2_2013
+INFO:root:end processing gps_Jason-2_2013
+INFO:root:start processing argos_Jason-2_2013
+INFO:root:end processing argos_Jason-2_2013
+INFO:root:start processing gps_SARAL_2013
+INFO:root:end processing gps_SARAL_2013
+INFO:root:start processing argos_SARAL_2013
+INFO:root:end processing argos_SARAL_2013
+INFO:root:start processing gps_Cryosat-2_2013
+INFO:root:end processing gps_Cryosat-2_2013
+INFO:root:start processing argos_Cryosat-2_2013
+INFO:root:end processing argos_Cryosat-2_2013
+INFO:root:start processing gps_Jason-2_2012
+INFO:root:end processing gps_Jason-2_2012
+INFO:root:start processing argos_Jason-2_2012
+INFO:root:end processing argos_Jason-2_2012
+INFO:root:start processing gps_Cryosat-2_2012
+INFO:root:end processing gps_Cryosat-2_2012
+INFO:root:start processing argos_Cryosat-2_2012
+INFO:root:end processing argos_Cryosat-2_2012
+INFO:root:start processing gps_Jason-2_2011
+INFO:root:end processing gps_Jason-2_2011
+INFO:root:start processing argos_Jason-2_2011
+INFO:root:end processing argos_Jason-2_2011
+INFO:root:start processing gps_Cryosat-2_2011
+INFO:root:end processing gps_Cryosat-2_2011
+INFO:root:start processing argos_Cryosat-2_2011
+INFO:root:end processing argos_Cryosat-2_2011
+INFO:root:start processing gps_Jason-2_2010
+INFO:root:end processing gps_Jason-2_2010
+INFO:root:start processing argos_Jason-2_2010
+INFO:root:end processing argos_Jason-2_2010
+INFO:root:start processing gps_Cryosat-2_2010
+INFO:root:end processing gps_Cryosat-2_2010
+INFO:root:start processing argos_Cryosat-2_2010
+INFO:root:end processing argos_Cryosat-2_2010
+INFO:root:starts closing dask cluster ...
+INFO:root:client closed ...
+INFO:root: qdel 8362641
+INFO:root: qdel 8362642
+INFO:root:manually killed jobs ...
+INFO:root:... done
+INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=2
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n30:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
+INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/msdist/msdist_5_gps_Jason-3_2020.zarr
 INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/msdist/msdist_5_drogued_gps_Jason-3_2020.zarr
 INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/msdist/msdist_5_undrogued_gps_Jason-3_2020.nc
 INFO:root:end processing gps_Jason-3_2020
@@ -400,976 +1763,10 @@ INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/
 INFO:root:end processing argos_Cryosat-2_2010
 INFO:root:starts closing dask cluster ...
 INFO:root:client closed ...
-INFO:root: qdel 8107280
-INFO:root: qdel 8107281
+INFO:root: qdel 8363184
+INFO:root: qdel 8363185
 INFO:root:manually killed jobs ...
 INFO:root:... done
 INFO:root:- all done
-INFO:root:start spinning up dask cluster, jobs=2
-INFO:root:start spinning up dask cluster, jobs=2
-INFO:root:start spinning up dask cluster, jobs=2
-INFO:root:dashboard via ssh: ssh -N -L 8787:r1i1n7:8787 mdemol@datarmor1-10g
-INFO:root:open browser at address of the type: http://localhost:8787
-INFO:root:start processing gps_Jason-3_2020
-INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-3_2020.zarr
-INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-3_2020.zarr
-INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-3_2020.zarr
-INFO:root:end processing gps_Jason-3_2020
-INFO:root:start processing argos_Jason-3_2020
-INFO:root:argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-3_2020.zarr
-INFO:root:argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-3_2020.zarr
-INFO:root:end processing argos_Jason-3_2020
-INFO:root:start processing gps_SARAL_2020
-INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2020.zarr
-INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2020.zarr
-INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2020.zarr
-INFO:root:end processing gps_SARAL_2020
-INFO:root:start processing argos_SARAL_2020
-INFO:root:argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2020.zarr
-INFO:root:argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2020.zarr
-INFO:root:end processing argos_SARAL_2020
-INFO:root:start processing gps_Cryosat-2_2020
-INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2020.zarr
-INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2020.zarr
-INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2020.zarr
-INFO:root:end processing gps_Cryosat-2_2020
-INFO:root:start processing argos_Cryosat-2_2020
-INFO:root:argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2020.zarr
-INFO:root:argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2020.zarr
-INFO:root:end processing argos_Cryosat-2_2020
-INFO:root:start processing gps_Sentinel-3_A_2020
-INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_A_2020.zarr
-INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_A_2020.zarr
-INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_A_2020.zarr
-INFO:root:end processing gps_Sentinel-3_A_2020
-INFO:root:start processing argos_Sentinel-3_A_2020
-INFO:root:argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_A_2020.zarr
-INFO:root:argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_A_2020.zarr
-INFO:root:end processing argos_Sentinel-3_A_2020
-INFO:root:start processing gps_Sentinel-3_B_2020
-INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_B_2020.zarr
-INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_B_2020.zarr
-INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_B_2020.zarr
-INFO:root:end processing gps_Sentinel-3_B_2020
-INFO:root:start processing argos_Sentinel-3_B_2020
-INFO:root:argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_B_2020.zarr
-INFO:root:argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_B_2020.zarr
-INFO:root:end processing argos_Sentinel-3_B_2020
-INFO:root:start processing gps_Jason-3_2019
-INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-3_2019.zarr
-INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-3_2019.zarr
-INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-3_2019.zarr
-INFO:root:end processing gps_Jason-3_2019
-INFO:root:start processing argos_Jason-3_2019
-INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-3_2019.zarr
-INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-3_2019.zarr
-INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-3_2019.zarr
-INFO:root:end processing argos_Jason-3_2019
-INFO:root:start processing gps_SARAL_2019
-INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2019.zarr
-INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2019.zarr
-INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2019.zarr
-INFO:root:end processing gps_SARAL_2019
-INFO:root:start processing argos_SARAL_2019
-INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2019.zarr
-INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_SARAL_2019.zarr
-INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2019.zarr
-INFO:root:end processing argos_SARAL_2019
-INFO:root:start processing gps_Cryosat-2_2019
-INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2019.zarr
-INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2019.zarr
-INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2019.zarr
-INFO:root:end processing gps_Cryosat-2_2019
-INFO:root:start processing argos_Cryosat-2_2019
-INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2019.zarr
-INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2019.zarr
-INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2019.zarr
-INFO:root:end processing argos_Cryosat-2_2019
-INFO:root:start processing gps_Sentinel-3_A_2019
-INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_A_2019.zarr
-INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_A_2019.zarr
-INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_A_2019.zarr
-INFO:root:end processing gps_Sentinel-3_A_2019
-INFO:root:start processing argos_Sentinel-3_A_2019
-INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_A_2019.zarr
-INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Sentinel-3_A_2019.zarr
-INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_A_2019.zarr
-INFO:root:end processing argos_Sentinel-3_A_2019
-INFO:root:start processing gps_Sentinel-3_B_2019
-INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_B_2019.zarr
-INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_B_2019.zarr
-INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_B_2019.zarr
-INFO:root:end processing gps_Sentinel-3_B_2019
-INFO:root:start processing argos_Sentinel-3_B_2019
-INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_B_2019.zarr
-INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Sentinel-3_B_2019.zarr
-INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_B_2019.zarr
-INFO:root:end processing argos_Sentinel-3_B_2019
-INFO:root:start processing gps_Jason-3_2018
-INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-3_2018.zarr
-INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-3_2018.zarr
-INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-3_2018.zarr
-INFO:root:end processing gps_Jason-3_2018
-INFO:root:start processing argos_Jason-3_2018
-INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-3_2018.zarr
-INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-3_2018.zarr
-INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-3_2018.zarr
-INFO:root:end processing argos_Jason-3_2018
-INFO:root:start processing gps_SARAL_2018
-INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2018.zarr
-INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2018.zarr
-INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2018.zarr
-INFO:root:end processing gps_SARAL_2018
-INFO:root:start processing argos_SARAL_2018
-INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2018.zarr
-INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_SARAL_2018.zarr
-INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2018.zarr
-INFO:root:end processing argos_SARAL_2018
-INFO:root:start processing gps_Cryosat-2_2018
-INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2018.zarr
-INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2018.zarr
-INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2018.zarr
-INFO:root:end processing gps_Cryosat-2_2018
-INFO:root:start processing argos_Cryosat-2_2018
-INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2018.zarr
-INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2018.zarr
-INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2018.zarr
-INFO:root:end processing argos_Cryosat-2_2018
-INFO:root:start processing gps_Sentinel-3_A_2018
-INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_A_2018.zarr
-INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_A_2018.zarr
-INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_A_2018.zarr
-INFO:root:end processing gps_Sentinel-3_A_2018
-INFO:root:start processing argos_Sentinel-3_A_2018
-INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_A_2018.zarr
-INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Sentinel-3_A_2018.zarr
-INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_A_2018.zarr
-INFO:root:end processing argos_Sentinel-3_A_2018
-INFO:root:start processing gps_Sentinel-3_B_2018
-INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_B_2018.zarr
-INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_B_2018.zarr
-INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_B_2018.zarr
-INFO:root:end processing gps_Sentinel-3_B_2018
-INFO:root:start processing argos_Sentinel-3_B_2018
-INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_B_2018.zarr
-INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Sentinel-3_B_2018.zarr
-INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_B_2018.zarr
-INFO:root:end processing argos_Sentinel-3_B_2018
-INFO:root:start processing gps_Jason-3_2017
-INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-3_2017.zarr
-INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-3_2017.zarr
-INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-3_2017.zarr
-INFO:root:end processing gps_Jason-3_2017
-INFO:root:start processing argos_Jason-3_2017
-INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-3_2017.zarr
-INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-3_2017.zarr
-INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-3_2017.zarr
-INFO:root:end processing argos_Jason-3_2017
-INFO:root:start processing gps_Jason-2_2017
-INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2017.zarr
-INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2017.zarr
-INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2017.zarr
-INFO:root:end processing gps_Jason-2_2017
-INFO:root:start processing argos_Jason-2_2017
-INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2017.zarr
-INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2017.zarr
-INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2017.zarr
-INFO:root:end processing argos_Jason-2_2017
-INFO:root:start processing gps_SARAL_2017
-INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2017.zarr
-INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2017.zarr
-INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2017.zarr
-INFO:root:end processing gps_SARAL_2017
-INFO:root:start processing argos_SARAL_2017
-INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2017.zarr
-INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_SARAL_2017.zarr
-INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2017.zarr
-INFO:root:end processing argos_SARAL_2017
-INFO:root:start processing gps_Cryosat-2_2017
-INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2017.zarr
-INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2017.zarr
-INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2017.zarr
-INFO:root:end processing gps_Cryosat-2_2017
-INFO:root:start processing argos_Cryosat-2_2017
-INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2017.zarr
-INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2017.zarr
-INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2017.zarr
-INFO:root:end processing argos_Cryosat-2_2017
-INFO:root:start processing gps_Sentinel-3_A_2017
-INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_A_2017.zarr
-INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_A_2017.zarr
-INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_A_2017.zarr
-INFO:root:end processing gps_Sentinel-3_A_2017
-INFO:root:start processing argos_Sentinel-3_A_2017
-INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_A_2017.zarr
-INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Sentinel-3_A_2017.zarr
-INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_A_2017.zarr
-INFO:root:end processing argos_Sentinel-3_A_2017
-INFO:root:start processing gps_Jason-3_2016
-INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-3_2016.zarr
-INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-3_2016.zarr
-INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-3_2016.zarr
-INFO:root:end processing gps_Jason-3_2016
-INFO:root:start processing argos_Jason-3_2016
-INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-3_2016.zarr
-INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-3_2016.zarr
-INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-3_2016.zarr
-INFO:root:end processing argos_Jason-3_2016
-INFO:root:start processing gps_Jason-2_2016
-INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2016.zarr
-INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2016.zarr
-INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2016.zarr
-INFO:root:end processing gps_Jason-2_2016
-INFO:root:start processing argos_Jason-2_2016
-INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2016.zarr
-INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2016.zarr
-INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2016.zarr
-INFO:root:end processing argos_Jason-2_2016
-INFO:root:start processing gps_SARAL_2016
-INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2016.zarr
-INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2016.zarr
-INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2016.zarr
-INFO:root:end processing gps_SARAL_2016
-INFO:root:start processing argos_SARAL_2016
-INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2016.zarr
-INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_SARAL_2016.zarr
-INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2016.zarr
-INFO:root:end processing argos_SARAL_2016
-INFO:root:start processing gps_Cryosat-2_2016
-INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2016.zarr
-INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2016.zarr
-INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2016.zarr
-INFO:root:end processing gps_Cryosat-2_2016
-INFO:root:start processing argos_Cryosat-2_2016
-INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2016.zarr
-INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2016.zarr
-INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2016.zarr
-INFO:root:end processing argos_Cryosat-2_2016
-INFO:root:start processing gps_Sentinel-3_A_2016
-INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Sentinel-3_A_2016.zarr
-INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Sentinel-3_A_2016.zarr
-INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Sentinel-3_A_2016.zarr
-INFO:root:end processing gps_Sentinel-3_A_2016
-INFO:root:start processing argos_Sentinel-3_A_2016
-INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Sentinel-3_A_2016.zarr
-INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Sentinel-3_A_2016.zarr
-INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Sentinel-3_A_2016.zarr
-INFO:root:end processing argos_Sentinel-3_A_2016
-INFO:root:start processing gps_Jason-2_2015
-INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2015.zarr
-INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2015.zarr
-INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2015.zarr
-INFO:root:end processing gps_Jason-2_2015
-INFO:root:start processing argos_Jason-2_2015
-INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2015.zarr
-INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2015.zarr
-INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2015.zarr
-INFO:root:end processing argos_Jason-2_2015
-INFO:root:start processing gps_SARAL_2015
-INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2015.zarr
-INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2015.zarr
-INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2015.zarr
-INFO:root:end processing gps_SARAL_2015
-INFO:root:start processing argos_SARAL_2015
-INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2015.zarr
-INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_SARAL_2015.zarr
-INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2015.zarr
-INFO:root:end processing argos_SARAL_2015
-INFO:root:start processing gps_Cryosat-2_2015
-INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2015.zarr
-INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2015.zarr
-INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2015.zarr
-INFO:root:end processing gps_Cryosat-2_2015
-INFO:root:start processing argos_Cryosat-2_2015
-INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2015.zarr
-INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2015.zarr
-INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2015.zarr
-INFO:root:end processing argos_Cryosat-2_2015
-INFO:root:start processing gps_Jason-2_2014
-INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2014.zarr
-INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2014.zarr
-INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2014.zarr
-INFO:root:end processing gps_Jason-2_2014
-INFO:root:start processing argos_Jason-2_2014
-INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2014.zarr
-INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2014.zarr
-INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2014.zarr
-INFO:root:end processing argos_Jason-2_2014
-INFO:root:start processing gps_SARAL_2014
-INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2014.zarr
-INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2014.zarr
-INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2014.zarr
-INFO:root:end processing gps_SARAL_2014
-INFO:root:start processing argos_SARAL_2014
-INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2014.zarr
-INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_SARAL_2014.zarr
-INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2014.zarr
-INFO:root:end processing argos_SARAL_2014
-INFO:root:start processing gps_Cryosat-2_2014
-INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2014.zarr
-INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2014.zarr
-INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2014.zarr
-INFO:root:end processing gps_Cryosat-2_2014
-INFO:root:start processing argos_Cryosat-2_2014
-INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2014.zarr
-INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2014.zarr
-INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2014.zarr
-INFO:root:end processing argos_Cryosat-2_2014
-INFO:root:start processing gps_Jason-2_2013
-INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2013.zarr
-INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2013.zarr
-INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2013.zarr
-INFO:root:end processing gps_Jason-2_2013
-INFO:root:start processing argos_Jason-2_2013
-INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2013.zarr
-INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2013.zarr
-INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2013.zarr
-INFO:root:end processing argos_Jason-2_2013
-INFO:root:start processing gps_SARAL_2013
-INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_SARAL_2013.zarr
-INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_SARAL_2013.zarr
-INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_SARAL_2013.zarr
-INFO:root:end processing gps_SARAL_2013
-INFO:root:start processing argos_SARAL_2013
-INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_SARAL_2013.zarr
-INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_SARAL_2013.zarr
-INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_SARAL_2013.zarr
-INFO:root:end processing argos_SARAL_2013
-INFO:root:start processing gps_Cryosat-2_2013
-INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2013.zarr
-INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2013.zarr
-INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2013.zarr
-INFO:root:end processing gps_Cryosat-2_2013
-INFO:root:start processing argos_Cryosat-2_2013
-INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2013.zarr
-INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2013.zarr
-INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2013.zarr
-INFO:root:end processing argos_Cryosat-2_2013
-INFO:root:start processing gps_Jason-2_2012
-INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2012.zarr
-INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2012.zarr
-INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2012.zarr
-INFO:root:end processing gps_Jason-2_2012
-INFO:root:start processing argos_Jason-2_2012
-INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2012.zarr
-INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2012.zarr
-INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2012.zarr
-INFO:root:end processing argos_Jason-2_2012
-INFO:root:start processing gps_Cryosat-2_2012
-INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2012.zarr
-INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2012.zarr
-INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2012.zarr
-INFO:root:end processing gps_Cryosat-2_2012
-INFO:root:start processing argos_Cryosat-2_2012
-INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2012.zarr
-INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2012.zarr
-INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2012.zarr
-INFO:root:end processing argos_Cryosat-2_2012
-INFO:root:start processing gps_Jason-2_2011
-INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2011.zarr
-INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2011.zarr
-INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2011.zarr
-INFO:root:end processing gps_Jason-2_2011
-INFO:root:start processing argos_Jason-2_2011
-INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2011.zarr
-INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2011.zarr
-INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2011.zarr
-INFO:root:end processing argos_Jason-2_2011
-INFO:root:start processing gps_Cryosat-2_2011
-INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2011.zarr
-INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2011.zarr
-INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Cryosat-2_2011.zarr
-INFO:root:end processing gps_Cryosat-2_2011
-INFO:root:start processing argos_Cryosat-2_2011
-INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2011.zarr
-INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2011.zarr
-INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2011.zarr
-INFO:root:end processing argos_Cryosat-2_2011
-INFO:root:start processing gps_Jason-2_2010
-INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Jason-2_2010.zarr
-INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Jason-2_2010.zarr
-INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_gps_Jason-2_2010.zarr
-INFO:root:end processing gps_Jason-2_2010
-INFO:root:start processing argos_Jason-2_2010
-INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Jason-2_2010.zarr
-INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Jason-2_2010.zarr
-INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Jason-2_2010.zarr
-INFO:root:end processing argos_Jason-2_2010
-INFO:root:start processing gps_Cryosat-2_2010
-INFO:root:gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_gps_Cryosat-2_2010.zarr
-INFO:root:gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_gps_Cryosat-2_2010.zarr
-INFO:root:end processing gps_Cryosat-2_2010
-INFO:root:start processing argos_Cryosat-2_2010
-INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_argos_Cryosat-2_2010.zarr
-INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_drogued_argos_Cryosat-2_2010.zarr
-INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mstime/mstime_600_undrogued_argos_Cryosat-2_2010.zarr
-INFO:root:end processing argos_Cryosat-2_2010
-INFO:root:starts closing dask cluster ...
-INFO:root:client closed ...
-INFO:root: qdel 8124830
-INFO:root: qdel 8124831
-INFO:root:manually killed jobs ...
-INFO:root:... done
-INFO:root:- all done
-INFO:root:start spinning up dask cluster, jobs=3
-INFO:root:dashboard via ssh: ssh -N -L 8787:r1i5n35:8787 mdemol@datarmor1-10g
-INFO:root:open browser at address of the type: http://localhost:8787
-INFO:root:start processing gps_Jason-3_2020
-INFO:root:end processing gps_Jason-3_2020
-INFO:root:start processing argos_Jason-3_2020
-INFO:root:end processing argos_Jason-3_2020
-INFO:root:start processing gps_SARAL_2020
-INFO:root:end processing gps_SARAL_2020
-INFO:root:start processing argos_SARAL_2020
-INFO:root:end processing argos_SARAL_2020
-INFO:root:start processing gps_Cryosat-2_2020
-INFO:root:end processing gps_Cryosat-2_2020
-INFO:root:start processing argos_Cryosat-2_2020
-INFO:root:end processing argos_Cryosat-2_2020
-INFO:root:start processing gps_Sentinel-3_A_2020
-INFO:root:end processing gps_Sentinel-3_A_2020
-INFO:root:start processing argos_Sentinel-3_A_2020
-INFO:root:end processing argos_Sentinel-3_A_2020
-INFO:root:start processing gps_Sentinel-3_B_2020
-INFO:root:end processing gps_Sentinel-3_B_2020
-INFO:root:start processing argos_Sentinel-3_B_2020
-INFO:root:end processing argos_Sentinel-3_B_2020
-INFO:root:start processing gps_Jason-3_2019
-INFO:root:end processing gps_Jason-3_2019
-INFO:root:start processing argos_Jason-3_2019
-INFO:root:end processing argos_Jason-3_2019
-INFO:root:start processing gps_SARAL_2019
-INFO:root:end processing gps_SARAL_2019
-INFO:root:start processing argos_SARAL_2019
-INFO:root:end processing argos_SARAL_2019
-INFO:root:start processing gps_Cryosat-2_2019
-INFO:root:end processing gps_Cryosat-2_2019
-INFO:root:start processing argos_Cryosat-2_2019
-INFO:root:end processing argos_Cryosat-2_2019
-INFO:root:start processing gps_Sentinel-3_A_2019
-INFO:root:end processing gps_Sentinel-3_A_2019
-INFO:root:start processing argos_Sentinel-3_A_2019
-INFO:root:end processing argos_Sentinel-3_A_2019
-INFO:root:start processing gps_Sentinel-3_B_2019
-INFO:root:end processing gps_Sentinel-3_B_2019
-INFO:root:start processing argos_Sentinel-3_B_2019
-INFO:root:end processing argos_Sentinel-3_B_2019
-INFO:root:start processing gps_Jason-3_2018
-INFO:root:end processing gps_Jason-3_2018
-INFO:root:start processing argos_Jason-3_2018
-INFO:root:end processing argos_Jason-3_2018
-INFO:root:start processing gps_SARAL_2018
-INFO:root:end processing gps_SARAL_2018
-INFO:root:start processing argos_SARAL_2018
-INFO:root:end processing argos_SARAL_2018
-INFO:root:start processing gps_Cryosat-2_2018
-INFO:root:end processing gps_Cryosat-2_2018
-INFO:root:start processing argos_Cryosat-2_2018
-INFO:root:end processing argos_Cryosat-2_2018
-INFO:root:start processing gps_Sentinel-3_A_2018
-INFO:root:end processing gps_Sentinel-3_A_2018
-INFO:root:start processing argos_Sentinel-3_A_2018
-INFO:root:end processing argos_Sentinel-3_A_2018
-INFO:root:start processing gps_Sentinel-3_B_2018
-INFO:root:end processing gps_Sentinel-3_B_2018
-INFO:root:start processing argos_Sentinel-3_B_2018
-INFO:root:end processing argos_Sentinel-3_B_2018
-INFO:root:start processing gps_Jason-3_2017
-INFO:root:end processing gps_Jason-3_2017
-INFO:root:start processing argos_Jason-3_2017
-INFO:root:end processing argos_Jason-3_2017
-INFO:root:start processing gps_Jason-2_2017
-INFO:root:end processing gps_Jason-2_2017
-INFO:root:start processing argos_Jason-2_2017
-INFO:root:end processing argos_Jason-2_2017
-INFO:root:start processing gps_SARAL_2017
-INFO:root:end processing gps_SARAL_2017
-INFO:root:start processing argos_SARAL_2017
-INFO:root:end processing argos_SARAL_2017
-INFO:root:start processing gps_Cryosat-2_2017
-INFO:root:end processing gps_Cryosat-2_2017
-INFO:root:start processing argos_Cryosat-2_2017
-INFO:root:end processing argos_Cryosat-2_2017
-INFO:root:start processing gps_Sentinel-3_A_2017
-INFO:root:end processing gps_Sentinel-3_A_2017
-INFO:root:start processing argos_Sentinel-3_A_2017
-INFO:root:end processing argos_Sentinel-3_A_2017
-INFO:root:start processing gps_Jason-3_2016
-INFO:root:end processing gps_Jason-3_2016
-INFO:root:start processing argos_Jason-3_2016
-INFO:root:end processing argos_Jason-3_2016
-INFO:root:start processing gps_Jason-2_2016
-INFO:root:end processing gps_Jason-2_2016
-INFO:root:start processing argos_Jason-2_2016
-INFO:root:end processing argos_Jason-2_2016
-INFO:root:start processing gps_SARAL_2016
-INFO:root:end processing gps_SARAL_2016
-INFO:root:start processing argos_SARAL_2016
-INFO:root:end processing argos_SARAL_2016
-INFO:root:start processing gps_Cryosat-2_2016
-INFO:root:end processing gps_Cryosat-2_2016
-INFO:root:start processing argos_Cryosat-2_2016
-INFO:root:end processing argos_Cryosat-2_2016
-INFO:root:start processing gps_Sentinel-3_A_2016
-INFO:root:end processing gps_Sentinel-3_A_2016
-INFO:root:start processing argos_Sentinel-3_A_2016
-INFO:root:end processing argos_Sentinel-3_A_2016
-INFO:root:start processing gps_Jason-2_2015
-INFO:root:end processing gps_Jason-2_2015
-INFO:root:start processing argos_Jason-2_2015
-INFO:root:end processing argos_Jason-2_2015
-INFO:root:start processing gps_SARAL_2015
-INFO:root:end processing gps_SARAL_2015
-INFO:root:start processing argos_SARAL_2015
-INFO:root:end processing argos_SARAL_2015
-INFO:root:start processing gps_Cryosat-2_2015
-INFO:root:end processing gps_Cryosat-2_2015
-INFO:root:start processing argos_Cryosat-2_2015
-INFO:root:end processing argos_Cryosat-2_2015
-INFO:root:start processing gps_Jason-2_2014
-INFO:root:end processing gps_Jason-2_2014
-INFO:root:start processing argos_Jason-2_2014
-INFO:root:end processing argos_Jason-2_2014
-INFO:root:start processing gps_SARAL_2014
-INFO:root:end processing gps_SARAL_2014
-INFO:root:start processing argos_SARAL_2014
-INFO:root:end processing argos_SARAL_2014
-INFO:root:start processing gps_Cryosat-2_2014
-INFO:root:end processing gps_Cryosat-2_2014
-INFO:root:start processing argos_Cryosat-2_2014
-INFO:root:end processing argos_Cryosat-2_2014
-INFO:root:start processing gps_Jason-2_2013
-INFO:root:end processing gps_Jason-2_2013
-INFO:root:start processing argos_Jason-2_2013
-INFO:root:end processing argos_Jason-2_2013
-INFO:root:start processing gps_SARAL_2013
-INFO:root:end processing gps_SARAL_2013
-INFO:root:start processing argos_SARAL_2013
-INFO:root:end processing argos_SARAL_2013
-INFO:root:start processing gps_Cryosat-2_2013
-INFO:root:end processing gps_Cryosat-2_2013
-INFO:root:start processing argos_Cryosat-2_2013
-INFO:root:end processing argos_Cryosat-2_2013
-INFO:root:start processing gps_Jason-2_2012
-INFO:root:end processing gps_Jason-2_2012
-INFO:root:start processing argos_Jason-2_2012
-INFO:root:end processing argos_Jason-2_2012
-INFO:root:start processing gps_Cryosat-2_2012
-INFO:root:end processing gps_Cryosat-2_2012
-INFO:root:start processing argos_Cryosat-2_2012
-INFO:root:end processing argos_Cryosat-2_2012
-INFO:root:start processing gps_Jason-2_2011
-INFO:root:end processing gps_Jason-2_2011
-INFO:root:start processing argos_Jason-2_2011
-INFO:root:end processing argos_Jason-2_2011
-INFO:root:start processing gps_Cryosat-2_2011
-INFO:root:end processing gps_Cryosat-2_2011
-INFO:root:start processing argos_Cryosat-2_2011
-INFO:root:end processing argos_Cryosat-2_2011
-INFO:root:start processing gps_Jason-2_2010
-INFO:root:end processing gps_Jason-2_2010
-INFO:root:start processing argos_Jason-2_2010
-INFO:root:start spinning up dask cluster, jobs=2
-INFO:root:dashboard via ssh: ssh -N -L 8787:r1i0n24:8787 mdemol@datarmor1-10g
-INFO:root:open browser at address of the type: http://localhost:8787
-INFO:root:start processing gps_Jason-3_2020
-INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-3_2020.zarr
-INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-3_2020.zarr
-INFO:root:gps_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-3_2020.zarr
-INFO:root:end processing gps_Jason-3_2020
-INFO:root:start processing argos_Jason-3_2020
-INFO:root:argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-3_2020.zarr
-INFO:root:argos_Jason-3_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-3_2020.zarr
-INFO:root:end processing argos_Jason-3_2020
-INFO:root:start processing gps_SARAL_2020
-INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2020.zarr
-INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2020.zarr
-INFO:root:gps_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2020.zarr
-INFO:root:end processing gps_SARAL_2020
-INFO:root:start processing argos_SARAL_2020
-INFO:root:argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2020.zarr
-INFO:root:argos_SARAL_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2020.zarr
-INFO:root:end processing argos_SARAL_2020
-INFO:root:start processing gps_Cryosat-2_2020
-INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2020.zarr
-INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2020.zarr
-INFO:root:gps_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2020.zarr
-INFO:root:end processing gps_Cryosat-2_2020
-INFO:root:start processing argos_Cryosat-2_2020
-INFO:root:argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2020.zarr
-INFO:root:argos_Cryosat-2_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2020.zarr
-INFO:root:end processing argos_Cryosat-2_2020
-INFO:root:start processing gps_Sentinel-3_A_2020
-INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_A_2020.zarr
-INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_A_2020.zarr
-INFO:root:gps_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_A_2020.zarr
-INFO:root:end processing gps_Sentinel-3_A_2020
-INFO:root:start processing argos_Sentinel-3_A_2020
-INFO:root:argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_A_2020.zarr
-INFO:root:argos_Sentinel-3_A_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_A_2020.zarr
-INFO:root:end processing argos_Sentinel-3_A_2020
-INFO:root:start processing gps_Sentinel-3_B_2020
-INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_B_2020.zarr
-INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_B_2020.zarr
-INFO:root:gps_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_B_2020.zarr
-INFO:root:end processing gps_Sentinel-3_B_2020
-INFO:root:start processing argos_Sentinel-3_B_2020
-INFO:root:argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_B_2020.zarr
-INFO:root:argos_Sentinel-3_B_2020 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_B_2020.zarr
-INFO:root:end processing argos_Sentinel-3_B_2020
-INFO:root:start processing gps_Jason-3_2019
-INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-3_2019.zarr
-INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-3_2019.zarr
-INFO:root:gps_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-3_2019.zarr
-INFO:root:end processing gps_Jason-3_2019
-INFO:root:start processing argos_Jason-3_2019
-INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-3_2019.zarr
-INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-3_2019.zarr
-INFO:root:argos_Jason-3_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-3_2019.zarr
-INFO:root:end processing argos_Jason-3_2019
-INFO:root:start processing gps_SARAL_2019
-INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2019.zarr
-INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2019.zarr
-INFO:root:gps_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2019.zarr
-INFO:root:end processing gps_SARAL_2019
-INFO:root:start processing argos_SARAL_2019
-INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2019.zarr
-INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_SARAL_2019.zarr
-INFO:root:argos_SARAL_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2019.zarr
-INFO:root:end processing argos_SARAL_2019
-INFO:root:start processing gps_Cryosat-2_2019
-INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2019.zarr
-INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2019.zarr
-INFO:root:gps_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2019.zarr
-INFO:root:end processing gps_Cryosat-2_2019
-INFO:root:start processing argos_Cryosat-2_2019
-INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2019.zarr
-INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2019.zarr
-INFO:root:argos_Cryosat-2_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2019.zarr
-INFO:root:end processing argos_Cryosat-2_2019
-INFO:root:start processing gps_Sentinel-3_A_2019
-INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_A_2019.zarr
-INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_A_2019.zarr
-INFO:root:gps_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_A_2019.zarr
-INFO:root:end processing gps_Sentinel-3_A_2019
-INFO:root:start processing argos_Sentinel-3_A_2019
-INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_A_2019.zarr
-INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Sentinel-3_A_2019.zarr
-INFO:root:argos_Sentinel-3_A_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_A_2019.zarr
-INFO:root:end processing argos_Sentinel-3_A_2019
-INFO:root:start processing gps_Sentinel-3_B_2019
-INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_B_2019.zarr
-INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_B_2019.zarr
-INFO:root:gps_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_B_2019.zarr
-INFO:root:end processing gps_Sentinel-3_B_2019
-INFO:root:start processing argos_Sentinel-3_B_2019
-INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_B_2019.zarr
-INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Sentinel-3_B_2019.zarr
-INFO:root:argos_Sentinel-3_B_2019 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_B_2019.zarr
-INFO:root:end processing argos_Sentinel-3_B_2019
-INFO:root:start processing gps_Jason-3_2018
-INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-3_2018.zarr
-INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-3_2018.zarr
-INFO:root:gps_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-3_2018.zarr
-INFO:root:end processing gps_Jason-3_2018
-INFO:root:start processing argos_Jason-3_2018
-INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-3_2018.zarr
-INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-3_2018.zarr
-INFO:root:argos_Jason-3_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-3_2018.zarr
-INFO:root:end processing argos_Jason-3_2018
-INFO:root:start processing gps_SARAL_2018
-INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2018.zarr
-INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2018.zarr
-INFO:root:gps_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2018.zarr
-INFO:root:end processing gps_SARAL_2018
-INFO:root:start processing argos_SARAL_2018
-INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2018.zarr
-INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_SARAL_2018.zarr
-INFO:root:argos_SARAL_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2018.zarr
-INFO:root:end processing argos_SARAL_2018
-INFO:root:start processing gps_Cryosat-2_2018
-INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2018.zarr
-INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2018.zarr
-INFO:root:gps_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2018.zarr
-INFO:root:end processing gps_Cryosat-2_2018
-INFO:root:start processing argos_Cryosat-2_2018
-INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2018.zarr
-INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2018.zarr
-INFO:root:argos_Cryosat-2_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2018.zarr
-INFO:root:end processing argos_Cryosat-2_2018
-INFO:root:start processing gps_Sentinel-3_A_2018
-INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_A_2018.zarr
-INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_A_2018.zarr
-INFO:root:gps_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_A_2018.zarr
-INFO:root:end processing gps_Sentinel-3_A_2018
-INFO:root:start processing argos_Sentinel-3_A_2018
-INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_A_2018.zarr
-INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Sentinel-3_A_2018.zarr
-INFO:root:argos_Sentinel-3_A_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_A_2018.zarr
-INFO:root:end processing argos_Sentinel-3_A_2018
-INFO:root:start processing gps_Sentinel-3_B_2018
-INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_B_2018.zarr
-INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_B_2018.zarr
-INFO:root:gps_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_B_2018.zarr
-INFO:root:end processing gps_Sentinel-3_B_2018
-INFO:root:start processing argos_Sentinel-3_B_2018
-INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_B_2018.zarr
-INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Sentinel-3_B_2018.zarr
-INFO:root:argos_Sentinel-3_B_2018 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_B_2018.zarr
-INFO:root:end processing argos_Sentinel-3_B_2018
-INFO:root:start processing gps_Jason-3_2017
-INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-3_2017.zarr
-INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-3_2017.zarr
-INFO:root:gps_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-3_2017.zarr
-INFO:root:end processing gps_Jason-3_2017
-INFO:root:start processing argos_Jason-3_2017
-INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-3_2017.zarr
-INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-3_2017.zarr
-INFO:root:argos_Jason-3_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-3_2017.zarr
-INFO:root:end processing argos_Jason-3_2017
-INFO:root:start processing gps_Jason-2_2017
-INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2017.zarr
-INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2017.zarr
-INFO:root:gps_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2017.zarr
-INFO:root:end processing gps_Jason-2_2017
-INFO:root:start processing argos_Jason-2_2017
-INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2017.zarr
-INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2017.zarr
-INFO:root:argos_Jason-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2017.zarr
-INFO:root:end processing argos_Jason-2_2017
-INFO:root:start processing gps_SARAL_2017
-INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2017.zarr
-INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2017.zarr
-INFO:root:gps_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2017.zarr
-INFO:root:end processing gps_SARAL_2017
-INFO:root:start processing argos_SARAL_2017
-INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2017.zarr
-INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_SARAL_2017.zarr
-INFO:root:argos_SARAL_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2017.zarr
-INFO:root:end processing argos_SARAL_2017
-INFO:root:start processing gps_Cryosat-2_2017
-INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2017.zarr
-INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2017.zarr
-INFO:root:gps_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2017.zarr
-INFO:root:end processing gps_Cryosat-2_2017
-INFO:root:start processing argos_Cryosat-2_2017
-INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2017.zarr
-INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2017.zarr
-INFO:root:argos_Cryosat-2_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2017.zarr
-INFO:root:end processing argos_Cryosat-2_2017
-INFO:root:start processing gps_Sentinel-3_A_2017
-INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_A_2017.zarr
-INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_A_2017.zarr
-INFO:root:gps_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_A_2017.zarr
-INFO:root:end processing gps_Sentinel-3_A_2017
-INFO:root:start processing argos_Sentinel-3_A_2017
-INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_A_2017.zarr
-INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Sentinel-3_A_2017.zarr
-INFO:root:argos_Sentinel-3_A_2017 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_A_2017.zarr
-INFO:root:end processing argos_Sentinel-3_A_2017
-INFO:root:start processing gps_Jason-3_2016
-INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-3_2016.zarr
-INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-3_2016.zarr
-INFO:root:gps_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-3_2016.zarr
-INFO:root:end processing gps_Jason-3_2016
-INFO:root:start processing argos_Jason-3_2016
-INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-3_2016.zarr
-INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-3_2016.zarr
-INFO:root:argos_Jason-3_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-3_2016.zarr
-INFO:root:end processing argos_Jason-3_2016
-INFO:root:start processing gps_Jason-2_2016
-INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2016.zarr
-INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2016.zarr
-INFO:root:gps_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2016.zarr
-INFO:root:end processing gps_Jason-2_2016
-INFO:root:start processing argos_Jason-2_2016
-INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2016.zarr
-INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2016.zarr
-INFO:root:argos_Jason-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2016.zarr
-INFO:root:end processing argos_Jason-2_2016
-INFO:root:start processing gps_SARAL_2016
-INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2016.zarr
-INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2016.zarr
-INFO:root:gps_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2016.zarr
-INFO:root:end processing gps_SARAL_2016
-INFO:root:start processing argos_SARAL_2016
-INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2016.zarr
-INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_SARAL_2016.zarr
-INFO:root:argos_SARAL_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2016.zarr
-INFO:root:end processing argos_SARAL_2016
-INFO:root:start processing gps_Cryosat-2_2016
-INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2016.zarr
-INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2016.zarr
-INFO:root:gps_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2016.zarr
-INFO:root:end processing gps_Cryosat-2_2016
-INFO:root:start processing argos_Cryosat-2_2016
-INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2016.zarr
-INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2016.zarr
-INFO:root:argos_Cryosat-2_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2016.zarr
-INFO:root:end processing argos_Cryosat-2_2016
-INFO:root:start processing gps_Sentinel-3_A_2016
-INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Sentinel-3_A_2016.zarr
-INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Sentinel-3_A_2016.zarr
-INFO:root:gps_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Sentinel-3_A_2016.zarr
-INFO:root:end processing gps_Sentinel-3_A_2016
-INFO:root:start processing argos_Sentinel-3_A_2016
-INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Sentinel-3_A_2016.zarr
-INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Sentinel-3_A_2016.zarr
-INFO:root:argos_Sentinel-3_A_2016 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Sentinel-3_A_2016.zarr
-INFO:root:end processing argos_Sentinel-3_A_2016
-INFO:root:start processing gps_Jason-2_2015
-INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2015.zarr
-INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2015.zarr
-INFO:root:gps_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2015.zarr
-INFO:root:end processing gps_Jason-2_2015
-INFO:root:start processing argos_Jason-2_2015
-INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2015.zarr
-INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2015.zarr
-INFO:root:argos_Jason-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2015.zarr
-INFO:root:end processing argos_Jason-2_2015
-INFO:root:start processing gps_SARAL_2015
-INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2015.zarr
-INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2015.zarr
-INFO:root:gps_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2015.zarr
-INFO:root:end processing gps_SARAL_2015
-INFO:root:start processing argos_SARAL_2015
-INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2015.zarr
-INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_SARAL_2015.zarr
-INFO:root:argos_SARAL_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2015.zarr
-INFO:root:end processing argos_SARAL_2015
-INFO:root:start processing gps_Cryosat-2_2015
-INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2015.zarr
-INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2015.zarr
-INFO:root:gps_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2015.zarr
-INFO:root:end processing gps_Cryosat-2_2015
-INFO:root:start processing argos_Cryosat-2_2015
-INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2015.zarr
-INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2015.zarr
-INFO:root:argos_Cryosat-2_2015 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2015.zarr
-INFO:root:end processing argos_Cryosat-2_2015
-INFO:root:start processing gps_Jason-2_2014
-INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2014.zarr
-INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2014.zarr
-INFO:root:gps_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2014.zarr
-INFO:root:end processing gps_Jason-2_2014
-INFO:root:start processing argos_Jason-2_2014
-INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2014.zarr
-INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2014.zarr
-INFO:root:argos_Jason-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2014.zarr
-INFO:root:end processing argos_Jason-2_2014
-INFO:root:start processing gps_SARAL_2014
-INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2014.zarr
-INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2014.zarr
-INFO:root:gps_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2014.zarr
-INFO:root:end processing gps_SARAL_2014
-INFO:root:start processing argos_SARAL_2014
-INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2014.zarr
-INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_SARAL_2014.zarr
-INFO:root:argos_SARAL_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2014.zarr
-INFO:root:end processing argos_SARAL_2014
-INFO:root:start processing gps_Cryosat-2_2014
-INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2014.zarr
-INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2014.zarr
-INFO:root:gps_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2014.zarr
-INFO:root:end processing gps_Cryosat-2_2014
-INFO:root:start processing argos_Cryosat-2_2014
-INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2014.zarr
-INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2014.zarr
-INFO:root:argos_Cryosat-2_2014 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2014.zarr
-INFO:root:end processing argos_Cryosat-2_2014
-INFO:root:start processing gps_Jason-2_2013
-INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2013.zarr
-INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2013.zarr
-INFO:root:gps_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2013.zarr
-INFO:root:end processing gps_Jason-2_2013
-INFO:root:start processing argos_Jason-2_2013
-INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2013.zarr
-INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2013.zarr
-INFO:root:argos_Jason-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2013.zarr
-INFO:root:end processing argos_Jason-2_2013
-INFO:root:start processing gps_SARAL_2013
-INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_SARAL_2013.zarr
-INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_SARAL_2013.zarr
-INFO:root:gps_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_SARAL_2013.zarr
-INFO:root:end processing gps_SARAL_2013
-INFO:root:start processing argos_SARAL_2013
-INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_SARAL_2013.zarr
-INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_SARAL_2013.zarr
-INFO:root:argos_SARAL_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_SARAL_2013.zarr
-INFO:root:end processing argos_SARAL_2013
-INFO:root:start processing gps_Cryosat-2_2013
-INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2013.zarr
-INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2013.zarr
-INFO:root:gps_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2013.zarr
-INFO:root:end processing gps_Cryosat-2_2013
-INFO:root:start processing argos_Cryosat-2_2013
-INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2013.zarr
-INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2013.zarr
-INFO:root:argos_Cryosat-2_2013 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2013.zarr
-INFO:root:end processing argos_Cryosat-2_2013
-INFO:root:start processing gps_Jason-2_2012
-INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2012.zarr
-INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2012.zarr
-INFO:root:gps_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2012.zarr
-INFO:root:end processing gps_Jason-2_2012
-INFO:root:start processing argos_Jason-2_2012
-INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2012.zarr
-INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2012.zarr
-INFO:root:argos_Jason-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2012.zarr
-INFO:root:end processing argos_Jason-2_2012
-INFO:root:start processing gps_Cryosat-2_2012
-INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2012.zarr
-INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2012.zarr
-INFO:root:gps_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2012.zarr
-INFO:root:end processing gps_Cryosat-2_2012
-INFO:root:start processing argos_Cryosat-2_2012
-INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2012.zarr
-INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2012.zarr
-INFO:root:argos_Cryosat-2_2012 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2012.zarr
-INFO:root:end processing argos_Cryosat-2_2012
-INFO:root:start processing gps_Jason-2_2011
-INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2011.zarr
-INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2011.zarr
-INFO:root:gps_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2011.zarr
-INFO:root:end processing gps_Jason-2_2011
-INFO:root:start processing argos_Jason-2_2011
-INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2011.zarr
-INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2011.zarr
-INFO:root:argos_Jason-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2011.zarr
-INFO:root:end processing argos_Jason-2_2011
-INFO:root:start processing gps_Cryosat-2_2011
-INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2011.zarr
-INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2011.zarr
-INFO:root:gps_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Cryosat-2_2011.zarr
-INFO:root:end processing gps_Cryosat-2_2011
-INFO:root:start processing argos_Cryosat-2_2011
-INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2011.zarr
-INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2011.zarr
-INFO:root:argos_Cryosat-2_2011 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2011.zarr
-INFO:root:end processing argos_Cryosat-2_2011
-INFO:root:start processing gps_Jason-2_2010
-INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Jason-2_2010.zarr
-INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Jason-2_2010.zarr
-INFO:root:gps_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_gps_Jason-2_2010.zarr
-INFO:root:end processing gps_Jason-2_2010
-INFO:root:start processing argos_Jason-2_2010
-INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Jason-2_2010.zarr
-INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Jason-2_2010.zarr
-INFO:root:argos_Jason-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Jason-2_2010.zarr
-INFO:root:end processing argos_Jason-2_2010
-INFO:root:start processing gps_Cryosat-2_2010
-INFO:root:gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_gps_Cryosat-2_2010.zarr
-INFO:root:gps_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_gps_Cryosat-2_2010.zarr
-INFO:root:end processing gps_Cryosat-2_2010
-INFO:root:start processing argos_Cryosat-2_2010
-INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_argos_Cryosat-2_2010.zarr
-INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_drogued_argos_Cryosat-2_2010.zarr
-INFO:root:argos_Cryosat-2_2010 storred in /home/datawork-lops-osi/aponte/margot/historical_coloc_ok/mslonlat/mslonlat_25_1800.0_5_undrogued_argos_Cryosat-2_2010.zarr
-INFO:root:end processing argos_Cryosat-2_2010
-INFO:root:starts closing dask cluster ...
-INFO:root:client closed ...
-INFO:root: qdel 8147844
-INFO:root: qdel 8147845
-INFO:root:manually killed jobs ...
-INFO:root:... done
-INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=10

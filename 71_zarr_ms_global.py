@@ -33,7 +33,7 @@ run_name = "ms_global"
 
 # will overwrite existing results
 # overwrite = True
-overwrite = False
+overwrite = True
 
 # dask parameters
 
@@ -207,8 +207,24 @@ def trim_memory() -> int:
 DL =25e3 #meters
 DT = 0.5*3600 #seconds
 
-def ms_dataset(dsm, l) :
-    dsm = match.add_except_sum(dsm)   
+#IF restricted computation
+wd_x= ['es_cstrio_z15_alti_wd_x', 'es_cstrio_z15_drifter_wd_x']
+wd_y = ['es_cstrio_z15_alti_wd_y', 'es_cstrio_z15_drifter_wd_y']
+grad_x = ['alti_ggx_adt_filtered',
+          'alti_ggx_adt_filtered_ocean_tide',
+          'alti_ggx_adt_filtered_ocean_tide_internal_tide',
+          'alti_ggx_adt_filtered_ocean_tide_internal_tide_dac',
+         'aviso_alti_ggx_adt',
+          'aviso_drifter_ggx_adt'
+         ]
+grad_y =['aviso_alti_ggy_adt', 'aviso_drifter_ggy_adt']
+cutoff=None
+
+
+
+
+def ms_dataset(dsm, l, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff) :
+    dsm = match.add_except_sum(dsm, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
     nb = dsm.sizes["obs"]
     ds = (dsm**2).mean('obs')
     ds["nb_coloc"] = nb

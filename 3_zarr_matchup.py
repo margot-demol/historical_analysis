@@ -30,7 +30,7 @@ run_name = "box_build_colocalisations"
 
 # will overwrite existing results
 # overwrite = True
-overwrite = False
+overwrite = True
 
 # dask parameters
 
@@ -207,7 +207,7 @@ def run_matchup(l):
     ds_matchup = matchup_dataset_one(l)
     #store
     zarr = os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr")
-    ds_matchup.to_zarr(zarr, mode="w")
+    ds_matchup.chunk({'obs':500}).to_zarr(zarr, mode="w")
     logging.info(f"matchup {l} storred in {zarr}")
     
 if __name__ == "__main__":

@@ -18,7 +18,7 @@ from distributed.diagnostics import MemorySampler
 # to force flushing of memory
 import gc, ctypes
 
-from histlib.cstes import labels, zarr_dir, matchup_dir, var
+from histlib.cstes import labels, zarr_dir, matchup_dir
 import histlib.matchup as match
 
 dataset = 'matchup'
@@ -29,7 +29,7 @@ run_name = "box_build_colocalisations"
 
 # will overwrite existing results
 # overwrite = True
-overwrite = False
+overwrite = True
 
 # dask parameters
 
@@ -201,8 +201,26 @@ def trim_memory() -> int:
 
 # ---------------------------------- core of the job to be done ----------------------------------
 DL =25e3 #meters
-DT = 0.5*3600 #seconds
+DT = int(1800) #seconds
 dl = 5
+
+var =[
+    'drifter_acc_x_0',
+    'drifter_acc_y_0',
+    'drifter_coriolis_x_0',
+    'drifter_coriolis_y_0',
+    'es_cstrio_z15_alti_wd_x',
+    'es_cstrio_z15_drifter_wd_x',
+    'es_cstrio_z15_alti_wd_y',
+    'es_cstrio_z15_drifter_wd_y',
+    'alti_ggx_adt_filtered',
+    'alti_ggx_adt_filtered_ocean_tide',
+    'alti_ggx_adt_filtered_ocean_tide_internal_tide',
+    'aviso_alti_ggx_adt',
+    'aviso_drifter_ggx_adt',
+    'aviso_alti_ggy_adt',
+    'aviso_drifter_ggy_adt',
+]
 
 def bin_lonlat_ms(ds,l, dl):
     dsm = match.add_except_sum(ds)   

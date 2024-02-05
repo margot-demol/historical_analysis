@@ -18,7 +18,7 @@ from distributed.diagnostics import MemorySampler
 # to force flushing of memory
 import gc, ctypes
 
-from histlib.cstes import labels, zarr_dir, matchup_dir, var
+from histlib.cstes import labels, zarr_dir, matchup_dir
 import histlib.matchup as match
 
 dataset = 'matchup'
@@ -203,6 +203,24 @@ def trim_memory() -> int:
 dl = 5e3
 dt = 10*60
 
+var =[
+    'drifter_acc_x_0',
+    'drifter_acc_y_0',
+    'drifter_coriolis_x_0',
+    'drifter_coriolis_y_0',
+    'es_cstrio_z15_alti_wd_x',
+    'es_cstrio_z15_drifter_wd_x',
+    'es_cstrio_z15_alti_wd_y',
+    'es_cstrio_z15_drifter_wd_y',
+    'alti_ggx_adt_filtered',
+    'alti_ggx_adt_filtered_ocean_tide',
+    'alti_ggx_adt_filtered_ocean_tide_internal_tide',
+    'aviso_alti_ggx_adt',
+    'aviso_drifter_ggx_adt',
+    'aviso_alti_ggy_adt',
+    'aviso_drifter_ggy_adt',
+]
+
 def bin_dist_ms(ds,l, dl):
     dsm = match.add_except_sum(ds)   
     dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop(['id_comb', 'time'])
@@ -345,7 +363,7 @@ if __name__ == "__main__":
     ## boucle for on labels
     for l in labels: 
         logging.info(f"start processing {l}")
-        run_ms_time(l)            
+        run_ms_dist(l)            
         logging.info(f"end processing {l}")
     
     # close dask

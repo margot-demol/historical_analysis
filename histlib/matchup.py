@@ -149,23 +149,29 @@ list_func_suffix = ["cstrio_z0", "cstrio_z15"]
 MATCHUP FILE COLOC + AVISO + ERASTAR
 ------------------------------------------------------------------------
 """
-def matchup_dataset_one(l):
+def matchup_dataset_one(l, T=10, cutoff=[2,1,0.5,0.2, 0.1]):
     """Gathers colocalisation, erastar and aviso data at matchup point, include drogue status. Return the matchup dataset corresponding to l
     Parameters
     ----------
     l : label, 
             in cstes.labels
+    T : window length of low pass filter on drifter trajectories (days)
+    cutoff : cutoff frequencies (cpd)
     """
     ds_data = xr.open_zarr(os.path.join(zarr_dir, f'{l}.zarr')).chunk({'obs':500, 'site_obs':-1})
     ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':500, 'site_obs':-1})
     ds_data = add_adt_to_ds_data(ds_data)
+
+    drogue_status = ds_data.time<ds_data.drifter_drogue_lost_date.mean('site_obs')
+    ds_data = ds_data[_data_var]
+    
+    if cutoff!=None:
+        add_low_pass_filter_to_data(ds_data, T=10, cutoff=[2,1,0.5,0.2, 0.1])
+    
     ds_aviso = xr.open_zarr(os.path.join(zarr_dir+'_ok','aviso', f'aviso_{l}.zarr')).chunk({'obs':500})
     ds_stress = xr.open_zarr(os.path.join(zarr_dir+'_ok','erastar', f'erastar_{l}.zarr')).chunk({'obs':500})
     
     # COLOCALIZATIONS DATA
-
-    drogue_status = ds_data.time<ds_data.drifter_drogue_lost_date.mean('site_obs')
-    ds_data = ds_data[_data_var]
     cc = [l for l in list(ds_data.coords)if l not in ['obs', 'box_x', 'box_y', 'alti_time_mid']]
     ds_data = ds_data.reset_coords(cc)
     idx = ds_data.__site_matchup_indice.astype(int).compute()
@@ -208,6 +214,17 @@ def matchup_dataset_one(l):
     _ds = _ds.rename({v: v.replace("_matchup", "") for v in _ds})
     #_ds = change_obs_coords(_ds, l)  
     _ds = _ds.drop(['box_x', 'box_y']).set_coords(['lon', 'lat','time'])
+
+    #ADDING TIDE + DAC correction
+    _ds['alti_ggx_adt_filtered_ocean_tide'] = _ds.alti_ggx_adt_filtered+ _ds.alti_ggx_ocean_tide
+    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide'] = _ds.alti_ggx_adt_filtered_ocean_tide + _ds.alti_ggx_internal_tide
+    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide_dac'] = _ds.alti_ggx_adt_filtered_ocean_tide_internal_tide + _ds.alti_ggx_internal_tide
+
+    _ds['alti_ggx_adt_filtered_ocean_tide'].attrs=_ds.alti_ggx_adt_filtered.attrs
+    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide'].attrs = _ds.alti_ggx_adt_filtered.attrs
+    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide_dac'].attrs = _ds.alti_ggx_adt_filtered.attrs
+
+
     return _ds
 
 """
@@ -215,17 +232,10 @@ def matchup_dataset_one(l):
 ADD LOW PASS FILTER
 ------------------
 """
-def add_low_pass_filter_to_data(ds, T=2, cutoff=4) : 
-    """ Apply low pass filter on drifter velocities, compute new drifter_acc and drifter_coriolis and return dataset ds with these variables added (with time dimension)
-    Parameters
-    ----------
-    ds_data: dataset
-            dataset containing colocalisations
-    T : float
-        window in days
-    cutoff : float
-        cutoff frequency in cpd
-    
+def add_low_pass_filter_to_data(ds, T=10, cutoff=[2,1,0.5,0.2, 0.1]) : 
+    """ Return dataset with filtered trajectories acceleration and coriolis term 
+        T: window length days
+        cutoff : cut off frequency in cpd
     """
     from scipy.signal import filtfilt
     from scipy.integrate import cumulative_trapezoid
@@ -234,34 +244,29 @@ def add_low_pass_filter_to_data(ds, T=2, cutoff=4) :
     dt = (ds.drifter_time.diff('site_obs')/pd.Timedelta('1D')).mean()  # in days
     from pynsitu.tseries import generate_filter
 
-    taps = generate_filter(band="low", dt=dt, T=T, bandwidth=cutoff)
+    dss = ds[[ 'drifter_vx', 'drifter_vy']].compute().fillna(0)
+    if not isinstance(cutoff, list) : cutoff=[cutoff]
+    for cto in cutoff :
+        taps = generate_filter(band="low", dt=dt, T=T, bandwidth=cto)
+        print(len(taps))
+        try : 
+            vx = xr.DataArray(filtfilt(taps, 1, dss.drifter_vx),dims=['obs', 'site_obs'])
+            vy = xr.DataArray(filtfilt(taps, 1, dss.drifter_vy), dims=['obs', 'site_obs'])
+        except :
+            print('padlen modified')
+            vx = xr.DataArray(filtfilt(taps, 1, dss.drifter_vx, padlen = len(dss.drifter_vx)),dims=['obs', 'site_obs'])
+            vy = xr.DataArray(filtfilt(taps, 1, dss.drifter_vy, padlen = len(dss.drifter_vx)), dims=['obs', 'site_obs'])
+            
+        cutoffstr = str(cto).replace('.','')
 
-    vx = xr.DataArray(filtfilt(taps, 1, ds.drifter_vx), dims=['obs', 'site_obs'])
-    vy = xr.DataArray(filtfilt(taps, 1, ds.drifter_vy), dims=['obs', 'site_obs'])
-    ds[f"drifter_acc_x_{cutoff}"] = (vx.differentiate("site_obs")/3600).assign_attrs(**ds.drifter_acc_x.attrs).assign_attrs(description= ds.drifter_acc_x.attrs['description'] + f' filtered with {cutoff} cpd frequency',cutoff=cutoff)
-    ds[f"drifter_acc_y_{cutoff}"] = (vy.differentiate("site_obs")/3600).assign_attrs(**ds.drifter_acc_x.attrs).assign_attrs(description= ds.drifter_acc_y.attrs['description'] + f' filtered with {cutoff} cpd frequency',cutoff=cutoff)
-    ds[f"drifter_coriolis_x_{cutoff}"] = (-vy * ds.f).assign_attrs(ds.drifter_coriolis_x.attrs).assign_attrs(description= ds.drifter_coriolis_x.attrs['description'] + f' filtered with {cutoff} cpd frequency',cutoff=cutoff)
-    ds[f"drifter_coriolis_y_{cutoff}"] = (vx * ds.f).assign_attrs(ds.drifter_coriolis_y.attrs).assign_attrs(description= ds.drifter_coriolis_y.attrs['description'] + f' filtered with {cutoff} cpd frequency',cutoff=cutoff)
-    
-    return ds
+        
+        
+        ds[f"drifter_acc_x_{cutoffstr}"] = (vx.differentiate("site_obs")/3600).assign_attrs(**ds.drifter_acc_x_0.attrs).assign_attrs(description= ds.drifter_acc_x_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
+        ds[f"drifter_acc_y_{cutoffstr}"] = (vy.differentiate("site_obs")/3600).assign_attrs(**ds.drifter_acc_x_0.attrs).assign_attrs(description= ds.drifter_acc_y_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
+        ds[f"drifter_coriolis_x_{cutoffstr}"] = (-vy * ds.f).assign_attrs(ds.drifter_coriolis_x_0.attrs).assign_attrs(description= ds.drifter_coriolis_x_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
+        ds[f"drifter_coriolis_y_{cutoffstr}"] = (vx * ds.f).assign_attrs(ds.drifter_coriolis_y_0.attrs).assign_attrs(description= ds.drifter_coriolis_y_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
 
-def add_low_pass_filter_to_matchup(l, T=2, cutoff=4):
-    """ Apply low pass filter on drifter velocities, compute new drifter_acc and drifter_coriolis and return these variables (and only them) at matchup point
-    Parameters
-    ----------
-    l: label
-            in cstes.labels
-    T : float
-        window in days
-    cutoff : float
-        cutoff frequency in cpd
-    
-    """
-    ds_data = xr.open_zarr(os.path.join(zarr_dir, f'{l}.zarr')).chunk({'obs':500, 'site_obs':-1})
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True)[['drifter_vx', 'drifter_vy', 'drifter_acc_x', 'drifter_acc_y', 'drifter_coriolis_x', 'drifter_coriolis_y', 'f', '__site_matchup_indice']].chunk({'obs':500, 'site_obs':-1})
-    ds = add_low_pass_filter_to_data(ds_data, T, cutoff)
-    idx = ds.__site_matchup_indice.astype(int).compute()
-    return ds.sel(site_obs=idx).chunk({'obs':500})
+
     
 """
 ------------------
@@ -283,8 +288,8 @@ def find_term_list(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=N
     """
     if not wd_x : wd_x = [l for l in _ds if "wd_x" in l]
     if not wd_y : wd_y = [l for l in _ds if "wd_y" in l]
-    if not grad_x : grad_x = [l for l in _ds if "ggx_adt"]# in l or "ggx_sla" in l]
-    if not grad_y : grad_y = [l for l in _ds if "ggy_adt"]# in l or "ggy_sla" in l]
+    if not grad_x : grad_x = [l for l in _ds if "ggx_adt" in l]# or "ggx_sla" in l]
+    if not grad_y : grad_y = [l for l in _ds if "ggy_adt" in l]# or "ggy_sla" in l]
     if not cutoff : cutoff = [l.split('acc_x_')[-1] for l in _ds if "acc_x" in l]
     return wd_x, wd_y, grad_x, grad_y, cutoff
     
