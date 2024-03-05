@@ -1,0 +1,7 @@
+github
+_old
+**/.ipynb_checkpoints
+**/__pycache__/
+**/output
+HELP.md
+images
