@@ -128,15 +128,236 @@ def ms_dataset(dsm, l) :
         
     return ds
     
-def globa_ms_drifter_sat_year(dsms):
-    return (dsms*dsms.nb_coloc).mean('drifter_sat_year').drop('nb_coloc')
+def global_ms_drifter_sat_year(dsmean, dsms, alpha):
+    """
+    dsmean: dataset with mean values
+    dsms : dataset with ms values
 
+    """
+    
+    #global ms
+    ms = (((dsms*dsms.nb_coloc).sum('drifter_sat_year'))/(dsms.nb_coloc.sum('drifter_sat_year'))).drop('nb_coloc')
+    print(dsms.nb_coloc.sum('drifter_sat_year'))
+    for v in dsms.keys():
+        if v != 'nb_coloc':
+            ms[v].attrs=dsms[v].attrs
+    #global mean and var
+    mean = (((dsmean*dsmean.nb_coloc).sum('drifter_sat_year'))/(dsmean.nb_coloc.sum('drifter_sat_year'))).drop('nb_coloc')
+    var = ms-mean**2
+    
+    #nb_coloc
+    nb_coloc = dsms.nb_coloc.sum('drifter_sat_year')
+    ms['nb_coloc']=nb_coloc
 
+    #error
+    from scipy.stats import ncx2
+    def get_xlow(mean, var, nb_coloc, alpha):
+        df = nb_coloc -1
+        nc = df*(mean**2)/var
+        norm = df/var
+        return ncx2.ppf(alpha/2, df, nc)/norm
+
+    def get_xup(mean, var, nb_coloc, alpha):
+        df = nb_coloc -1
+        nc = df*(mean**2)/var
+        norm = df/var
+        return ncx2.ppf(1-alpha/2, df, nc)/norm
+
+    mslow = xr.apply_ufunc(get_xlow, mean, var, nb_coloc, alpha)
+    msup = xr.apply_ufunc(get_xup, mean, var, nb_coloc, alpha)
+    
+    return ms, mslow, msup
+
+def compute_sum_ms(ds, dserr, id_):
+    dic = ds['sum_'+id_].attrs
+    return ds[dic['acc']]+ds[dic['coriolis']]+ds[dic['ggrad']]+ds[dic['wind']], dserr[dic['acc']]+dserr[dic['coriolis']]+dserr[dic['ggrad']]+dserr[dic['wind']], 
+    
+def nMSRe_id(ds,dserr, id_):
+    sum_ms, sum_ms_err = compute_sum_ms(ds,dserr, id_)
+    ter = ds['sum_'+id_]/sum_ms*100
+    tererr = ter*(dserr['sum_'+id_]/ds['sum_'+id_]+sum_ms_err/sum_ms)
+    return ter.values, tererr.values
+
+def C_x(ds,dserr, id_):
+    def C_x_one_id(ds,dserr, id_):
+        dic = ds['sum_'+id_].attrs
+        lab = ['acc', 'coriolis', 'ggrad', 'wind']
+        cx = {l:(ds['exc_'+l+'_'+id_] - ds['sum_'+id_]).values for l in lab}
+        err_cx = {l+'_err':(dserr['exc_'+l+'_'+id_] + dserr['sum_'+id_]).values for l in lab}
+        cx.update(err_cx)
+        df = pd.DataFrame(cx, index=pd.Index([id_], name='id_comb'))
+        return df
+
+    if isinstance(id_, str):
+        return C_x_one_id(ds,dserr, id_)
+    else : 
+        return pd.concat([C_x_one_id(ds,dserr, i) for i in id_])
+
+def true_err_x(ds,dserr, id_) :
+    dso = xr.Dataset()
+    dic = ds['sum_'+id_].attrs
+    for x in ['acc', 'coriolis', 'ggrad', 'wind']:
+        X =dic[x]
+        dso[x] = ds[X]
+        dso[x+'_err'] = dserr[X]
+        dso['exc_'+x] = ds['exc_' + x +'_'+ id_]
+        dso['true_'+x] = (ds[X] - ds['sum_'+id_] + ds['exc_' + x +'_'+ id_])/2
+        dso['true_'+x+'_err'] = (dserr[X] + dserr['sum_'+id_] + dserr['exc_' + x +'_'+ id_])/2
+        dso['err_'+x] = (ds[X] + ds['sum_'+id_] - ds['exc_' + x +'_'+ id_])/2
+        dso['err_'+x+'_err'] = (dserr[X] + dserr['sum_'+id_] + dserr['exc_' + x +'_'+ id_])/2
+    dso['S'] = ds['sum_'+id_]
+    return dso
+        
 """
 PLOT
 -------------------------------
 """
+def plot_cor_uncor_part(ds, ax, title=None):
+    """ 
+    Parameters
+    ----------
+    ds : dataset with rms of x, excx and sum (created by )
+    id_: identification of the combination
+    ax : axis on which to plot
 
+    """
+    # ACC X
+    ax.bar(1.5, ds['true_acc'], yerr = ds['true_acc_err'], capsize=10,
+           color = 'red', width = 0.4, zorder=3, align = 'center')
+    ax.bar(1.5, ds['err_acc'], bottom = ds['true_acc'],yerr = ds['acc_err'], capsize=10,
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.text(1.5, ds['acc']+5e-12, str(np.format_float_scientific(ds['acc'].values,precision = 3)), horizontalalignment='center')
+    rse = np.round(ds['true_acc']/ds['acc']*100,2)
+    ax.text(1.5, ds['true_acc']+5e-12, f'{rse.values}%', horizontalalignment='center')
+
+    # CORIOLIS
+    ax.bar(2, ds['true_coriolis'], yerr = ds['true_coriolis_err'], capsize=10,
+           color = 'green', width = 0.4, zorder=3, align = 'center')
+    ax.bar(2, ds['err_coriolis'], bottom = ds['true_coriolis'],yerr = ds['coriolis_err'], capsize=10,
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.text(2, ds['coriolis']+5e-12, str(np.format_float_scientific(ds['coriolis'].values,precision = 3)), horizontalalignment='center')
+    rse = np.round(ds['true_coriolis']/ds['coriolis']*100,2)
+    ax.text(2, ds['true_coriolis']+5e-12, f'{rse.values}%', horizontalalignment='center')
+
+    # G GRADIENT SLA
+    ax.bar(2.5, ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
+           color = 'c', width = 0.4, zorder=3, align = 'center')
+    ax.bar(2.5, ds['err_ggrad'], bottom = ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.text(2.5, ds['ggrad']+5e-12, str(np.format_float_scientific(ds['ggrad'].values,precision = 3)), horizontalalignment='center')
+    rse = np.round(ds['true_ggrad']/ds['ggrad']*100,2)
+    ax.text(2.5, ds['true_ggrad']+5e-12, f'{rse.values}%', horizontalalignment='center')
+
+        # WIND
+    ax.bar(3, ds['true_wind'],yerr = ds['wind_err'], capsize=10,
+           color = 'mediumvioletred', width = 0.4, zorder=3, align = 'center')
+    ax.bar(3, ds['err_wind'], bottom = ds['true_wind'],yerr = ds['wind_err'], capsize=10,
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.text(3, ds['wind']+5e-12, str(np.format_float_scientific(ds['wind'].values,precision = 3)), horizontalalignment='center')
+    rse = np.round(ds['true_wind']/ds['wind']*100,2)
+    ax.text(3, ds['true_wind']+5e-12, f'{rse.values}%', horizontalalignment='center')
+
+    #ax.set_ylim((0,8e-5))
+    ax.grid(axis='y', zorder=0)
+
+    if isinstance(title, int): ax.set_title(ds.id_comb)
+    else : ax.set_title(title+'\n')
+    
+    N=np.arange(1.5,3.5, 0.5) 
+    ticks = (r'$d_tu$', r'$-fv$', r'$g \partial_x \eta$', r'$\frac{1}{\rho}\partial_z\tau_x$')
+    ax.set_xticks(N, ticks,)
+
+
+def plot_closure_bar(ds, id_, ax, title=1):
+    """ Plot closure bars for a combination on the axis ax.
+    
+    Parameters
+    ----------
+    ds : dataset with rms of x, excx and sum (created by )
+    id_: identification of the combination
+    ax : axis on which to plot
+
+    """
+    dic = ds['sum_'+id_].attrs
+    acc = ''+dic['acc']
+    cor = ''+dic['coriolis']
+    ggrad = ''+dic['ggrad']
+    wd = ''+dic['wind']
+
+    # ACC X
+    ax.bar(1.5, (np.sqrt(ds[acc]) + np.sqrt(ds['exc_acc_' + id_]))**2,
+           color ='lightgrey', width = 0.45, zorder=3, align = 'center',)
+    ax.bar(1.5, (np.sqrt(ds[acc]) - np.sqrt(ds['exc_acc_' + id_]))**2,
+           color ='w', width = 0.45, zorder=3, align = 'center',)
+    ax.bar(1.5, ds['exc_acc_' + id_],
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.bar(1.5, ds[acc], bottom = ds['exc_acc_' + id_],
+           color = 'red', width = 0.4, zorder=3, align = 'center')
+
+    # CORIOLIS
+    ax.bar(2, (np.sqrt(ds['exc_coriolis_' + id_]) + np.sqrt(ds[cor]))**2,
+           color='lightgrey', width = 0.45, zorder=3, align = 'center',)
+    ax.bar(2, (np.sqrt(ds['exc_coriolis_' + id_]) - np.sqrt(ds[cor]))**2,
+           color='w', width = 0.45, zorder=3, align = 'center', )
+    ax.bar(2, ds['exc_coriolis_' + id_],
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.bar(2, ds[cor], bottom = ds['exc_coriolis_' + id_],
+           color = 'green', width = 0.4, zorder=3, align = 'center')
+
+    # G GRADIENT SLA
+    ax.bar(2.5, (np.sqrt(ds['exc_ggrad_' + id_]) + np.sqrt(ds[ggrad]))**2,
+           color ='lightgrey', width = 0.45, zorder=3, align = 'center',)
+    ax.bar(2.5, (np.sqrt(ds['exc_ggrad_' + id_]) - np.sqrt(ds[ggrad]))**2,
+           color ='w', width = 0.45, zorder=3, align = 'center',)
+    ax.bar(2.5, ds['exc_ggrad_' + id_],
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.bar(2.5, ds[ggrad], bottom = ds['exc_ggrad_' + id_],
+           color = 'c', width = 0.4, zorder=3, align = 'center')
+
+    # WIND
+    ax.bar(3, (np.sqrt(ds['exc_wind_' + id_]) + np.sqrt(ds[wd]))**2,
+           color ='lightgrey', width = 0.45, zorder=3, align = 'center',)
+    ax.bar(3, (np.sqrt(ds['exc_wind_' + id_]) - np.sqrt(ds[wd]))**2,
+           color ='w', width = 0.45, zorder=3, align = 'center',)
+    ax.bar(3, ds['exc_wind_' + id_],
+           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
+    ax.bar(3, ds[wd], bottom = ds['exc_wind_' + id_],
+           color = 'mediumvioletred', width = 0.4, zorder=3, align = 'center')
+    
+    #SUM of ms^2
+    ax.bar(1,ds[acc],
+           color = 'red', width = 0.4, zorder=3, align = 'center')
+    ax.bar(1, ds[cor], bottom = ds[acc],
+           color = 'green', width = 0.4, zorder=3, align = 'center')
+    ax.bar(1, ds[ggrad], bottom = ds[acc]+ds[cor],
+           color = 'c', width = 0.4, zorder=3, align = 'center')
+    ax.bar(1, ds[wd], bottom = ds[acc]+ds[cor]+ds[ggrad],
+           color = 'mediumvioletred', width = 0.4, zorder=3, align = 'center')
+    Ss=ds[acc]+ds[cor]+ds[ggrad]+ds[wd]
+    ax.text(0.75, Ss+Ss/30, str(np.format_float_scientific(Ss.values,precision = 3)))
+
+    ax.set_ylabel(r'Mean square $\langle ...^2 \rangle$ [$m^2/s^4$]')
+    if isinstance(title, int): ax.set_title(id_)
+    else : ax.set_title(title+'\n')
+    
+    #TOTAL
+    S = ds['sum_'+id_]
+    ax.bar(0.5, S, color ='k',width = 0.4, zorder=3)
+    ax.text(0.25, S+S/20, str(np.format_float_scientific(S.values,precision = 3)))
+    ax.axhline(y=S, c="k", linewidth=2, ls=':', zorder=4)
+    
+    #ax.set_ylim((0,8e-5))
+    ax.grid(axis='y', zorder=0)
+    
+    N=np.arange(0.5,3.5, 0.5) 
+    #g = ds[ggrad].attrs['long_name'].replace('rms[',r'').replace(']','').replace('altimatchup','aviso').replace('driftermatchup','aviso').split('+')
+    #ggrad_tick='$\n $+'.join(g)
+    #w = ds_all['rms_es_cstrio_z15_alti_wd_x'].attrs['long_name'].replace('rms[',r'').replace(']','').split(' from')
+    #wd_tick = '\n from'.join(w)
+    #ticks = (r'$\langle S^2\rangle$',r'$\sum_x \langle x^2\rangle$',r'$d_tu$', r'$-fv$', ggrad_tick, r'$\frac{1}{\rho}\partial_z\tau_x$')
+    #ax.set_xticks(N, ticks,)
+
+    print(f'acc:{ds[acc].values}, coriolis:{ds[cor].values}, ggrad:{ds[ggrad].values}, wind:{ds[wd].values}')
 
 def plot_stat_lonlat(
     variables, ds=1, cmap="viridis", title=1, cmap_label=1, fig_title=1

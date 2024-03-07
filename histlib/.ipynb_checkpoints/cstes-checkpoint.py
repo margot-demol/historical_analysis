@@ -174,3 +174,5 @@ id_co_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':
 id_aviso_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'aviso_alti_ggx_adt','wind':'es_cstrio_z15_alti_wd_x'}
 
 term_color ={'acc':'r', 'coriolis':'g','ggrad':'c', 'wind':'mediumvioletred'}
+
+cutoff_str = {'0':'No filter', '01':'0.1', '02':'0.2', '05':'0.5', '1':'1', '15':'1.5', '2':'2', '25':'2.5'}

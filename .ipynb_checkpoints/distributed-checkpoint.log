@@ -1,1 +1,1 @@
-INFO:root:start spinning up dask cluster, jobs=10
+INFO:root:start spinning up dask cluster, jobs=2

@@ -166,7 +166,7 @@ def matchup_dataset_one(l, T=10, cutoff=[2,1,0.5,0.2, 0.1]):
     ds_data = ds_data[_data_var]
     
     if cutoff!=None:
-        add_low_pass_filter_to_data(ds_data, T=10, cutoff=[2,1,0.5,0.2, 0.1])
+        add_low_pass_filter_to_data(ds_data, T=10, cutoff=cutoff)
     
     ds_aviso = xr.open_zarr(os.path.join(zarr_dir+'_ok','aviso', f'aviso_{l}.zarr')).chunk({'obs':500})
     ds_stress = xr.open_zarr(os.path.join(zarr_dir+'_ok','erastar', f'erastar_{l}.zarr')).chunk({'obs':500})
@@ -232,7 +232,7 @@ def matchup_dataset_one(l, T=10, cutoff=[2,1,0.5,0.2, 0.1]):
 ADD LOW PASS FILTER
 ------------------
 """
-def add_low_pass_filter_to_data(ds, T=10, cutoff=[2,1,0.5,0.2, 0.1]) : 
+def add_low_pass_filter_to_data(ds, T=12, cutoff=[2,1,0.5,0.2, 0.1]) : 
     """ Return dataset with filtered trajectories acceleration and coriolis term 
         T: window length days
         cutoff : cut off frequency in cpd
@@ -244,7 +244,7 @@ def add_low_pass_filter_to_data(ds, T=10, cutoff=[2,1,0.5,0.2, 0.1]) :
     dt = (ds.drifter_time.diff('site_obs')/pd.Timedelta('1D')).mean()  # in days
     from pynsitu.tseries import generate_filter
 
-    dss = ds[[ 'drifter_vx', 'drifter_vy']].compute().fillna(0)
+    dss = ds[[ 'drifter_vx', 'drifter_vy']].fillna(0)
     if not isinstance(cutoff, list) : cutoff=[cutoff]
     for cto in cutoff :
         taps = generate_filter(band="low", dt=dt, T=T, bandwidth=cto)
@@ -265,7 +265,6 @@ def add_low_pass_filter_to_data(ds, T=10, cutoff=[2,1,0.5,0.2, 0.1]) :
         ds[f"drifter_acc_y_{cutoffstr}"] = (vy.differentiate("site_obs")/3600).assign_attrs(**ds.drifter_acc_x_0.attrs).assign_attrs(description= ds.drifter_acc_y_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
         ds[f"drifter_coriolis_x_{cutoffstr}"] = (-vy * ds.f).assign_attrs(ds.drifter_coriolis_x_0.attrs).assign_attrs(description= ds.drifter_coriolis_x_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
         ds[f"drifter_coriolis_y_{cutoffstr}"] = (vx * ds.f).assign_attrs(ds.drifter_coriolis_y_0.attrs).assign_attrs(description= ds.drifter_coriolis_y_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
-
 
     
 """
@@ -291,6 +290,7 @@ def find_term_list(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=N
     if not grad_x : grad_x = [l for l in _ds if "ggx_adt" in l]# or "ggx_sla" in l]
     if not grad_y : grad_y = [l for l in _ds if "ggy_adt" in l]# or "ggy_sla" in l]
     if not cutoff : cutoff = [l.split('acc_x_')[-1] for l in _ds if "acc_x" in l]
+    else : cutoff = [str(c).replace('.','') for c in cutoff]#float to str
     return wd_x, wd_y, grad_x, grad_y, cutoff
     
 def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=None):
@@ -305,7 +305,7 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
                  - wind terms from the different sources and way to compute it from stress all finishing with '_wd_x/y'
     wd_x, wd_y, grad_x, grad_y : list of str
         contains wd_x, wd_y, grad_x or grad_y variable names in the dataset we want to consider for combinations
-    cutoff : list of str
+    cutoff : list of float
             cutoff frequency for drifter variables ('0' for no filter applied) we want to consider for combinations
     Returns
     ----------
@@ -379,6 +379,8 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
                             + "__drifter_x"
                         )
                         LIST.append(lx)
+    return LIST
+"""
         for grad in grad_y:
             for wd in wd_y:
                 ly = {
@@ -415,6 +417,7 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
                     )
                     LIST.append(ly)
     return LIST
+"""
 """
 ------------------
 ADD EXCEPT + SUM
@@ -453,7 +456,7 @@ def add_except_sum(
     wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
         
     COMB = combinations(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
-    ds_matchup = ds_matchup[wd_x + wd_y+ grad_x + grad_y + ["drifter_acc_x_"+cf for cf in cutoff]+["drifter_acc_y_"+cf for cf in cutoff]+["drifter_coriolis_x_"+cf for cf in cutoff]+["drifter_coriolis_y_"+cf for cf in cutoff]]
+    ds_matchup = ds_matchup[wd_x + wd_y+ grad_x + grad_y + ["drifter_acc_x_"+cf for cf in cutoff]+["drifter_coriolis_x_"+cf for cf in cutoff]]
     _ds_sum = xr.Dataset()
     _ds_except = xr.Dataset()
 

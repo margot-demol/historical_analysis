@@ -1,8 +1,8 @@
 import xarray as xr
 import numpy as np
 
-import m2lib22.cstes as cstes
-import m2lib22.box as box
+import histlib.cstes as cstes
+import histlib.box as box
 
 """
 FUNCTIONS STRESS -> WIND TERM 

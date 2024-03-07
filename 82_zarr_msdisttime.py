@@ -29,7 +29,7 @@ run_name = "box_build_colocalisations"
 
 # will overwrite existing results
 # overwrite = True
-overwrite = False
+overwrite = True
 
 # dask parameters
 
@@ -203,26 +203,26 @@ def trim_memory() -> int:
 dl = 5e3
 dt = 10*60
 
-var =[
-    'drifter_acc_x_0',
-    'drifter_acc_y_0',
-    'drifter_coriolis_x_0',
-    'drifter_coriolis_y_0',
-    'es_cstrio_z15_alti_wd_x',
-    'es_cstrio_z15_drifter_wd_x',
-    'es_cstrio_z15_alti_wd_y',
-    'es_cstrio_z15_drifter_wd_y',
-    'alti_ggx_adt_filtered',
-    'alti_ggx_adt_filtered_ocean_tide',
-    'alti_ggx_adt_filtered_ocean_tide_internal_tide',
-    'aviso_alti_ggx_adt',
-    'aviso_drifter_ggx_adt',
-    'aviso_alti_ggy_adt',
-    'aviso_drifter_ggy_adt',
-]
+DL =25e3 #meters
+DT = 0.5*3600 #seconds
+
+#IF restricted computation
+wd_x= ['es_cstrio_z15_alti_wd_x', 'es_cstrio_z15_drifter_wd_x']
+wd_y = []
+grad_x = ['alti_ggx_adt_filtered',
+          'alti_ggx_adt_filtered_ocean_tide',
+          'alti_ggx_adt_filtered_ocean_tide_internal_tide',
+          'alti_ggx_adt_filtered_ocean_tide_internal_tide_dac',
+         'aviso_alti_ggx_adt',
+          'aviso_drifter_ggx_adt'
+         ]
+grad_y =[]
+cutoff=[0, 2.5]
+
+var = wd_x+grad_x+grad_y+['drifter_acc_x_0','drifter_coriolis_x_0']
 
 def bin_dist_ms(ds,l, dl):
-    dsm = match.add_except_sum(ds)   
+    dsm = match.add_except_sum(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)  
     dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop(['id_comb', 'time'])
     dfm = dsm.to_dask_dataframe().set_index('obs')
     dfm["distbin"] = (dfm.alti___distance // dl) * dl
@@ -248,9 +248,40 @@ def bin_dist_ms(ds,l, dl):
     dso['distbin'] = dso['distbin']+dl/2
 
     return dso
+
+def bin_dist_mean(ds,l, dl):
+    dsm = match.add_except_sum(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)      
+    dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop(['id_comb', 'time'])
+    dfm = dsm.to_dask_dataframe().set_index('obs')
+    dfm["distbin"] = (dfm.alti___distance // dl) * dl
     
+    #mean
+    d2 = dfm.drop(['lon', 'lat', 'distbin'], axis=1)
+    dd = dfm[['distbin']].merge(d2)
+    dd = dd.groupby(["distbin"]).mean()
+    
+    #count
+    dnb = dfm.reset_index()[['obs', 'distbin']].groupby(["distbin"]).count().obs.compute().to_xarray()
+    dsms = dd.compute().to_xarray()
+    #attrs
+    for v in list(dsms.variables) :
+        if v in ds :
+            dsms[v].attrs = ds[v].attrs
+    #merge
+    dso = xr.merge([dsms, dnb.rename('nb_coloc_bin')])
+    dso['drifter_sat_year']=l
+    dso = dso.expand_dims('drifter_sat_year')
+    dso = dso.set_coords('drifter_sat_year')
+    # center lon, lat bins + reindex to have same for all
+    dist_bins = np.arange(0, 200e3, dl)
+    dso = dso.reindex({'distbin':dist_bins})
+    dso['distbin'] = dso['distbin']+dl/2
+
+    return dso
+
+
 def bin_time_ms(ds,l, dt):
-    dsm = match.add_except_sum(ds)   
+    dsm = match.add_except_sum(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
     dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop(['id_comb', 'time'])
     dfm = dsm.to_dask_dataframe().set_index('obs')
     dfm["timebin"] = (dfm.alti___time_difference // dt) * dt
@@ -276,52 +307,123 @@ def bin_time_ms(ds,l, dt):
     dso['timebin'] = dso['timebin']+dt/2
 
     return dso
+
+def bin_time_mean(ds,l, dt):
+    dsm = match.add_except_sum(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
+    dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop(['id_comb', 'time'])
+    dfm = dsm.to_dask_dataframe().set_index('obs')
+    dfm["timebin"] = (dfm.alti___time_difference // dt) * dt
+    #ms
+    d2 = dfm.drop(['lon', 'lat', 'timebin'], axis=1)
+    dd = dfm[['timebin']].merge(d2)
+    dd = dd.groupby(["timebin"]).mean()
+    #count
+    dnb = dfm.reset_index()[['obs', 'timebin']].groupby(["timebin"]).count().obs.compute().to_xarray()
+    dsms = dd.compute().to_xarray()
+    #attrs
+    for v in list(dsms.variables) :
+        if v in ds :
+            dsms[v].attrs = ds[v].attrs
+    #merge
+    dso = xr.merge([dsms, dnb.rename('nb_coloc_bin')])
+    dso['drifter_sat_year']=l
+    dso = dso.expand_dims('drifter_sat_year')
+    dso = dso.set_coords('drifter_sat_year')
+    # center lon, lat bins + reindex to have same for all
+    time_bins = np.arange(0, 3*3600, dt)
+    dso = dso.reindex({'timebin':time_bins})
+    dso['timebin'] = dso['timebin']+dt/2
+
+    return dso
     
 
 def run_ms_dist(l):
     """main execution code"""
     dsm = xr.open_dataset(os.path.join(matchup_dir, f'matchup_{l}.zarr'))[var+['drogue_status', 'alti___distance', 'alti___time_difference']].dropna('obs').chunk({'obs':500})
+    # add filtered acc and coriolis
+    zarr_cutoff = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+".zarr")
+    zarr_cutoff1 = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+"_2.zarr")
+    if os.path.isdir(zarr_cutoff):
+        dsm = xr.merge([dsm, xr.open_dataset(zarr_cutoff),xr.open_dataset(zarr_cutoff1)], join='inner').chunk({'obs':1000})
+        
+    dsm = dsm.where(dsm.alti___time_difference<=DT, drop=True).drop(['alti___time_difference']).dropna('obs')
     dsmd = dsm.where(dsm.drogue_status, drop=True).drop('drogue_status')
     dsmnd = dsm.where(np.logical_not(dsm.drogue_status), drop=True).drop('drogue_status')
     dsm = dsm.drop('drogue_status')
-    # DIST
+    
+    # DIST MS
     zarr = os.path.join(zarr_dir+'_ok',f'msdist/msdist_{int(dl/1e3)}_{l}.zarr')
     if not os.path.isdir(zarr) :
         bin_dist_ms(dsm,l, dl).to_zarr(zarr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-        logging.info(f"{l} storred in {zarr}")
+        logging.info(f"ms {l} storred")
     if dsmd.dims['obs']!=0 : 
         zarrd = os.path.join(zarr_dir+'_ok',f'msdist/msdist_{int(dl/1e3)}_drogued_{l}.zarr')
         if not os.path.isdir(zarrd) :
             bin_dist_ms(dsmd,l, dl).to_zarr(zarrd, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
-            logging.info(f"{l} storred in {zarrd}")
+            logging.info(f"ms drogued {l} storred")
     if dsmnd.dims['obs']!=0 :
-        zarrud = os.path.join(zarr_dir+'_ok',f'msdist/msdist_{int(dl/1e3)}_undrogued_{l}.nc')
+        zarrud = os.path.join(zarr_dir+'_ok',f'msdist/msdist_{int(dl/1e3)}_undrogued_{l}.zarr')
         if not os.path.isdir(zarrud) :
             bin_dist_ms(dsmnd,l, dl).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-            logging.info(f"{l} storred in {zarrud}")
+            logging.info(f"ms undrogued {l} storred")
+
+    # DIST MEAN
+    zarr = os.path.join(zarr_dir+'_ok',f'meandist/meandist_{int(dl/1e3)}_{l}.zarr')
+    if not os.path.isdir(zarr) :
+        bin_dist_mean(dsm,l, dl).to_zarr(zarr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        logging.info(f"mean {l} storred")
+    if dsmd.dims['obs']!=0 : 
+        zarrd = os.path.join(zarr_dir+'_ok',f'meandist/meandist_{int(dl/1e3)}_drogued_{l}.zarr')
+        if not os.path.isdir(zarrd) :
+            bin_dist_mean(dsmd,l, dl).to_zarr(zarrd, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+            logging.info(f"mean {l} drogued storred")
+    if dsmnd.dims['obs']!=0 :
+        zarrud = os.path.join(zarr_dir+'_ok',f'meandist/meandist_{int(dl/1e3)}_undrogued_{l}.zarr')
+        if not os.path.isdir(zarrud) :
+            bin_dist_mean(dsmnd,l, dl).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+            logging.info(f"mean {l} undrogued storred")
 
 def run_ms_time(l):
     """main execution code"""
     dsm = xr.open_dataset(os.path.join(matchup_dir, f'matchup_{l}.zarr'))[var+['drogue_status', 'alti___distance', 'alti___time_difference']].dropna('obs').chunk({'obs':500})
+    # add filtered acc and coriolis
+    zarr_cutoff = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+".zarr")
+    zarr_cutoff1 = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+"_2.zarr")
+    if os.path.isdir(zarr_cutoff):
+        dsm = xr.merge([dsm, xr.open_dataset(zarr_cutoff),xr.open_dataset(zarr_cutoff1)], join='inner').chunk({'obs':1000})
+        
+    dsm = dsm.where(dsm.alti___distance<=DL, drop=True).drop(['alti___distance']).dropna('obs')
     dsmd = dsm.where(dsm.drogue_status, drop=True).drop('drogue_status')
     dsmnd = dsm.where(np.logical_not(dsm.drogue_status), drop=True).drop('drogue_status')
     dsm = dsm.drop('drogue_status')
-
-    # TIME
+    
+    # TIME MS
     zarr = os.path.join(zarr_dir+'_ok',f'mstime/mstime_{int(dt)}_{l}.zarr')
-    if not os.path.isdir(zarr) :
-        bin_time_ms(dsm,l, dt).to_zarr(zarr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-        logging.info(f"{l} storred in {zarr}")
+    bin_time_ms(dsm,l, dt).to_zarr(zarr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+    logging.info(f"ms {l} storred")
     if dsmd.dims['obs']!=0 : 
         zarrd = os.path.join(zarr_dir+'_ok',f'mstime/mstime_{int(dt)}_drogued_{l}.zarr')
-        if not os.path.isdir(zarrd) :
-            bin_time_ms(dsmd,l, dt).to_zarr(zarrd, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
-            logging.info(f"{l} storred in {zarrd}")
+        bin_time_ms(dsmd,l, dt).to_zarr(zarrd, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+        logging.info(f"ms drogued {l} storred")
     if dsmnd.dims['obs']!=0 :
         zarrud = os.path.join(zarr_dir+'_ok',f'mstime/mstime_{int(dt)}_undrogued_{l}.zarr')
-        if not os.path.isdir(zarrud) :
-            bin_time_ms(dsmnd,l, dt).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-            logging.info(f"{l} storred in {zarrud}")
+        bin_time_ms(dsmnd,l, dt).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        logging.info(f"ms undrogued {l} storred")
+
+    # time MEAN
+    zarr = os.path.join(zarr_dir+'_ok',f'meantime/meantime_{int(dt)}_{l}.zarr')
+    bin_time_mean(dsm,l, dt).to_zarr(zarr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+    logging.info(f"mean {l} storred")
+    if dsmd.dims['obs']!=0 : 
+        zarrd = os.path.join(zarr_dir+'_ok',f'meantime/meantime_{int(dt)}_drogued_{l}.zarr')
+        bin_time_mean(dsmd,l, dt).to_zarr(zarrd, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+        logging.info(f"mean {l} drogued storred")
+    if dsmnd.dims['obs']!=0 :
+        zarrud = os.path.join(zarr_dir+'_ok',f'meantime/meantime_{int(dt)}_undrogued_{l}.zarr')
+        bin_time_mean(dsmnd,l, dt).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        logging.info(f"mean {l} undrogued storred")
+
+
     
 
     
@@ -358,12 +460,14 @@ if __name__ == "__main__":
     logging.info(f"open browser at address of the type: http://localhost:{dashboard_port}")
 
     #overwrite
+
     if not overwrite :
-        labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok',f'msdist/msdist_{int(dl/1e3)}_undrogued_{l}.zarr'))]
+        labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok',f'meantime/meantime_{int(dl/1e3)}_undrogued_{l}.zarr'))]
+        #labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok',f'meandist/meandist_{int(dl/1e3)}_undrogued_{l}.zarr'))]
     ## boucle for on labels
     for l in labels: 
         logging.info(f"start processing {l}")
-        run_ms_dist(l)            
+        run_ms_time(l)            
         logging.info(f"end processing {l}")
     
     # close dask

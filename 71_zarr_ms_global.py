@@ -23,7 +23,7 @@ from glob import glob
 
 import histlib.matchup as match
 import histlib.diagnosis as diag
-from histlib.cstes import labels, zarr_dir, matchup_dir, var
+from histlib.cstes import labels, zarr_dir, matchup_dir, cutoff_str
 from histlib.matchup import _data_var, _stress_var, _aviso_var
 
 # ---- Run parameters
@@ -31,13 +31,10 @@ from histlib.matchup import _data_var, _stress_var, _aviso_var
 #root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
 run_name = "ms_global"
 
-# will overwrite existing results
-# overwrite = True
-overwrite = True
 
 # dask parameters
 
-dask_jobs = 3  # number of dask pbd jobs
+dask_jobs = 1  # number of dask pbd jobs
 jobqueuekw = dict(processes=20, cores=20)  # uplet debug
 
 # ---------------------------- dask utils - do not touch -------------------------------
@@ -209,7 +206,7 @@ DT = 0.5*3600 #seconds
 
 #IF restricted computation
 wd_x= ['es_cstrio_z15_alti_wd_x', 'es_cstrio_z15_drifter_wd_x']
-wd_y = ['es_cstrio_z15_alti_wd_y', 'es_cstrio_z15_drifter_wd_y']
+wd_y = []
 grad_x = ['alti_ggx_adt_filtered',
           'alti_ggx_adt_filtered_ocean_tide',
           'alti_ggx_adt_filtered_ocean_tide_internal_tide',
@@ -217,15 +214,15 @@ grad_x = ['alti_ggx_adt_filtered',
          'aviso_alti_ggx_adt',
           'aviso_drifter_ggx_adt'
          ]
-grad_y =['aviso_alti_ggy_adt', 'aviso_drifter_ggy_adt']
-cutoff=None
+grad_y =[]
+cutoff=[0, 0.1, 0.2, 0.5, 1, 1.5, 2, 2.5]
 
-
+var = wd_x+grad_x+grad_y+['drifter_acc_x_0','drifter_coriolis_x_0']
 
 
 def ms_dataset(dsm, l, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff) :
     dsm = match.add_except_sum(dsm, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
-    nb = dsm.sizes["obs"]
+    nb = dsm.dims["obs"]
     ds = (dsm**2).mean('obs')
     ds["nb_coloc"] = nb
     ds['drifter_sat_year']=l
@@ -241,26 +238,57 @@ def ms_dataset(dsm, l, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutof
         
     return ds
 
+def mean_dataset(dsm, l, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff) :
+    dsm = match.add_except_sum(dsm, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
+    nb = dsm.dims["obs"]
+    ds = dsm.mean('obs')
+    ds["nb_coloc"] = nb
+    ds['drifter_sat_year']=l
+    ds = ds.expand_dims('drifter_sat_year')
+    ds = ds.set_coords('drifter_sat_year')
+    
+    if "id_comb" in dsm:
+        ds["id_comb"] = dsm["id_comb"]
+    ## ATTRS
+    for v in dsm.keys() :
+        ds[v].attrs =dsm[v].attrs
+        ds[v].attrs['units']=r'$m.s^{-2}$'
+        
+    return ds
+
 def run_ms_global(l):
 
     dsm = xr.open_dataset(os.path.join(matchup_dir, f'matchup_{l}.zarr'))[var+['drogue_status', 'alti___distance', 'alti___time_difference']].dropna('obs').chunk({'obs':500})
+    # add filtered acc and coriolis
+    zarr_cutoff = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+".zarr")
+    zarr_cutoff1 = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+"_2.zarr")
+    if os.path.isdir(zarr_cutoff):
+        dsm = xr.merge([dsm, xr.open_dataset(zarr_cutoff),xr.open_dataset(zarr_cutoff1)], join='inner').chunk({'obs':1000})
+        
     dsm = dsm.where(dsm.alti___distance<=DL, drop=True)
-    dsm = dsm.where(dsm.alti___time_difference<=DT, drop=True).drop(['alti___distance', 'alti___time_difference'])
+    dsm = dsm.where(dsm.alti___time_difference<=DT, drop=True).drop(['alti___distance', 'alti___time_difference']).dropna('obs')
     dsmd = dsm.where(dsm.drogue_status, drop=True).drop('drogue_status')
     dsmnd = dsm.where(np.logical_not(dsm.drogue_status), drop=True).drop('drogue_status')
     dsm = dsm.drop('drogue_status')
+    
     if l==labels[0] : 
-        ms_dataset(dsm, l).to_zarr(os.path.join(zarr_dir+'_ok',f'ms_{int(DL//1000)}_{DT}.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        ms_dataset(dsm, l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        mean_dataset(dsm, l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
         if dsmd.dims['obs']!=0 : 
-            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok',f'ms_{int(DL//1000)}_{DT}_drogued.zarr'), encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_drogued_2.zarr'), encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+            mean_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_drogued_2.zarr'), encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
         if dsmnd.dims['obs']!=0 : 
-            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok',f'ms_{int(DL//1000)}_{DT}_undrogued.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_undrogued_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+            mean_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_undrogued_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
     else : 
-        ms_dataset(dsm,l).to_zarr(os.path.join(zarr_dir+'_ok',f'ms_{int(DL//1000)}_{DT}.zarr'), append_dim='drifter_sat_year')
+        ms_dataset(dsm,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_2.zarr'), append_dim='drifter_sat_year')
+        mean_dataset(dsm,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_2.zarr'), append_dim='drifter_sat_year')
         if dsmd.dims['obs']!=0 : 
-            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok',f'ms_{int(DL//1000)}_{DT}_drogued.zarr'), append_dim='drifter_sat_year')
+            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_drogued_2.zarr'), append_dim='drifter_sat_year')
+            mean_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_drogued_2.zarr'), append_dim='drifter_sat_year')
         if dsmnd.dims['obs']!=0 : 
-            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok',f'ms_{int(DL//1000)}_{DT}_undrogued.zarr'),append_dim='drifter_sat_year')
+            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_undrogued_2.zarr'),append_dim='drifter_sat_year')
+            mean_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_undrogued_2.zarr'),append_dim='drifter_sat_year')
     
 if __name__ == "__main__":
 
@@ -287,16 +315,13 @@ if __name__ == "__main__":
         "distributed",
         jobs=dask_jobs,
         fraction=0.9,
-        walltime="04:00:00",
+        walltime="08:00:00",
         **jobqueuekw,
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
     logging.info("dashboard via ssh: " + ssh_command)
     logging.info(f"open browser at address of the type: http://localhost:{dashboard_port}")
 
-    #overwrite
-    if not overwrite :
-        overwrite=True
 
     ## boucle for on labels
     for l in labels: 

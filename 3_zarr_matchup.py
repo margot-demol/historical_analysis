@@ -204,7 +204,7 @@ def trim_memory() -> int:
 
 def run_matchup(l):
     from histlib.matchup import matchup_dataset_one
-    ds_matchup = matchup_dataset_one(l)
+    ds_matchup = matchup_dataset_one(l, cutoff=None)
     #store
     zarr = os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr")
     ds_matchup.chunk({'obs':500}).to_zarr(zarr, mode="w")
@@ -235,7 +235,7 @@ if __name__ == "__main__":
         "distributed",
         jobs=dask_jobs,
         fraction=0.9,
-        walltime="36:00:00",
+        walltime="08:00:00",
         **jobqueuekw,
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
@@ -245,6 +245,7 @@ if __name__ == "__main__":
     #overwrite
     if not overwrite :
         labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr"))]
+    
     ## boucle for on labels
     for l in labels: 
         logging.info(f"start processing {l}")
