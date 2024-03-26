@@ -528,6 +528,61 @@ def terms_comb(id_):
     attrs['wd'] = l[3]+'_'+l[4].replace('_', '_wd_')
     return attrs
 
+
+
+def product_dataset(
+    ds_matchup,
+    wd_x=None,
+    wd_y=None,
+    grad_x=None,
+    grad_y=None,
+    cutoff=None
+):
+    """Create dataset with all possible product of 2 terms for correlation computations
+    
+
+    Parameters
+    ----------
+    ds_matchup: dataset
+            dataset containing colocalisations, should contain at least the _data_var
+    wd_x, wd_y, grad_x, grad_y : list of str
+        contains wd_x, wd_y, grad_x or grad_y variable names in the dataset we want to consider for combinations
+        if not provided, will find all possibly corresponding variables in dataset
+    cutoff : list of str
+            cutoff frequency for drifter variables ('0' for no filter applied) we want to consider for combinations`
+            if not provided, will find all possibly corresponding variables in dataset
+    """
+    
+    # SUM combination
+    wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
+        
+    COMB = combinations(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
+    ds_matchup = ds_matchup[wd_x + wd_y+ grad_x + grad_y + ["drifter_acc_x_"+cf for cf in cutoff]+["drifter_coriolis_x_"+cf for cf in cutoff]]
+    _ds_corr = xr.Dataset()
+
+    for comb in COMB:
+        import itertools
+        comb.pop('id')
+        corr_key = list(itertools.combinations(list(comb.values()),2))
+
+        for ab in corr_key:
+            id_str_2 = "prod_"+ab[0]+"__"+ab[1]
+            if id_str_2 not in ds_matchup: 
+                cor = ds_matchup[ab[0]]*ds_matchup[ab[1]]
+                
+                _ds_corr[id_str_2] = xr.DataArray(
+                    data=cor,
+                    attrs={
+                        "description": "*".join(ab),
+                        "long_name": "*".join(
+                            [ds_matchup[a].attrs["long_name"] for a in ab]
+                        ),
+                        "units": r"$m^2.s^{-4}$",
+                    },
+                )
+
+    return _ds_corr
+
 """
 Diagnosis functions
 -------------------------------

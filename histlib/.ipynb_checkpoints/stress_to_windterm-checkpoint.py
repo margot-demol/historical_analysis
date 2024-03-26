@@ -13,38 +13,33 @@ EKMAN RIO 2014
 return wind term 
 """
 
-theta0 = 30.75 * np.pi / 180  # degré
-theta15 = 48.18 * np.pi / 180  # degré
-beta0 = 0.61  # m^2.s/kg
-beta15 = 0.25  # m^2.s/kg
-
-
 def cst_rio_z0(taue, taun, f, theta_lon, theta_lat, rot=True):
-    theta0 = 30.75 * np.pi / 180
+    
+    theta0 = - 30.75 * np.pi / 180 * np.sign(f)
     beta0 = 0.61
-
-    fuek_e = -f * beta0 * (np.sin(theta0) * taue + np.cos(theta0) * taun)
-    fuek_n = f * beta0 * (np.cos(theta0) * taue - np.sin(theta0) * taun)
+    
+    uek_e = beta0 * (np.cos(theta0) * taue - np.sin(theta0) * taun)
+    uek_n = beta0 * (np.sin(theta0) * taue + np.cos(theta0) * taun)
 
     if rot:
-        fuek_x, fuek_y = box.vevn2vxvy(theta_lon, theta_lat, fuek_e, fuek_n)
-        return fuek_x, fuek_y
+        uek_x, uek_y = box.vevn2vxvy(theta_lon, theta_lat, uek_e, uek_n)
+        return -f * uek_y, f * uek_x
     else:
-        return fuek_e, fuek_n
+        return -f * uek_n, f * uek_e
 
 
 def cst_rio_z15(taue, taun, f, theta_lon, theta_lat, rot=True):
-    theta15 = 48.18 * np.pi / 180
+    theta15 = - 48.18 * np.pi / 180 * np.sign(f)
     beta15 = 0.25
+    
+    uek_e = beta15 * (np.cos(theta15) * taue - np.sin(theta15) * taun)
+    uek_n = beta15 * (np.sin(theta15) * taue + np.cos(theta15) * taun)
 
-    fuek_e = -f * beta15 * (np.sin(theta15) * taue + np.cos(theta15) * taun)
-    fuek_n = f * beta15 * (np.cos(theta15) * taue - np.sin(theta15) * taun)
     if rot:
-        fuek_x, fuek_y = box.vevn2vxvy(theta_lon, theta_lat, fuek_e, fuek_n)
-        return fuek_x, fuek_y
+        uek_x, uek_y = box.vevn2vxvy(theta_lon, theta_lat, uek_e, uek_n)
+        return f * uek_y, -f * uek_x
     else:
-        return fuek_e, fuek_n
-
+        return f * uek_n, -f * uek_e
 
 """
 WIND TERM DATASET 
@@ -67,16 +62,18 @@ def compute_wd_from_stress(
     for i in range(len(list_func)):
         func, suf = list_func[i], list_func_suffix[i]
         for src in list_wd_srce_suffix:
-            alti_matchup_theta_lon, alti_matchup_theta_lat = ds["box_theta_lon"].isel(
+            alti_matchup_theta_lon, alti_matchup_theta_lat = ds["box_theta_lon"].sel(
                 box_x=0, box_y=0
-            ), ds["box_theta_lat"].isel(box_x=0, box_y=0)
+            ), ds["box_theta_lat"].sel(box_x=0, box_y=0)
+
             try:
-                drifter_theta_lon = ds["drifter_theta_lon"].isel(
-                    site_obs=np.int(ds.__site_matchup_indice.values)
-                )
-                drifter_theta_lat = ds["drifter_theta_lat"].isel(
-                    site_obs=np.int(ds.__site_matchup_indice.values)
-                )
+                idx = ds.__site_matchup_indice.astype(int).compute()
+
+                drifter_theta_lon = ds["drifter_theta_lon"].sel(
+                    site_obs=idx)
+            
+                drifter_theta_lat = ds["drifter_theta_lat"].sel(
+                    site_obs=idx)
 
             except:
                 drifter_theta_lon = ds["drifter_theta_lon"]
@@ -92,6 +89,7 @@ def compute_wd_from_stress(
                 ds["f"],
                 alti_matchup_theta_lon,
                 alti_matchup_theta_lat,
+                rot=True,
             )
             (
                 _ds[src + "_" + suf + "_drifter_wd_x"],
@@ -102,6 +100,7 @@ def compute_wd_from_stress(
                 ds["f"],
                 drifter_theta_lon,
                 drifter_theta_lat,
+                rot=True,
             )
 
             # attrs ADD HERE IF MORE FUNCTIONS TO COMPUTE WIND FROM STRESS
@@ -157,6 +156,7 @@ def compute_wd_from_stress(
                     ds["f"],
                     ds["drifter_theta_lon"],
                     ds["drifter_theta_lat"],
+                    rot=True,
                 )
                 # attrs
                 _ds[src + "_" + suf + "_traj_wd_x"].attrs = {
@@ -186,6 +186,7 @@ def compute_wd_from_stress(
                     ds["f"],
                     ds["box_theta_lon"],
                     ds["box_theta_lat"],
+                    rot=True,
                 )
                 # attrs
                 _ds[src + "_" + suf + "_box_wd_x"].attrs = {

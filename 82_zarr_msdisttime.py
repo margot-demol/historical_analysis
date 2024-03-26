@@ -279,6 +279,37 @@ def bin_dist_mean(ds,l, dl):
 
     return dso
 
+def bin_dist_corr(ds,l, dl):
+    
+    dsm = match.product_dataset(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)      
+    dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop(['time'])
+    dfm = dsm.to_dask_dataframe().set_index('obs')
+    dfm["distbin"] = (dfm.alti___distance // dl) * dl
+    
+    #mean
+    d2 = dfm.drop(['lon', 'lat', 'distbin'], axis=1)
+    dd = dfm[['distbin']].merge(d2)
+    dd = dd.groupby(["distbin"]).mean()
+    
+    #count
+    dnb = dfm.reset_index()[['obs', 'distbin']].groupby(["distbin"]).count().obs.compute().to_xarray()
+    dsms = dd.compute().to_xarray()
+    #attrs
+    for v in list(dsms.variables) :
+        if v in ds :
+            dsms[v].attrs = ds[v].attrs
+    #merge
+    dso = xr.merge([dsms, dnb.rename('nb_coloc_bin')])
+    dso['drifter_sat_year']=l
+    dso = dso.expand_dims('drifter_sat_year')
+    dso = dso.set_coords('drifter_sat_year')
+    # center lon, lat bins + reindex to have same for all
+    dist_bins = np.arange(0, 200e3, dl)
+    dso = dso.reindex({'distbin':dist_bins})
+    dso['distbin'] = dso['distbin']+dl/2
+
+    return dso
+
 
 def bin_time_ms(ds,l, dt):
     dsm = match.add_except_sum(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
@@ -335,7 +366,34 @@ def bin_time_mean(ds,l, dt):
     dso['timebin'] = dso['timebin']+dt/2
 
     return dso
-    
+
+def bin_time_corr(ds,l, dt):
+    dsm = match.product_dataset(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
+    dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop([ 'time'])
+    dfm = dsm.to_dask_dataframe().set_index('obs')
+    dfm["timebin"] = (dfm.alti___time_difference // dt) * dt
+    #ms
+    d2 = dfm.drop(['lon', 'lat', 'timebin'], axis=1)
+    dd = dfm[['timebin']].merge(d2)
+    dd = dd.groupby(["timebin"]).mean()
+    #count
+    dnb = dfm.reset_index()[['obs', 'timebin']].groupby(["timebin"]).count().obs.compute().to_xarray()
+    dsms = dd.compute().to_xarray()
+    #attrs
+    for v in list(dsms.variables) :
+        if v in ds :
+            dsms[v].attrs = ds[v].attrs
+    #merge
+    dso = xr.merge([dsms, dnb.rename('nb_coloc_bin')])
+    dso['drifter_sat_year']=l
+    dso = dso.expand_dims('drifter_sat_year')
+    dso = dso.set_coords('drifter_sat_year')
+    # center lon, lat bins + reindex to have same for all
+    time_bins = np.arange(0, 3*3600, dt)
+    dso = dso.reindex({'timebin':time_bins})
+    dso['timebin'] = dso['timebin']+dt/2
+
+    return dso
 
 def run_ms_dist(l):
     """main execution code"""
@@ -383,6 +441,25 @@ def run_ms_dist(l):
             bin_dist_mean(dsmnd,l, dl).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
             logging.info(f"mean {l} undrogued storred")
 
+    # DIST CORR
+    zarr = os.path.join(zarr_dir+'_ok',f'corrdist/corrdist_{int(dl/1e3)}_{l}.zarr')
+    if not os.path.isdir(zarr) :
+        bin_dist_corr(dsm,l, dl).to_zarr(zarr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        logging.info(f"corr {l} storred")
+    if dsmd.dims['obs']!=0 : 
+        zarrd = os.path.join(zarr_dir+'_ok',f'corrdist/corrdist_{int(dl/1e3)}_drogued_{l}.zarr')
+        if not os.path.isdir(zarrd) :
+            bin_dist_corr(dsmd,l, dl).to_zarr(zarrd, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+            logging.info(f"corr {l} drogued storred")
+    if dsmnd.dims['obs']!=0 :
+        zarrud = os.path.join(zarr_dir+'_ok',f'corrdist/corrdist_{int(dl/1e3)}_undrogued_{l}.zarr')
+        if not os.path.isdir(zarrud) :
+            bin_dist_corr(dsmnd,l, dl).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+            logging.info(f"corr {l} undrogued storred")
+
+
+
+
 def run_ms_time(l):
     """main execution code"""
     dsm = xr.open_dataset(os.path.join(matchup_dir, f'matchup_{l}.zarr'))[var+['drogue_status', 'alti___distance', 'alti___time_difference']].dropna('obs').chunk({'obs':500})
@@ -423,7 +500,18 @@ def run_ms_time(l):
         bin_time_mean(dsmnd,l, dt).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
         logging.info(f"mean {l} undrogued storred")
 
-
+    # time CORR
+    zarr = os.path.join(zarr_dir+'_ok',f'corrtime/corrtime_{int(dt)}_{l}.zarr')
+    bin_time_corr(dsm,l, dt).to_zarr(zarr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+    logging.info(f"corr {l} storred")
+    if dsmd.dims['obs']!=0 : 
+        zarrd = os.path.join(zarr_dir+'_ok',f'corrtime/corrtime_{int(dt)}_drogued_{l}.zarr')
+        bin_time_corr(dsmd,l, dt).to_zarr(zarrd, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+        logging.info(f"corr {l} drogued storred")
+    if dsmnd.dims['obs']!=0 :
+        zarrud = os.path.join(zarr_dir+'_ok',f'corrtime/corrtime_{int(dt)}_undrogued_{l}.zarr')
+        bin_time_corr(dsmnd,l, dt).to_zarr(zarrud,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        logging.info(f"corr {l} undrogued storred")
     
 
     

@@ -283,6 +283,40 @@ def bin_lonlat_mean(ds,l, dl):
 
     return dso
 
+def bin_lonlat_corr(ds,l, dl):
+    dsm = match.product_dataset(ds, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
+    dsm = dsm.reset_coords(['lon', 'lat', 'time']).drop([ 'time'])
+    dfm = dsm.to_dask_dataframe().set_index('obs')
+    dfm["latbin"] = (dfm.lat // dl) * dl
+    dfm["lonbin"] = (dfm.lon // dl) * dl
+    #ms
+    d2 = dfm.drop(['lon', 'lat', 'lonbin', 'latbin'], axis=1)
+    dd = dfm[['lonbin', 'latbin']].merge(d2)
+    dd = dd.groupby(["latbin", "lonbin"]).mean()
+    
+    #count
+    dnb = dfm.reset_index()[['obs', 'latbin', 'lonbin']].groupby(["latbin", "lonbin"]).count().obs.compute().to_xarray()
+    dsms = dd.compute().to_xarray()
+    #attrs
+    for v in list(dsms.variables) :
+        if v in ds :
+            dsms[v].attrs = ds[v].attrs
+    #merge
+    dso = xr.merge([dsms, dnb.rename('nb_coloc_bin')])
+    dso['drifter_sat_year']=l
+    dso = dso.expand_dims('drifter_sat_year')
+    dso = dso.set_coords('drifter_sat_year')
+    # center lon, lat bins + reindex to have same for all
+    lon_bins, lat_bins = np.arange(-180, 180, dl), np.arange(-90, 90, dl)
+    dso = dso.reindex({'lonbin':lon_bins, 'latbin':lat_bins})
+    dso['lonbin'] = dso['lonbin']+dl/2
+    dso['latbin'] = dso['latbin']+dl/2
+
+    return dso
+
+
+
+
 def run_mslonlat(l):
     """main execution code"""
     dsm = xr.open_dataset(os.path.join(matchup_dir, f'matchup_{l}.zarr'))[var+['drogue_status', 'alti___distance', 'alti___time_difference']].dropna('obs').chunk({'obs':500})
@@ -301,31 +335,41 @@ def run_mslonlat(l):
     # all
     zarr_ms = os.path.join(zarr_dir+'_ok',f'mslonlat/mslonlat_{int(DL//1000)}_{DT}_{dl}_{l}.zarr')
     zarr_mean = os.path.join(zarr_dir+'_ok',f'meanlonlat/meanlonlat_{int(DL//1000)}_{DT}_{dl}_{l}.zarr')
+    zarr_cor = os.path.join(zarr_dir+'_ok',f'corrlonlat/corrlonlat_{int(DL//1000)}_{DT}_{dl}_{l}.zarr')
+    
     if not os.path.isdir(zarr_ms) :
         bin_lonlat_ms(dsm,l, dl).to_zarr(zarr_ms,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
     if not os.path.isdir(zarr_mean) :
         bin_lonlat_mean(dsm,l, dl).to_zarr(zarr_mean,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-        logging.info(f"{l} ms/mean storred")
+    if not os.path.isdir(zarr_mean) :
+        bin_lonlat_corr(dsm,l, dl).to_zarr(zarr_corr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        logging.info(f"{l} ms/mean/cor storred")
         
     #drogued   
     if dsmd.dims['obs']!=0 : 
         zarrd_ms = os.path.join(zarr_dir+'_ok',f'mslonlat/mslonlat_{int(DL//1000)}_{DT}_{dl}_drogued_{l}.zarr')
         zarrd_mean = os.path.join(zarr_dir+'_ok',f'meanlonlat/meanlonlat_{int(DL//1000)}_{DT}_{dl}_drogued_{l}.zarr')
+        zarrd_corr = os.path.join(zarr_dir+'_ok',f'corrlonlat/corrlonlat_{int(DL//1000)}_{DT}_{dl}_drogued_{l}.zarr')
         if not os.path.isdir(zarrd_ms) :
             bin_lonlat_ms(dsmd,l, dl).to_zarr(zarrd_ms, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
         if not os.path.isdir(zarrd_mean) :
             bin_lonlat_mean(dsmd,l, dl).to_zarr(zarrd_mean, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
-        logging.info(f"drogued {l} ms/mean storred")
+        if not os.path.isdir(zarrd_corr) :
+            bin_lonlat_corr(dsmd,l, dl).to_zarr(zarrd_corr, encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+        logging.info(f"drogued {l} ms/mean/corr storred")
         
     #undrogued    
     if dsmnd.dims['obs']!=0 :
         zarrud_ms = os.path.join(zarr_dir+'_ok',f'mslonlat/mslonlat_{int(DL//1000)}_{DT}_{dl}_undrogued_{l}.zarr')
         zarrud_mean = os.path.join(zarr_dir+'_ok',f'meanlonlat/meanlonlat_{int(DL//1000)}_{DT}_{dl}_undrogued_{l}.zarr')
+        zarrud_corr = os.path.join(zarr_dir+'_ok',f'corrlonlat/corrlonlat_{int(DL//1000)}_{DT}_{dl}_undrogued_{l}.zarr')
         if not os.path.isdir(zarrud_ms) :
             bin_lonlat_ms(dsmnd,l, dl).to_zarr(zarrud_ms,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
         if not os.path.isdir(zarrud_mean) :
             bin_lonlat_mean(dsmnd,l, dl).to_zarr(zarrud_mean,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-        logging.info(f"undrogued {l} ms/mean storred")
+        if not os.path.isdir(zarrud_corr) :
+            bin_lonlat_corr(dsmnd,l, dl).to_zarr(zarrud_corr,encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        logging.info(f"undrogued {l} ms/mean/corr storred")
     
 
     

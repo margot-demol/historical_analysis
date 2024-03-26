@@ -272,23 +272,23 @@ def run_ms_global(l):
     dsm = dsm.drop('drogue_status')
     
     if l==labels[0] : 
-        ms_dataset(dsm, l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-        mean_dataset(dsm, l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        ms_dataset(dsm, l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+        mean_dataset(dsm, l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
         if dsmd.dims['obs']!=0 : 
-            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_drogued_2.zarr'), encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
-            mean_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_drogued_2.zarr'), encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_drogued.zarr'), encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
+            mean_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_drogued.zarr'), encoding={'drifter_sat_year':{'dtype':'U32'}},mode='w')
         if dsmnd.dims['obs']!=0 : 
-            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_undrogued_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
-            mean_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_undrogued_2.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_undrogued.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
+            mean_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_undrogued.zarr'),encoding={'drifter_sat_year':{'dtype':'U32'}}, mode='w')
     else : 
-        ms_dataset(dsm,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_2.zarr'), append_dim='drifter_sat_year')
-        mean_dataset(dsm,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_2.zarr'), append_dim='drifter_sat_year')
+        ms_dataset(dsm,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}.zarr'), append_dim='drifter_sat_year')
+        mean_dataset(dsm,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}.zarr'), append_dim='drifter_sat_year')
         if dsmd.dims['obs']!=0 : 
-            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_drogued_2.zarr'), append_dim='drifter_sat_year')
-            mean_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_drogued_2.zarr'), append_dim='drifter_sat_year')
+            ms_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_drogued.zarr'), append_dim='drifter_sat_year')
+            mean_dataset(dsmd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_drogued.zarr'), append_dim='drifter_sat_year')
         if dsmnd.dims['obs']!=0 : 
-            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_undrogued_2.zarr'),append_dim='drifter_sat_year')
-            mean_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_undrogued_2.zarr'),append_dim='drifter_sat_year')
+            ms_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'ms_{int(DL//1000)}_{DT}_undrogued.zarr'),append_dim='drifter_sat_year')
+            mean_dataset(dsmnd,l).to_zarr(os.path.join(zarr_dir+'_ok','global',f'mean_{int(DL//1000)}_{DT}_undrogued.zarr'),append_dim='drifter_sat_year')
     
 if __name__ == "__main__":
 

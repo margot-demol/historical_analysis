@@ -485,9 +485,7 @@ def vevn2vxvy(theta_lon, theta_lat, ve, vn):
     local vx, local vy : np.array, np.array
 
     """
-    return ve * np.cos(theta_lon) + vn * np.cos(theta_lat), ve * np.sin(
-        theta_lon
-    ) + vn * np.sin(theta_lat)
+    return ve * np.cos(theta_lon) + vn * np.cos(theta_lat), ve * np.sin(theta_lon) + vn * np.sin(theta_lat)
 
 
 def compute_local_drifters_velocities(ds, tdim):
@@ -752,20 +750,20 @@ def build_dataset(
     }
     ds.box_theta_lat.attrs = {
         "description": "local angle between the track and the longitude axis for box's points",
-        "units": "°",
+        "units": "rad",
     }
     ds.box_theta_lon.attrs = {
         "description": "local angle between the track and the latitude axis for box's points",
-        "units": "°",
+        "units": "rad",
     }
 
     ds.drifter_theta_lat.attrs = {
         "description": "local angle between the track and the longitude axis along the drifter's trajectory",
-        "units": "°",
+        "units": "rad",
     }
     ds.drifter_theta_lon.attrs = {
         "description": "local angle between the track and the latitude axis along the drifter's trajectory",
-        "units": "°",
+        "units": "rad",
     }
     ds.f.attrs = {
         "description": "coriolis frequency at the altimeter's matchup point",
