@@ -221,6 +221,7 @@ var = wd_x+grad_x+grad_y+['drifter_acc_x_0','drifter_coriolis_x_0']
 
 
 def corr_dataset(dsm, l, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff) :
+    """ Compute the mean of product \alpha_i\alpha_j, giving correlation"""
     ds_ = match.product_dataset(dsm, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
     nb = ds_.dims["obs"]
     ds = ds_.mean('obs')
@@ -234,6 +235,22 @@ def corr_dataset(dsm, l, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cut
         ds[v].attrs =ds_[v].attrs
         ds[v].attrs['units']=r'$m^2.s^{-4}$'
         
+    return ds
+
+def corr_var_dataset(dsm, l, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff) :
+    """ Compute the variance of product \alpha_i\alpha_j, then will allow to compute errors on correlation estimation"""
+    ds_ = match.product_dataset(dsm, wd_x=wd_x, wd_y=wd_y, grad_x=grad_x, grad_y=grad_y, cutoff=cutoff)   
+    nb = ds_.dims["obs"]
+    ds = ds_.var('obs')
+    ds["nb_coloc"] = nb
+    ds['drifter_sat_year']=l
+    ds = ds.expand_dims('drifter_sat_year')
+    ds = ds.set_coords('drifter_sat_year')
+
+    ## ATTRS
+    for v in ds_.keys() :
+        ds[v].attrs =ds_[v].attrs
+        ds[v].attrs['units']=r'$m^2.s^{-4}$'
     return ds
 
 def run_corr_global(l):

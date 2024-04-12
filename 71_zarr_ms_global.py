@@ -205,7 +205,7 @@ DL =25e3 #meters
 DT = 0.5*3600 #seconds
 
 #IF restricted computation
-wd_x= ['es_cstrio_z15_alti_wd_x', 'es_cstrio_z15_drifter_wd_x']
+wd_x= ['es_cstrio_z15_alti_wd_x', 'es_cstrio_z15_drifter_wd_x', 'es_cstrio_z0_alti_wd_x', 'es_cstrio_z0_drifter_wd_x']
 wd_y = []
 grad_x = ['alti_ggx_adt_filtered',
           'alti_ggx_adt_filtered_ocean_tide',
@@ -215,7 +215,7 @@ grad_x = ['alti_ggx_adt_filtered',
           'aviso_drifter_ggx_adt'
          ]
 grad_y =[]
-cutoff=[0, 0.1, 0.2, 0.5, 1, 1.5, 2, 2.5]
+cutoff=[0, 0.5, 1.5, 2.5]
 
 var = wd_x+grad_x+grad_y+['drifter_acc_x_0','drifter_coriolis_x_0']
 

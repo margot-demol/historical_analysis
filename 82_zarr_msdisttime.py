@@ -201,7 +201,7 @@ def trim_memory() -> int:
 
 # ---------------------------------- core of the job to be done ----------------------------------
 dl = 5e3
-dt = 10*60
+dt = 1*60
 
 DL =25e3 #meters
 DT = 0.5*3600 #seconds
@@ -468,7 +468,7 @@ def run_ms_time(l):
     zarr_cutoff1 = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+"_2.zarr")
     if os.path.isdir(zarr_cutoff):
         dsm = xr.merge([dsm, xr.open_dataset(zarr_cutoff),xr.open_dataset(zarr_cutoff1)], join='inner').chunk({'obs':1000})
-        
+    dsm = dsm.where(dsm.alti___time_difference<=3600, drop=True)   
     dsm = dsm.where(dsm.alti___distance<=DL, drop=True).drop(['alti___distance']).dropna('obs')
     dsmd = dsm.where(dsm.drogue_status, drop=True).drop('drogue_status')
     dsmnd = dsm.where(np.logical_not(dsm.drogue_status), drop=True).drop('drogue_status')
