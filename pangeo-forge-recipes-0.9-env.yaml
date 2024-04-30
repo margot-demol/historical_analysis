@@ -1,0 +1,16 @@
+name: pangeo-forge-recipes-0.9-env
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - xarray
+  - pandas
+  - distributed
+  - dask
+  - dask-jobqueue
+  - pangeo-forge-recipes==0.9
+  - intake
+  - zarr
+  - netcdf4
+  - matplotlib
+  - ipykernel

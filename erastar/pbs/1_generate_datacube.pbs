@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#PBS -N ERASTAR_generate_datacube
+#PBS -q omp
+#PBS -l walltime=14:00:00
+#PBS -l mem=320g
+#PBS -l ncpus=8
+#PBS -o ./output
+
+# cd to the directory you submitted your job
+cd ${PBS_O_WORKDIR}
+
+. /appli/anaconda/latest/etc/profile.d/conda.sh
+
+conda activate pangeo-forge-recipes-0.9-env
+
+# ERASTAR
+#python 1_generate_datacube.py --start 2015-12-01 --end 2016-02-01 --version datacube-year --output-dir /home1/scratch/gcaer/data >& ./output/${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
+python 1_generate_datacube.py --start '2009-12-31 09:00:00' --end '2020-12-31 23:00:00' --version datacube-year --output-dir /home/datawork-data-terra/odatis/data >& ${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1

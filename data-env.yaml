@@ -1,0 +1,22 @@
+name: data-env
+channels:
+  - conda-forge
+dependencies:
+  # Librairie Data Science
+  - numpy
+  - xarray
+  - pandas
+  - scipy
+  - dask
+  - dask-jobqueue
+  - kerchunk
+  # Librairie Data Format
+  - zarr
+  - netcdf4
+  # Librairie Catalogue
+  - intake
+  - intake-xarray
+  # Librairie Visualisation
+  - matplotlib
+  # Librairie pour Jupyter
+  - ipykernel

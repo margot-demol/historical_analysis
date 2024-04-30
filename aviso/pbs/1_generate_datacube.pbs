@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#PBS -N AVISO_generate_datacube
+#PBS -q omp
+#PBS -l walltime=14:00:00
+#PBS -l mem=320g
+#PBS -l ncpus=8
+#PBS -o ./output
+
+# cd to the directory you submitted your job
+cd ${PBS_O_WORKDIR}
+
+. /appli/anaconda/latest/etc/profile.d/conda.sh
+
+conda activate pangeo-forge-recipes-0.9-env
+
+# AVISO
+#python 1_generate_datacube.py --start 2015-01-01 --end 2017-12-31 --version datacube-year --output-dir /home1/scratch/gcaer/data >& ./output/${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
+python 1_generate_datacube.py --start 1993-01-01 --end 2023-06-07 --version datacube-year --output-dir /home/datawork-data-terra/odatis/data >& ${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
