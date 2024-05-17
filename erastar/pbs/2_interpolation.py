@@ -69,10 +69,17 @@ def setup_cluster(
 
 def open_datacube(path, chunks, start, end):
     """Ouverture du datacube"""
-    vars = ["crs","lat_bnds","lon_bnds","ugosa","err_ugosa","vgosa","err_vgosa","ugos","vgos","flag_ice","tpa_correction","nv",]
+    vars = ["es_u10s", "es_v10s", "e5_u10s", "e5_v10s", "count", "quality_flag"]
     cat = intake.open_catalog(path)
     datacubes = [cat[str(year)](chunks=chunks).to_dask().drop_vars(vars) for year in range(start, end+1)]
     datacube = xr.concat(datacubes, dim="time")
+
+    datacube = (datacube.rename(
+                {v: v.replace("tauu", "taue") for v in datacube if "tauu" in v}
+            ).rename(
+                {v: v.replace("tauv", "taun") for v in datacube if "tauv" in v}
+            )
+    )
     return datacube
 
 def initialisation(ds, **kwargs):
@@ -98,8 +105,8 @@ def initialisation(ds, **kwargs):
     ds = ds.drop_vars(vars)
 
     # Pour chaque observation, définition de l'extension temporelle
-    ds['time_min'] = (ds.time + np.timedelta64(kwargs['dt'][0], 'D'))
-    ds['time_max'] = (ds.time + np.timedelta64(kwargs['dt'][1]-1, 'D'))
+    ds['time_min'] = (ds.time + np.timedelta64(kwargs['dt'][0], 'h'))
+    ds['time_max'] = (ds.time + np.timedelta64(kwargs['dt'][1]-1, 'h'))
     return ds
 
 _lon_180_to_360 = lambda lon: lon % 360
@@ -144,8 +151,8 @@ def mask_drifter_time(drifter_times, times, **kwargs):
     values = []
     for drifter_time, time in zip(drifter_times, times):
         t = pd.to_datetime(time)
-        start = np.datetime64((t + pd.Timedelta(days=kwargs['dt'][0])).date())
-        end = np.datetime64((t + pd.Timedelta(days=kwargs['dt'][1]-1)).date())
+        start = np.datetime64((t + pd.Timedelta(hours=kwargs['dt'][0])))
+        end = np.datetime64((t + pd.Timedelta(hours=kwargs['dt'][1]-1)))
         mask = (drifter_time >= start) & (drifter_time <= end)
         drifter_time[~mask] = np.datetime64('NaT')
         drifter_time.astype(np.int64)
@@ -158,7 +165,7 @@ def set_time_array(times, **kwargs):
     values = []
     for time in zip(times):
         t = pd.to_datetime(time)
-        t = [np.datetime64((t + pd.Timedelta(days=_dt)).date[0]) for _dt in range(*kwargs['dt'])]
+        t = [np.datetime64((t + pd.Timedelta(hours=_dt)).date[0]) for _dt in range(*kwargs['dt'])]
         values.append(t)
     return np.array(values).astype(np.int64)
     
@@ -251,7 +258,7 @@ def set_new_drifter_time_array(ds, dt):
         dask_gufunc_kwargs=dict(output_sizes={'t': len(range(*dt))}),
         dask='parallelized',
         kwargs={'dt': dt} # +/- 2 jours
-    ).astype('datetime64[D]').astype('datetime64[ns]')
+    ).astype('datetime64[ns]')
     return ds
 
 def set_matchup_site(ds):
@@ -320,19 +327,16 @@ def interp_traj(datacube, ds):
         datacube
         .interp(
             time=ds.new_drifter_time,
-            longitude=ds['new_drifter_lon'],
-            latitude=ds['drifter_lat'],
+            lon=ds['new_drifter_lon'],
+            lat=ds['drifter_lat'],
             )
-        .rename({v: "aviso_traj_" + v for v in datacube})
+        .rename({v: "es_traj_" + v for v in datacube})
         .drop_vars(
             [
                 "drifter_lon",
                 "drifter_lat",
-                "time",
-                "longitude",
-                "latitude",
-                "lat",
                 "lon",
+                "lat",
                 "time",
             ]
         )
@@ -345,11 +349,11 @@ def interp_box(datacube, ds):
         datacube
         .interp(
             time=ds._drifter_time,
-            longitude=ds.new_box_lon,
-            latitude=ds.box_lat,
+            lon=ds.new_box_lon,
+            lat=ds.box_lat,
         )
-        .drop_vars(["longitude", "latitude", "lat", "lon", "time"])
-        .rename({v: "aviso_box_" + v for v in datacube})
+        .drop_vars(["lat", "lon", "time"])
+        .rename({v: "es_box_" + v for v in datacube})
     )
     return res_box
 
@@ -359,16 +363,16 @@ def interp_drifter(datacube, ds):
         datacube
         .interp(
             time=ds['_drifter_time_array'],
-            longitude=ds['_drifter_lon'],#.drop_vars(['time']), 
-            latitude=ds['_drifter_lat'],#.drop_vars(['time']),
+            lon=ds['_drifter_lon'],
+            lat=ds['_drifter_lat'],
         )
     )
-    res_drifter['aviso_time_'] = ds['_drifter_time_array']
+    res_drifter['es_time_'] = ds['_drifter_time_array']
     res_drifter = (
-        res_drifter.set_coords(['aviso_time_'])
-        .drop_vars(["longitude", "latitude", "lat", "lon", "time"])
-        .rename({v: "aviso_drifter_temp_" + v for v in datacube})
-        .rename({'t': 'aviso_time'})
+        res_drifter.set_coords(['es_time_'])
+        .drop_vars(["lat", "lon", "time"])
+        .rename({v: "es_drifter_temp_" + v for v in datacube})
+        .rename({'t': 'es_time'})
     )
     return res_drifter
 
@@ -378,253 +382,128 @@ def interp_alti(datacube, ds):
         datacube
         .interp(
             time=ds['alti_time_'].isel(alti_time=ds.sizes['alti_time']//2),
-            longitude=ds['new_alti_lon'],
-            latitude=ds['alti_lat'].isel(alti_time=ds.sizes['alti_time']//2),
+            lon=ds['new_alti_lon'],
+            lat=ds['alti_lat'].isel(alti_time=ds.sizes['alti_time']//2),
         )
     )
     res_alti = res_alti.drop_vars(list(res_alti.coords.keys())).rename(
-        {v: "aviso_alti_matchup_" + v for v in datacube}
+        {v: "es_alti_matchup_" + v for v in datacube}
     )
     return res_alti
 
 def merge_results(ds, res_traj, res_box, res_drifter, res_alti):
-    g = 9.81
-
-    res_box["aviso_box_ggx_sla"] = g * res_box["aviso_box_sla"].differentiate(
-        "box_x"
+    res_drifter_matchup = (
+        res_traj.isel(site_obs=xr.DataArray(ds.__site_matchup_indice.values.astype(int), dims='obs'))
+        .drop_vars(list(res_traj.coords.keys()))
+        .rename({v: v.replace("traj_", "drifter_matchup_") for v in res_traj})
     )
-    res_box["aviso_box_ggy_sla"] = g * res_box["aviso_box_sla"].differentiate(
-        "box_y"
-    )
-    res_traj["aviso_traj_ggx_sla"] = res_box["aviso_box_ggx_sla"].interp(
-        box_x=res_traj.drifter_x, box_y=res_traj.drifter_y
-    )
-    res_traj["aviso_traj_ggy_sla"] = res_box["aviso_box_ggy_sla"].interp(
-        box_x=res_traj.drifter_x, box_y=res_traj.drifter_y
-    )
-    # adt
-    res_box["aviso_box_ggx_adt"] = g * res_box["aviso_box_adt"].differentiate(
-        "box_x"
-    )
-    res_box["aviso_box_ggy_adt"] = g * res_box["aviso_box_adt"].differentiate(
-        "box_y"
-    )
-    res_traj["aviso_traj_ggx_adt"] = res_box["aviso_box_ggx_adt"].interp(
-        box_x=res_traj.drifter_x, box_y=res_traj.drifter_y
-    )
-    res_traj["aviso_traj_ggy_adt"] = res_box["aviso_box_ggy_adt"].interp(
-        box_x=res_traj.drifter_x, box_y=res_traj.drifter_y
-    )
-
-    # sla
-    res_alti["aviso_alti_matchup_ggx_sla"] = res_box["aviso_box_ggx_sla"].sel(
-        box_x=0, box_y=0
-    )
-    res_alti["aviso_alti_matchup_ggy_sla"] = res_box["aviso_box_ggy_sla"].sel(
-        box_x=0, box_y=0
-    )
-    # adt
-    res_alti["aviso_alti_matchup_ggx_adt"] = res_box["aviso_box_ggx_adt"].sel(
-        box_x=0, box_y=0
-    )
-    res_alti["aviso_alti_matchup_ggy_adt"] = res_box["aviso_box_ggy_adt"].sel(
-        box_x=0, box_y=0
-    )
-
-    res_drifter_matchup = res_traj[[v for v in res_traj if "gg" in v]].isel(
-    site_obs=xr.DataArray(ds.__site_matchup_indice.values.astype(int), dims='obs')
-    )
-    res_drifter_matchup = res_drifter_matchup.rename(
-        {v: v.replace("traj_", "drifter_matchup_") for v in res_drifter_matchup}
-    ).drop_vars(
-        list(res_drifter_matchup.coords.keys())
-    )  # NEW
 
     res = (
         xr.merge([res_traj, res_drifter_matchup, res_box, res_drifter, res_alti])
-            #.reset_index("aviso_time")
-            .reset_coords(["drifter_time", "drifter_x", "drifter_y", "aviso_time_"])
+            .reset_coords(["drifter_time", "drifter_x", "drifter_y", "es_time_"])
     )
 
     res = res.set_coords(
-            ["obs", "aviso_time_"]
+            ["obs", "es_time_"]
         )
+
+    res = res.rename({v: "es_" + v.replace("es_", "") for v in res if "es_" in v})
+    res = res.rename({v: "e5_" + v.replace("es_", "").replace("e5_", "") for v in res if "e5_" in v})
     return res
 
 def set_attrs(res):
+    
     # attrs
-    res.aviso_alti_matchup_err_sla.attrs = {
-        "description": "sla error interpolated on the altimeter's matchup",
-        "long_name": r"$err\eta_{altimatchup}$",
-        "units": "m",
+    res.e5_alti_matchup_taue.attrs = {
+        "long_name": "era5 eastward wind stress interpolated on the altimeter's matchup",
+        "units": "Pa",
     }
-    res.aviso_alti_matchup_sla.attrs = {
-        "description": "sla interpolated on the altimeter's matchup",
-        "long_name": r"$\eta_{altimatchup}$",
-        "units": "m",
-    }
-    res.aviso_alti_matchup_adt.attrs = {
-        "description": "adt interpolated on the altimeter's matchup",
-        "long_name": r"$adt_{altimatchup}$",
-        "units": "m",
-    }
-    res.aviso_alti_matchup_ggx_sla.attrs = {
-        "description": "along track sla gradient term interpolated on the altimeter's matchup",
-        "long_name": r"$g\partial_x\eta_{altimatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_alti_matchup_ggy_sla.attrs = {
-        "description": "cross track sla gradient term interpolated on the altimeter's matchup",
-        "long_name": r"$g\partial_y\eta_{altimatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_alti_matchup_ggx_adt.attrs = {
-        "description": "along track adt gradient term interpolated on the altimeter's matchup",
-        "long_name": r"$g\partial_xadt_{altimatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_alti_matchup_ggy_adt.attrs = {
-        "description": "cross track adt gradient term interpolated on the altimeter's matchup",
-        "long_name": r"$g\partial_yadt_{altimatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-
-    res.aviso_box_err_sla.attrs = {
-        "description": "sla error interpolated on the box at the matchup time or for several times (depending on the dimension)",
-        "long_name": r"$err\eta_{box}$",
-        "units": "m",
-    }
-    res.aviso_box_sla.attrs = {
-        "description": "sla interpolated on the box at the matchup time or for several times (depending on the dimension)",
-        "long_name": r"$\eta_{box}$",
-        "units": "m",
-    }
-    res.aviso_box_ggx_sla.attrs = {
-        "description": "along track sla gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
-        "long_name": r"$g\partial_x\eta_{box}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_box_ggy_sla.attrs = {
-        "description": "cross track sla gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
-        "long_name": r"$g\partial_y\eta_{box}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_box_adt.attrs = {
-        "description": "adt interpolated on the box at the matchup time or for several times (depending on the dimension)",
-        "long_name": r"$adt_{box}$",
-        "units": "m",
-    }
-    res.aviso_box_ggx_adt.attrs = {
-        "description": "along track adt gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
-        "long_name": r"$g\partial_xadt_{box}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_box_ggy_adt.attrs = {
-        "description": "cross track adt gradient term interpolated on the box at the matchup time or for several times (depending on the dimension)",
-        "long_name": r"$g\partial_yadt_{box}$",
-        "units": r"$m.s^{-2}$",
-    }
-
-    res.aviso_traj_err_sla.attrs = {
-        "description": "sla error interpolated on the drifter's trajectory",
-        "long_name": r"$err\eta_{traj}$",
-        "units": "m",
-    }
-    res.aviso_traj_sla.attrs = {
-        "description": "sla interpolated on the drifter's trajectory",
-        "long_name": r"$\eta_{traj}$",
-        "units": "m",
-    }
-    res.aviso_traj_ggx_sla.attrs = {
-        "description": "along track sla gradient term interpolated on the drifter's trajectory",
-        "long_name": r"$g\partial_x\eta_{traj}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_traj_ggy_sla.attrs = {
-        "description": "cross track sla gradient term interpolated on the drifter's trajectory",
-        "long_name": r"$g\partial_y\eta_{traj}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_traj_adt.attrs = {
-        "description": "adt interpolated on the drifter's trajectory",
-        "long_name": r"$adt_{traj}$",
-        "units": "m",
-    }
-    res.aviso_traj_ggx_adt.attrs = {
-        "description": "along track adt gradient term interpolated on the drifter's trajectory",
-        "long_name": r"$g\partial_xadt_{traj}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_traj_ggy_adt.attrs = {
-        "description": "cross track adt gradient term interpolated on the drifter's trajectory",
-        "long_name": r"$g\partial_yadt_{traj}$",
-        "units": r"$m.s^{-2}$",
-    }
-
-    res.aviso_drifter_matchup_ggx_sla.attrs = {
-        "description": "along track sla gradient term interpolated on the drifter's matchup",
-        "long_name": r"$g\partial_x\eta_{driftermatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_drifter_matchup_ggy_sla.attrs = {
-        "description": "cross track sla gradient term interpolated on the drifter's matchup",
-        "long_name": r"$g\partial_y\eta_{altimetermatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_drifter_matchup_ggx_adt.attrs = {
-        "description": "along track adt gradient term interpolated on the drifter's matchup",
-        "long_name": r"$g\partial_xadt_{driftermatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-    res.aviso_drifter_matchup_ggy_adt.attrs = {
-        "description": "cross track adt gradient term interpolated on the drifter's matchup",
-        "long_name": r"$g\partial_yadt_{altimetermatchup}$",
-        "units": r"$m.s^{-2}$",
-    }
-
-    res.aviso_drifter_temp_err_sla.attrs = {
-        "description": "sla error interpolated on the drifter's matchup position for several times (static but temporal variation)",
-        "long_name": r"$err\eta_{driftertemporal}$",
-        "units": "m",
-    }
-    res.aviso_drifter_temp_sla.attrs = {
-        "description": "sla interpolated on the drifter's matchup position for several times (static but temporal variation)",
-        "long_name": r"$\eta_{driftertemporal}$",
-        "units": "m",
-    }
-    res.aviso_drifter_temp_adt.attrs = {
-        "description": "adt interpolated on the drifter's matchup position for several times (static but temporal variation)",
-        "long_name": r"$adt_{driftertemporal}$",
-        "units": "m",
+    res.e5_alti_matchup_taun.attrs = {
+        "long_name": "era5 northward wind stress interpolated on the altimeter's matchup",
+        "units": "Pa",
     }
     
-    # New 
+    res.e5_drifter_matchup_taue.attrs = {
+        "long_name": "era5 eastward wind stress interpolated on the drifter's matchup",
+        "units": "Pa",
+    }
+    res.e5_drifter_matchup_taun.attrs = {
+        "long_name": "era5 northward wind stress interpolated on the drifter's matchup",
+        "units": "Pa",
+    }
     
-    res.box_x.attrs = {
-        'description': 
-        'along track direction x coordinate of the box', 
-        'units': 'm'
+    res.e5_box_taue.attrs = {
+        "long_name": "era5 eastward wind stress interpolated on the box at the matchup time or several times (depending on the dimension)",
+        "units": "Pa",
     }
-    res.box_y.attrs = {
-        'description': 'cross track direction y coordinate of the box', 
-        'units': 'm'
+    res.e5_box_taun.attrs = {
+        "long_name": "era5 northward wind stress interpolated on the box at the matchup time or several times (depending on the dimension)",
+        "units": "Pa",
     }
-    res.drifter_time.attrs = {
-        'description': "drifter's trajectory time measurements"
+    
+    res.e5_drifter_temp_taue.attrs = {
+        "long_name": "era5 eastward wind stress interpolated on the drifter's matchup position for several times (static but temporal variation)",
+        "units": "Pa",
     }
-    res.drifter_x.attrs = {
-        'description': "drifter's along track direction x position on the box",
-        'units': 'm'
+    res.e5_drifter_temp_taun.attrs = {
+        "long_name": "era5 northward wind stress interpolated on the drifter's matchup position for several times (static but temporal variation)",
+        "units": "Pa",
     }
-    res.drifter_y.attrs = {
-        'description': "drifter's cross track direction y position on the box",
-        'units': 'm'
+    
+    res.e5_traj_taue.attrs = {
+        "long_name": "era5 eastward wind stress interpolated on the drifter's trajectory",
+        "units": "Pa",
     }
-    res.aviso_time_.attrs = {
-        'axis': 'T', 
-        'long_name': 'Time', 
-        'standard_name': 'time'
+    res.e5_traj_taun.attrs = {
+        "long_name": "era5 northward wind stress interpolated on the drifter's trajectory",
+        "units": "Pa",
     }
+    
+    res.es_alti_matchup_taue.attrs = {
+        "long_name": "erastar eastward wind stress interpolated on the altimeter's matchup",
+        "units": "Pa",
+    }
+    res.es_alti_matchup_taun.attrs = {
+        "long_name": "erastar northward wind stress interpolated on the altimeter's matchup",
+        "units": "Pa",
+    }
+    
+    res.es_drifter_matchup_taue.attrs = {
+        "long_name": "erastar eastward wind stress interpolated on the drifter's matchup",
+        "units": "Pa",
+    }
+    res.es_drifter_matchup_taun.attrs = {
+        "long_name": "erastar northward wind stress interpolated on the drifter's matchup",
+        "units": "Pa",
+    }
+    
+    res.es_box_taue.attrs = {
+        "long_name": "erastar eastward wind stress interpolated on the box at the matchup time",
+        "units": "Pa",
+    }
+    res.es_box_taun.attrs = {
+        "long_name": "erastar northward wind stress interpolated on the box at the matchup time",
+        "units": "Pa",
+    }
+    
+    res.es_drifter_temp_taue.attrs = {
+        "long_name": "erastar eastward wind stress interpolated on the drifter's matchup position for several times (static but temporal variation)",
+        "units": "Pa",
+    }
+    res.es_drifter_temp_taun.attrs = {
+        "long_name": "erastar northward wind stress interpolated on the drifter's matchup position for several times (static but temporal variation)",
+        "units": "Pa",
+    }
+    
+    res.es_traj_taue.attrs = {
+        "long_name": "erastar eastward wind stress interpolated on the drifter's trajectory",
+        "units": "Pa",
+    }
+    res.es_traj_taun.attrs = {
+        "long_name": "erastar northward wind stress interpolated on the drifter's trajectory",
+        "units": "Pa",
+    }
+    
     return res
 
 def interpolation(datacube, ds, is_360=False):
@@ -632,8 +511,8 @@ def interpolation(datacube, ds, is_360=False):
     _lon_180_to_360 = lambda lon: lon % 360
     
     if is_360 == True:
-        datacube = datacube.assign_coords(longitude=_lon_180_to_360(datacube.longitude))
-        datacube = datacube.sortby("longitude")    
+        datacube = datacube.assign_coords(lon=_lon_180_to_360(datacube.lon))
+        datacube = datacube.sortby("lon")    
     
     res_traj = interp_traj(datacube, ds)
     res_box = interp_box(datacube, ds)
@@ -690,20 +569,21 @@ def concat(results, output, filename, fmt):
     if fmt == 'zarr':
         res.to_zarr(output / f'{filename}.zarr')
 
-def conf(ds, n_obs, n_batch):
+def conf(ds, n_obs_per_batch, n_obs_per_file):
     """Visualisation des paramètres (nombre de fichiers de sorties, ..) en fonction de la configuration d'entrée"""
-    n_batches = ds.sizes['obs']//n_obs + 1 # Nombre de batch au total
-    n_netcdf = n_batches//n_batch + 1 # Nombre de fichier netCDF en sortie
-    print(f"Nombre d'observation par batch: {n_obs}")
+    n_batches = ds.sizes['obs']//n_obs_per_batch + (1 if ds.sizes['obs'] % n_obs_per_batch > 0 else 0) # Nombre de batch au total
+    n_batch_per_file = n_obs_per_file // n_obs_per_batch
+    n_netcdf = n_batches // n_batch_per_file + (1 if n_batches % n_batch_per_file > 0 else 0) # Nombre de fichier netCDF en sortie
+    print(f"Nombre d'observation par batch: {n_obs_per_batch}")
     print(f"Nombre de batch: {n_batches}")
-    print(f"Nombre de batch par fichier netCDF: {n_batch}")
+    print(f"Nombre d'observations par fichier NetCDF: {n_obs_per_file}")
+    print(f"Nombre de batch par fichier netCDF: {n_batch_per_file}")
     print(f"Nombre de fichier NetCDF: {n_netcdf}")
-    print(f"Nombre d'observations par fichier NetCDF: {n_obs*n_batch}")
 
 def recipe(ds, datacube, dt, n_obs_per_file, n_obs_per_batch, n_obs_per_loop, idx_loop, output, filename, fmt):
     """Création des recettes en lazy_mode
-    n_obs : Nombre d'observation par batch
-    n_batch : Nombre de batch par fichier netCDF
+    n_obs_per_batch : Nombre d'observations par batch
+    n_obs_per_file : Nombre d'observations par fichier netCDF
     """
 
     batches = []
@@ -712,7 +592,7 @@ def recipe(ds, datacube, dt, n_obs_per_file, n_obs_per_batch, n_obs_per_loop, id
         ds_sub = ds.isel(obs=slice(i,i + n_obs_per_batch))
         time_min, time_max = ds_sub.time_min.values.min(), ds_sub.time_max.values.max()
         # Sélection de la portion du datacube concerné par la tranche
-        datacube_sub = datacube.sel(time=slice(time_min.astype('datetime64[D]'), time_max.astype('datetime64[D]')))
+        datacube_sub = datacube.sel(time=slice(time_min, time_max))
         batches.append(processing(ds_sub, datacube_sub, dt))
 
     concats = []
@@ -728,8 +608,8 @@ def recipe(ds, datacube, dt, n_obs_per_file, n_obs_per_batch, n_obs_per_loop, id
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
-        prog='AVISO interpolation',
-        description='Program to interpolate observations over AVISO datacube'
+        prog='ERASTAR interpolation',
+        description='Program to interpolate observations over ERASTAR datacube'
     )
 
     # PARAMETERS
@@ -816,10 +696,11 @@ if __name__ == "__main__":
 
         ## Extension temporelle des matchups
         time_min, time_max = ds.time.values.min(), ds.time.values.max()
-        dtime = np.timedelta64(max(abs(x) for x in args.dt), 'D')
+        dtime = np.timedelta64(max(abs(x) for x in args.dt), 'h')
+        print(f"TIME_MIN: {time_min}, TIME_MAX: {time_max}")
         start = pd.to_datetime(time_min - dtime).year
         end = pd.to_datetime(time_max + dtime).year
-    
+        print(f"START: {start}, END: {end}")
         # Ouverture Datacube
         journal.info(f"     3) Ouverture du Datacube") 
     

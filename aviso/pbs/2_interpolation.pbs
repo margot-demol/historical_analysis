@@ -13,18 +13,40 @@ cd ${PBS_O_WORKDIR}
 
 conda activate data-env
 
+# python 2_interpolation.py \
+# --dt -2 3 \
+# --n-obs-per-loop 150_000 \
+# --n-obs-per-file 30_000 \
+# --n-obs-per-batch 1_000 \
+# --format netcdf \
+# --inputs /home1/datahome/gcaer/odatis/projects/historical_analysis/inputs.csv \
+# --path-datacube /home/datawork-data-terra/odatis/data/aviso/datacube-year/reference.yaml \
+# --queue omp \
+# --cores 8 \
+# --jobs 7 \
+# --memory 115Gib \
+# --walltime 01:00:00 \
+# --processes 1 \
+# --log-directory /home1/scratch/gcaer/dask-logs \
+# --output-dir /home1/scratch/gcaer/data/aviso/test2 #>& ${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
+
 python 2_interpolation.py \
 --dt -2 3 \
---n-obs 1_000 \
---n-batch 10 \
+--n-obs-per-loop 50_000 \
+--n-obs-per-file 10_000 \
+--n-obs-per-batch 1_000 \
 --format netcdf \
---label gps_Jason-3_2019 \
+--inputs /home1/datahome/gcaer/odatis/projects/historical_analysis/aviso/pbs/inputs.csv \
 --path-datacube /home/datawork-data-terra/odatis/data/aviso/datacube-year/reference.yaml \
 --queue omp \
 --cores 28 \
 --jobs 3 \
 --memory 300Gib \
---walltime 04:00:00 \
+--walltime 01:00:00 \
 --processes 5 \
 --log-directory /home1/scratch/gcaer/dask-logs \
---output-dir /home1/scratch/gcaer/data/aviso/test #>& ${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
+--output-dir /home1/scratch/gcaer/data/aviso/test2 #>& ${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
+
+# --n-obs-per-loop 150_000 \ 
+# --n-obs-per-file 30_000 \
+# --n-obs-per-batch 1_000 \

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#PBS -N ERASTAR_interpolation
+#PBS -q mpi
+#PBS -l walltime=14:00:00
+#PBS -l mem=115g
+#PBS -l ncpus=28
+#PBS -o ./output
+
+# cd to the directory you submitted your job
+cd ${PBS_O_WORKDIR}
+
+. /appli/anaconda/latest/etc/profile.d/conda.sh
+
+conda activate data-env
+
+# python 2_interpolation.py \
+# --dt -12 13 \
+# --n-obs-per-loop 150_000 \
+# --n-obs-per-file 30_000 \
+# --n-obs-per-batch 1_000 \
+# --format netcdf \
+# --inputs /home1/datahome/gcaer/odatis/projects/historical_analysis/erastar/pbs/inputs.csv \
+# --path-datacube /home/datawork-data-terra/odatis/data/erastar/datacube-year/reference.yaml \
+# --queue omp \
+# --cores 8 \
+# --jobs 7 \
+# --memory 115Gib \
+# --walltime 01:00:00 \
+# --processes 1 \
+# --log-directory /home1/scratch/gcaer/dask-logs \
+# --output-dir /home1/scratch/gcaer/data/erastar/test2 #>& ${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
+
+python 2_interpolation.py \
+--dt -12 13 \
+--n-obs-per-loop 20_000 \
+--n-obs-per-file 10_000 \
+--n-obs-per-batch 500 \
+--format netcdf \
+--inputs /home1/datahome/gcaer/odatis/projects/historical_analysis/erastar/pbs/inputs.csv \
+--path-datacube /home/datawork-data-terra/odatis/data/erastar/datacube-year/reference.yaml \
+--queue omp \
+--cores 28 \
+--jobs 3 \
+--memory 500Gib \
+--walltime 01:00:00 \
+--processes 5 \
+--log-directory /home1/scratch/gcaer/dask-logs \
+--output-dir /home1/scratch/gcaer/data/erastar/test2 #>& ${PBS_JOBNAME}.e${PBS_JOBID%.*} 2>&1
