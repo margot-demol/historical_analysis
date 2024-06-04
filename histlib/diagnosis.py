@@ -129,8 +129,8 @@ def ms_dataset(dsm, l) :
         
     return ds
     
-def global_cor(dsc):
-    #global ms
+def global_drifter_sat(dsc):
+    #global
     cor = (((dsc*dsc.nb_coloc).sum('drifter_sat_year'))/(dsc.nb_coloc.sum('drifter_sat_year'))).drop('nb_coloc')
     print(dsc.nb_coloc.sum('drifter_sat_year'))
     for v in dsc.keys():
@@ -155,6 +155,7 @@ def global_ms_drifter_sat_year(dsmean, dsms, alpha):
     for v in dsms.keys():
         if v != 'nb_coloc':
             ms[v].attrs=dsms[v].attrs
+            
     #global mean and var
     mean = (((dsmean*dsmean.nb_coloc).sum('drifter_sat_year'))/(dsmean.nb_coloc.sum('drifter_sat_year'))).drop('nb_coloc')
     var = ms-mean**2
@@ -222,6 +223,20 @@ def true_err_x(ds,dserr, id_) :
         dso['err_'+x+'_err'] = (dserr[X] + dserr['sum_'+id_] + dserr['exc_' + x +'_'+ id_])/2
     dso['S'] = ds['sum_'+id_]
     return dso
+
+def error_on_covariances(dscorr, dsms , corr_id, alpha=0.01):
+    def compute_contribution_errors(ms12, ms1, ms2, N, alpha):
+        import scipy.stats as sps
+        rho = ms12/np.sqrt(ms1*ms2)
+        dist = sps.norm(loc=0, scale=1)
+        q5 = -dist.ppf(alpha)
+        return q5*(1+rho**2)*np.sqrt(ms1*ms2)/np.sqrt(N)
+    ds_cov_err = xr.zeros_like(dscorr)
+    for prod in corr_id :
+            ms12 = 'prod_'+'__'.join(prod)
+            ms1, ms2 = prod
+            ds_cov_err[ms12] = compute_contribution_errors(dscorr[ms12], dsms[ms1]-dsms[ms1]**2, dsms[ms2]-dsms[ms2]**2, dscorr['nb_coloc'], alpha)
+    return ds_cov_err
         
 """
 PLOT

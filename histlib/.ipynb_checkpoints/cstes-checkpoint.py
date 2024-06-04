@@ -173,7 +173,8 @@ var2 =['nb_coloc_bin',
 id_co_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'alti_ggx_adt_filtered','wind':'es_cstrio_z15_drifter_wd_x'}
 id_aviso_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'aviso_alti_ggx_adt','wind':'es_cstrio_z15_alti_wd_x'}
 
-c0 ={'acc':'#D62728', 'coriolis':'#2CA02C','ggrad':'#1F77B4', 'wind':'#FF7F0E'}
+c0 ={'acc':'#941717', 'coriolis':'#388E3C','ggrad':'#42A5F5', 'wind':'#FFA000'} #https://redketchup.io/color-picker
+#c0 ={'acc':'#D62728', 'coriolis':'#2CA02C','ggrad':'#1F77B4', 'wind':'#FF7F0E'}
 c1 ={'acc':'#FF9896', 'coriolis':'#98DF8A','ggrad':'#AEC7E8', 'wind':'#FFBB78'}
 
 cutoff_str = {'0':'No filter', '01':'0.1', '02':'0.2', '05':'0.5', '1':'1', '15':'1.5', '2':'2', '25':'2.5'}
