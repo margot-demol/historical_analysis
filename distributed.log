@@ -4317,3 +4317,7 @@ INFO:root: qdel 9050842
 INFO:root:manually killed jobs ...
 INFO:root:... done
 INFO:root:- all done
+INFO:root:start spinning up dask cluster, jobs=1
+INFO:root:dashboard via ssh: ssh -N -L 8787:r1i0n25:8787 mdemol@datarmor1-10g
+INFO:root:open browser at address of the type: http://localhost:8787
+INFO:root:start processing gps_Jason-3_2020
