@@ -1,5 +1,15 @@
+""" Constants and useful functions """
+
+
+#DIRECTORIES
+zarr_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc"
+matchup_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup"
+images_dir = "/home1/datawork/mdemol/historical_analysis/images"
+result_dir = "/home1/datawork/mdemol/historical_analysis/results"
+
 import string
 
+#LABELS
 labels = [
     "gps_Jason-3_2020",#
     "argos_Jason-3_2020",#
@@ -87,11 +97,7 @@ labels = [
     #"argos_Jason-2_2008",
 ]
 
-zarr_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc"
-matchup_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup"
-images_dir = "/home1/datawork/mdemol/historical_analysis/images"
-result_dir = "/home1/datawork/mdemol/historical_analysis/results"
-
+# FUNCTIONS
 import histlib.box as box
 
 #nc_files = {l: box.load_collocalisations(int(l.split('_')[-1]), drifter=l.split('_')[0], product_type=l.split('_')[1], satellite=l.split('_')[2], ) for l in labels}
@@ -102,7 +108,7 @@ lon_360_to_180 = lambda lon: (lon + 180) % 360 - 180
 
 lettres = ["(" + l + ")" for l in list(string.ascii_lowercase)]
 
-
+#VARIABLES LIST
 var = [
     'drifter_acc_x_0',
     'drifter_acc_y_0',
@@ -173,8 +179,9 @@ var2 =['nb_coloc_bin',
 id_co_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'alti_ggx_adt_filtered','wind':'es_cstrio_z15_drifter_wd_x'}
 id_aviso_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'aviso_alti_ggx_adt','wind':'es_cstrio_z15_alti_wd_x'}
 
+#COLORS FOR THE DIFFERENT TERMS
 c0 ={'acc':'#941717', 'coriolis':'#388E3C','ggrad':'#42A5F5', 'wind':'#FFA000'} #https://redketchup.io/color-picker
-#c0 ={'acc':'#D62728', 'coriolis':'#2CA02C','ggrad':'#1F77B4', 'wind':'#FF7F0E'}
 c1 ={'acc':'#FF9896', 'coriolis':'#98DF8A','ggrad':'#AEC7E8', 'wind':'#FFBB78'}
 
+# RENAME FILTER FROM THE ABREVIATION
 cutoff_str = {'0':'No filter', '01':'0.1', '02':'0.2', '05':'0.5', '1':'1', '15':'1.5', '2':'2', '25':'2.5'}

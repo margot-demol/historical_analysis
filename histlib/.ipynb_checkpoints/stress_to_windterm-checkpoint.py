@@ -23,9 +23,9 @@ def cst_rio_z0(taue, taun, f, theta_lon, theta_lat, rot=True):
 
     if rot:
         uek_x, uek_y = box.vevn2vxvy(theta_lon, theta_lat, uek_e, uek_n)
-        return -f * uek_y, f * uek_x
+        return f * uek_y, -f * uek_x
     else:
-        return -f * uek_n, f * uek_e
+        return f * uek_n, -f * uek_e
 
 
 def cst_rio_z15(taue, taun, f, theta_lon, theta_lat, rot=True):
