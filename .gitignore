@@ -114,3 +114,4 @@ dask-worker*
 */images_all/*
 *.png
 *.jpg
+*.jpeg
