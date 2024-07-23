@@ -112,3 +112,5 @@ dask-worker*
 *.csv
 *.nc
 */images_all/*
+*.png
+*.jpg
