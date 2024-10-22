@@ -1,10 +1,10 @@
 """ Constants and useful functions """
-
+U = 9.81 * 1e-3/(1e3)
 
 #DIRECTORIES
-zarr_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc"
+zarr_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok"
 matchup_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup"
-images_dir = "/home1/datawork/mdemol/historical_analysis/images"
+images_dir = "/home1/datawork/mdemol/historical_analysis/images_new"
 result_dir = "/home1/datawork/mdemol/historical_analysis/results"
 
 import string
@@ -180,8 +180,8 @@ id_co_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':
 id_aviso_dic =  {'acc':'drifter_acc_x_0','coriolis':'drifter_coriolis_x_0','ggrad':'aviso_alti_ggx_adt','wind':'es_cstrio_z15_alti_wd_x'}
 
 #COLORS FOR THE DIFFERENT TERMS
-c0 ={'acc':'#941717', 'coriolis':'#388E3C','ggrad':'#42A5F5', 'wind':'#FFA000'} #https://redketchup.io/color-picker
-c1 ={'acc':'#FF9896', 'coriolis':'#98DF8A','ggrad':'#AEC7E8', 'wind':'#FFBB78'}
+c0 ={'acc':'#941717', 'cor':'#388E3C','ggx':'#42A5F5', 'wd':'#FFA000'} #https://redketchup.io/color-picker
+c1 ={'acc':'#FF9896', 'cor':'#98DF8A','ggx':'#AEC7E8', 'wd':'#FFBB78'}
 
 # RENAME FILTER FROM THE ABREVIATION
 cutoff_str = {'0':'No filter', '01':'0.1', '02':'0.2', '05':'0.5', '1':'1', '15':'1.5', '2':'2', '25':'2.5'}

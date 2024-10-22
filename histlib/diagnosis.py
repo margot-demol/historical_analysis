@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import xarray as xr
+import dask.dataframe as dd
 import pyproj
 from rasterio.transform import Affine
 from math import ceil
@@ -56,755 +57,297 @@ def coloc_repartition(ds, bins=bins_lonlat):
     """
 
     return histogram(ds.lon, ds.lat, bins=bins).compute()
-    
-"""
-PDFS
--------------------------------
-"""
-def compute_pdfs(ds, bins):
-    """Compute and add to the diagnosis dataset independant pdf of the acceleration's, coriolis's terms for both x-along track and y-orthogonal direction and pressure gradient's term on both x-along track
-    If the given bin is np.ndarray, it returns the pdfs of the flatten ds, if the given bin is a dictionnary, the pdfs will be computed along dict dimensions.
-
-    Parameters
-    ----------
-    ds : xarray Dataset
-        dataset build by box.build_dataset
-    bins : np.ndarray or dict('dim':ndarray)
-    ds_diag : xarray Dataset
-        diagnosis dataset in which we add new diagnosis
-    """
-    ds_diag = xr.Dataset()
-    list_var = list(ds.keys())
-    # bins = dict(acc=bins_acc, separation=bins_separation)
-
-    # Acceleration
-    dt = 3600
-    if isinstance(bins, dict):
-        for var in list_var:
-            ds_diag["pdf_" + var] = (
-                histogram(
-                    ds[var].rename("acc"),
-                    *[ds[k] for k in bins if k != "acc"],
-                    bins=[v for k, v in bins.items()],
-                    density=True
-                )
-                .compute()
-            )
-
-    elif isinstance(bins, np.ndarray):
-        for var in list_var:
-            ds_diag["pdf_" + var] = (
-                histogram(ds[var].rename("acc"), bins=bins, density=True)
-                .compute()
-            )
-    else:
-        print("wrong bins type")
-
-    ds_diag["nb_coloc"] = ds.sizes["obs"]
-    if "id_comb" in ds:
-        ds_diag["id_comb"] = ds["id_comb"]
-    
-    ds_diag.acc_bin.attrs={'longname':'accbins', 'units':r'$m.s^{-2}$'}
-
-    return ds_diag
-
-"""
-MS
--------------------------------
-"""
-def ms_dataset(dsm, l) :
-    dsm = match.add_except_sum(dsm)   
-    nb = dsm.sizes["obs"]
-    ds = (dsm**2).mean('obs')
-    ds["nb_coloc"] = nb
-    ds['drifter_sat_year']=l
-    ds = ds.expand_dims('drifter_sat_year')
-    ds = ds.set_coords('drifter_sat_year')
-    if "id_comb" in dsm:
-        ds["id_comb"] = dsm["id_comb"]
-    ## ATTRS
-    for v in dsm.keys() :
-        ds[v].attrs =dsm[v].attrs
-        ds[v].attrs['units']=r'$m^2.s^{-4}$'
-        
-    return ds
-    
-def global_drifter_sat(dsc):
-    #global
-    cor = (((dsc*dsc.nb_coloc).sum('drifter_sat_year'))/(dsc.nb_coloc.sum('drifter_sat_year'))).drop('nb_coloc')
-    print(dsc.nb_coloc.sum('drifter_sat_year'))
-    for v in dsc.keys():
-        if v != 'nb_coloc':
-            cor[v].attrs=dsc[v].attrs
-    
-    #nb_coloc
-    nb_coloc = dsc.nb_coloc.sum('drifter_sat_year')
-    cor['nb_coloc']=nb_coloc
-    return cor
-    
-def global_ms_drifter_sat_year(dsmean, dsms, alpha):
-    """
-    dsmean: dataset with mean values
-    dsms : dataset with ms values
-
-    """
-    
-    #global ms
-    ms = (((dsms*dsms.nb_coloc).sum('drifter_sat_year'))/(dsms.nb_coloc.sum('drifter_sat_year'))).drop('nb_coloc')
-    print(dsms.nb_coloc.sum('drifter_sat_year'))
-    for v in dsms.keys():
-        if v != 'nb_coloc':
-            ms[v].attrs=dsms[v].attrs
-            
-    #global mean and var
-    mean = (((dsmean*dsmean.nb_coloc).sum('drifter_sat_year'))/(dsmean.nb_coloc.sum('drifter_sat_year'))).drop('nb_coloc')
-    var = ms-mean**2
-
-    
-    #nb_coloc
-    nb_coloc = dsms.nb_coloc.sum('drifter_sat_year')
-    ms['nb_coloc']=nb_coloc
-
-    #error
-    from scipy.stats import ncx2
-    def get_xlow(mean, var, nb_coloc, alpha):
-        df = nb_coloc -1
-        nc = df*(mean**2)/var
-        norm = df/var
-        return ncx2.ppf(alpha/2, df, nc)/norm
-
-    def get_xup(mean, var, nb_coloc, alpha):
-        df = nb_coloc -1
-        nc = df*(mean**2)/var
-        norm = df/var
-        return ncx2.ppf(1-alpha/2, df, nc)/norm
-
-    mslow = xr.apply_ufunc(get_xlow, mean, var, nb_coloc, alpha)
-    msup = xr.apply_ufunc(get_xup, mean, var, nb_coloc, alpha)
-    
-    return ms, mslow, msup
-
-def compute_sum_ms(ds, dserr, id_):
-    dic = ds['sum_'+id_].attrs
-    return ds[dic['acc']]+ds[dic['coriolis']]+ds[dic['ggrad']]+ds[dic['wind']], dserr[dic['acc']]+dserr[dic['coriolis']]+dserr[dic['ggrad']]+dserr[dic['wind']], 
-    
-def nMSRe_id(ds,dserr, id_):
-    sum_ms, sum_ms_err = compute_sum_ms(ds,dserr, id_)
-    ter = ds['sum_'+id_]/sum_ms*100
-    tererr = ter*(dserr['sum_'+id_]/ds['sum_'+id_]+sum_ms_err/sum_ms)
-    return ter.values, tererr.values
-
-def C_x(ds,dserr, id_):
-    def C_x_one_id(ds,dserr, id_):
-        dic = ds['sum_'+id_].attrs
-        lab = ['acc', 'coriolis', 'ggrad', 'wind']
-        cx = {l:(ds['exc_'+l+'_'+id_] - ds['sum_'+id_]).values for l in lab}
-        err_cx = {l+'_err':(dserr['exc_'+l+'_'+id_] + dserr['sum_'+id_]).values for l in lab}
-        cx.update(err_cx)
-        df = pd.DataFrame(cx, index=pd.Index([id_], name='id_comb'))
-        return df
-
-    if isinstance(id_, str):
-        return C_x_one_id(ds,dserr, id_)
-    else : 
-        return pd.concat([C_x_one_id(ds,dserr, i) for i in id_])
-
-def true_err_x(ds,dserr, id_) :
-    dso = xr.Dataset()
-    dic = ds['sum_'+id_].attrs
-    for x in ['acc', 'coriolis', 'ggrad', 'wind']:
-        X =dic[x]
-        dso[x] = ds[X]
-        dso[x+'_err'] = dserr[X]
-        dso['exc_'+x] = ds['exc_' + x +'_'+ id_]
-        dso['true_'+x] = (ds[X] - ds['sum_'+id_] + ds['exc_' + x +'_'+ id_])/2
-        dso['true_'+x+'_err'] = (dserr[X] + dserr['sum_'+id_] + dserr['exc_' + x +'_'+ id_])/2
-        dso['err_'+x] = (ds[X] + ds['sum_'+id_] - ds['exc_' + x +'_'+ id_])/2
-        dso['err_'+x+'_err'] = (dserr[X] + dserr['sum_'+id_] + dserr['exc_' + x +'_'+ id_])/2
-    dso['S'] = ds['sum_'+id_]
-    return dso
-
-def error_on_covariances(dscorr, dsms , corr_id, alpha=0.01):
-    def compute_contribution_errors(ms12, ms1, ms2, N, alpha):
-        import scipy.stats as sps
-        rho = ms12/np.sqrt(ms1*ms2)
-        dist = sps.norm(loc=0, scale=1)
-        q5 = -dist.ppf(alpha)
-        return q5*(1+rho**2)*np.sqrt(ms1*ms2)/np.sqrt(N)
-    ds_cov_err = xr.zeros_like(dscorr)
-    for prod in corr_id :
-            ms12 = 'prod_'+'__'.join(prod)
-            ms1, ms2 = prod
-            ds_cov_err[ms12] = compute_contribution_errors(dscorr[ms12], dsms[ms1]-dsms[ms1]**2, dsms[ms2]-dsms[ms2]**2, dscorr['nb_coloc'], alpha)
-    return ds_cov_err
-        
-"""
-PLOT
--------------------------------
-"""
-"""
-def plot_true_err_cor_part(ds, dscor, id_dic, ax, title=None, legend=True, rd=0):
-    ""
-    Parameters
-    ----------
-    ds : dataset with rms of x, excx and sum (created by )
-    id_: identification of the combination
-    ax : axis on which to plot
-
-    ""
-    l = '_nolegend_'
-    dp = 9e-12
-    
-    def vn(id_dic, key1, key2):
-        return 'prod_'+id_dic[key1]+'__'+id_dic[key2]
-    w = 0.2
-    # ACC X 
-    #ax.bar(1.5, ds['acc'], color = 'k', width = 0.46, zorder=3, align = 'center')
-    if legend : l ='total explained physical signal parts'
-    ax.bar(1.5, ds['true_acc'], yerr = ds['true_acc_err'], capsize=10,
-           color = 'k', width = 0.45, zorder=3, align = 'center', label=l)
-    if legend : l ='Unexplained errors parts'
-    ax.bar(1.5, ds['err_acc'], bottom = ds['true_acc'],yerr = ds['acc_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center', label = l)
-    ax.bar(1.5, -dscor[vn(id_dic, 'acc', 'wind')],
-           color = c0['wind'], width = w, zorder=3, align = 'center')
-    ax.bar(1.5, -dscor[vn(id_dic, 'acc', 'coriolis')],
-           color = c0['coriolis'], width = w, zorder=3, align = 'center')
-    ax.bar(1.5, -dscor[vn(id_dic, 'acc', 'ggrad')], bottom = -dscor[vn(id_dic, 'acc', 'coriolis')],
-           color = c0['ggrad'], width = w, zorder=3, align = 'center')
-    rse = np.round(ds['true_acc']/ds['acc']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(1.5, ds['true_acc']+dp, f'{rse}%', horizontalalignment='center')
-
-    # CORIOLIS X  
-    #ax.bar(2, ds['coriolis'], color = 'k', width = 0.46, zorder=3, align = 'center')
-    
-    ax.bar(2, ds['true_coriolis'], yerr = ds['true_coriolis_err'], capsize=10,
-           color = 'k', width = 0.45, zorder=3, align = 'center')
-    ax.bar(2, ds['err_coriolis'], bottom = ds['true_coriolis'],yerr = ds['coriolis_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center')
-    
-    ax.bar(2, -dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['wind'], width = w, zorder=3, align = 'center')
-    if legend : l ='part explained by inertial acceleration'
-    ax.bar(2, -dscor[vn(id_dic, 'acc', 'coriolis')], bottom = -dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['acc'], width = w, zorder=3, align = 'center', label = l)
-    if legend : l ='part explained by pressure gradient term'
-    ax.bar(2, -dscor[vn(id_dic, 'coriolis', 'ggrad')], bottom = -dscor[vn(id_dic, 'acc', 'coriolis')]-dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['ggrad'], width = w, zorder=3, align = 'center', label=l)
-    rse = np.round(ds['true_coriolis']/ds['coriolis']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(2, ds['true_coriolis']+dp, f'{rse}%', horizontalalignment='center')
-
-    # GGRAD X    
-    #ax.bar(2.5, ds['ggrad'],color = 'k', width = 0.46, zorder=3, align = 'center')  
-    
-    ax.bar(2.5, ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
-           color = 'k', width = 0.45, zorder=3, align = 'center')
-    ax.bar(2.5, ds['err_ggrad'], bottom = ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center')
-    if legend : l ='part explained by coriolis acceleration'
-    ax.bar(2.5, -dscor[vn(id_dic, 'coriolis', 'ggrad')], bottom = -dscor[vn(id_dic, 'acc', 'ggrad')],
-           color = c0['coriolis'], width = w, zorder=3, align = 'center', label=l)
-    if legend : l ='part explained by wind term'
-    ax.bar(2.5, -dscor[vn(id_dic, 'ggrad', 'wind')],
-           color = c0['wind'], width = w, zorder=3, align = 'center', label=l)
-    ax.bar(2.5, -dscor[vn(id_dic, 'acc', 'ggrad')],
-           color = c0['acc'], width = w, zorder=3, align = 'center')
-    rse = np.round(ds['true_ggrad']/ds['ggrad']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(2.5, ds['true_ggrad']+dp, f'{rse}%', horizontalalignment='center')
-
-    # WD X 
-    #ax.bar(3, ds['wind'],color = 'k', width = 0.46, zorder=3, align = 'center')
-    
-    ax.bar(3, ds['true_wind'],yerr = ds['wind_err'], capsize=10,
-           color = 'k', width = 0.45, zorder=3, align = 'center')
-    ax.bar(3, ds['err_wind'], bottom = ds['true_wind'],yerr = ds['wind_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center')
-    
-    ax.bar(3, -dscor[vn(id_dic, 'acc', 'wind')],
-           color = c0['acc'], width = w, zorder=3, align = 'center')
-    ax.bar(3, -dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['coriolis'], width = w, zorder=3, align = 'center')
-    ax.bar(3, -dscor[vn(id_dic, 'ggrad', 'wind')], bottom = -dscor[vn(id_dic, 'acc', 'wind')],
-           color = c0['ggrad'], width = w, zorder=3, align = 'center')
-    rse = np.round(ds['true_wind']/ds['wind']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(3, ds['true_wind']+dp, f'{rse}%', horizontalalignment='center')
-    
-    ax.grid(axis='y', zorder=0)
-    if isinstance(title, int): ax.set_title(ds.id_comb)
-    else : ax.set_title(title+'\n')
-
-    if legend==False :
-        ax.legend()
-        ax.get_legend().remove()
-        
-    N=np.arange(1.5,3.5, 0.5) 
-    ticks = (r'$d_tu$', r'$-fv$', r'$g \partial_x \eta$', r'$\frac{1}{\rho}\partial_z\tau_x$')
-    ax.set_xticks(N, ticks,)
-"""
-def plot_true_err_cor_part(ds, dscor, id_dic, ax, title=None, legend=True, rd=0):
-    """ 
-    Parameters
-    ----------
-    ds : dataset with rms of x, excx and sum (created by )
-    id_: identification of the combination
-    ax : axis on which to plot
-
-    """
-    l = '_nolegend_'
-    dp = 9e-12
-    plt.rcParams['hatch.linewidth'] = 10
-    def vn(id_dic, key1, key2):
-        return 'prod_'+id_dic[key1]+'__'+id_dic[key2]
-    w = 0.4
-    # ACC X 
-    #ax.bar(1.5, ds['acc'], color = 'k', width = 0.46, zorder=3, align = 'center')
-    if legend : l ='Inertial acceleration'
-    ax.bar(1.5, ds['true_acc'], yerr = ds['true_acc_err'], capsize=10,
-           color = c0['acc'], width = 0.45, zorder=3, align = 'center', label=l)
-    ax.bar(1.5, ds['err_acc'], bottom = ds['true_acc'],yerr = ds['acc_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center')
-    
-    plt.rcParams['hatch.color'] = c0['acc']
-    ax.bar(1.5, -dscor[vn(id_dic, 'acc', 'wind')],
-           color = c0['wind'], width = w, zorder=3, align = 'center', hatch='/')
-    ax.bar(1.5, -dscor[vn(id_dic, 'acc', 'coriolis')],
-           color = c0['coriolis'], width = w, zorder=3, align = 'center', hatch='/')
-    ax.bar(1.5, -dscor[vn(id_dic, 'acc', 'ggrad')], bottom = -dscor[vn(id_dic, 'acc', 'coriolis')],
-           color = c0['ggrad'], width = w, zorder=3, align = 'center', hatch='/')
-    
-    rse = np.round(ds['true_acc']/ds['acc']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(1.5, ds['true_acc']+dp, f'{rse}%', horizontalalignment='center')
-
-    # CORIOLIS X  
-    #ax.bar(2, ds['coriolis'], color = 'k', width = 0.46, zorder=3, align = 'center')
-    if legend : l ='Coriolis acceleration'
-    ax.bar(2, ds['true_coriolis'], yerr = ds['true_coriolis_err'], capsize=10,
-           color = c0['coriolis'], width = 0.45, zorder=3, align = 'center', label=l)
-    ax.bar(2, ds['err_coriolis'], bottom = ds['true_coriolis'],yerr = ds['coriolis_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center')
-    
-    
-    plt.rcParams['hatch.color'] = c0['coriolis']    
-    ax.bar(2, -dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['wind'], width = w, zorder=3, align = 'center', hatch='/')
-    ax.bar(2, -dscor[vn(id_dic, 'acc', 'coriolis')], bottom = -dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['acc'], width = w, zorder=3, align = 'center',  hatch='/')
-    ax.bar(2, -dscor[vn(id_dic, 'coriolis', 'ggrad')], bottom = -dscor[vn(id_dic, 'acc', 'coriolis')]-dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['ggrad'], width = w, zorder=3, align = 'center', hatch='/')
-    rse = np.round(ds['true_coriolis']/ds['coriolis']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(2, ds['true_coriolis']+dp, f'{rse}%', horizontalalignment='center')
-
-    # GGRAD X    
-    #ax.bar(2.5, ds['ggrad'],color = 'k', width = 0.46, zorder=3, align = 'center')  
-    if legend : l ='Pressure gradient term'
-    ax.bar(2.5, ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
-           color = c0['ggrad'], width = 0.45, zorder=3, align = 'center', label=l)
-    ax.bar(2.5, ds['err_ggrad'], bottom = ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center')
-    if legend : l ='part explained by coriolis acceleration'
-    plt.rcParams['hatch.color'] = c0['ggrad']
-    ax.bar(2.5, -dscor[vn(id_dic, 'coriolis', 'ggrad')], bottom = -dscor[vn(id_dic, 'acc', 'ggrad')],
-           color = c0['coriolis'], width = w, zorder=3, align = 'center',  hatch='/')
-    if legend : l ='part explained by wind term'
-    ax.bar(2.5, -dscor[vn(id_dic, 'ggrad', 'wind')],
-           color = c0['wind'], width = w, zorder=3, align = 'center', hatch='/')
-    ax.bar(2.5, -dscor[vn(id_dic, 'acc', 'ggrad')],
-           color = c0['acc'], width = w, zorder=3, align = 'center', hatch='/')
-    rse = np.round(ds['true_ggrad']/ds['ggrad']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(2.5, ds['true_ggrad']+dp, f'{rse}%', horizontalalignment='center')
-
-    # WD X 
-    #ax.bar(3, ds['wind'],color = 'k', width = 0.46, zorder=3, align = 'center')
-    if legend : l ='Turbulent stress vertical divergence'
-    ax.bar(3, ds['true_wind'],yerr = ds['wind_err'], capsize=10,
-           color = c0['wind'], width = 0.45, zorder=3, align = 'center', label=l)
-    if legend : l ='Unexplained errors parts'
-    ax.bar(3, ds['err_wind'], bottom = ds['true_wind'],yerr = ds['wind_err'], capsize=10,
-           color = 'lightgrey', width = 0.45, zorder=3, align = 'center', label=l)
-    plt.rcParams['hatch.color'] = c0['wind']
-    ax.bar(3, -dscor[vn(id_dic, 'acc', 'wind')],
-           color = c0['acc'], width = w, zorder=3, align = 'center', hatch='/')
-    ax.bar(3, -dscor[vn(id_dic, 'coriolis', 'wind')],
-           color = c0['coriolis'], width = w, zorder=3, align = 'center', hatch='/')
-    ax.bar(3, -dscor[vn(id_dic, 'ggrad', 'wind')], bottom = -dscor[vn(id_dic, 'acc', 'wind')],
-           color = c0['ggrad'], width = w, zorder=3, align = 'center', hatch='/')
-    rse = np.round(ds['true_wind']/ds['wind']*100, rd).values
-    if rd==0: rse=int(rse)
-    ax.text(3, ds['true_wind']+dp, f'{rse}%', horizontalalignment='center')
-    
-    ax.grid(axis='y', zorder=0)
-    if isinstance(title, int): ax.set_title(ds.id_comb)
-    else : ax.set_title(title+'\n')
-
-    if legend==False :
-        ax.legend()
-        ax.get_legend().remove()
-        
-    N=np.arange(1.5,3.5, 0.5) 
-    ticks = (r'$d_tu$', r'$-fv$', r'$g \partial_x \eta$', r'$\frac{1}{\rho}\partial_z\tau_x$')
-    ax.set_xticks(N, ticks,)
-
-def synthetic_figure(ds, dsc, dic, ax) :
-    plt.rcParams["axes.edgecolor"] = "w"
-    a=1.5
-    b = 2e-12
-    bbox = dict(facecolor='w', alpha=0.8, edgecolor='w')
-    def vn(id_dic, key1, key2):
-        return 'prod_'+id_dic[key1]+'__'+id_dic[key2]
-            
-    ## INDIVIDUAL MS ##
-    ax.barh(2*a, ds['acc'], color= c0['acc'], label = 'Inertial acceleration')
-    ax.barh(2*a, ds['coriolis'], left =ds['acc']+b , color= c0['coriolis'], label = 'Coriolis acceleration')
-    ax.barh(2*a, ds['ggrad'], left =ds['acc']+ds['coriolis']+2*b , color= c0['ggrad'], label = 'Pressure gradient term')
-    ax.barh(2*a, ds['wind'], left =ds['acc']+ds['coriolis']+ds['ggrad']+3*b, color= c0['wind'], label = 'Vertical turbulent stress divergence')
-    
-    ts = ds['acc']+ds['coriolis']+ds['ggrad']+ds['wind']
-    ax.text(ts/2, 2*a+0.5, r'Individual MS - Total initial MS $\langle \alpha^2 \rangle$', ha='center') 
-    #percentage + MS
-    key = ['acc', 'coriolis', 'ggrad', 'wind']
-    for i in range(len(key)) :
-        ax.text(sum([ds[v] for v in key[:i]])+ds[key[i]]/2+i*b, 2*a, f'{int(np.rint((ds[key[i]]/ts).values*100))}%', ha='center',bbox=bbox )
-        ax.text(sum([ds[v] for v in key[:i]])+ds[key[i]]/2+i*b, 2*a-0.55, f'{np.format_float_scientific(ds[key[i]].values,precision = 1)}', ha='center')
-    
-    
-    ## CAPTURED PHYSICAL + ERRORS PARTS ##
-    ax.barh(1*a, ds['true_acc'], color= c0['acc'])
-    ax.barh(1*a, ds['err_acc'], left = ds['true_acc'], color= 'lightgrey', label='Errors')
-    ax.barh(1*a, ds['true_coriolis'], left =ds['true_acc']+ds['err_acc']+b, color= c0['coriolis'])
-    ax.barh(1*a, ds['err_coriolis'], left =ds['true_acc']+ds['err_acc']+ ds['true_coriolis'], color= 'lightgrey')
-    ax.barh(1*a, ds['true_ggrad'], left =ds['true_acc']+ds['err_acc']+ ds['true_coriolis']+ ds['err_coriolis']+b, color= c0['ggrad'])
-    ax.barh(1*a, ds['err_ggrad'], left =ds['true_acc']+ds['err_acc']+ ds['true_coriolis']+ ds['err_coriolis']+ds['true_ggrad'], color= 'lightgrey')
-    ax.barh(1*a, ds['true_wind'], left =ds['true_acc']+ds['err_acc']+ ds['true_coriolis']+ ds['err_coriolis']+ds['true_ggrad']+ds['err_ggrad']+b, color= c0['wind'])
-    ax.barh(1*a, ds['err_wind'], left =ds['true_acc']+ds['err_acc']+ ds['true_coriolis']+ ds['err_coriolis']+ds['true_ggrad']+ds['err_ggrad']+ds['true_wind'], color= 'lightgrey')
-
-    
-    ax.text(ts/2, 1*a+0.5, r'Captured physical and errors parts MS $\langle \hat{\alpha}^2 \rangle$ and $\langle \alpha_e^2 \rangle$', ha='center') 
-    #percentage + MS
-    key = ['true_acc','err_acc', 'true_coriolis','err_coriolis', 'true_ggrad','err_ggrad', 'true_wind', 'err_wind']
-    for i in range(len(key)) :
-        if i==len(key)-1 :
-            ax.text(sum([ds[v] for v in key[:i]])+ds[key[i]]/2+i*b/2, (1-0.1)*a, f'{int(np.rint((ds[key[i]]/ts).values*100))}%', ha='center', bbox=bbox)
-        else : 
-            ax.text(sum([ds[v] for v in key[:i]])+ds[key[i]]/2+i*b/2, 1*a, f'{int(np.rint((ds[key[i]]/ts).values*100))}%', ha='center', bbox=bbox)
-        if i%2 ==1 :
-            ax.text(sum([ds[v] for v in key[:i]])+ds[key[i]]/2+i*b/2, (1-0.1)*a-0.55, f'{np.format_float_scientific(ds[key[i]].values,precision = 1)}', ha='center')
-        else :
-            ax.text(sum([ds[v] for v in key[:i]])+ds[key[i]]/2+i*b/2, 1*a-0.55, f'{np.format_float_scientific(ds[key[i]].values,precision = 1)}', ha='center')
-        
-    ## PAIRS + RESIDUAL ##
-    plt.rcParams['hatch.linewidth'] = 10
-    plt.rcParams['hatch.color'] = c0['ggrad']
-    ax.barh(0, dsc[vn(dic, 'coriolis', 'ggrad')], color=c0['coriolis'], hatch='/')
-    plt.rcParams['hatch.color'] = c0['coriolis']
-    ax.barh(0, dsc[vn(dic, 'acc', 'coriolis')], color=c0['acc'], hatch='/', left = dsc[vn(dic, 'coriolis', 'ggrad')]+b)
-    plt.rcParams['hatch.color'] = c0['acc']
-    ax.barh(0, dsc[vn(dic, 'acc', 'ggrad')], color=c0['ggrad'], hatch='/', left = dsc[vn(dic, 'coriolis', 'ggrad')]+dsc[vn(dic, 'acc', 'coriolis')]+2*b)
-    plt.rcParams['hatch.color'] = c0['wind']
-    ax.barh(0, dsc[vn(dic, 'coriolis', 'wind')], color=c0['coriolis'], hatch='/', left = dsc[vn(dic, 'coriolis', 'ggrad')]+dsc[vn(dic, 'acc', 'coriolis')]+dsc[vn(dic, 'acc', 'ggrad')]+3*b)
-    ax.barh(0, ds['S'], color='lightgrey', left = dsc[vn(dic, 'coriolis', 'ggrad')]+dsc[vn(dic, 'acc', 'coriolis')]+dsc[vn(dic, 'acc', 'ggrad')]+dsc[vn(dic, 'coriolis', 'wind')]+4*b)
-
-    tts = dsc[vn(dic, 'coriolis', 'ggrad')]+dsc[vn(dic, 'acc', 'coriolis')]+dsc[vn(dic, 'acc', 'ggrad')]+dsc[vn(dic, 'coriolis', 'wind')]+4*b+ds['S']
-
-    sum_pairs = dsc[vn(dic, 'coriolis', 'ggrad')]+dsc[vn(dic, 'acc', 'coriolis')]+dsc[vn(dic, 'acc', 'ggrad')]+dsc[vn(dic, 'coriolis', 'wind')]+3*b
-    ax.text(sum_pairs/2, 0.6, r"Pairs' contributions $C_{ij}$", ha='center')
-    #accolade
-    c = 1e-12
-    id1 =0
-    id2 = sum_pairs
-    bx = [id1, id1, id2, id2]
-    by = [0.45, 0.5, 0.5, 0.45]
-    ax.plot(bx, by, 'k-', lw=2)
-    ax.text(sum_pairs + ds['S']/2, 0.5, r'MSRe $\langle S^2 \rangle$', ha='center')
-
-    #percentage + MS
-    key = [vn(dic, 'coriolis', 'ggrad'),vn(dic, 'acc', 'coriolis'), vn(dic, 'acc', 'ggrad'), vn(dic, 'coriolis', 'wind')]
-    for i in range(len(key)) :
-        ax.text(sum([dsc[v] for v in key[:i]])+dsc[key[i]]/2+i*b, 0, f'{int(np.rint((dsc[key[i]]/ts).values*100))}%', ha='center', bbox=bbox)
-        ax.text(sum([dsc[v] for v in key[:i]])+dsc[key[i]]/2+i*b, 0-0.55, f'{np.format_float_scientific(dsc[key[i]].values,precision = 1)}', ha='center')
-    
-    ax.text(sum([dsc[v] for v in key])+ds['S']/2+i*b, 0, f'{int(np.rint((ds["S"]/ts).values*100))}%', ha='center', bbox=bbox)
-    ax.text(sum([dsc[v] for v in key])+ds['S']/2+i*b, 0-0.55, f'{np.format_float_scientific(ds["S"].values,precision = 1)}', ha='center')
-
-    # FIGURE SET
-    ax.set_yticks([])
-    ax.set_xlim(-1e-11, tts+1e-11)
-    ax.set_ylim(-1, 4)
-    ax.get_yaxis().set_visible(False)
-    ax.axhline(-1, color='k')
-
-    plt.rcParams["axes.edgecolor"] = "k"
-    
-
-def plot_cor_uncor_part(ds, ax, title=None):
-    """ 
-    Parameters
-    ----------
-    ds : dataset with rms of x, excx and sum (created by )
-    id_: identification of the combination
-    ax : axis on which to plot
-
-    """
-    # ACC X
-    ax.bar(1.5, ds['true_acc'], yerr = ds['true_acc_err'], capsize=10,
-           color = c0['acc'], width = 0.4, zorder=3, align = 'center')
-    ax.bar(1.5, ds['err_acc'], bottom = ds['true_acc'],yerr = ds['acc_err'], capsize=10,
-           color = 'lightgrey', width = 0.4, zorder=3, align = 'center')
-    ax.text(1.5, ds['acc']+5e-12, str(np.format_float_scientific(ds['acc'].values,precision = 3)), horizontalalignment='center')
-    rse = np.round(ds['true_acc']/ds['acc']*100,2)
-    ax.text(1.5, ds['true_acc']+5e-12, f'{rse.values}%', horizontalalignment='center')
-
-    # CORIOLIS
-    ax.bar(2, ds['true_coriolis'], yerr = ds['true_coriolis_err'], capsize=10,
-           color = c0['coriolis'], width = 0.4, zorder=3, align = 'center')
-    ax.bar(2, ds['err_coriolis'], bottom = ds['true_coriolis'],yerr = ds['coriolis_err'], capsize=10,
-           color = 'lightgrey', width = 0.4, zorder=3, align = 'center')
-    ax.text(2, ds['coriolis']+5e-12, str(np.format_float_scientific(ds['coriolis'].values,precision = 3)), horizontalalignment='center')
-    rse = np.round(ds['true_coriolis']/ds['coriolis']*100,2)
-    ax.text(2, ds['true_coriolis']+5e-12, f'{rse.values}%', horizontalalignment='center')
-
-    # G GRADIENT SLA
-    ax.bar(2.5, ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
-           color = c0['ggrad'], width = 0.4, zorder=3, align = 'center')
-    ax.bar(2.5, ds['err_ggrad'], bottom = ds['true_ggrad'],yerr = ds['ggrad_err'], capsize=10,
-           color = 'lightgrey', width = 0.4, zorder=3, align = 'center')
-    ax.text(2.5, ds['ggrad']+5e-12, str(np.format_float_scientific(ds['ggrad'].values,precision = 3)), horizontalalignment='center')
-    rse = np.round(ds['true_ggrad']/ds['ggrad']*100,2)
-    ax.text(2.5, ds['true_ggrad']+5e-12, f'{rse.values}%', horizontalalignment='center')
-
-        # WIND
-    ax.bar(3, ds['true_wind'],yerr = ds['wind_err'], capsize=10,
-           color = c0['wind'], width = 0.4, zorder=3, align = 'center')
-    ax.bar(3, ds['err_wind'], bottom = ds['true_wind'],yerr = ds['wind_err'], capsize=10,
-           color = 'lightgrey', width = 0.4, zorder=3, align = 'center')
-    ax.text(3, ds['wind']+5e-12, str(np.format_float_scientific(ds['wind'].values,precision = 3)), horizontalalignment='center')
-    rse = np.round(ds['true_wind']/ds['wind']*100,2)
-    ax.text(3, ds['true_wind']+5e-12, f'{rse.values}%', horizontalalignment='center')
-
-    #ax.set_ylim((0,8e-5))
-    ax.grid(axis='y', zorder=0)
-
-    if isinstance(title, int): ax.set_title(ds.id_comb)
-    else : ax.set_title(title+'\n')
-    
-    N=np.arange(1.5,3.5, 0.5) 
-    ticks = (r'$d_tu$', r'$-fv$', r'$g \partial_x \eta$', r'$\frac{1}{\rho}\partial_z\tau_x$')
-    ax.set_xticks(N, ticks,)
-
-
-def plot_closure_bar(ds, id_, ax, title=1):
-    """ Plot closure bars for a combination on the axis ax.
-    
-    Parameters
-    ----------
-    ds : dataset with rms of x, excx and sum (created by )
-    id_: identification of the combination
-    ax : axis on which to plot
-
-    """
-    dic = ds['sum_'+id_].attrs
-    acc = ''+dic['acc']
-    cor = ''+dic['coriolis']
-    ggrad = ''+dic['ggrad']
-    wd = ''+dic['wind']
-
-    # ACC X
-    ax.bar(1.5, (np.sqrt(ds[acc]) + np.sqrt(ds['exc_acc_' + id_]))**2,
-           color ='lightgrey', width = 0.45, zorder=3, align = 'center',)
-    ax.bar(1.5, (np.sqrt(ds[acc]) - np.sqrt(ds['exc_acc_' + id_]))**2,
-           color ='w', width = 0.45, zorder=3, align = 'center',)
-    ax.bar(1.5, ds['exc_acc_' + id_],
-           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
-    ax.bar(1.5, ds[acc], bottom = ds['exc_acc_' + id_],
-           color = 'red', width = 0.4, zorder=3, align = 'center')
-
-    # CORIOLIS
-    ax.bar(2, (np.sqrt(ds['exc_coriolis_' + id_]) + np.sqrt(ds[cor]))**2,
-           color='lightgrey', width = 0.45, zorder=3, align = 'center',)
-    ax.bar(2, (np.sqrt(ds['exc_coriolis_' + id_]) - np.sqrt(ds[cor]))**2,
-           color='w', width = 0.45, zorder=3, align = 'center', )
-    ax.bar(2, ds['exc_coriolis_' + id_],
-           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
-    ax.bar(2, ds[cor], bottom = ds['exc_coriolis_' + id_],
-           color = 'green', width = 0.4, zorder=3, align = 'center')
-
-    # G GRADIENT SLA
-    ax.bar(2.5, (np.sqrt(ds['exc_ggrad_' + id_]) + np.sqrt(ds[ggrad]))**2,
-           color ='lightgrey', width = 0.45, zorder=3, align = 'center',)
-    ax.bar(2.5, (np.sqrt(ds['exc_ggrad_' + id_]) - np.sqrt(ds[ggrad]))**2,
-           color ='w', width = 0.45, zorder=3, align = 'center',)
-    ax.bar(2.5, ds['exc_ggrad_' + id_],
-           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
-    ax.bar(2.5, ds[ggrad], bottom = ds['exc_ggrad_' + id_],
-           color = 'c', width = 0.4, zorder=3, align = 'center')
-
-    # WIND
-    ax.bar(3, (np.sqrt(ds['exc_wind_' + id_]) + np.sqrt(ds[wd]))**2,
-           color ='lightgrey', width = 0.45, zorder=3, align = 'center',)
-    ax.bar(3, (np.sqrt(ds['exc_wind_' + id_]) - np.sqrt(ds[wd]))**2,
-           color ='w', width = 0.45, zorder=3, align = 'center',)
-    ax.bar(3, ds['exc_wind_' + id_],
-           color = 'lightsteelblue', width = 0.4, zorder=3, align = 'center')
-    ax.bar(3, ds[wd], bottom = ds['exc_wind_' + id_],
-           color = 'mediumvioletred', width = 0.4, zorder=3, align = 'center')
-    
-    #SUM of ms^2
-    ax.bar(1,ds[acc],
-           color = 'red', width = 0.4, zorder=3, align = 'center')
-    ax.bar(1, ds[cor], bottom = ds[acc],
-           color = 'green', width = 0.4, zorder=3, align = 'center')
-    ax.bar(1, ds[ggrad], bottom = ds[acc]+ds[cor],
-           color = 'c', width = 0.4, zorder=3, align = 'center')
-    ax.bar(1, ds[wd], bottom = ds[acc]+ds[cor]+ds[ggrad],
-           color = 'mediumvioletred', width = 0.4, zorder=3, align = 'center')
-    Ss=ds[acc]+ds[cor]+ds[ggrad]+ds[wd]
-    ax.text(0.75, Ss+Ss/30, str(np.format_float_scientific(Ss.values,precision = 3)))
-
-    ax.set_ylabel(r'Mean square $\langle ...^2 \rangle$ [$m^2/s^4$]')
-    if isinstance(title, int): ax.set_title(id_)
-    else : ax.set_title(title+'\n')
-    
-    #TOTAL
-    S = ds['sum_'+id_]
-    ax.bar(0.5, S, color ='k',width = 0.4, zorder=3)
-    ax.text(0.25, S+S/20, str(np.format_float_scientific(S.values,precision = 3)))
-    ax.axhline(y=S, c="k", linewidth=2, ls=':', zorder=4)
-    
-    #ax.set_ylim((0,8e-5))
-    ax.grid(axis='y', zorder=0)
-    
-    N=np.arange(0.5,3.5, 0.5) 
-    #g = ds[ggrad].attrs['long_name'].replace('rms[',r'').replace(']','').replace('altimatchup','aviso').replace('driftermatchup','aviso').split('+')
-    #ggrad_tick='$\n $+'.join(g)
-    #w = ds_all['rms_es_cstrio_z15_alti_wd_x'].attrs['long_name'].replace('rms[',r'').replace(']','').split(' from')
-    #wd_tick = '\n from'.join(w)
-    #ticks = (r'$\langle S^2\rangle$',r'$\sum_x \langle x^2\rangle$',r'$d_tu$', r'$-fv$', ggrad_tick, r'$\frac{1}{\rho}\partial_z\tau_x$')
-    #ax.set_xticks(N, ticks,)
-
-    print(f'acc:{ds[acc].values}, coriolis:{ds[cor].values}, ggrad:{ds[ggrad].values}, wind:{ds[wd].values}')
-
-def plot_stat_lonlat(
-    variables, ds=1, cmap="viridis", title=1, cmap_label=1, fig_title=1
-):
-    lv = len(variables)
-    if isinstance(variables[0], str):
-        variables = [ds[v] for v in variables]
-        if ds == 1:
-            assert False, "give dataset"
-    nrows = ceil(lv / 2)
-    ncols = 2
-    if lv == 1:
-        nrows = 1
-        ncols = 1
-    # Define the figure and each axis for the 3 rows and 3 columns
-    fig, axs = plt.subplots(
-        nrows=nrows,
-        ncols=ncols,
-        subplot_kw={"projection": ccrs.PlateCarree()},
-        figsize=(16, nrows * 4),
-    )
-
-    # axs is a 2 dimensional array of `GeoAxes`.  We will flatten it into a 1-D array
-    if lv != 1:
-        axs = axs.flatten()
-    else:
-        axs = [axs]
-
-    # Loop over all of the variables
-    for i in range(lv):
-        # Contour plot
-        if cmap_label != 1:
-            variables[i].assign_attrs({"long_name": cmap_label[i]}).plot(
-                x="lon_bin", y="lat_bin", cmap=cmap, ax=axs[i]
-            )
-        else:
-            variables[i].plot(x="lon_bin", y="lat_bin", cmap=cmap, ax=axs[i])
-
-        # Title each subplot with the name of the model
-        if title != 1:
-            axs[i].set_title(title[i], fontsize=15)
-
-        # Draw the coastines for each subplot
-        axs[i].coastlines()
-        axs[i].add_feature(cfeature.LAND)
-        gl = axs[i].gridlines(
-            crs=ccrs.PlateCarree(),
-            draw_labels=True,
-            linewidth=1,
-            color="gray",
-            alpha=0.5,
-            linestyle=":",
-        )
-        gl.xlabels_top = False
-        gl.ylabels_right = False
-    if isinstance(fig_title, str):
-        fig.suptitle(fig_title)
-    fig.tight_layout(rect=[0, 0, 1, 1])  # left, bottom, right, top (default is 0,0,1,1)
-    # set the spacing between subplots
-
-    # Delete the unwanted axes
-    if lv != 1:
-        for i in np.arange(lv, nrows * 2):
-            fig.delaxes(axs[i])
-
-
-def plot_ms_lonlat(ds, id_, title=1):
-    dic = ds["ms_sum_" + id_].attrs
-    acc = "ms_" + dic["acc"]
-    cor = "ms_" + dic["coriolis"]
-    ggrad = "ms_" + dic["ggrad"]
-    wd = "ms_" + dic["wind"]
-
-    ggrad_tick = (
-        ds[ggrad]
-        .attrs["long_name"]
-        .replace("ms[", r"")
-        .replace("]", "")
-        .replace("altimatchup", "aviso")
-        .replace("driftermatchup", "aviso")
-    )
-    w = ds[wd].attrs["long_name"].replace("ms[", r"").replace("]", "").split(" from")
-    wd_tick = " from".join(w)
-    ticks = [r"$d_tu$", r"$-fv$", ggrad_tick, "$fv_{Ekman}$"]
-
-    # S
-    S = ds["ms_sum_" + id_]
-    title = [r"$\langle S^2\rangle$"]
-    plot_stat_lonlat([S], title=title, cmap_label=title, fig_title=id_)
-
-    # S-x
-    Sx = [
-        ds["ms_exc_acc_" + id_] / S,
-        ds["ms_exc_coriolis_" + id_] / S,
-        ds["ms_exc_ggrad_" + id_] / S,
-        ds["ms_exc_wind_" + id_] / S,
-    ]
-    title = [
-        r"$\frac{\langle S_{-x}^2\rangle}{\langle S^2\rangle}$   $\alpha =$" + t
-        for t in ticks
-    ]
-    cmap_label = [r"$\langle S_{-x}^2\rangle/\langle S^2\rangle$"] * len(Sx)
-    plot_stat_lonlat(Sx, title=title, cmap_label=cmap_label, fig_title=id_)
-
-    # x
-    x = [ds[acc] / S, ds[cor] / S, ds[ggrad] / S, ds[wd] / S]
-    title = [
-        r"$\frac{\langle x^2\rangle}{\langle S^2\rangle}$   $x =$" + t for t in ticks
-    ]
-    cmap_label = [r"$\langle x^2\rangle/\langle S^2\rangle$"] * len(Sx)
-    plot_stat_lonlat(x, title=title, cmap_label=cmap_label, fig_title=id_)
+      
 
 def put_fig_letter(fig, ax, letter):
     trans = mtransforms.ScaledTranslation(10/72, -5/72, fig.dpi_scale_trans)
     ax.text(0.0, 1.0, letter+')', transform=ax.transAxes + trans,
             fontsize='medium', verticalalignment='top', fontfamily='serif',
             bbox=dict(facecolor='0.7', edgecolor='none', pad=3.0))
+
+"""
+BUILD MATCHUP
+--------------------------------------------------------------
+"""
+
+def path_csv(comb,drifter_type, drogue_status, DL, DT):
+    # Drogue status
+    if drogue_status == 'both' : dr_st = 'bothdroguedundrogued'
+    elif drogue_status : dr_st = 'drogued'
+    elif not drogue_status : dr_st = 'undrogued'
+
+    #Drifter type
+    if drifter_type == 'both' : dr = 'bothgpsargos'
+    elif drifter_type == 'gps' : dr = 'gps'
+    elif drifter_type == 'argos' : dr = 'argos'
+
+    #dl 
+    if DL : dl=str(int(DL))
+    if DL ==None : dl='None'
+    if DT : dt=str(int(DT/60))
+    if DT ==None : dt='None'
+
+    return os.path.join(zarr_dir, 'analysis_files', f'{dr_st}__{dr}__{dl}km__{dt}min__'+'__'.join([comb[key] for key in comb])+'.csv')
+
+def build_diagnostic(df, comb):
+    if (isinstance(df, pd.core.frame.DataFrame) or  isinstance(df, dd.core.DataFrame)):
+        df = df.rename(columns = {comb[key]:key for key in comb}).reset_index()[['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']]
+        
+        vars = ['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']
+        types = ['int64','float64','float64','bool','U','float64','float64','float64','float64','float64','float64','datetime64']
+    
+        df.astype({vars[i] : types[i] for i in range(len(vars))})
+        
+        tms = [tm for tm in comb]
+        
+        # residual
+        df['s'] = df[[tm for tm in comb]].sum(axis=1)
+        
+        # correlations
+        from itertools import combinations
+        correlation = list(combinations(tms, 2))
+        for c in correlation :
+            df[f'{c[0]}_{c[1]}'] = df[c[0]]*df[c[1]]
+    
+        for tm in tms :
+            #Errors parts
+            df['E_'+tm] = df.s*df[tm]
+            # Observed balanced parts
+            df['B_'+tm] = -df[[f'{c[0]}_{c[1]}' for c in correlation if tm in f'{c[0]}_{c[1]}']].sum(axis=1)
+    
+        #Contributions
+        for c in correlation :
+            df['X_'+f'{c[0]}_{c[1]}'] = -2*df[f'{c[0]}_{c[1]}']
+    
+        for tm in tms + ['s'] :
+            df[tm.upper()] = df[tm]**2
+        
+        df['sigma'] = df[[tm.upper() for tm in tms]].sum(axis=1)
+        
+    if isinstance(df, xr.core.dataset.Dataset) : 
+        df = df.rename({comb[key]:key for key in comb})[['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']]
+        
+        tms = [tm for tm in comb]
+        
+        # residual
+        df['s'] = sum([df[v] for v in [tm for tm in comb]])
+        
+        # correlations
+        from itertools import combinations
+        correlation = list(combinations(tms, 2))
+        for c in correlation :
+            df[f'{c[0]}_{c[1]}'] = df[c[0]]*df[c[1]]
+    
+        for tm in tms :
+            #Errors parts
+            df['E_'+tm] = df.s*df[tm]
+            # Observed balanced parts
+            df['B_'+tm] = sum([-df[v] for v in [f'{c[0]}_{c[1]}' for c in correlation if tm in f'{c[0]}_{c[1]}']])
+    
+        #Contributions
+        for c in correlation :
+            df['X_'+f'{c[0]}_{c[1]}'] = -2*df[f'{c[0]}_{c[1]}']
+    
+        for tm in tms + ['s'] :
+            df[tm.upper()] = df[tm]**2
+        df['sigma'] = sum([df[v] for v in [tm.upper() for tm in tms]])
+
+    return df
+    
+def build_matchup_dataframe(comb, drifter_type = 'both', drogue_status='both', DL=None, DT=None, store=False):
+    from histlib.cstes import labels
+    # gps/argos
+    if drifter_type!='both': 
+        labels = [l for l in labels if drifter_type in l]
+    DF =[]
+    for l in labels :
+        paths = [f'/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_{l}.zarr'] + glob(os.path.join(f'/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/cutoff_matchup/cutoff_matchup_{l}*.zarr'))
+        df = xr.merge([xr.open_dataset(path) for path in paths])[[comb[key] for key in comb]+['drogue_status']].to_dataframe()
+        df['drifter_type'] = l.split('_')[0]
+        df['drogue_status'] = df['drogue_status'].astype('bool')
+        
+        if drogue_status != 'both':
+            df = df.where(df.drogue_status==drogue_status).dropna()
+        if DL :
+            df =df.where(df.alti___distance<DL).dropna()
+        if DT : 
+            df =df.where(df.alti___time_difference<DT).dropna()
+        DF.append(df)
+        print(l)
+    
+    df = pd.concat(DF)
+
+    df = build_diagnostic(df, comb)
+    df = df.set_index('obs')
+    
+    if store :
+        df.to_csv(path_csv(comb,drifter_type, drogue_status, DL, DT))
+    return df
+
+
+"""
+ERROR COMPUTING
+--------------------------------------------------------------
+"""
+
+def mean_df(df):
+    return df.mean()
+from scipy.stats import bootstrap
+def compute_bootstrap_error(dff, bootkwargs):
+    #print(len(dff))
+    if len(dff)<5:
+        return np.nan
+    else : 
+        data = (dff, )  # samples must be in a sequence
+        return bootstrap(data, statistic = mean_df, **bootkwargs).standard_error
+
+"""
+GLOBAL ANALYSIS
+--------------------------------------------------------------
+"""
+def synthetic_figure(df, ax, xlim=None, aviso=False) :
+    from histlib.cstes import U
+    plt.rcParams["axes.edgecolor"] = "w"
+    a=1.5
+    bbox = dict(facecolor='w', alpha=0.8, edgecolor='w')
+    
+    ts = df['sigma']
+    print(ts)
+    #gap between bars for readability
+    if xlim : b=xlim/400
+    else : b=ts/400
+
+    #b = 1e-10
+    
+    ## INDIVIDUAL MS ##
+    ax.barh(2*a, df['ACC'], color= c0['acc'], label = 'Inertial acceleration')
+    ax.barh(2*a, df['COR'], left =df['ACC']+b , color= c0['coriolis'], label = 'Coriolis acceleration')
+    ax.barh(2*a, df['GGX'], left =df['ACC']+df['COR']+2*b , color= c0['ggrad'], label = 'Pressure gradient term')
+    ax.barh(2*a, df['WD'], left =df['ACC']+df['COR']+df['GGX']+3*b, color= c0['wind'], label = 'Wind term')
+    
+
+    ax.text(ts/2, 2*a+0.5, r'Individual MS $A_i$', ha='center') 
+    #percentage + MS
+    key = ['ACC', 'COR', 'GGX', 'WD']
+    for i in range(len(key)) :
+        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 2*a, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center',bbox=bbox )
+        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 2*a-0.55, f'{np.round(df[key[i]],2)}', ha='center')
+
+    #accolade
+    c = 1e-12*U**2
+    id1 =0
+    id2 = ts + 3*b
+    bx = [id1, id1, id2, id2]
+    by = [3.70, 3.75, 3.75, 3.70]
+    ax.plot(bx, by, 'k-', lw=2)
+    ax.text(ts, 3.8, r'$\Sigma$', fontsize=15, ha='center')
+    
+    ## CAPTURED PHYSICAL + ERRORS PARTS ##
+    ax.barh(1*a, df['B_acc'], color= c0['acc'])
+    ax.barh(1*a, df['E_acc'], left = df['B_acc'], color= 'lightgrey', label='Errors')
+    ax.barh(1*a, df['B_cor'], left =df['B_acc']+df['E_acc']+b, color= c0['coriolis'])
+    ax.barh(1*a, df['E_cor'], left =df['B_acc']+df['E_acc']+ df['B_cor'], color= 'lightgrey')
+    ax.barh(1*a, df['B_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+b, color= c0['ggrad'])
+    if df['E_ggx']>0 : 
+        ax.barh(1*a, df['E_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx'], color= 'lightgrey')
+        ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+b, color= c0['wind'])
+        ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+df['B_wd'], color= 'lightgrey')
+    else : 
+        print('ok')
+        ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+2*b, color= c0['wind'])
+        ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['B_wd']+2*b, color= 'lightgrey')
+    
+    ax.text(ts/2, 1*a+0.5, r'Balanced physical and errors parts MS $B_i$ and $E_i$', ha='center') 
+            
+    #percentage + MS
+    key = ['B_acc','E_acc', 'B_cor','E_cor', 'B_ggx','E_ggx', 'B_wd', 'E_wd']
+    for i in range(len(key)) :
+        d=0#vertical +
+        dx=0#horizontal + on MS
+        dxx=0#horizontal + on percentage
+        if i==len(key)-1 : 
+            d=-0.1*a 
+            dx = 3e-11
+            dxx = 1.5e-11
+        if i==len(key)-2 : d=0.1*a 
+        if aviso and i==len(key)-3 : d=-0.1*a
+        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b/2+dxx, a+d, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
+        d=0        
+        if i%2 ==1 : d=-0.1*a
+        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b/2+dx, a+d -0.55, f'{np.round(df[key[i]],2)}', ha='center')
+        
+    ## PAIRS + RESIDUAL ##
+    plt.rcParams['hatch.linewidth'] = 10
+    plt.rcParams['hatch.color'] = c0['ggrad']
+    ax.barh(0, df['X_cor_ggx'], color=c0['coriolis'], hatch='/')
+    plt.rcParams['hatch.color'] = c0['coriolis']
+    ax.barh(0, df['X_acc_cor'], color=c0['acc'], hatch='/', left = df['X_cor_ggx']+b)
+    plt.rcParams['hatch.color'] = c0['acc']
+    ax.barh(0, df['X_acc_ggx'], color=c0['ggrad'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+2*b)
+    plt.rcParams['hatch.color'] = c0['wind']
+    ax.barh(0, df['X_cor_wd'], color=c0['coriolis'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+3*b)
+    ax.barh(0, df['S'], color='lightgrey', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+4*b)
+
+    tts = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+4*b+df['S']
+    print(tts)
+    sum_pairs = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+3*b
+    ax.text(sum_pairs/2, 0.6, r"Pairs' contributions $X_{ij}$", ha='center')
+    #accolade
+    c = 1e-12
+    id1 = 0
+    id2 = sum_pairs
+    bx = [id1, id1, id2, id2]
+    by = [0.45, 0.5, 0.5, 0.45]
+    #ax.plot(bx, by, 'k-', lw=2)
+    ax.text(sum_pairs + df['S']/2, 0.5, r'$S$', ha='center')
+
+    #percentage + MS
+    from itertools import combinations
+    correlation = list(combinations(['acc', 'cor', 'ggx', 'wd'], 2))
+    key = ['X_cor_ggx', 'X_acc_cor','X_acc_ggx','X_cor_wd']
+
+    for i in range(len(key)) :
+        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 0, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
+        d=0
+        if aviso and key[i]== 'X_acc_ggx' : d = -0.1*a
+        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 0-0.55+d, f'{np.round(df[key[i]],2)}', ha='center')
+    
+    ax.text(sum([df[v] for v in key])+df['S']/2+i*b, 0, f'{int(np.rint((df["S"]/ts)*100))} %', ha='center', bbox=bbox)
+    ax.text(sum([df[v] for v in key])+df['S']/2+i*b, 0-0.55, f'{np.round(df["S"],2)}', ha='center')
+
+    # FIGURE SET
+    ax.set_yticks([])
+    if not xlim : xlim=tts
+    ax.set_xlim(-1e-11, xlim+1e-11)
+    ax.set_ylim(-1, 4.1)
+    ax.get_yaxis().set_visible(False)
+    ax.annotate('',xy=(xlim,-1),xytext=(0,-1),arrowprops={'arrowstyle':'->', 'facecolor':'k'})
+    ax.set_xlabel(r'$[U^2]$')
+
+
+"""
+LONLAT ANALYSIS
+--------------------------------------------------------------
+"""
+def lonlat_stats(df, dl=5, vars_errors=['S'], bootkwargs=dict()):
+    df["latbin"] = (df.lat // dl) * dl
+    df["lonbin"] = (df.lon // dl) * dl
+    
+    # Mean in bins
+    mean = df.groupby(["latbin", "lonbin"]).mean().compute()
+    
+    #count
+    count = df.reset_index()[['obs', 'latbin', 'lonbin']].groupby(["latbin", "lonbin"]).count().obs.compute().rename('nb_coloc_bin')
+
+    # bootstrap errors
+    DF = []
+    for v in vars_errors :
+        DF.append(df.reset_index()[[v, 'latbin', 'lonbin']].groupby(["latbin", "lonbin"])[v].apply(compute_bootstrap_error, bootkwargs).compute())
+    booterrors = pd.concat(DF, axis=1)
+    booterrors = booterrors.rename(columns={v:'be__'+v for v in booterrors.columns})
+
+    return pd.concat([mean, count,booterrors], axis=1)
+
 
 """
 Default list
