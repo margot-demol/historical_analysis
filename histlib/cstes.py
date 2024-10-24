@@ -2,8 +2,9 @@
 U = 9.81 * 1e-3/(1e3)
 
 #DIRECTORIES
-zarr_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok"
-matchup_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup"
+zarr_dir = "/home/datawork-lops-oc/aponte/margot/historical_coloc"
+#zarr_dir = "/home/datawork-lops-osi/aponte/margot/historical_coloc_ok"
+matchup_dir = "/home/datawork-lops-oc/aponte/margot/historical_coloc_ok/matchup"
 images_dir = "/home1/datawork/mdemol/historical_analysis/images_new"
 result_dir = "/home1/datawork/mdemol/historical_analysis/results"
 

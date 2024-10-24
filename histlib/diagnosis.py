@@ -33,7 +33,7 @@ import histlib.stress_to_windterm as stw
 
 from histlib.stress_to_windterm import list_wd_srce_suffix, list_func, list_func_suffix
 from histlib.cstes import labels, zarr_dir, c0, c1
-
+zarr_dir = zarr_dir+'_ok'
 """
 Diagnosis functions
 --------------------------------------------------------------
@@ -63,7 +63,7 @@ def put_fig_letter(fig, ax, letter):
     trans = mtransforms.ScaledTranslation(10/72, -5/72, fig.dpi_scale_trans)
     ax.text(0.0, 1.0, letter+')', transform=ax.transAxes + trans,
             fontsize='medium', verticalalignment='top', fontfamily='serif',
-            bbox=dict(facecolor='0.7', edgecolor='none', pad=3.0))
+            bbox=dict(facecolor='0.7', edgecolor='none', pad=3.0), zorder=30)
 
 """
 BUILD MATCHUP
@@ -220,10 +220,10 @@ def synthetic_figure(df, ax, xlim=None, aviso=False) :
     #b = 1e-10
     
     ## INDIVIDUAL MS ##
-    ax.barh(2*a, df['ACC'], color= c0['acc'], label = 'Inertial acceleration')
-    ax.barh(2*a, df['COR'], left =df['ACC']+b , color= c0['coriolis'], label = 'Coriolis acceleration')
-    ax.barh(2*a, df['GGX'], left =df['ACC']+df['COR']+2*b , color= c0['ggrad'], label = 'Pressure gradient term')
-    ax.barh(2*a, df['WD'], left =df['ACC']+df['COR']+df['GGX']+3*b, color= c0['wind'], label = 'Wind term')
+    ax.barh(2*a, df['ACC'], color= c0['acc'], label = 'Lagrangian acceleration')
+    ax.barh(2*a, df['COR'], left =df['ACC']+b , color= c0['cor'], label = 'Coriolis acceleration')
+    ax.barh(2*a, df['GGX'], left =df['ACC']+df['COR']+2*b , color= c0['ggx'], label = 'Pressure gradient term')
+    ax.barh(2*a, df['WD'], left =df['ACC']+df['COR']+df['GGX']+3*b, color= c0['wd'], label = 'Wind term')
     
 
     ax.text(ts/2, 2*a+0.5, r'Individual MS $A_i$', ha='center') 
@@ -245,16 +245,16 @@ def synthetic_figure(df, ax, xlim=None, aviso=False) :
     ## CAPTURED PHYSICAL + ERRORS PARTS ##
     ax.barh(1*a, df['B_acc'], color= c0['acc'])
     ax.barh(1*a, df['E_acc'], left = df['B_acc'], color= 'lightgrey', label='Errors')
-    ax.barh(1*a, df['B_cor'], left =df['B_acc']+df['E_acc']+b, color= c0['coriolis'])
+    ax.barh(1*a, df['B_cor'], left =df['B_acc']+df['E_acc']+b, color= c0['cor'])
     ax.barh(1*a, df['E_cor'], left =df['B_acc']+df['E_acc']+ df['B_cor'], color= 'lightgrey')
-    ax.barh(1*a, df['B_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+b, color= c0['ggrad'])
+    ax.barh(1*a, df['B_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+b, color= c0['ggx'])
     if df['E_ggx']>0 : 
         ax.barh(1*a, df['E_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx'], color= 'lightgrey')
-        ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+b, color= c0['wind'])
+        ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+b, color= c0['wd'])
         ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+df['B_wd'], color= 'lightgrey')
     else : 
         print('ok')
-        ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+2*b, color= c0['wind'])
+        ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+2*b, color= c0['wd'])
         ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['B_wd']+2*b, color= 'lightgrey')
     
     ax.text(ts/2, 1*a+0.5, r'Balanced physical and errors parts MS $B_i$ and $E_i$', ha='center') 
@@ -278,14 +278,14 @@ def synthetic_figure(df, ax, xlim=None, aviso=False) :
         
     ## PAIRS + RESIDUAL ##
     plt.rcParams['hatch.linewidth'] = 10
-    plt.rcParams['hatch.color'] = c0['ggrad']
-    ax.barh(0, df['X_cor_ggx'], color=c0['coriolis'], hatch='/')
-    plt.rcParams['hatch.color'] = c0['coriolis']
+    plt.rcParams['hatch.color'] = c0['ggx']
+    ax.barh(0, df['X_cor_ggx'], color=c0['cor'], hatch='/')
+    plt.rcParams['hatch.color'] = c0['cor']
     ax.barh(0, df['X_acc_cor'], color=c0['acc'], hatch='/', left = df['X_cor_ggx']+b)
     plt.rcParams['hatch.color'] = c0['acc']
-    ax.barh(0, df['X_acc_ggx'], color=c0['ggrad'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+2*b)
-    plt.rcParams['hatch.color'] = c0['wind']
-    ax.barh(0, df['X_cor_wd'], color=c0['coriolis'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+3*b)
+    ax.barh(0, df['X_acc_ggx'], color=c0['ggx'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+2*b)
+    plt.rcParams['hatch.color'] = c0['wd']
+    ax.barh(0, df['X_cor_wd'], color=c0['cor'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+3*b)
     ax.barh(0, df['S'], color='lightgrey', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+4*b)
 
     tts = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+4*b+df['S']

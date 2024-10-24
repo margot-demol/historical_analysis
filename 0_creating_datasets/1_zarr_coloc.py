@@ -202,7 +202,6 @@ def trim_memory() -> int:
 
 # ---------------------------------- core of the job to be done ----------------------------------
 
-
 def run_coloc(l):
     """main execution code"""
 
@@ -223,17 +222,56 @@ def run_coloc(l):
     ds.to_zarr(zarr, mode="w")
     logging.info(f"{l} storred in {zarr}")
 
+
+
+if __name__ == "__main__":
+
+    ## step0: setup logging
+
+    # to std output
+    # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+    # to file
+    logging.basicConfig(
+        filename="distributed.log",
+        level=logging.INFO,
+        # level=logging.DEBUG,
+    )
+    # level order is: DEBUG, INFO, WARNING, ERROR
+    # encoding='utf-8', # available only in latests python versions
+
+    # dask memory logging:
+    # https://blog.dask.org/2021/03/11/dask_memory_usage
+    # log dask summary?
+
+    # spin up cluster
+    logging.info("start spinning up dask cluster, jobs={}".format(dask_jobs))
+    cluster, client = spin_up_cluster(
+        "distributed",
+        jobs=dask_jobs,
+        fraction=0.9,
+        walltime="04:00:00",
+        **jobqueuekw,
+    )
+    ssh_command, dashboard_port = dashboard_ssh_forward(client)
+    logging.info("dashboard via ssh: " + ssh_command)
+    logging.info(f"open browser at address of the type: http://localhost:{dashboard_port}")
+
     #overwrite
     if not overwrite :
         labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, l+".zarr"))]
 
     ## boucle for on labels
-    for l in labels: 
-        logging.info(f"start processing {l}")
-        run_coloc(l)
-                      
-        logging.info(f"end processing {l}")
-    
+    #for l in labels: 
+    #    logging.info(f"start processing {l}")
+    #    run_coloc(l)
+    #                  
+    #    logging.info(f"end processing {l}")
+
+    # only one label
+    l="gps_Jason-3_2019"
+    logging.info(f"start processing {l}")
+    run_coloc(l)
+    logging.info(f"end processing {l}")
     # close dask
     close_dask(cluster, client)
 
