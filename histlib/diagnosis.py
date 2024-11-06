@@ -89,9 +89,11 @@ def path_csv(comb,drifter_type, drogue_status, DL, DT):
 
     return os.path.join(zarr_dir, 'analysis_files', f'{dr_st}__{dr}__{dl}km__{dt}min__'+'__'.join([comb[key] for key in comb])+'.csv')
 
-def build_diagnostic(df, comb):
+def build_diagnostic(df, comb, rename=True):
     if (isinstance(df, pd.core.frame.DataFrame) or  isinstance(df, dd.core.DataFrame)):
-        df = df.rename(columns = {comb[key]:key for key in comb}).reset_index()[['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']]
+        
+        if rename : 
+            df = df.rename(columns = {comb[key]:key for key in comb}).reset_index()[['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']]
         
         vars = ['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']
         types = ['int64','float64','float64','bool','U','float64','float64','float64','float64','float64','float64','datetime64']
@@ -125,7 +127,8 @@ def build_diagnostic(df, comb):
         df['sigma'] = df[[tm.upper() for tm in tms]].sum(axis=1)
         
     if isinstance(df, xr.core.dataset.Dataset) : 
-        df = df.rename({comb[key]:key for key in comb})[['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']]
+        if rename :
+            df = df.rename({comb[key]:key for key in comb})[['obs','acc','cor','drogue_status','drifter_type','ggx','wd','alti___distance','alti___time_difference','lat','lon','time']]
         
         tms = [tm for tm in comb]
         
@@ -161,7 +164,7 @@ def build_matchup_dataframe(comb, drifter_type = 'both', drogue_status='both', D
         labels = [l for l in labels if drifter_type in l]
     DF =[]
     for l in labels :
-        paths = [f'/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/matchup/matchup_{l}.zarr'] + glob(os.path.join(f'/home/datawork-lops-osi/aponte/margot/historical_coloc_ok/cutoff_matchup/cutoff_matchup_{l}*.zarr'))
+        paths = [f'/home/datawork-lops-oc/aponte/margot/historical_coloc_ok/matchup/matchup_{l}.zarr'] + glob(os.path.join(f'/home/datawork-lops-oc/aponte/margot/historical_coloc_ok/cutoff_matchup/cutoff_matchup_{l}*.zarr'))
         df = xr.merge([xr.open_dataset(path) for path in paths])[[comb[key] for key in comb]+['drogue_status']].to_dataframe()
         df['drifter_type'] = l.split('_')[0]
         df['drogue_status'] = df['drogue_status'].astype('bool')
@@ -207,6 +210,7 @@ GLOBAL ANALYSIS
 """
 def synthetic_figure(df, ax, xlim=None, aviso=False) :
     from histlib.cstes import U
+    U2 =U**2
     plt.rcParams["axes.edgecolor"] = "w"
     a=1.5
     bbox = dict(facecolor='w', alpha=0.8, edgecolor='w')
@@ -243,41 +247,46 @@ def synthetic_figure(df, ax, xlim=None, aviso=False) :
     ax.text(ts, 3.8, r'$\Sigma$', fontsize=15, ha='center')
     
     ## CAPTURED PHYSICAL + ERRORS PARTS ##
+    plt.rcParams['hatch.linewidth'] = 8
+    plt.rcParams['hatch.color'] = 'lightgrey'
     ax.barh(1*a, df['B_acc'], color= c0['acc'])
-    ax.barh(1*a, df['E_acc'], left = df['B_acc'], color= 'lightgrey', label='Errors')
+    ax.barh(1*a, df['E_acc'], left = df['B_acc'], color= c0['acc'], hatch='/')
     ax.barh(1*a, df['B_cor'], left =df['B_acc']+df['E_acc']+b, color= c0['cor'])
-    ax.barh(1*a, df['E_cor'], left =df['B_acc']+df['E_acc']+ df['B_cor'], color= 'lightgrey')
+    ax.barh(1*a, df['E_cor'], left =df['B_acc']+df['E_acc']+ df['B_cor'], color= c0['cor'], hatch='/')
     ax.barh(1*a, df['B_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+b, color= c0['ggx'])
     if df['E_ggx']>0 : 
-        ax.barh(1*a, df['E_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx'], color= 'lightgrey')
+        ax.barh(1*a, df['E_ggx'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx'], color= c0['ggx'], hatch='/')
         ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+b, color= c0['wd'])
-        ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+df['B_wd'], color= 'lightgrey')
+        ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['E_ggx']+df['B_wd'], color= c0['wd'], hatch='/')
     else : 
-        print('ok')
         ax.barh(1*a, df['B_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+2*b, color= c0['wd'])
-        ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['B_wd']+2*b, color= 'lightgrey')
+        ax.barh(1*a, df['E_wd'], left =df['B_acc']+df['E_acc']+ df['B_cor']+ df['E_cor']+df['B_ggx']+df['B_wd']+2*b, hatch='/', color= c0['wd'])
+        ax.barh(1*a, -df['E_ggx'], left =-b + df['E_ggx'], color= c0['ggx'], hatch='/',)
     
-    ax.text(ts/2, 1*a+0.5, r'Balanced physical and errors parts MS $B_i$ and $E_i$', ha='center') 
+    ax.text(ts/2, 1*a+0.5, r'Balanced and errors parts MS $\beta_i$ and $\epsilon_i$', ha='center') 
             
     #percentage + MS
     key = ['B_acc','E_acc', 'B_cor','E_cor', 'B_ggx','E_ggx', 'B_wd', 'E_wd']
     for i in range(len(key)) :
         d=0#vertical +
-        dx=0#horizontal + on MS
-        dxx=0#horizontal + on percentage
+        dx=0# horizontal + on MS
+        dxx=0# horizontal + on percentage
         if i==len(key)-1 : 
             d=-0.1*a 
-            dx = 3e-11
-            dxx = 1.5e-11
+            dx = 3e-11/U2
+            dxx = 1.5e-11/U2
         if i==len(key)-2 : d=0.1*a 
-        if aviso and i==len(key)-3 : d=-0.1*a
-        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b/2+dxx, a+d, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
+        if abs(int(np.rint((df[key[i]]/ts)*100)))>0: #does not plot percentage below 1%
+            if df[key[i]]>0 : 
+                ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b/2+dxx, a+d, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
+            else : 
+                ax.text(df[key[i]]/2-dxx, a+d, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
         d=0        
         if i%2 ==1 : d=-0.1*a
         ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b/2+dx, a+d -0.55, f'{np.round(df[key[i]],2)}', ha='center')
         
     ## PAIRS + RESIDUAL ##
-    plt.rcParams['hatch.linewidth'] = 10
+    plt.rcParams['hatch.linewidth'] = 8
     plt.rcParams['hatch.color'] = c0['ggx']
     ax.barh(0, df['X_cor_ggx'], color=c0['cor'], hatch='/')
     plt.rcParams['hatch.color'] = c0['cor']
@@ -286,12 +295,20 @@ def synthetic_figure(df, ax, xlim=None, aviso=False) :
     ax.barh(0, df['X_acc_ggx'], color=c0['ggx'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+2*b)
     plt.rcParams['hatch.color'] = c0['wd']
     ax.barh(0, df['X_cor_wd'], color=c0['cor'], hatch='/', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+3*b)
-    ax.barh(0, df['S'], color='lightgrey', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+4*b)
+    ax.barh(0, df['S'], label='Errors', color='lightgrey', left = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+4*b)
+    #negative contribution
+    plt.rcParams['hatch.color'] = c0['acc']
+    ax.barh(0, -df['X_acc_wd'], color=c0['wd'], hatch='/', left = df['X_acc_wd']-b)
+    plt.rcParams['hatch.color'] = c0['ggx']
+    ax.barh(0, -df['X_ggx_wd'], color=c0['wd'], hatch='/', left = df['X_acc_wd']+df['X_ggx_wd']-2*b)
+    
 
     tts = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+4*b+df['S']
     print(tts)
     sum_pairs = df['X_cor_ggx']+df['X_acc_cor']+df['X_acc_ggx']+df['X_cor_wd']+3*b
     ax.text(sum_pairs/2, 0.6, r"Pairs' contributions $X_{ij}$", ha='center')
+
+    
     #accolade
     c = 1e-12
     id1 = 0
@@ -305,24 +322,37 @@ def synthetic_figure(df, ax, xlim=None, aviso=False) :
     from itertools import combinations
     correlation = list(combinations(['acc', 'cor', 'ggx', 'wd'], 2))
     key = ['X_cor_ggx', 'X_acc_cor','X_acc_ggx','X_cor_wd']
-
     for i in range(len(key)) :
-        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 0, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
         d=0
         if aviso and key[i]== 'X_acc_ggx' : d = -0.1*a
+        
+        if abs(int(np.rint((df[key[i]]/ts)*100)))>0: #does not plot percentage below 1%
+            ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 0+d*2, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
+        
+        ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 0-0.55+d, f'{np.round(df[key[i]],2)}', ha='center')
+        
+    #negative contribution     
+    key = ['X_acc_wd', 'X_ggx_wd']
+    for i in range(len(key)) :
+        if abs(int(np.rint((df[key[i]]/ts)*100)))>0:
+            ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 0, f'{int(np.rint((df[key[i]]/ts)*100))} %', ha='center', bbox=bbox)
+        d=0        
+        if i%2 ==1 : d=-0.1*a
         ax.text(sum([df[v] for v in key[:i]])+df[key[i]]/2+i*b, 0-0.55+d, f'{np.round(df[key[i]],2)}', ha='center')
     
+    key = ['X_cor_ggx', 'X_acc_cor','X_acc_ggx','X_cor_wd']
     ax.text(sum([df[v] for v in key])+df['S']/2+i*b, 0, f'{int(np.rint((df["S"]/ts)*100))} %', ha='center', bbox=bbox)
     ax.text(sum([df[v] for v in key])+df['S']/2+i*b, 0-0.55, f'{np.round(df["S"],2)}', ha='center')
 
     # FIGURE SET
     ax.set_yticks([])
     if not xlim : xlim=tts
-    ax.set_xlim(-1e-11, xlim+1e-11)
+    ax.axvline(0, ls=':', c='grey')
+    ax.set_xlim(-0.5, xlim+0.5)
     ax.set_ylim(-1, 4.1)
     ax.get_yaxis().set_visible(False)
-    ax.annotate('',xy=(xlim,-1),xytext=(0,-1),arrowprops={'arrowstyle':'->', 'facecolor':'k'})
-    ax.set_xlabel(r'$[U^2]$')
+    ax.annotate('',xy=(xlim,-1),xytext=(-0.5,-1),arrowprops={'arrowstyle':'->', 'facecolor':'k'})
+    ax.set_xlabel(r'$[\gamma^2]$')
 
 
 """

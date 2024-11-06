@@ -268,17 +268,17 @@ if __name__ == "__main__":
         labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+"_3.zarr"))]
 
     ## boucle for on labels
-    for l in labels: 
-        if l != 'gps_Sentinel-3_A_2019' : #too big
-            logging.info(f"start processing {l}")
-            run_cutoff_matchup(l, T=12, cutoff = cutoff)
-            logging.info(f"end processing {l}")
-    """        
+    #for l in labels: 
+    #    if l != 'gps_Sentinel-3_A_2019' : #too big
+    #        logging.info(f"start processing {l}")
+    #        run_cutoff_matchup(l, T=12, cutoff = cutoff)
+    #        logging.info(f"end processing {l}")
+       
     l= 'gps_Sentinel-3_A_2019'
     logging.info(f"start processing {l}")
     run_cutoff_matchup(l, T=12, cutoff = cutoff)
     logging.info(f"end processing {l}")
-    """
+
     
     # close dask
     close_dask(cluster, client)
