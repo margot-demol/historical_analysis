@@ -73,8 +73,10 @@ def load_collocalisations(source, satellite=None, product_type=None, drifter=Non
         files = [f for f in files if product_type in f]
     if drifter is not None:
         files = [f for f in files if drifter in f]
-    files = [f for f in files if xr.open_dataset(f).dims['obs']>1] # 1 obs files can't be processed by build_dataset (TO CORRECT ONE DAY...)
-    
+    files = [
+        f for f in files if xr.open_dataset(f).dims["obs"] > 1
+    ]  # 1 obs files can't be processed by build_dataset (TO CORRECT ONE DAY...)
+
     return files
 
 
@@ -485,7 +487,9 @@ def vevn2vxvy(theta_lon, theta_lat, ve, vn):
     local vx, local vy : np.array, np.array
 
     """
-    return ve * np.cos(theta_lon) + vn * np.cos(theta_lat), ve * np.sin(theta_lon) + vn * np.sin(theta_lat)
+    return ve * np.cos(theta_lon) + vn * np.cos(theta_lat), ve * np.sin(
+        theta_lon
+    ) + vn * np.sin(theta_lat)
 
 
 def compute_local_drifters_velocities(ds, tdim):
@@ -521,8 +525,8 @@ def compute_local_drifters_velocities(ds, tdim):
         dask="parallelized",
     )
     return vx, vy
-    
-    
+
+
 """
 BUILDING DATASET AND ADD THE BOX velocities, sla gradients
 ---------------------------------------------------------------------------------------------------------
@@ -558,34 +562,34 @@ def build_dataset(
     ds = xr.open_dataset(nc).chunk(chunks)
 
     # prevent to use apply_ufuncs(vectorize=True) on 1 chunk dataset
-    if ds.dims['obs']==1 :
-        print('obs dim =1')
+    if ds.dims["obs"] == 1:
+        print("obs dim =1")
         return 1
-    elif ds.dims['obs']<=1000:
-        ds = ds.chunk({'obs':ds.dims['obs']//2})
-        
-        
+    elif ds.dims["obs"] <= 1000:
+        ds = ds.chunk({"obs": ds.dims["obs"] // 2})
+
     # change prefixes
     ds = change_prefix(ds)
 
-    #put longitude in the -180-180° system for all
+    # put longitude in the -180-180° system for all
     from histlib.cstes import lon_360_to_180
+
     if (ds["lon"] > 180).any() or (ds["lon"] < -180).any():
-        ds['lon'] = lon_360_to_180(ds.lon)
-        print('lon from 0-360° to -180-180°')
+        ds["lon"] = lon_360_to_180(ds.lon)
+        print("lon from 0-360° to -180-180°")
     if (ds["alti_lon"] > 180).any() or (ds["alti_lon"] < -180).any():
-        ds['alti_lon'] = lon_360_to_180(ds.alti_lon)
-        print('alti_lon from 0-360° to -180-180°')
+        ds["alti_lon"] = lon_360_to_180(ds.alti_lon)
+        print("alti_lon from 0-360° to -180-180°")
     if (ds["drifter_lon"] > 180).any() or (ds["drifter_lon"] < -180).any():
-        ds['drifter_lon'] = lon_360_to_180(ds.drifter_lon)
-        print('drifter_lon from 0-360° to -180-180°')
-    
+        ds["drifter_lon"] = lon_360_to_180(ds.drifter_lon)
+        print("drifter_lon from 0-360° to -180-180°")
+
     # add several variables in coords
     ds = ds.set_coords(["drifter_" + d for d in ["time", "lon", "lat"]]).set_coords(
         ["alti_" + d for d in ["time_", "lon", "lat"]]
     )
-    #put longitude in the -180-180° system
-    
+    # put longitude in the -180-180° system
+
     # ds = ds.persist()
 
     # add box
@@ -622,25 +626,30 @@ def build_dataset(
     dx = grid.diff(ds["alti_x"], axis="t")
     dy = grid.diff(ds["alti_y"], axis="t")
     dxy = np.sqrt(dx**2 + dy**2)
-    
+
     g = 9.81
-    listv = [l for l in list(ds.variables) if 'sla' in l]+['alti_mdt','alti_ocean_tide', 'alti_dac', 'alti_internal_tide']
-    for sla in listv :
+    listv = [l for l in list(ds.variables) if "sla" in l] + [
+        "alti_mdt",
+        "alti_ocean_tide",
+        "alti_dac",
+        "alti_internal_tide",
+    ]
+    for sla in listv:
         dsla = grid.diff(ds[sla], axis="t")
-        ds[sla.replace('alti', 'alti_ggx')] = g * dsla / dxy
+        ds[sla.replace("alti", "alti_ggx")] = g * dsla / dxy
 
     # add Coriolis frequency
     ds["f"] = 2 * 2 * np.pi / 86164.1 * np.sin(ds.lat * np.pi / 180)
 
     # add momentum conservation equation term
     dt = 3600
-    ds["drifter_acc_x"] = ds.drifter_vx.differentiate("site_obs")/dt
-    ds["drifter_acc_y"] = ds.drifter_vy.differentiate("site_obs")/dt
+    ds["drifter_acc_x"] = ds.drifter_vx.differentiate("site_obs") / dt
+    ds["drifter_acc_y"] = ds.drifter_vy.differentiate("site_obs") / dt
     ds["drifter_coriolis_x"] = -ds["drifter_vy"] * ds.f
     ds["drifter_coriolis_y"] = ds["drifter_vx"] * ds.f
 
-    #add coord for site_obs to simplify concatenation in case site_obs dim have different lengths
-    ds = ds.assign_coords(site_obs=np.arange(ds.dims['site_obs']))
+    # add coord for site_obs to simplify concatenation in case site_obs dim have different lengths
+    ds = ds.assign_coords(site_obs=np.arange(ds.dims["site_obs"]))
 
     # attrs
     ds.drifter_x.attrs = {
@@ -717,16 +726,16 @@ def build_dataset(
 
     ds.drifter_time.attrs = {"description": "drifter's trajectory time measurements"}
 
-    #ds.alti_g_grad_x.attrs = {
+    # ds.alti_g_grad_x.attrs = {
     #    "description": "cross track sla gradient term from the altimeter",
     #    "units": r"$m.s^{-2}$",
     #    "long_name": r"$g\partial_x\eta$",
-    #}
-    #ds.alti_denoised_g_grad_x.attrs = {
+    # }
+    # ds.alti_denoised_g_grad_x.attrs = {
     #    "description": "denoised cross track sla gradient term from the altimeter",
     #    "units": r"$m.s^{-2}$",
     #    "long_name": r"$g\partial_x\eta$",
-    #}
+    # }
 
     ds.box_lat.attrs = {
         "description": "latitudes of box points",
@@ -780,38 +789,57 @@ def build_dataset(
 ERRORS
 ---------------------------------------------------------------------------------------------------------
 """
+
+
 def dlonlat_dlonlatkm(dlon, dlat, lat):
-    """ return the error distance in m from the error in degree"""
-    R=6371e3
-    return R*np.arccos(np.sin(lat)**2 + (np.cos(lat)**2)*np.cos(dlon)), R*dlat
-                       
-def rotation(dlonkm, dlatkm, box_phi):#APPROXIMATIF
-    """ apply rotation lon, lat -> xy """ 
-    return dlonkm*np.cos(box_phi)+dlatkm*np.sin(box_phi), -dlonkm*np.sin(box_phi)+dlatkm*np.cos(box_phi) 
+    """return the error distance in m from the error in degree"""
+    R = 6371e3
+    return R * np.arccos(np.sin(lat) ** 2 + (np.cos(lat) ** 2) * np.cos(dlon)), R * dlat
+
+
+def rotation(dlonkm, dlatkm, box_phi):  # APPROXIMATIF
+    """apply rotation lon, lat -> xy"""
+    return dlonkm * np.cos(box_phi) + dlatkm * np.sin(box_phi), -dlonkm * np.sin(
+        box_phi
+    ) + dlatkm * np.cos(box_phi)
+
+
 def err_xy_obs(dobs):
-    #_drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
-    #dobs= dobs.drop(_drop)
-    dlon=dobs.drifter_err_lon.compute()*np.pi/180 
-    dlat=dobs.drifter_err_lat.compute()*np.pi/180
-    lat=dobs.lat.compute()*np.pi/180
-    box_phi = dobs.box_phi.compute()*np.pi/180
-    dlonkm, dlatkm=dlonlat_dlonlatkm(dlon, dlat,lat) #need computed values !!!
-    
-    ds=xr.Dataset()
-    ds['drifter_err_lonm']=dlonkm.assign_attrs({"long_name":r'$err_{lon}$', "units":'m'})
-    ds['drifter_err_latm']=dlatkm.assign_attrs({"long_name":r'$err_{lat}$', "units":'m'})
+    # _drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
+    # dobs= dobs.drop(_drop)
+    dlon = dobs.drifter_err_lon.compute() * np.pi / 180
+    dlat = dobs.drifter_err_lat.compute() * np.pi / 180
+    lat = dobs.lat.compute() * np.pi / 180
+    box_phi = dobs.box_phi.compute() * np.pi / 180
+    dlonkm, dlatkm = dlonlat_dlonlatkm(dlon, dlat, lat)  # need computed values !!!
+
+    ds = xr.Dataset()
+    ds["drifter_err_lonm"] = dlonkm.assign_attrs(
+        {"long_name": r"$err_{lon}$", "units": "m"}
+    )
+    ds["drifter_err_latm"] = dlatkm.assign_attrs(
+        {"long_name": r"$err_{lat}$", "units": "m"}
+    )
     errx, erry = rotation(dlonkm, dlatkm, box_phi)
-    ds['drifter_err_x']=errx.assign_attrs({"long_name":r'$err_x$', "units":'m'})
-    ds['drifter_err_y']=erry.assign_attrs({"long_name":r'$err_y$', "units":'m'})
-    
-    errvx, errvy = vevn2vxvy(dobs.drifter_theta_lon, dobs.drifter_theta_lat, dobs.drifter_ve, dobs.drifter_vn)
-    ds['drifter_err_vx']=errvx.assign_attrs({"long_name":r'$err_{vx}$', "units":'m/s'})
-    ds['drifter_err_vy']=errvy.assign_attrs({"long_name":r'$err_{vy}$', "units":'m/s'})
+    ds["drifter_err_x"] = errx.assign_attrs({"long_name": r"$err_x$", "units": "m"})
+    ds["drifter_err_y"] = erry.assign_attrs({"long_name": r"$err_y$", "units": "m"})
+
+    errvx, errvy = vevn2vxvy(
+        dobs.drifter_theta_lon, dobs.drifter_theta_lat, dobs.drifter_ve, dobs.drifter_vn
+    )
+    ds["drifter_err_vx"] = errvx.assign_attrs(
+        {"long_name": r"$err_{vx}$", "units": "m/s"}
+    )
+    ds["drifter_err_vy"] = errvy.assign_attrs(
+        {"long_name": r"$err_{vy}$", "units": "m/s"}
+    )
     return ds
-    
+
+
 def _concat_err_xy(ds):
-    """ concatenate """
-    return xr.concat([err_xy_obs(ds.sel(obs=o)) for o in ds.obs], 'obs')
+    """concatenate"""
+    return xr.concat([err_xy_obs(ds.sel(obs=o)) for o in ds.obs], "obs")
+
 
 def compute_err_xy(ds):
     """
@@ -820,33 +848,38 @@ def compute_err_xy(ds):
     ----------
     ds: xr.Dataset
         Input collocation dataset
-    
+
     Return
     ------
     ds: xr.Dataset
         Dataset with errors
 
     """
-    #_drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
-    #ds=ds.drop(_drop)
+    # _drop = ['alti_lat','alti_lon','alti_time','alti_time_','alti_time_mid','alti_x','alti_x_mid','alti_y','alti_y_mid','drifter_lat','drifter_lon','drifter_time','drifter_x','drifter_y',]
+    # ds=ds.drop(_drop)
 
     # build template
-    template = _concat_err_xy(ds.isel(obs=slice(0,2)))
-    
+    template = _concat_err_xy(ds.isel(obs=slice(0, 2)))
+
     # broad cast along obs dimension
-    template, _ = xr.broadcast(template.isel(obs=0).chunk(), 
-                               ds.time,
-                               exclude=[ "box_x", "box_y",],
-                              )
-    
+    template, _ = xr.broadcast(
+        template.isel(obs=0).chunk(),
+        ds.time,
+        exclude=[
+            "box_x",
+            "box_y",
+        ],
+    )
+
     # massage further and unify chunks
-    template = (xr.merge([ds[['lon','lat', 'time']], template.drop(list(template.coords))])
-             .unify_chunks()[list(template.keys())])
-    
+    template = xr.merge(
+        [ds[["lon", "lat", "time"]], template.drop(list(template.coords))]
+    ).unify_chunks()[list(template.keys())]
+
     # actually perform the calculation
-    try : 
+    try:
         ds_err = xr.map_blocks(_concat_err_xy, ds, template=template).compute()
-    except : 
-        assert False, 'pb map_blocks'
-   
+    except:
+        assert False, "pb map_blocks"
+
     return ds_err

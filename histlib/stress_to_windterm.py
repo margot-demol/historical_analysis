@@ -13,11 +13,12 @@ EKMAN RIO 2014
 return wind term 
 """
 
+
 def cst_rio_z0(taue, taun, f, theta_lon, theta_lat, rot=True):
-    
-    theta0 = - 30.75 * np.pi / 180 * np.sign(f)
+
+    theta0 = -30.75 * np.pi / 180 * np.sign(f)
     beta0 = 0.61
-    
+
     uek_e = beta0 * (np.cos(theta0) * taue - np.sin(theta0) * taun)
     uek_n = beta0 * (np.sin(theta0) * taue + np.cos(theta0) * taun)
 
@@ -29,9 +30,9 @@ def cst_rio_z0(taue, taun, f, theta_lon, theta_lat, rot=True):
 
 
 def cst_rio_z15(taue, taun, f, theta_lon, theta_lat, rot=True):
-    theta15 = - 48.18 * np.pi / 180 * np.sign(f)
+    theta15 = -48.18 * np.pi / 180 * np.sign(f)
     beta15 = 0.25
-    
+
     uek_e = beta15 * (np.cos(theta15) * taue - np.sin(theta15) * taun)
     uek_n = beta15 * (np.sin(theta15) * taue + np.cos(theta15) * taun)
 
@@ -40,6 +41,7 @@ def cst_rio_z15(taue, taun, f, theta_lon, theta_lat, rot=True):
         return f * uek_y, -f * uek_x
     else:
         return f * uek_n, -f * uek_e
+
 
 """
 WIND TERM DATASET 
@@ -69,11 +71,9 @@ def compute_wd_from_stress(
             try:
                 idx = ds.__site_matchup_indice.astype(int).compute()
 
-                drifter_theta_lon = ds["drifter_theta_lon"].sel(
-                    site_obs=idx)
-            
-                drifter_theta_lat = ds["drifter_theta_lat"].sel(
-                    site_obs=idx)
+                drifter_theta_lon = ds["drifter_theta_lon"].sel(site_obs=idx)
+
+                drifter_theta_lat = ds["drifter_theta_lat"].sel(site_obs=idx)
 
             except:
                 drifter_theta_lon = ds["drifter_theta_lon"]

@@ -25,7 +25,7 @@ from histlib.cstes import labels, zarr_dir
 
 # ---- Run parameters
 
-#root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
+# root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
 run_name = "box_build_colocalisations"
 
 # will overwrite existing results
@@ -202,6 +202,7 @@ def trim_memory() -> int:
 
 # ---------------------------------- core of the job to be done ----------------------------------
 
+
 def run_coloc(l):
     """main execution code"""
 
@@ -209,19 +210,29 @@ def run_coloc(l):
     # ds = ...
     # synthetic example here to compute pi:
     import dask.array as da
-    nc_files = box.load_collocalisations(int(l.split('_')[-1]), drifter=l.split('_')[0], product_type=l.split('_')[1], satellite=l.split('_')[2], )
+
+    nc_files = box.load_collocalisations(
+        int(l.split("_")[-1]),
+        drifter=l.split("_")[0],
+        product_type=l.split("_")[1],
+        satellite=l.split("_")[2],
+    )
     L = [box.build_dataset(nc_files[i], persist=True) for i in range(len(nc_files))]
-    ds = (xr.concat(L, "obs")
-      .assign_attrs(__time_coverage_end=xr.open_dataset(nc_files[-1]).attrs['__time_coverage_end'])
-      .drop_vars('site_obs')
-      .chunk(dict(obs=500))
-     )
-    ds['obs'] = np.arange(ds.dims['obs'])
-    #store
-    zarr = os.path.join(zarr_dir, l+".zarr")
+    ds = (
+        xr.concat(L, "obs")
+        .assign_attrs(
+            __time_coverage_end=xr.open_dataset(nc_files[-1]).attrs[
+                "__time_coverage_end"
+            ]
+        )
+        .drop_vars("site_obs")
+        .chunk(dict(obs=500))
+    )
+    ds["obs"] = np.arange(ds.dims["obs"])
+    # store
+    zarr = os.path.join(zarr_dir, l + ".zarr")
     ds.to_zarr(zarr, mode="w")
     logging.info(f"{l} storred in {zarr}")
-
 
 
 if __name__ == "__main__":
@@ -254,21 +265,25 @@ if __name__ == "__main__":
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
     logging.info("dashboard via ssh: " + ssh_command)
-    logging.info(f"open browser at address of the type: http://localhost:{dashboard_port}")
+    logging.info(
+        f"open browser at address of the type: http://localhost:{dashboard_port}"
+    )
 
-    #overwrite
-    if not overwrite :
-        labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, l+".zarr"))]
+    # overwrite
+    if not overwrite:
+        labels = [
+            l for l in labels if not os.path.isdir(os.path.join(zarr_dir, l + ".zarr"))
+        ]
 
     ## boucle for on labels
-    #for l in labels: 
+    # for l in labels:
     #    logging.info(f"start processing {l}")
     #    run_coloc(l)
-    #                  
+    #
     #    logging.info(f"end processing {l}")
 
     # only one label
-    l="gps_Jason-3_2019"
+    l = "gps_Jason-3_2019"
     logging.info(f"start processing {l}")
     run_coloc(l)
     logging.info(f"end processing {l}")

@@ -25,7 +25,7 @@ from histlib.cstes import labels, zarr_dir
 
 # ---- Run parameters
 
-#root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
+# root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
 run_name = "box_build_colocalisations"
 
 # will overwrite existing results
@@ -202,14 +202,17 @@ def trim_memory() -> int:
 
 # ---------------------------------- core of the job to be done ----------------------------------
 
+
 def run_matchup(l):
     from histlib.matchup import matchup_dataset_one
+
     ds_matchup = matchup_dataset_one(l, cutoff=None)
-    #store
-    zarr = os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr")
-    ds_matchup.chunk({'obs':500}).to_zarr(zarr, mode="w")
+    # store
+    zarr = os.path.join(zarr_dir + "_ok", "matchup", "matchup_" + l + ".zarr")
+    ds_matchup.chunk({"obs": 500}).to_zarr(zarr, mode="w")
     logging.info(f"matchup {l} storred in {zarr}")
-    
+
+
 if __name__ == "__main__":
 
     ## step0: setup logging
@@ -240,20 +243,27 @@ if __name__ == "__main__":
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
     logging.info("dashboard via ssh: " + ssh_command)
-    logging.info(f"open browser at address of the type: http://localhost:{dashboard_port}")
+    logging.info(
+        f"open browser at address of the type: http://localhost:{dashboard_port}"
+    )
 
-    #overwrite
-    if not overwrite :
-        labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok','matchup',"matchup_"+l+".zarr"))]
-    
+    # overwrite
+    if not overwrite:
+        labels = [
+            l
+            for l in labels
+            if not os.path.isdir(
+                os.path.join(zarr_dir + "_ok", "matchup", "matchup_" + l + ".zarr")
+            )
+        ]
+
     ## boucle for on labels
-    for l in labels: 
+    for l in labels:
         logging.info(f"start processing {l}")
         run_matchup(l)
-            
-            
+
         logging.info(f"end processing {l}")
-    
+
     # close dask
     close_dask(cluster, client)
 

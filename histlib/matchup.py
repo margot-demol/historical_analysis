@@ -25,13 +25,13 @@ import os
 from glob import glob
 
 import histlib.box as box
-#import histlib.sat as sat
+
+# import histlib.sat as sat
 import histlib.cstes as cstes
 import histlib.stress_to_windterm as stw
 
 from histlib.stress_to_windterm import list_wd_srce_suffix, list_func, list_func_suffix
 from histlib.cstes import labels, zarr_dir
-
 
 
 """ 
@@ -40,6 +40,7 @@ MATCHUP DATASET
 ------------------------------------------------------------------------
 """
 
+
 def add_ggx_attrs(ds_data):
     """Add gradient attributes
     Parameters
@@ -47,12 +48,22 @@ def add_ggx_attrs(ds_data):
     ds_data: dataset
             dataset containing colocalisations
     """
-    listv = [l for l in list(ds_data.variables) if 'sla' in l]+['alti_mdt','alti_ocean_tide', 'alti_dac', 'alti_internal_tide']
-    listv = [l for l in listv if 'gg' not in l]
-    for v in listv :
-        ds_data[v.replace('alti', 'alti_ggx')].attrs['comment'] = ds_data[v].attrs['comment']
-        ds_data[v.replace('alti', 'alti_ggx')].attrs['units'] = r'$m.s^{-2}$'
-        ds_data[v.replace('alti', 'alti_ggx')].attrs['long_name']= r'$g\partial_x$'+v.replace('alti_','')
+    listv = [l for l in list(ds_data.variables) if "sla" in l] + [
+        "alti_mdt",
+        "alti_ocean_tide",
+        "alti_dac",
+        "alti_internal_tide",
+    ]
+    listv = [l for l in listv if "gg" not in l]
+    for v in listv:
+        ds_data[v.replace("alti", "alti_ggx")].attrs["comment"] = ds_data[v].attrs[
+            "comment"
+        ]
+        ds_data[v.replace("alti", "alti_ggx")].attrs["units"] = r"$m.s^{-2}$"
+        ds_data[v.replace("alti", "alti_ggx")].attrs[
+            "long_name"
+        ] = r"$g\partial_x$" + v.replace("alti_", "")
+
 
 def add_adt_to_ds_data(ds_data):
     """Adds adt to dataset from sla + mdt and manages attributes
@@ -62,31 +73,50 @@ def add_adt_to_ds_data(ds_data):
             dataset containing colocalisations
     """
     add_ggx_attrs(ds_data)
-    ds_data = ds_data.rename({'drifter_acc_x':'drifter_acc_x_0', 'drifter_acc_y':'drifter_acc_y_0', 'drifter_coriolis_x':'drifter_coriolis_x_0', 'drifter_coriolis_y':'drifter_coriolis_y_0'})
-    for sla in ['alti_ggx_sla_filtered','alti_ggx_sla_unfiltered','alti_ggx_sla_unfiltered_denoised','alti_ggx_sla_unfiltered_imf1']:
-        ds_data[sla.replace('sla', 'adt')] = ds_data[sla] + ds_data.alti_ggx_mdt
-        ds_data[sla.replace('sla', 'adt')].attrs['comment'] = ds_data[sla].attrs['comment']
-        ds_data[sla.replace('sla', 'adt')].attrs['units'] = r'$m.s^{-2}$'
-        ds_data[sla.replace('sla', 'adt')].attrs['long_name']= ds_data[sla].attrs['long_name'].replace('sla', 'adt')
+    ds_data = ds_data.rename(
+        {
+            "drifter_acc_x": "drifter_acc_x_0",
+            "drifter_acc_y": "drifter_acc_y_0",
+            "drifter_coriolis_x": "drifter_coriolis_x_0",
+            "drifter_coriolis_y": "drifter_coriolis_y_0",
+        }
+    )
+    for sla in [
+        "alti_ggx_sla_filtered",
+        "alti_ggx_sla_unfiltered",
+        "alti_ggx_sla_unfiltered_denoised",
+        "alti_ggx_sla_unfiltered_imf1",
+    ]:
+        ds_data[sla.replace("sla", "adt")] = ds_data[sla] + ds_data.alti_ggx_mdt
+        ds_data[sla.replace("sla", "adt")].attrs["comment"] = ds_data[sla].attrs[
+            "comment"
+        ]
+        ds_data[sla.replace("sla", "adt")].attrs["units"] = r"$m.s^{-2}$"
+        ds_data[sla.replace("sla", "adt")].attrs["long_name"] = (
+            ds_data[sla].attrs["long_name"].replace("sla", "adt")
+        )
     return ds_data
 
-def change_obs_coords(ds,l) :
+
+def change_obs_coords(ds, l):
     """Change obs coordinates including the label
     Parameters
     ----------
     ds_data: dataset
             dataset containing colocalisations
-    l : label, 
+    l : label,
             in cstes.labels
     """
-    o = np.array(ds['obs']).astype('U')
-    L = np.full_like(o, l+'__')
-    ob = xr.DataArray(np.char.add(L, o), dims='obs')
-    ds = ds.drop('obs')
-    ds = ds.assign_coords({'obs':ob})
+    o = np.array(ds["obs"]).astype("U")
+    L = np.full_like(o, l + "__")
+    ob = xr.DataArray(np.char.add(L, o), dims="obs")
+    ds = ds.drop("obs")
+    ds = ds.assign_coords({"obs": ob})
     return ds
-    
+
+
 import histlib.stress_to_windterm as stw
+
 _data_var = [
     "f",
     "box_theta_lon",
@@ -97,17 +127,17 @@ _data_var = [
     "drifter_typebuoy",
     "alti___distance",
     "alti___time_difference",
-    'alti_ggx_dac',
-    'alti_ggx_internal_tide',
-    'alti_ggx_mdt',
-    'alti_ggx_ocean_tide',
-    'alti_ggx_sla_filtered',
-    'alti_ggx_sla_unfiltered',
-    'alti_ggx_sla_unfiltered_denoised',
+    "alti_ggx_dac",
+    "alti_ggx_internal_tide",
+    "alti_ggx_mdt",
+    "alti_ggx_ocean_tide",
+    "alti_ggx_sla_filtered",
+    "alti_ggx_sla_unfiltered",
+    "alti_ggx_sla_unfiltered_denoised",
     #'alti_ggx_sla_unfiltered_imf1',
-    'alti_ggx_adt_filtered',
-    'alti_ggx_adt_unfiltered',
-    'alti_ggx_adt_unfiltered_denoised',
+    "alti_ggx_adt_filtered",
+    "alti_ggx_adt_unfiltered",
+    "alti_ggx_adt_unfiltered_denoised",
     #'alti_ggx_adt_unfiltered_imf1',
     "drifter_vx",
     "drifter_vy",
@@ -115,7 +145,6 @@ _data_var = [
     "drifter_acc_y_0",
     "drifter_coriolis_x_0",
     "drifter_coriolis_y_0",
-    
 ]
 _aviso_var = [
     "aviso_alti_matchup_ggx_adt",
@@ -149,42 +178,65 @@ list_func_suffix = ["cstrio_z0", "cstrio_z15"]
 MATCHUP FILE COLOC + AVISO + ERASTAR
 ------------------------------------------------------------------------
 """
-def matchup_dataset_one(l, T=10, cutoff=[2,1,0.5,0.2, 0.1]):
+
+
+def matchup_dataset_one(l, T=10, cutoff=[2, 1, 0.5, 0.2, 0.1]):
     """Gathers colocalisation, erastar and aviso data at matchup point, include drogue status. Return the matchup dataset corresponding to l
     Parameters
     ----------
-    l : label, 
+    l : label,
             in cstes.labels
     T : window length of low pass filter on drifter trajectories (days)
     cutoff : cutoff frequencies (cpd)
     """
-    ds_data = xr.open_zarr(os.path.join(zarr_dir, f'{l}.zarr')).chunk({'obs':500, 'site_obs':-1})
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':500, 'site_obs':-1})
+    ds_data = xr.open_zarr(os.path.join(zarr_dir, f"{l}.zarr")).chunk(
+        {"obs": 500, "site_obs": -1}
+    )
+    ds_data = ds_data.where(ds_data.alti___distance < 2e5, drop=True).chunk(
+        {"obs": 500, "site_obs": -1}
+    )
     ds_data = add_adt_to_ds_data(ds_data)
 
-    drogue_status = ds_data.time<ds_data.drifter_drogue_lost_date.mean('site_obs')
+    drogue_status = ds_data.time < ds_data.drifter_drogue_lost_date.mean("site_obs")
     ds_data = ds_data[_data_var]
-    
-    if cutoff!=None:
+
+    if cutoff != None:
         add_low_pass_filter_to_data(ds_data, T=10, cutoff=cutoff)
-    
-    ds_aviso = xr.open_zarr(os.path.join(zarr_dir+'_ok','aviso', f'aviso_{l}.zarr')).chunk({'obs':500})
-    ds_stress = xr.open_zarr(os.path.join(zarr_dir+'_ok','erastar', f'erastar_{l}.zarr')).chunk({'obs':500})
-    
+
+    ds_aviso = xr.open_zarr(
+        os.path.join(zarr_dir + "_ok", "aviso", f"aviso_{l}.zarr")
+    ).chunk({"obs": 500})
+    ds_stress = xr.open_zarr(
+        os.path.join(zarr_dir + "_ok", "erastar", f"erastar_{l}.zarr")
+    ).chunk({"obs": 500})
+
     # COLOCALIZATIONS DATA
-    cc = [l for l in list(ds_data.coords)if l not in ['obs', 'box_x', 'box_y', 'alti_time_mid']]
+    cc = [
+        l
+        for l in list(ds_data.coords)
+        if l not in ["obs", "box_x", "box_y", "alti_time_mid"]
+    ]
     ds_data = ds_data.reset_coords(cc)
     idx = ds_data.__site_matchup_indice.astype(int).compute()
-    _ds_data = ds_data.sel(site_obs=idx).isel( alti_time_mid=ds_data.dims['alti_time_mid']//2).drop(["alti_time_mid", "alti_x_mid", "alti_y_mid"])
-    #_ds_data = compute_dsdatamatchup(ds_data)
+    _ds_data = (
+        ds_data.sel(site_obs=idx)
+        .isel(alti_time_mid=ds_data.dims["alti_time_mid"] // 2)
+        .drop(["alti_time_mid", "alti_x_mid", "alti_y_mid"])
+    )
+    # _ds_data = compute_dsdatamatchup(ds_data)
     for v in _ds_data.variables:
         _ds_data[v].attrs = ds_data[v].attrs
-    _ds_data['drogue_status'] = drogue_status.drop(['lon', 'lat', 'time']).assign_attrs({'long_name':'drogue status', 'description':'True if drogued, False if undrogued (day precision only)'})
+    _ds_data["drogue_status"] = drogue_status.drop(["lon", "lat", "time"]).assign_attrs(
+        {
+            "long_name": "drogue status",
+            "description": "True if drogued, False if undrogued (day precision only)",
+        }
+    )
 
     # AVISO
     _ds_aviso = ds_aviso[_aviso_var]
 
-    #ERASTAR
+    # ERASTAR
     _ds_stress = ds_stress[_stress_var]
 
     # FOR IND PDFS
@@ -212,68 +264,124 @@ def matchup_dataset_one(l, T=10, cutoff=[2,1,0.5,0.2, 0.1]):
         ]
     ).set_coords(["alti___distance", "alti___time_difference"])
     _ds = _ds.rename({v: v.replace("_matchup", "") for v in _ds})
-    #_ds = change_obs_coords(_ds, l)  
-    _ds = _ds.drop(['box_x', 'box_y']).set_coords(['lon', 'lat','time'])
+    # _ds = change_obs_coords(_ds, l)
+    _ds = _ds.drop(["box_x", "box_y"]).set_coords(["lon", "lat", "time"])
 
-    #ADDING TIDE + DAC correction
-    _ds['alti_ggx_adt_filtered_ocean_tide'] = _ds.alti_ggx_adt_filtered+ _ds.alti_ggx_ocean_tide
-    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide'] = _ds.alti_ggx_adt_filtered_ocean_tide + _ds.alti_ggx_internal_tide
-    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide_dac'] = _ds.alti_ggx_adt_filtered_ocean_tide_internal_tide + _ds.alti_ggx_internal_tide
+    # ADDING TIDE + DAC correction
+    _ds["alti_ggx_adt_filtered_ocean_tide"] = (
+        _ds.alti_ggx_adt_filtered + _ds.alti_ggx_ocean_tide
+    )
+    _ds["alti_ggx_adt_filtered_ocean_tide_internal_tide"] = (
+        _ds.alti_ggx_adt_filtered_ocean_tide + _ds.alti_ggx_internal_tide
+    )
+    _ds["alti_ggx_adt_filtered_ocean_tide_internal_tide_dac"] = (
+        _ds.alti_ggx_adt_filtered_ocean_tide_internal_tide + _ds.alti_ggx_internal_tide
+    )
 
-    _ds['alti_ggx_adt_filtered_ocean_tide'].attrs=_ds.alti_ggx_adt_filtered.attrs
-    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide'].attrs = _ds.alti_ggx_adt_filtered.attrs
-    _ds['alti_ggx_adt_filtered_ocean_tide_internal_tide_dac'].attrs = _ds.alti_ggx_adt_filtered.attrs
-
+    _ds["alti_ggx_adt_filtered_ocean_tide"].attrs = _ds.alti_ggx_adt_filtered.attrs
+    _ds[
+        "alti_ggx_adt_filtered_ocean_tide_internal_tide"
+    ].attrs = _ds.alti_ggx_adt_filtered.attrs
+    _ds[
+        "alti_ggx_adt_filtered_ocean_tide_internal_tide_dac"
+    ].attrs = _ds.alti_ggx_adt_filtered.attrs
 
     return _ds
+
 
 """
 ------------------
 ADD LOW PASS FILTER
 ------------------
 """
-def add_low_pass_filter_to_data(ds, T=12, cutoff=[2,1,0.5,0.2, 0.1]) : 
-    """ Return dataset with filtered trajectories acceleration and coriolis term 
-        T: window length days
-        cutoff : cut off frequency in cpd
+
+
+def add_low_pass_filter_to_data(ds, T=12, cutoff=[2, 1, 0.5, 0.2, 0.1]):
+    """Return dataset with filtered trajectories acceleration and coriolis term
+    T: window length days
+    cutoff : cut off frequency in cpd
     """
     from scipy.signal import filtfilt
     from scipy.integrate import cumulative_trapezoid
     from scipy.optimize import minimize
+
     # coefficients
-    dt = (ds.drifter_time.diff('site_obs')/pd.Timedelta('1D')).mean()  # in days
+    dt = (ds.drifter_time.diff("site_obs") / pd.Timedelta("1D")).mean()  # in days
     from pynsitu.tseries import generate_filter
 
-    dss = ds[[ 'drifter_vx', 'drifter_vy']].fillna(0)
-    if not isinstance(cutoff, list) : cutoff=[cutoff]
-    for cto in cutoff :
+    dss = ds[["drifter_vx", "drifter_vy"]].fillna(0)
+    if not isinstance(cutoff, list):
+        cutoff = [cutoff]
+    for cto in cutoff:
         taps = generate_filter(band="low", dt=dt, T=T, bandwidth=cto)
         print(len(taps))
-        try : 
-            vx = xr.DataArray(filtfilt(taps, 1, dss.drifter_vx),dims=['obs', 'site_obs'])
-            vy = xr.DataArray(filtfilt(taps, 1, dss.drifter_vy), dims=['obs', 'site_obs'])
-        except :
-            print('padlen modified')
-            vx = xr.DataArray(filtfilt(taps, 1, dss.drifter_vx, padlen = len(dss.drifter_vx)),dims=['obs', 'site_obs'])
-            vy = xr.DataArray(filtfilt(taps, 1, dss.drifter_vy, padlen = len(dss.drifter_vx)), dims=['obs', 'site_obs'])
-            
-        cutoffstr = str(cto).replace('.','')
+        try:
+            vx = xr.DataArray(
+                filtfilt(taps, 1, dss.drifter_vx), dims=["obs", "site_obs"]
+            )
+            vy = xr.DataArray(
+                filtfilt(taps, 1, dss.drifter_vy), dims=["obs", "site_obs"]
+            )
+        except:
+            print("padlen modified")
+            vx = xr.DataArray(
+                filtfilt(taps, 1, dss.drifter_vx, padlen=len(dss.drifter_vx)),
+                dims=["obs", "site_obs"],
+            )
+            vy = xr.DataArray(
+                filtfilt(taps, 1, dss.drifter_vy, padlen=len(dss.drifter_vx)),
+                dims=["obs", "site_obs"],
+            )
 
-        
-        
-        ds[f"drifter_acc_x_{cutoffstr}"] = (vx.differentiate("site_obs")/3600).assign_attrs(**ds.drifter_acc_x_0.attrs).assign_attrs(description= ds.drifter_acc_x_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
-        ds[f"drifter_acc_y_{cutoffstr}"] = (vy.differentiate("site_obs")/3600).assign_attrs(**ds.drifter_acc_x_0.attrs).assign_attrs(description= ds.drifter_acc_y_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
-        ds[f"drifter_coriolis_x_{cutoffstr}"] = (-vy * ds.f).assign_attrs(ds.drifter_coriolis_x_0.attrs).assign_attrs(description= ds.drifter_coriolis_x_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
-        ds[f"drifter_coriolis_y_{cutoffstr}"] = (vx * ds.f).assign_attrs(ds.drifter_coriolis_y_0.attrs).assign_attrs(description= ds.drifter_coriolis_y_0.attrs['description'] + f' filtered with {cto} cpd frequency',cutoff=cto)
+        cutoffstr = str(cto).replace(".", "")
 
-    
+        ds[f"drifter_acc_x_{cutoffstr}"] = (
+            (vx.differentiate("site_obs") / 3600)
+            .assign_attrs(**ds.drifter_acc_x_0.attrs)
+            .assign_attrs(
+                description=ds.drifter_acc_x_0.attrs["description"]
+                + f" filtered with {cto} cpd frequency",
+                cutoff=cto,
+            )
+        )
+        ds[f"drifter_acc_y_{cutoffstr}"] = (
+            (vy.differentiate("site_obs") / 3600)
+            .assign_attrs(**ds.drifter_acc_x_0.attrs)
+            .assign_attrs(
+                description=ds.drifter_acc_y_0.attrs["description"]
+                + f" filtered with {cto} cpd frequency",
+                cutoff=cto,
+            )
+        )
+        ds[f"drifter_coriolis_x_{cutoffstr}"] = (
+            (-vy * ds.f)
+            .assign_attrs(ds.drifter_coriolis_x_0.attrs)
+            .assign_attrs(
+                description=ds.drifter_coriolis_x_0.attrs["description"]
+                + f" filtered with {cto} cpd frequency",
+                cutoff=cto,
+            )
+        )
+        ds[f"drifter_coriolis_y_{cutoffstr}"] = (
+            (vx * ds.f)
+            .assign_attrs(ds.drifter_coriolis_y_0.attrs)
+            .assign_attrs(
+                description=ds.drifter_coriolis_y_0.attrs["description"]
+                + f" filtered with {cto} cpd frequency",
+                cutoff=cto,
+            )
+        )
+
+
 """
 ------------------
 COLOCALISATIONS
 ------------------
 """
+
+
 def find_term_list(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=None):
-    """ Find lists of every possibilities for each momentum equation terms from the dataset
+    """Find lists of every possibilities for each momentum equation terms from the dataset
     Parameters
     ----------
     _ds: dataset
@@ -283,16 +391,23 @@ def find_term_list(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=N
         if not provided, will find all possibly corresponding variables in dataset
     cutoff : list of str
             cutoff frequency for drifter variables ('0' for no filter applied)
-    
+
     """
-    if not wd_x : wd_x = [l for l in _ds if "wd_x" in l]
-    if not wd_y : wd_y = [l for l in _ds if "wd_y" in l]
-    if not grad_x : grad_x = [l for l in _ds if "ggx_adt" in l]# or "ggx_sla" in l]
-    if not grad_y : grad_y = [l for l in _ds if "ggy_adt" in l]# or "ggy_sla" in l]
-    if not cutoff : cutoff = [l.split('acc_x_')[-1] for l in _ds if "acc_x" in l]
-    else : cutoff = [str(c).replace('.','') for c in cutoff]#float to str
+    if not wd_x:
+        wd_x = [l for l in _ds if "wd_x" in l]
+    if not wd_y:
+        wd_y = [l for l in _ds if "wd_y" in l]
+    if not grad_x:
+        grad_x = [l for l in _ds if "ggx_adt" in l]  # or "ggx_sla" in l]
+    if not grad_y:
+        grad_y = [l for l in _ds if "ggy_adt" in l]  # or "ggy_sla" in l]
+    if not cutoff:
+        cutoff = [l.split("acc_x_")[-1] for l in _ds if "acc_x" in l]
+    else:
+        cutoff = [str(c).replace(".", "") for c in cutoff]  # float to str
     return wd_x, wd_y, grad_x, grad_y, cutoff
-    
+
+
 def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=None):
     """Create a list of dictionnaries containing the different data combinations possible to rebuild the moment conservation
 
@@ -312,17 +427,19 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
     [{'acc': 'drifter_acc_x','coriolis': 'drifter_coriolis_x','ggx': 'alti_ggx','wind': 'es_cstrio_z0_alti_wd_x','id': 'co_es_cstrio_z0_alti_x'},....]
     list of dictionnaries containing the varaibles taken for each term and an identification: gradsrc_wdsrc_wdmethod_wddepth_matchupposition_x/y
     """
-    
-    wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(_ds, wd_x, wd_y, grad_x, grad_y, cutoff)
-    
+
+    wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(
+        _ds, wd_x, wd_y, grad_x, grad_y, cutoff
+    )
+
     LIST = []
 
-    for cf in cutoff :
-        for grad in grad_x :
-            for wd in wd_x :
+    for cf in cutoff:
+        for grad in grad_x:
+            for wd in wd_x:
                 lx = {
-                    "acc": 'drifter_acc_x_'+cf,
-                    "coriolis": 'drifter_coriolis_x_'+cf,
+                    "acc": "drifter_acc_x_" + cf,
+                    "coriolis": "drifter_coriolis_x_" + cf,
                     "ggrad": "",
                     "wind": "",
                     "id": "",
@@ -334,10 +451,11 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
                         lx["wind"] = wd
                         lx["id"] = (
                             "aviso__"
-                            +cf+'__'
-                            +grad[-3:]
-                            +'__'
-                            +"_".join(wd.split("_")[:3])
+                            + cf
+                            + "__"
+                            + grad[-3:]
+                            + "__"
+                            + "_".join(wd.split("_")[:3])
                             + "__alti_x"
                         )
                         LIST.append(lx)
@@ -346,9 +464,10 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
                         lx["wind"] = wd
                         lx["id"] = (
                             "aviso__"
-                            +cf+'__'
-                            +grad[-3:]
-                            +'__'
+                            + cf
+                            + "__"
+                            + grad[-3:]
+                            + "__"
                             + "_".join(wd.split("_")[:3])
                             + "__drifter_x"
                         )
@@ -360,9 +479,10 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
                         lx["wind"] = wd
                         lx["id"] = (
                             "co__"
-                            +cf+'_'
+                            + cf
+                            + "_"
                             + grad.replace("alti_", "").replace("ggx", "")
-                            +'__'
+                            + "__"
                             + "_".join(wd.split("_")[:3])
                             + "__alti_x"
                         )
@@ -372,14 +492,17 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
                         lx["wind"] = wd
                         lx["id"] = (
                             "co__"
-                            +cf+'_'
+                            + cf
+                            + "_"
                             + grad.replace("alti_", "").replace("ggx", "")
-                            +'__'
+                            + "__"
                             + "_".join(wd.split("_")[:3])
                             + "__drifter_x"
                         )
                         LIST.append(lx)
     return LIST
+
+
 """
         for grad in grad_y:
             for wd in wd_y:
@@ -423,18 +546,20 @@ def combinations(_ds, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=Non
 ADD EXCEPT + SUM
 ------------------
 """
+
+
 def add_except_sum(
     ds_matchup,
-    sum_= True,
-    except_ = True,
+    sum_=True,
+    except_=True,
     wd_x=None,
     wd_y=None,
     grad_x=None,
     grad_y=None,
-    cutoff=None
+    cutoff=None,
 ):
     """Create dataset with matchup terms values, sum of terms and except sum of terms for all possible combinations
-    
+
 
     Parameters
     ----------
@@ -451,18 +576,27 @@ def add_except_sum(
             cutoff frequency for drifter variables ('0' for no filter applied) we want to consider for combinations`
             if not provided, will find all possibly corresponding variables in dataset
     """
-    
+
     # SUM combination
-    wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
-        
+    wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(
+        ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff
+    )
+
     COMB = combinations(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
-    ds_matchup = ds_matchup[wd_x + wd_y+ grad_x + grad_y + ["drifter_acc_x_"+cf for cf in cutoff]+["drifter_coriolis_x_"+cf for cf in cutoff]]
+    ds_matchup = ds_matchup[
+        wd_x
+        + wd_y
+        + grad_x
+        + grad_y
+        + ["drifter_acc_x_" + cf for cf in cutoff]
+        + ["drifter_coriolis_x_" + cf for cf in cutoff]
+    ]
     _ds_sum = xr.Dataset()
     _ds_except = xr.Dataset()
 
     id_comb_list = []
     for comb in COMB:
-        #print(comb.values())
+        # print(comb.values())
         _id = comb["id"]
         id_comb_list.append(_id)
         comb.pop("id")
@@ -517,29 +651,27 @@ def add_except_sum(
         DS.append(_ds_sum)
     return xr.merge(DS)
 
+
 def terms_comb(id_):
-    l = id_.split('__')
+    l = id_.split("__")
     xy = id_[-1]
-    attrs = {'acc':'drifter_acc_'+xy+'_'+l[1],'coriolis': 'drifter_coriolis_'+xy+'_'+l[1]}
-    if 'co' in l:
-        attrs['gg'] = 'alti_gg'+xy+'_'+l[2]
-    if 'aviso' in l :
-        attrs['gg'] = 'aviso_'+l[4][:-3]+'_gg'+xy+'_'+l[2]
-    attrs['wd'] = l[3]+'_'+l[4].replace('_', '_wd_')
+    attrs = {
+        "acc": "drifter_acc_" + xy + "_" + l[1],
+        "coriolis": "drifter_coriolis_" + xy + "_" + l[1],
+    }
+    if "co" in l:
+        attrs["gg"] = "alti_gg" + xy + "_" + l[2]
+    if "aviso" in l:
+        attrs["gg"] = "aviso_" + l[4][:-3] + "_gg" + xy + "_" + l[2]
+    attrs["wd"] = l[3] + "_" + l[4].replace("_", "_wd_")
     return attrs
 
 
-
 def product_dataset(
-    ds_matchup,
-    wd_x=None,
-    wd_y=None,
-    grad_x=None,
-    grad_y=None,
-    cutoff=None
+    ds_matchup, wd_x=None, wd_y=None, grad_x=None, grad_y=None, cutoff=None
 ):
     """Create dataset with all possible product of 2 terms for correlation computations
-    
+
 
     Parameters
     ----------
@@ -552,24 +684,34 @@ def product_dataset(
             cutoff frequency for drifter variables ('0' for no filter applied) we want to consider for combinations`
             if not provided, will find all possibly corresponding variables in dataset
     """
-    
+
     # SUM combination
-    wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
-        
+    wd_x, wd_y, grad_x, grad_y, cutoff = find_term_list(
+        ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff
+    )
+
     COMB = combinations(ds_matchup, wd_x, wd_y, grad_x, grad_y, cutoff)
-    ds_matchup = ds_matchup[wd_x + wd_y+ grad_x + grad_y + ["drifter_acc_x_"+cf for cf in cutoff]+["drifter_coriolis_x_"+cf for cf in cutoff]]
+    ds_matchup = ds_matchup[
+        wd_x
+        + wd_y
+        + grad_x
+        + grad_y
+        + ["drifter_acc_x_" + cf for cf in cutoff]
+        + ["drifter_coriolis_x_" + cf for cf in cutoff]
+    ]
     _ds_corr = xr.Dataset()
 
     for comb in COMB:
         import itertools
-        comb.pop('id')
-        corr_key = list(itertools.combinations(list(comb.values()),2))
+
+        comb.pop("id")
+        corr_key = list(itertools.combinations(list(comb.values()), 2))
 
         for ab in corr_key:
-            id_str_2 = "prod_"+ab[0]+"__"+ab[1]
-            if id_str_2 not in ds_matchup: 
-                cor = ds_matchup[ab[0]]*ds_matchup[ab[1]]
-                
+            id_str_2 = "prod_" + ab[0] + "__" + ab[1]
+            if id_str_2 not in ds_matchup:
+                cor = ds_matchup[ab[0]] * ds_matchup[ab[1]]
+
                 _ds_corr[id_str_2] = xr.DataArray(
                     data=cor,
                     attrs={
@@ -582,6 +724,7 @@ def product_dataset(
                 )
 
     return _ds_corr
+
 
 """
 Diagnosis functions
@@ -633,7 +776,7 @@ def compute_pdfs(ds, bins):
                     ds[var].rename("acc"),
                     *[ds[k] for k in bins if k != "acc"],
                     bins=[v for k, v in bins.items()],
-                    density=True
+                    density=True,
                 )
                 .assign_attrs(
                     {
@@ -795,11 +938,9 @@ def ds_mean_var_std_2bins(ds, bin_dim, bin_dim_ggrad, **kwargs):
             ds_mean_var_std(
                 ds[[var for var in ds if var != "pdf_alti_ggx"]],
                 bin_dim="acc_bin",
-                **kwargs
+                **kwargs,
             ),
-            ds_mean_var_std(
-                ds[["pdf_alti_ggx"]], bin_dim="acc_bin_grad", **kwargs
-            ),
+            ds_mean_var_std(ds[["pdf_alti_ggx"]], bin_dim="acc_bin_grad", **kwargs),
         ]
     )
 
@@ -935,6 +1076,7 @@ def plot_ms_lonlat(ds, id_, title=1):
     ]
     cmap_label = [r"$\langle x^2\rangle/\langle S^2\rangle$"] * len(Sx)
     plot_stat_lonlat(x, title=title, cmap_label=cmap_label, fig_title=id_)
+
 
 """ 
 ------------------------------------------------------------------------

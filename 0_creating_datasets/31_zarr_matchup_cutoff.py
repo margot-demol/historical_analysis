@@ -25,11 +25,11 @@ from histlib.cstes import labels, zarr_dir
 
 # ---- Run parameters
 
-#root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
+# root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
 run_name = "box_build_colocalisations"
 
 # will overwrite existing results
-#overwrite = True
+# overwrite = True
 overwrite = False
 
 # dask parameters
@@ -202,35 +202,68 @@ def trim_memory() -> int:
 
 # ---------------------------------- core of the job to be done ----------------------------------
 from histlib.matchup import add_adt_to_ds_data, add_low_pass_filter_to_data
+
 cutoff = [3, 3.5]
 chunk = 2000
 
-def cutoff_matchup(l,T, cutoff):
-    var = ['__site_matchup_indice', 'obs', 'box_x', 'box_y', 'alti_time_mid','f', "drifter_vx", "drifter_vy", "drifter_acc_x_0", "drifter_acc_y_0", "drifter_coriolis_x_0", "drifter_coriolis_y_0",]
-    ds_data = xr.open_zarr(os.path.join(zarr_dir, f'{l}.zarr')).chunk({'obs':chunk, 'site_obs':-1})
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True).chunk({'obs':chunk, 'site_obs':-1})
+
+def cutoff_matchup(l, T, cutoff):
+    var = [
+        "__site_matchup_indice",
+        "obs",
+        "box_x",
+        "box_y",
+        "alti_time_mid",
+        "f",
+        "drifter_vx",
+        "drifter_vy",
+        "drifter_acc_x_0",
+        "drifter_acc_y_0",
+        "drifter_coriolis_x_0",
+        "drifter_coriolis_y_0",
+    ]
+    ds_data = xr.open_zarr(os.path.join(zarr_dir, f"{l}.zarr")).chunk(
+        {"obs": chunk, "site_obs": -1}
+    )
+    ds_data = ds_data.where(ds_data.alti___distance < 2e5, drop=True).chunk(
+        {"obs": chunk, "site_obs": -1}
+    )
     ds_data = add_adt_to_ds_data(ds_data)
-    drogue_status = ds_data.time<ds_data.drifter_drogue_lost_date.mean('site_obs')
+    drogue_status = ds_data.time < ds_data.drifter_drogue_lost_date.mean("site_obs")
     ds_data = ds_data[var]
 
     add_low_pass_filter_to_data(ds_data, T=T, cutoff=cutoff)
 
     # SELECT MATCHUP
-    cc = [l for l in list(ds_data.coords)if l not in ['obs', 'box_x', 'box_y', 'alti_time_mid']]
+    cc = [
+        l
+        for l in list(ds_data.coords)
+        if l not in ["obs", "box_x", "box_y", "alti_time_mid"]
+    ]
     ds_data = ds_data.reset_coords(cc)
     idx = ds_data.__site_matchup_indice.astype(int).compute()
-    dsmf = ds_data.sel(site_obs=idx).isel( alti_time_mid=ds_data.dims['alti_time_mid']//2).drop(["alti_time_mid", "alti_x_mid", "alti_y_mid"])[[v for v in ds_data if 'drifter_acc_x_' in v or 'drifter_coriolis_x_' in v]]
+    dsmf = (
+        ds_data.sel(site_obs=idx)
+        .isel(alti_time_mid=ds_data.dims["alti_time_mid"] // 2)
+        .drop(["alti_time_mid", "alti_x_mid", "alti_y_mid"])[
+            [v for v in ds_data if "drifter_acc_x_" in v or "drifter_coriolis_x_" in v]
+        ]
+    )
     for v in dsmf.variables:
         dsmf[v].attrs = ds_data[v].attrs
     return dsmf
-    
-def run_cutoff_matchup(l, T=12, cutoff= cutoff):
-    ds = cutoff_matchup(l, T=T, cutoff=cutoff).chunk({'obs':500}).persist()
-    #store
-    zarr = os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+"_3.zarr")
+
+
+def run_cutoff_matchup(l, T=12, cutoff=cutoff):
+    ds = cutoff_matchup(l, T=T, cutoff=cutoff).chunk({"obs": 500}).persist()
+    # store
+    zarr = os.path.join(
+        zarr_dir + "_ok", "cutoff_matchup", "cutoff_matchup_" + l + "_3.zarr"
+    )
     ds.to_zarr(zarr, mode="w")
-    logging.info(f"matchup {l} storred in {zarr}")    
-    
+    logging.info(f"matchup {l} storred in {zarr}")
+
+
 if __name__ == "__main__":
 
     ## step0: setup logging
@@ -261,25 +294,36 @@ if __name__ == "__main__":
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
     logging.info("dashboard via ssh: " + ssh_command)
-    logging.info(f"open browser at address of the type: http://localhost:{dashboard_port}")
+    logging.info(
+        f"open browser at address of the type: http://localhost:{dashboard_port}"
+    )
 
-    #overwrite
-    if not overwrite :
-        labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir+'_ok','cutoff_matchup',"cutoff_matchup_"+l+"_3.zarr"))]
+    # overwrite
+    if not overwrite:
+        labels = [
+            l
+            for l in labels
+            if not os.path.isdir(
+                os.path.join(
+                    zarr_dir + "_ok",
+                    "cutoff_matchup",
+                    "cutoff_matchup_" + l + "_3.zarr",
+                )
+            )
+        ]
 
     ## boucle for on labels
-    #for l in labels: 
+    # for l in labels:
     #    if l != 'gps_Sentinel-3_A_2019' : #too big
     #        logging.info(f"start processing {l}")
     #        run_cutoff_matchup(l, T=12, cutoff = cutoff)
     #        logging.info(f"end processing {l}")
-       
-    l= 'gps_Sentinel-3_A_2019'
+
+    l = "gps_Sentinel-3_A_2019"
     logging.info(f"start processing {l}")
-    run_cutoff_matchup(l, T=12, cutoff = cutoff)
+    run_cutoff_matchup(l, T=12, cutoff=cutoff)
     logging.info(f"end processing {l}")
 
-    
     # close dask
     close_dask(cluster, client)
 

@@ -23,10 +23,10 @@ import histlib.aviso as aviso
 import histlib.erastar as eras
 from histlib.cstes import labels, zarr_dir
 
-dataset = 'matchup'
+dataset = "matchup"
 # ---- Run parameters
 
-#root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
+# root_dir = "/home/datawork-lops-osi/equinox/mit4320/parcels/"
 run_name = "box_build_colocalisations"
 
 # will overwrite existing results
@@ -34,7 +34,7 @@ run_name = "box_build_colocalisations"
 overwrite = False
 
 # dask parameters
-    
+
 dask_jobs = 10  # number of dask pbd jobs
 jobqueuekw = dict(processes=20, cores=20)  # uplet debug
 
@@ -203,29 +203,39 @@ def trim_memory() -> int:
 
 # ---------------------------------- core of the job to be done ----------------------------------
 
-def run_eras_divided(l, Ng=100000) :
+
+def run_eras_divided(l, Ng=100000):
     "run erastar on subfiles of constant obs dim (allow to always get same number of chunk/task, solve memory pb"
-    ds_data = xr.open_zarr(zarr_dir+'/'+l+'.zarr')
-    ds_data = ds_data.where(ds_data.alti___distance<2e5, drop=True)
-    Nt = ds_data.dims['obs']
-    N=0
-    i=0
-    while N < Nt :
-        if not os.path.isdir(os.path.join(zarr_dir, "erastar_"+l+f"_{i}.zarr")):
-            ds_data_ = ds_data.isel(obs=slice(N,min(N+Ng, Nt))).chunk({'obs':200, 'alti_time':-1, 'site_obs':-1})
+    ds_data = xr.open_zarr(zarr_dir + "/" + l + ".zarr")
+    ds_data = ds_data.where(ds_data.alti___distance < 2e5, drop=True)
+    Nt = ds_data.dims["obs"]
+    N = 0
+    i = 0
+    while N < Nt:
+        if not os.path.isdir(os.path.join(zarr_dir, "erastar_" + l + f"_{i}.zarr")):
+            ds_data_ = ds_data.isel(obs=slice(N, min(N + Ng, Nt))).chunk(
+                {"obs": 200, "alti_time": -1, "site_obs": -1}
+            )
             run_eras_divided_one(ds_data_, i)
-        i+=1
-        N+=Ng
-            
+        i += 1
+        N += Ng
+
+
 def run_eras_divided_one(ds_data, i):
     """run erastar on one subfile"""
     import dask.array as da
-    ds_es = eras.compute_eras(ds_data, dt=(-12,13), only_matchup_time = True).chunk({'obs':500, 'site_obs':-1}).persist()
-    #store
-    zarr = os.path.join(zarr_dir, "erastar_"+l+f"_{i}.zarr")
-    ds_es.to_zarr(zarr, mode="w")  
+
+    ds_es = (
+        eras.compute_eras(ds_data, dt=(-12, 13), only_matchup_time=True)
+        .chunk({"obs": 500, "site_obs": -1})
+        .persist()
+    )
+    # store
+    zarr = os.path.join(zarr_dir, "erastar_" + l + f"_{i}.zarr")
+    ds_es.to_zarr(zarr, mode="w")
     logging.info(f"erastar {l} group {i} storred in {zarr}")
-    
+
+
 if __name__ == "__main__":
 
     ## step0: setup logging
@@ -256,18 +266,24 @@ if __name__ == "__main__":
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
     logging.info("dashboard via ssh: " + ssh_command)
-    logging.info(f"open browser at address of the type: http://localhost:{dashboard_port}")
+    logging.info(
+        f"open browser at address of the type: http://localhost:{dashboard_port}"
+    )
 
-    #overwrite
-    if not overwrite :
-        labels = [l for l in labels if not os.path.isdir(os.path.join(zarr_dir, "erastar_"+l+".zarr"))]
-        
+    # overwrite
+    if not overwrite:
+        labels = [
+            l
+            for l in labels
+            if not os.path.isdir(os.path.join(zarr_dir, "erastar_" + l + ".zarr"))
+        ]
+
     ## boucle for on labels
-    for l in labels: 
+    for l in labels:
         logging.info(f"start processing {l}")
-        run_eras_divided(l)    
+        run_eras_divided(l)
         logging.info(f"end processing {l}")
-    
+
     # close dask
     close_dask(cluster, client)
 

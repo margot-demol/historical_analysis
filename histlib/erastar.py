@@ -30,7 +30,7 @@ def load_eras(t, dt=None, suffix="es_", to_360=False, rkwargs=None, **kwargs):
     """
     # TIME
     t = pd.to_datetime(t)
-    if dt is not None:#select several hours around matchup
+    if dt is not None:  # select several hours around matchup
         t = [t + pd.Timedelta(np.timedelta64(_dt, "h")) for _dt in range(*dt)]
     else:
         t = [t]
@@ -95,13 +95,15 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
         box_lon = cstes.lon_180_to_360(ds_obs.box_lon)
         drifter_lon = cstes.lon_180_to_360(ds_obs.drifter_lon)
         _alti_lon = cstes.lon_180_to_360(
-            ds_obs.alti_lon.isel(alti_time=ds_obs.dims['alti_time']//2)
+            ds_obs.alti_lon.isel(alti_time=ds_obs.dims["alti_time"] // 2)
         )  # only matchup
 
     else:
         box_lon = ds_obs["box_lon"]
         drifter_lon = ds_obs["drifter_lon"]
-        _alti_lon = ds_obs["alti_lon"].isel(alti_time=ds_obs.dims['alti_time']//2)  # only matchup
+        _alti_lon = ds_obs["alti_lon"].isel(
+            alti_time=ds_obs.dims["alti_time"] // 2
+        )  # only matchup
 
     # matchup site
     site_matchup_indice = int(ds_obs.__site_matchup_indice.values)
@@ -187,9 +189,9 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
 
     # at alti matchup
     ds_alti = ds_eras.interp(
-        es_time=ds_obs.alti_time_.isel(alti_time=ds_obs.dims['alti_time']//2),
+        es_time=ds_obs.alti_time_.isel(alti_time=ds_obs.dims["alti_time"] // 2),
         es_lon=_alti_lon,
-        es_lat=ds_obs.alti_lat.isel(alti_time=ds_obs.dims['alti_time']//2),
+        es_lat=ds_obs.alti_lat.isel(alti_time=ds_obs.dims["alti_time"] // 2),
     )
     ds_alti = ds_alti.drop(list(ds_alti.coords.keys())).rename(
         {v: "alti_matchup_" + v for v in ds_eras}
@@ -202,9 +204,9 @@ def get_eras_one_obs(ds_obs, dt=(-12, 13), only_matchup_time=True):
         .reset_coords(["drifter_time", "drifter_x", "drifter_y", "es_time_"])
     )  # NEW
 
-    #ds["time"] = ds_obs.time.drop(["lon", "lat"])
-    ds['obs'] = ds_obs.obs
-    ds = ds.drop(['time', 'lon', 'lat'])
+    # ds["time"] = ds_obs.time.drop(["lon", "lat"])
+    ds["obs"] = ds_obs.obs
+    ds = ds.drop(["time", "lon", "lat"])
     ds = ds.rename({v: "es_" + v.replace("_es", "") for v in ds if "_es" in v})
     ds = ds.rename({v: "e5_" + v.replace("_e5", "") for v in ds if "_e5" in v})
 
@@ -217,7 +219,7 @@ def _concat_eras(ds, dt, only_matchup_time=True):
         D = []
         for o in ds.obs:
             D.append(get_eras_one_obs(ds.sel(obs=o), dt, only_matchup_time))
-        _ds = xr.concat(D,"obs")
+        _ds = xr.concat(D, "obs")
     except:
         assert False, (ds.__site_id.values, ds.obs.values)
     return _ds
