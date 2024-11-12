@@ -34,7 +34,7 @@ overwrite = False
 
 # dask parameters
 
-dask_jobs = 2  # number of dask pbd jobs
+dask_jobs = 8  # number of dask pbd jobs
 jobqueuekw = dict(processes=10, cores=10)  # uplet debug
 
 # ---------------------------- dask utils - do not touch -------------------------------
@@ -289,7 +289,7 @@ if __name__ == "__main__":
         "distributed",
         jobs=dask_jobs,
         fraction=0.9,
-        walltime="08:00:00",
+        walltime="03:00:00",
         **jobqueuekw,
     )
     ssh_command, dashboard_port = dashboard_ssh_forward(client)
