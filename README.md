@@ -1,8 +1,7 @@
-# historical_analysis
-Surface momentum reconstruction from GDP and historical altimetry
+# Historical analysis 
 
+This repository contains codes that reconstruct the oceanic near-surface momentum conservation from historical altimetry, drifters and wind reanalysis data.
+A new method, allowing us to quantify closure efficiency, to identify errors and to study the relative importance of the different terms and balances, is implemented.
 
-## Create COLOC/AVISO/ERASTAR files with 1_zarr_coloc_aviso_erastar_matchup.pbs
-## Create matchup files with 1_zarr_coloc_aviso_erastar_matchup.pbs
-## Compute ms values
-- stored in match
+The required python environment can be easily installed from the histenv.yml file.
+

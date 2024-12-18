@@ -1,4 +1,5 @@
 """ Constants and useful functions """
+
 U = 9.81 * 1e-3 / (1e3)
 U2 = U**2
 
@@ -194,7 +195,14 @@ id_aviso_dic = {
 }
 
 # COLORS FOR THE DIFFERENT TERMS
-c0 ={'acc':'#941717', 'coriolis':'#388E3C', 'cor':'#388E3C','ggx':'#42A5F5','ggd':'#42A5F5', 'wd':'#FFA000'}# https://redketchup.io/color-picker
+c0 = {
+    "acc": "#941717",
+    "coriolis": "#388E3C",
+    "cor": "#388E3C",
+    "ggx": "#42A5F5",
+    "ggd": "#42A5F5",
+    "wd": "#FFA000",
+}  # https://redketchup.io/color-picker
 c1 = {"acc": "#FF9896", "cor": "#98DF8A", "ggx": "#AEC7E8", "wd": "#FFBB78"}
 
 # RENAME FILTER FROM THE ABREVIATION

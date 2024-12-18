@@ -60,9 +60,9 @@ def add_ggx_attrs(ds_data):
             "comment"
         ]
         ds_data[v.replace("alti", "alti_ggx")].attrs["units"] = r"$m.s^{-2}$"
-        ds_data[v.replace("alti", "alti_ggx")].attrs[
-            "long_name"
-        ] = r"$g\partial_x$" + v.replace("alti_", "")
+        ds_data[v.replace("alti", "alti_ggx")].attrs["long_name"] = (
+            r"$g\partial_x$" + v.replace("alti_", "")
+        )
 
 
 def add_adt_to_ds_data(ds_data):
@@ -279,12 +279,12 @@ def matchup_dataset_one(l, T=10, cutoff=[2, 1, 0.5, 0.2, 0.1]):
     )
 
     _ds["alti_ggx_adt_filtered_ocean_tide"].attrs = _ds.alti_ggx_adt_filtered.attrs
-    _ds[
-        "alti_ggx_adt_filtered_ocean_tide_internal_tide"
-    ].attrs = _ds.alti_ggx_adt_filtered.attrs
-    _ds[
-        "alti_ggx_adt_filtered_ocean_tide_internal_tide_dac"
-    ].attrs = _ds.alti_ggx_adt_filtered.attrs
+    _ds["alti_ggx_adt_filtered_ocean_tide_internal_tide"].attrs = (
+        _ds.alti_ggx_adt_filtered.attrs
+    )
+    _ds["alti_ggx_adt_filtered_ocean_tide_internal_tide_dac"].attrs = (
+        _ds.alti_ggx_adt_filtered.attrs
+    )
 
     return _ds
 
